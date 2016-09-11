@@ -1,0 +1,69 @@
+
+//
+// Copyright 2016 Kary Foundation, Inc.
+//   Author: Pouya Kary <k@karyfoundation.org>
+//
+
+//
+// ─── IMPORT ─────────────────────────────────────────────────────────────────────
+//
+
+    @import '../../globals';
+
+//
+// ─── MAIN TABS VIEW ─────────────────────────────────────────────────────────────
+//
+
+    #header-tabs {
+        margin-left: 20px;
+        float: left;
+        background-size: contain;
+        background-position: left;
+        background-repeat: no-repeat;
+        width: @toolbar-tabs-width;
+        height: @header-height;
+    }
+
+//
+// ─── TAB INVISIBLE MAPS ─────────────────────────────────────────────────────────
+//
+
+    .invisible-tab {
+        height: 30px;
+        width: 102px;
+        position: fixed;
+        top: 9;
+    }
+
+    @tab-x-difference: 102px;
+    @tab-x-start: 27px;
+
+    #editor-tab-invisible {
+        left: @tab-x-start;
+    }
+
+    #programmer-tab-invisible {
+        left: @tab-x-start + @tab-x-difference;
+    }
+
+    #preferences-tab-invisible {
+        left: @tab-x-start + 2 * @tab-x-difference;
+    }
+
+//
+// ─── TABS ───────────────────────────────────────────────────────────────────────
+//
+
+    .editor-tab {
+        background-image: url('toolbar-tabs-editor.png');
+    }
+
+    .programmer-tab {
+        background-image: url('toolbar-tabs-programmer.png');
+    }
+
+    .algorithms-tab {
+        background-image: url('toolbar-tabs-algorithms.png');
+    }
+
+// ────────────────────────────────────────────────────────────────────────────────

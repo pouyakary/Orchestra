@@ -1,0 +1,41 @@
+
+//
+// Copyright 2016 Kary Foundation, Inc.
+//   Author: Pouya Kary <k@karyfoundation.org>
+//
+
+//
+// ─── SCROLL BAR SIZES ───────────────────────────────────────────────────────────
+//
+
+    @scroll-border: 4px;
+    @scroll-size: 5px;
+
+//
+// ─── SCROLL BAR ─────────────────────────────────────────────────────────────────
+//
+
+    ::-webkit-scrollbar {
+       width: @scroll-size + 2 * @scroll-border;
+       height: @scroll-size;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        height: @scroll-size;
+        border: @scroll-border solid rgba(0, 0, 0, 0);
+        background-clip: padding-box;
+        border-radius: @scroll-size;
+        background-color: rgba( 0, 0, 0, 0.1 );
+    }
+
+    ::-webkit-scrollbar-buttom {
+        width: 0;
+        height: 0;
+        display: none;
+    }
+
+    ::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+
+// ────────────────────────────────────────────────────────────────────────────────

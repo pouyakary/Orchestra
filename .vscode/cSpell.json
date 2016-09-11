@@ -1,0 +1,52 @@
+// cSpell Settings
+{
+    // Version of the setting file.  Always 0.1
+    "version": "0.1",
+    // language - current active spelling language
+    "language": "en",
+    // words - list of words to be always considered correct
+    "words": [
+        "Pouya",
+        "Kary",
+        "karyfoundation",
+        "Toolbar",
+        "Selectbox",
+        "Eulerian",
+        "newdot",
+        "newdotat",
+        "newdots",
+        "howmuch",
+        "getdot",
+        "getdots",
+        "foreachdot",
+        "foralldots",
+        "graphfrommatrix",
+        "countdots",
+        "movex",
+        "movey",
+        "movebx",
+        "moveby",
+        "Sortings",
+        "eulerianpath",
+        "euleriancycle",
+        "Micha",
+        "Hanselmann",
+        "Sina",
+        "Bakhtiari",
+        "posx",
+        "FIXME",
+        "Line's",
+        "mkdirp",
+        "Standalone",
+        "onresize",
+        "prismjs",
+        "Script's",
+        "subdirs"
+    ],
+    // flagWords - list of words to be always considered incorrect
+    // This is useful for offensive words and common spelling errors.
+    // For example "hte" should be "the"
+    "flagWords": [
+        "hte"
+    ]
+}

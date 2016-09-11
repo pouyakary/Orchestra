@@ -1,0 +1,30 @@
+{
+  "name": "regstudio",
+  "productName": "RegStudio",
+  "author": "Kary Foundation",
+  "main": "main.js",
+  "description": "RegEx done right",
+  "homepage": "https://github.com/karyfoundation/regman",
+  "license": "Apache-2.0",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "electron ./_compiled/main.js --enable-logging"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karyfoundation/regman"
+  },
+  "dependencies": { },
+  "devDependencies": {
+    "electron-builder": "^5.30.0",
+    "electron-packager": "^7.7.0",
+    "electron-prebuilt": "^1.3.3",
+    "fs-extra": "0.30.0",
+    "gulp": "3.9.1",
+    "gulp-cli": "1.2.1",
+    "gulp-uglify": "1.5.3",
+    "less": "2.7.1",
+    "mv": "^2.1.1",
+    "sloc": "0.1.10",
+  }
+}

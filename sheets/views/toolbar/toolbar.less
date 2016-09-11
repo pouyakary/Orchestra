@@ -1,0 +1,102 @@
+
+//
+// Copyright 2016 Kary Foundation, Inc.
+//   Author: Pouya Kary <k@karyfoundation.org>
+//
+
+//
+// ─── INCLUDES ───────────────────────────────────────────────────────────────────
+//
+
+    @import '../../globals';
+    @import '../../libs/kary-scheme';
+
+//
+// ─── HEADING ────────────────────────────────────────────────────────────────────
+//
+
+    .heading {
+        background-size: contain;
+        background-position: left bottom;
+        background-repeat: no-repeat;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        //padding-left: 20px;
+        padding-right: 20px;
+        font-size: 1.8rem;
+        color: @kary-light-foreground;
+        height: @header-height - 6px;
+        background-color: @color-2;
+        overflow: hidden;
+        border-bottom: @ribbon-border-size solid #B12CA8;
+    }
+
+//
+// ─── HEADER ─────────────────────────────────────────────────────────────────────
+//
+
+    #header-left {
+        float: left;
+    }
+
+    #header-right {
+        float: right;
+        color: @color-4;
+        padding-top: 0.25rem;
+        font-size: 1.2rem;
+    }
+
+//
+// ─── TOOLBAR ────────────────────────────────────────────────────────────────────
+//
+
+    .icon {
+        float: left;
+        height: @icon-box-size;
+        width: @icon-box-size;
+        margin-left: 10px;
+        margin-top: 4px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: @icon-size @icon-size;
+    }
+
+    .icon:hover{
+       
+    }
+
+    .icon-active {
+        background-size: @active-icon-size @active-icon-size;
+    }
+
+    #icon-move {
+        margin-left: 30px;
+        background-image: url('cursor.png');
+    }
+
+    #icon-edit {
+        background-image: url('edit.png');
+    }
+
+    #icon-remove {
+        background-image: url('remove.png');
+    }
+
+    #icon-select {
+        background-image: url('select.png');
+    }
+
+//
+// ─── STATUS BAR ─────────────────────────────────────────────────────────────────
+//
+
+    #status-view {
+        float: left;
+        margin-left: @icon-size;
+        margin-top: 11px;
+        font-size: 1.2rem;
+        color: @kary-light-orange;
+    }
+
+// ────────────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,75 @@
+
+//
+// Copyright 2016 Kary Foundation, Inc.
+//   Author: Pouya Kary <k@karyfoundation.org>
+//
+
+//
+// ─── INCLUDES ───────────────────────────────────────────────────────────────────
+//
+
+    @import 'globals';
+
+//
+// ─── BASE ───────────────────────────────────────────────────────────────────────
+//
+
+    html {
+        background-color: @color-1;
+        font-family: @font-sans-serif;
+        font-size: @base-font-size;
+        overflow: hidden;
+        min-height: 400px;
+        min-width: 300px;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    :focus {
+		outline-color: transparent;
+  		outline-style: none;
+	}
+
+    input {
+        font-size: 1rem;
+    }
+
+//
+// ─── UNSELECTABLE ───────────────────────────────────────────────────────────────
+//
+
+    .unselectable {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+//
+// ─── LOADING VIEW ───────────────────────────────────────────────────────────────
+//
+
+    #loading-view {
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding-top: ~'calc( 50vh - 60px )';
+        height: 100vh;
+        width: 100vw;
+        background-color: white;
+        color: @kary-light-red;
+        font-size: 3rem;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .dead-loading-view {
+        opacity: 0;
+        transition-duration: 0.7s;
+    }
+
+// ────────────────────────────────────────────────────────────────────────────────

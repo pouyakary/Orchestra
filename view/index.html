@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<title>RegStudio</title>
+		<!-- Main Graph Tools -->
+		<link rel="stylesheet" href="style.css">
+		<!-- Blockly Core -->
+        <script src="blockly-core/blockly_compressed.js"></script>
+        <script src="blockly-core/en.js"></script>
+
+        <!-- Regman Core -->
+        <script src="core/regstd.js"></script>
+        <script src="core/generator.js"></script>
+        <script src="core/blocks.js"></script>
+        <script src="core/blockly-styles.js"></script>
+        <script src="core/base.js"></script>
+        <script src="core/ui.js"></script>
+	</head>
+
+	<body>
+		<div class="heading" id="toolbar">
+			<!-- Tabs -->
+			<div id="header-tabs" class="editor-tab"></div>
+
+			<!-- Invisible Buttons -->
+			<div id="editor-tab-invisible" class="invisible-tab"
+				 onclick="">
+			</div>
+
+			<div id="programmer-tab-invisible" class="invisible-tab"
+				 onclick="">
+			</div>
+
+			<div style="clear: both;"></div>
+		</div>
+
+		<!-- Editor View Goes Here -->
+		<div id="EditorView" class="tab-view">
+			<!--- EDITOR --->
+			<div id="graph-and-ribbon-half">
+				<div class="ribbon unselectable">
+					<div id="ribbon-general-new-file" class="ribbon-icon">New</div>
+					<div id="ribbon-general-open-file" class="ribbon-icon">Open</div>
+					<div id="ribbon-general-save-file" class="ribbon-icon">Save</div>
+
+					<div class="ribbon-separator"></div>
+					<div style="clear: both;"></div>
+				</div>
+
+				<!-- View -->
+        		<div id="regman-coding-view"></div>
+			</div>
+		</div>
+
+
+		<!-- Toolbox Definition -->
+        <xml id="toolbox" style="display: none">
+            <block type="comment"></block>
+            <block type="one_or_more"></block>
+            <block type="any_number_of"></block>
+            <block type="match"></block>
+            <block type="maybe"></block>
+            <block type="one_of"></block>
+            <block type="option"></block>
+            <block type="lookahead"></block>
+            <block type="repeat"></block>
+            <block type="repeat_at_least"></block>
+            <block type="repeat_in_range"></block>
+            <block type="alphabet"></block>
+            <block type="range"></block>
+            <block type="anything_but"></block>
+            <block type="sigma"></block>
+            <block type="encode"></block>
+            <block type="free_form_regex"></block>
+            <block type="unicode"></block>
+            <block type="any"></block>
+            <block type="whitespace"></block>
+            <block type="special_whitespace"></block>
+            <block type="line_start"></block>
+            <block type="line_end"></block>
+        </xml>
+
+
+		<!-- Init Page -->
+        <script>
+            initWindow( );
+        </script>
+	</body>
+</html>

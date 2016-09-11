@@ -1,0 +1,68 @@
+
+//
+// Copyright 2016 Kary Foundation, Inc.
+//   Author: Pouya Kary <k@karyfoundation.org>
+//
+
+//
+// ─── IMPORTS ────────────────────────────────────────────────────────────────────
+//
+
+    @import '../../libs/kary-scheme';
+
+//
+// ─── RIBBON BAR MAIN ────────────────────────────────────────────────────────────
+//
+
+    @ribbon-border-size: 4px;
+    @ribbon-border-bottom-size: 1px;
+    .ribbon {
+        width: 100%;
+        height: @ribbon-height;
+        background: white;
+        border-bottom: #f5f5f5 1px solid;
+    }
+
+//
+// ─── RIBBON ICON ────────────────────────────────────────────────────────────────
+//
+
+    .ribbon-icon {
+        background-position: top center;
+        background-size: 34px 34px;
+        background-repeat: no-repeat;
+        margin: 8px 5px 0 5px;
+        padding-top: 41px;
+        width: max-content;
+        min-width: 46px;
+        text-align: center;
+        color: @kary-light-foreground;
+        float: left;
+        padding-bottom: 6px;
+        border-bottom-width: 3px;
+        border-bottom-style: solid;
+        border-bottom-color: transparent;
+    }
+
+//
+// ─── RIBBON HOVER ───────────────────────────────────────────────────────────────
+//
+
+    .ribbon-icon:hover {
+        border-bottom-color: #ccc;
+    }
+
+//
+// ─── SEPARATOR ──────────────────────────────────────────────────────────────────
+//
+
+    .ribbon-separator {
+        @margin-tob-bottom: 8px;
+        width: 2px;
+        height: @ribbon-height - 2 * @margin-tob-bottom;
+        margin: @margin-tob-bottom 8px @margin-tob-bottom 8px;
+        background: #EEE;
+        float: left;
+    }
+
+// ────────────────────────────────────────────────────────────────────────────────
