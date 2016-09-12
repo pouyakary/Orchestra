@@ -4,7 +4,7 @@
   "author": "Kary Foundation",
   "main": "main.js",
   "description": "RegEx done right",
-  "homepage": "https://github.com/karyfoundation/regman",
+  "homepage": "https://github.com/karyfoundation/meche",
   "license": "Apache-2.0",
   "version": "0.1.0",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/karyfoundation/regman"
+    "url": "https://github.com/karyfoundation/meche"
   },
   "dependencies": { },
   "devDependencies": {

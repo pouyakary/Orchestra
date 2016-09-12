@@ -98,7 +98,7 @@
         copyToBinaryFromDir( 'resources' );
         copyToBinaryFromDir( 'view' );
         copyToBinaryFromDir( 'electron' );
-        copyToBinaryFromDir( 'regman' );
+        copyToBinaryFromDir( 'meche' );
         callback();
     });
 

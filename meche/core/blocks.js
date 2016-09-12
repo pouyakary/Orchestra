@@ -1,0 +1,625 @@
+
+//
+// ─── COMPOSE ────────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['compose'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Meche Start");
+            this.appendStatementInput("children")
+                .setCheck("String");
+            this.setInputsInline(false);
+            this.setColour(120);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator['compose'] = function(block) {
+        var statements_children = MecheGenerator.statementToCode(block, 'children').trim( );
+        return '/' + statements_children.trim( ) + '/';
+    };
+
+//
+// ─── ALPHABET ───────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['alphabet'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Alphabet")
+                .appendField("0-9")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "numbers")
+                .appendField("a-z")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "lowercase")
+                .appendField("A-Z")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "uppercase")
+                .appendField("Other")
+                .appendField(new Blockly.FieldTextInput(""), "other");
+            this.setInputsInline(true);
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(260);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator['alphabet'] = function(block) {
+        var checkbox_numbers = block.getFieldValue('numbers') == 'TRUE';
+        var checkbox_lowercase = block.getFieldValue('lowercase') == 'TRUE';
+        var checkbox_uppercase = block.getFieldValue('uppercase') == 'TRUE';
+        var text_other = block.getFieldValue('other');
+
+        var code = '';
+        if ( checkbox_numbers ) { code += '0-9' };
+        if ( checkbox_lowercase ) { code += 'a-z' };
+        if ( checkbox_uppercase ) { code += 'A-Z' };
+        code += mecheEncodeText( text_other );
+
+        return '[' + code + ']';
+    };
+
+//
+// ─── ENCODE UNICODE ─────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks[ 'unicode' ] = {
+        init: function ( ) {
+            this.appendDummyInput( )
+                .appendField( "Encode Unicode" )
+                .appendField( new Blockly.FieldTextInput( "" ), "text" );
+            this.setInputsInline( true );
+            this.setPreviousStatement( true, "String" );
+            this.setNextStatement( true, "String" );
+            this.setColour( 330 );
+            this.setTooltip( '' );
+            this.setHelpUrl( 'http://www.example.com/' );
+        }
+    };
+
+    MecheGenerator[ 'unicode' ] = function ( block ) {
+        return mecheUnicodify( block.getFieldValue( 'text' ) );
+    };
+
+//
+// ─── ENCODE ─────────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks[ 'encode' ] = {
+        init: function ( ) {
+            this.appendDummyInput( )
+                .appendField( "Plain Text" )
+                .appendField( new Blockly.FieldTextInput( "" ), "text" );
+            this.setInputsInline( true );
+            this.setPreviousStatement( true, "String" );
+            this.setNextStatement( true, "String" );
+            this.setColour( 330 );
+            this.setTooltip( '' );
+            this.setHelpUrl( 'http://www.example.com/' );
+        }
+    };
+
+    MecheGenerator[ 'encode' ] = function ( block ) {
+        return mecheEncodeText( block.getFieldValue( 'text' ) );
+    };
+
+//
+// ─── FREE FORM REGEX ────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks[ 'free_form_regex' ] = {
+        init: function ( ) {
+            this.appendDummyInput( )
+                .appendField( "Freeform RegExp" )
+                .appendField( new Blockly.FieldTextInput( "" ), "regex" );
+            this.setInputsInline( true );
+            this.setPreviousStatement( true, "String" );
+            this.setNextStatement( true, "String" );
+            this.setColour( 330 );
+            this.setTooltip( '' );
+            this.setHelpUrl( 'http://www.example.com/' );
+        }
+    };
+
+    MecheGenerator[ 'free_form_regex' ] = function ( block ) {
+        return block.getFieldValue( 'regex' );
+    };
+
+//
+// ─── MORE THAN ONE ──────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks[ 'one_or_more' ] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("One or more");
+            this.appendStatementInput("regex")
+                .setCheck("String");
+            this.setInputsInline(true);
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(210);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator[ 'one_or_more' ] = function ( block ) {
+        var statements_regex = MecheGenerator.statementToCode( block, 'regex' ).trim( );
+        return mecheSequence( statements_regex ) + '+';
+    };
+
+//
+// ─── ANY NUMBER OF ──────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['any_number_of'] = {
+        init: function() {
+            this.appendDummyInput( )
+                .appendField("Any number of");
+            this.appendStatementInput("regex")
+                .setCheck("String");
+            this.setInputsInline(true);
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(210);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator['any_number_of'] = function(block) {
+        var statements_regex = MecheGenerator.statementToCode( block, 'regex' ).trim( );
+        return mecheSequence( statements_regex ) + '*';
+    };
+
+//
+// ─── ANY CHARACTER ──────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks[ 'any' ] = {
+        init: function( ) {
+            this.appendDummyInput()
+                .appendField("Any Character!");
+            this.setInputsInline(true);
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator[ 'any' ] = function ( block ) {
+        return '.';
+    };
+
+
+//
+// ─── MAYBE ──────────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['maybe'] = {
+        init: function() {
+            this.appendDummyInput( )
+                .appendField("Maybe");
+            this.appendStatementInput("NAME")
+                .setCheck("String");
+            this.setInputsInline(true);
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(210);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator[ 'maybe' ] = function( block ) {
+        var statements_name = MecheGenerator.statementToCode( block, 'NAME' ).trim();
+        return mecheSequence( statements_name ) + '?';
+    };
+
+
+//
+// ─── ONE OF ─────────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['one_of'] = {
+        init: function() {
+            this.appendDummyInput( )
+                .appendField("One of options");
+            this.appendStatementInput("Items")
+                .setCheck("MecheOption");
+            this.setInputsInline(true);
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(210);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator['one_of'] = function(block) {
+        var statements_items = MecheGenerator.statementToCode(block, 'Items').trim( );
+        return mecheSequence( statements_items.substring( 1 ) );
+    };
+
+//
+// ─── MECHE OPTION ──────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['option'] = {
+        init: function() {
+            this.appendStatementInput("NAME")
+                .setCheck(null)
+                .appendField("Option");
+            this.setInputsInline(true);
+            this.setPreviousStatement(true, "MecheOption");
+            this.setNextStatement(true, "MecheOption");
+            this.setColour(160);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator['option'] = function ( block ) {
+        return '|' + MecheGenerator.statementToCode(block, 'NAME').trim( );
+    };
+
+//
+// ─── START OF THE LINE ──────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['line_start'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Start of the Line");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator[ 'line_start' ] = function ( block ) {
+        return '^';
+    };
+
+//
+// ─── END OF THE LINE ────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks[ 'line_end' ] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("End of the Line");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator[ 'line_end' ] = function ( block ) {
+        return '$';
+    };
+
+//
+// ─── WHITE SPACE ────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks[ 'whitespace' ] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Whitespace")
+                .appendField("Space")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "space")
+                .appendField("Tab")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "tab")
+                .appendField("Linefeed (\\n)")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "linefeed");
+            this.setInputsInline(false);
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+
+    MecheGenerator['whitespace'] = function(block) {
+        var checkbox_space = block.getFieldValue('space') == 'TRUE';
+        var checkbox_tab = block.getFieldValue('tab') == 'TRUE';
+        var checkbox_linefeed = block.getFieldValue('linefeed') == 'TRUE';
+
+        var chars = [ ];
+        if ( checkbox_space ) { chars.push( '\\s' ) };
+        if ( checkbox_tab ) { chars.push( '\\t' ) };
+        if ( checkbox_linefeed ) { chars.push( '\\n' ) };
+
+        return mecheAlphabet( chars );
+    };
+
+//
+// ─── SPECIAL WHITE SPACE ────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['special_whitespace'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Special Whitespace");
+            this.appendDummyInput()
+                .appendField("Vertical Tab (\\v)")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "vtab")
+                .appendField("NUL (\\0)")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "nul");
+            this.appendDummyInput()
+                .appendField("Carriage Return (\\r)")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "carrige");
+            this.appendDummyInput()
+                .appendField("Form-feed (\\f)")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "formfeed");
+            this.setInputsInline(false);
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator['special_whitespace'] = function(block) {
+        var checkbox_vtab = block.getFieldValue('vtab') == 'TRUE';
+        var checkbox_nul = block.getFieldValue('nul') == 'TRUE';
+        var checkbox_carrige = block.getFieldValue('carrige') == 'TRUE';
+        var checkbox_formfeed = block.getFieldValue('formfeed') == 'TRUE';
+
+        var code = [ ];
+        if ( checkbox_vtab ) { code.pus( '\\v' ) };
+        if ( checkbox_nul ) { code.pus( '\\0' ) };
+        if ( checkbox_carrige ) { code.pus( '\\r' ) };
+        if ( checkbox_formfeed ) { code.pus( '\\f' ) };
+
+        return mecheAlphabet( code );
+    };
+
+//
+// ─── RANGE ──────────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks[ 'range' ] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Range")
+                .appendField(new Blockly.FieldTextInput("a"), "start")
+                .appendField("-")
+                .appendField(new Blockly.FieldTextInput("z"), "end");
+            this.setInputsInline(false);
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(260);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator[ 'range' ] = function ( block ) {
+        var text_start = block.getFieldValue('start');
+        var text_end = block.getFieldValue('end');
+        return '[' + text_start + '-' + text_end + ']';
+    };
+
+//
+// ─── MATCH ──────────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['match'] = {
+        init: function() {
+            this.appendDummyInput( )
+                .appendField("Remember Match");
+            this.appendStatementInput("match")
+                .setCheck("String");
+            this.setInputsInline(false);
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(210);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator[ 'match' ] = function ( block ) {
+        var statements_match = MecheGenerator.statementToCode(block, 'match').trim( );
+        return '(' + statements_match + ')';
+    };
+
+//
+// ─── SEQUENCE ───────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['sigma'] = {
+        init: function() {
+            this.appendDummyInput( )
+                .appendField("Sigma");
+            this.appendStatementInput("sigma")
+                .setCheck("String");
+            this.setInputsInline(false);
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(260);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator[ 'sigma' ] = function ( block ) {
+        var statements_sequence = MecheGenerator.statementToCode(block, 'sigma').trim( );
+        return '[' + statements_sequence + ']';
+    };
+
+//
+// ─── ANYTHING BUT ───────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['anything_but'] = {
+        init: function() {
+            this.appendStatementInput("anything-but")
+                .setCheck("String")
+                .appendField("Anything But");
+            this.setInputsInline(false);
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(260);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator['anything_but'] = function(block) {
+        var statements_anything_but = MecheGenerator.statementToCode(block, 'anything-but').trim( );
+        return '[^' + statements_anything_but + ']';
+    };
+
+//
+// ─── COMMENT ────────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['comment'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("#")
+                .appendField(new Blockly.FieldTextInput("Write your comment here"), "comment");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(290);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator['comment'] = function ( block ) {
+        return '';
+    };
+
+//
+// ─── REPEAT ─────────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['repeat'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Repeat")
+                .appendField(new Blockly.FieldTextInput(""), "count")
+                .appendField("times");
+            this.appendStatementInput("code")
+                .setCheck("String");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(210);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator['repeat'] = function ( block ) {
+        var text_count = block.getFieldValue('count');
+        var statements_code = MecheGenerator.statementToCode(block, 'code').trim( );
+        return mecheSequence( statements_code ) + '{' + text_count + '}';
+    }
+
+//
+// ─── REPEAT AT LEAST ────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['repeat_at_least'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Repeat at least")
+                .appendField(new Blockly.FieldTextInput(""), "count")
+                .appendField("times");
+            this.appendStatementInput("code")
+                .setCheck("String");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(210);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator['repeat_at_least'] = function ( block ) {
+        var text_count = block.getFieldValue('count');
+        var statements_code = MecheGenerator.statementToCode(block, 'code').trim( );
+        return mecheSequence( statements_code ) + '{' + text_count + ',}';
+    }
+
+//
+// ─── REPEAT IN RANGE ────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['repeat_in_range'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Repeat in range of")
+                .appendField(new Blockly.FieldTextInput(""), "start")
+                .appendField("to")
+                .appendField(new Blockly.FieldTextInput(""), "end");
+            this.appendStatementInput("code")
+                .setCheck("String");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(210);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator['repeat_in_range'] = function ( block ) {
+        var text_start = block.getFieldValue('start');
+        var text_end = block.getFieldValue('end');
+        var statements_code = MecheGenerator.statementToCode(block, 'code').trim( );
+
+        return mecheSequence( statements_code ) + '{' + text_start + ',' + text_end + '}';
+    }
+
+//
+// ─── LOOKAHEAD ──────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['lookahead'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Match ( not be followed by lookahead")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "reverse")
+                .appendField(")");
+            this.appendStatementInput("match")
+                .setCheck("String");
+            this.appendDummyInput()
+                .appendField("Lookahead ");
+            this.appendStatementInput("lookahead")
+                .setCheck("String");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(210);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    MecheGenerator['lookahead'] = function(block) {
+        var checkbox_reverse = block.getFieldValue('reverse') == 'TRUE';
+        var statements_match = MecheGenerator.statementToCode(block, 'match').trim( );
+        var statements_lookahead = MecheGenerator.statementToCode(block, 'lookahead').trim( );
+
+        var reverseSign = (checkbox_reverse)? '!': '=';
+        return mecheSequence( statements_match ) + '(?' + reverseSign + mecheSequence( statements_lookahead ) + ')';
+    };
+
+// ────────────────────────────────────────────────────────────────────────────────
+
+

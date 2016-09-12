@@ -1,13 +1,13 @@
 <html>
 	<head>
-		<title>RegStudio</title>
+		<title>Quartet Orchestra</title>
 		<!-- Main Graph Tools -->
 		<link rel="stylesheet" href="style.css">
 		<!-- Blockly Core -->
         <script src="blockly-core/blockly_compressed.js"></script>
         <script src="blockly-core/en.js"></script>
 
-        <!-- Regman Core -->
+        <!-- Meche Core -->
         <script src="core/regstd.js"></script>
         <script src="core/generator.js"></script>
         <script src="core/blocks.js"></script>
@@ -49,7 +49,7 @@
                     <div id="ribbon-console-view">
                         <div id="ribbon-console-text">Compiled RegExp</div>
                         <div id="ribbon-console-regexp"></div>
-                        <button id="ribbon-console-copy-hover-button">
+                        <button id="ribbon-console-copy-hover-button" onclick="onCopyRegExp( );">
                             <div>
                                 <img src="console-copy-icon.svg" id="console-copy-icon">
                                 <div id="console-copy-text">Copy</div>
@@ -68,7 +68,7 @@
 				</div>
 
 				<!-- View -->
-        		<div id="regman-coding-view"></div>
+        		<div id="meche-coding-view"></div>
 			</div>
 		</div>
 
