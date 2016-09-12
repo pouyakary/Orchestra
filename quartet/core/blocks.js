@@ -6,7 +6,7 @@
     Blockly.Blocks['compose'] = {
         init: function() {
             this.appendDummyInput()
-                .appendField("Quartet Start");
+                .appendField("Quartet");
             this.appendStatementInput("children")
                 .setCheck("String");
             this.setInputsInline(false);
