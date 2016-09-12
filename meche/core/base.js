@@ -24,7 +24,7 @@
         var xml = '<xml><block type="compose" deletable="false" x="500"></block></xml>';
         var toolbox = document.getElementById( 'toolbox' );
 
-        workspace = Blockly.inject( 'meche-coding-view', {
+        workspace = Blockly.inject( 'quartet-coding-view', {
             collapse: true,
             toolbox: toolbox,
             border: false,
@@ -49,7 +49,7 @@
 //
 
     function setupEventListeners ( ) {
-        workspace.addChangeListener( mecheOnUIChange );
+        workspace.addChangeListener( quartetOnUIChange );
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

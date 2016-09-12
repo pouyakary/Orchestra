@@ -6,7 +6,7 @@
     Blockly.Blocks['compose'] = {
         init: function() {
             this.appendDummyInput()
-                .appendField("Meche Start");
+                .appendField("Quartet Start");
             this.appendStatementInput("children")
                 .setCheck("String");
             this.setInputsInline(false);
@@ -16,8 +16,8 @@
         }
     };
 
-    MecheGenerator['compose'] = function(block) {
-        var statements_children = MecheGenerator.statementToCode(block, 'children').trim( );
+    QuartetGenerator['compose'] = function(block) {
+        var statements_children = QuartetGenerator.statementToCode(block, 'children').trim( );
         return '/' + statements_children.trim( ) + '/';
     };
 
@@ -46,7 +46,7 @@
         }
     };
 
-    MecheGenerator['alphabet'] = function(block) {
+    QuartetGenerator['alphabet'] = function(block) {
         var checkbox_numbers = block.getFieldValue('numbers') == 'TRUE';
         var checkbox_lowercase = block.getFieldValue('lowercase') == 'TRUE';
         var checkbox_uppercase = block.getFieldValue('uppercase') == 'TRUE';
@@ -56,7 +56,7 @@
         if ( checkbox_numbers ) { code += '0-9' };
         if ( checkbox_lowercase ) { code += 'a-z' };
         if ( checkbox_uppercase ) { code += 'A-Z' };
-        code += mecheEncodeText( text_other );
+        code += quartetEncodeText( text_other );
 
         return '[' + code + ']';
     };
@@ -79,8 +79,8 @@
         }
     };
 
-    MecheGenerator[ 'unicode' ] = function ( block ) {
-        return mecheUnicodify( block.getFieldValue( 'text' ) );
+    QuartetGenerator[ 'unicode' ] = function ( block ) {
+        return quartetUnicodify( block.getFieldValue( 'text' ) );
     };
 
 //
@@ -101,8 +101,8 @@
         }
     };
 
-    MecheGenerator[ 'encode' ] = function ( block ) {
-        return mecheEncodeText( block.getFieldValue( 'text' ) );
+    QuartetGenerator[ 'encode' ] = function ( block ) {
+        return quartetEncodeText( block.getFieldValue( 'text' ) );
     };
 
 //
@@ -123,7 +123,7 @@
         }
     };
 
-    MecheGenerator[ 'free_form_regex' ] = function ( block ) {
+    QuartetGenerator[ 'free_form_regex' ] = function ( block ) {
         return block.getFieldValue( 'regex' );
     };
 
@@ -146,9 +146,9 @@
         }
     };
 
-    MecheGenerator[ 'one_or_more' ] = function ( block ) {
-        var statements_regex = MecheGenerator.statementToCode( block, 'regex' ).trim( );
-        return mecheSequence( statements_regex ) + '+';
+    QuartetGenerator[ 'one_or_more' ] = function ( block ) {
+        var statements_regex = QuartetGenerator.statementToCode( block, 'regex' ).trim( );
+        return quartetSequence( statements_regex ) + '+';
     };
 
 //
@@ -170,9 +170,9 @@
         }
     };
 
-    MecheGenerator['any_number_of'] = function(block) {
-        var statements_regex = MecheGenerator.statementToCode( block, 'regex' ).trim( );
-        return mecheSequence( statements_regex ) + '*';
+    QuartetGenerator['any_number_of'] = function(block) {
+        var statements_regex = QuartetGenerator.statementToCode( block, 'regex' ).trim( );
+        return quartetSequence( statements_regex ) + '*';
     };
 
 //
@@ -192,7 +192,7 @@
         }
     };
 
-    MecheGenerator[ 'any' ] = function ( block ) {
+    QuartetGenerator[ 'any' ] = function ( block ) {
         return '.';
     };
 
@@ -216,9 +216,9 @@
         }
     };
 
-    MecheGenerator[ 'maybe' ] = function( block ) {
-        var statements_name = MecheGenerator.statementToCode( block, 'NAME' ).trim();
-        return mecheSequence( statements_name ) + '?';
+    QuartetGenerator[ 'maybe' ] = function( block ) {
+        var statements_name = QuartetGenerator.statementToCode( block, 'NAME' ).trim();
+        return quartetSequence( statements_name ) + '?';
     };
 
 
@@ -231,7 +231,7 @@
             this.appendDummyInput( )
                 .appendField("One of options");
             this.appendStatementInput("Items")
-                .setCheck("MecheOption");
+                .setCheck("QuartetOption");
             this.setInputsInline(true);
             this.setPreviousStatement(true, "String");
             this.setNextStatement(true, "String");
@@ -241,13 +241,13 @@
         }
     };
 
-    MecheGenerator['one_of'] = function(block) {
-        var statements_items = MecheGenerator.statementToCode(block, 'Items').trim( );
-        return mecheSequence( statements_items.substring( 1 ) );
+    QuartetGenerator['one_of'] = function(block) {
+        var statements_items = QuartetGenerator.statementToCode(block, 'Items').trim( );
+        return quartetSequence( statements_items.substring( 1 ) );
     };
 
 //
-// ─── MECHE OPTION ──────────────────────────────────────────────────────────────
+// ─── QUARTET OPTION ──────────────────────────────────────────────────────────────
 //
 
     Blockly.Blocks['option'] = {
@@ -256,16 +256,16 @@
                 .setCheck(null)
                 .appendField("Option");
             this.setInputsInline(true);
-            this.setPreviousStatement(true, "MecheOption");
-            this.setNextStatement(true, "MecheOption");
+            this.setPreviousStatement(true, "QuartetOption");
+            this.setNextStatement(true, "QuartetOption");
             this.setColour(160);
             this.setTooltip('');
             this.setHelpUrl('http://www.example.com/');
         }
     };
 
-    MecheGenerator['option'] = function ( block ) {
-        return '|' + MecheGenerator.statementToCode(block, 'NAME').trim( );
+    QuartetGenerator['option'] = function ( block ) {
+        return '|' + QuartetGenerator.statementToCode(block, 'NAME').trim( );
     };
 
 //
@@ -284,7 +284,7 @@
         }
     };
 
-    MecheGenerator[ 'line_start' ] = function ( block ) {
+    QuartetGenerator[ 'line_start' ] = function ( block ) {
         return '^';
     };
 
@@ -304,7 +304,7 @@
         }
     };
 
-    MecheGenerator[ 'line_end' ] = function ( block ) {
+    QuartetGenerator[ 'line_end' ] = function ( block ) {
         return '$';
     };
 
@@ -332,7 +332,7 @@
     };
 
 
-    MecheGenerator['whitespace'] = function(block) {
+    QuartetGenerator['whitespace'] = function(block) {
         var checkbox_space = block.getFieldValue('space') == 'TRUE';
         var checkbox_tab = block.getFieldValue('tab') == 'TRUE';
         var checkbox_linefeed = block.getFieldValue('linefeed') == 'TRUE';
@@ -342,7 +342,7 @@
         if ( checkbox_tab ) { chars.push( '\\t' ) };
         if ( checkbox_linefeed ) { chars.push( '\\n' ) };
 
-        return mecheAlphabet( chars );
+        return quartetAlphabet( chars );
     };
 
 //
@@ -373,7 +373,7 @@
         }
     };
 
-    MecheGenerator['special_whitespace'] = function(block) {
+    QuartetGenerator['special_whitespace'] = function(block) {
         var checkbox_vtab = block.getFieldValue('vtab') == 'TRUE';
         var checkbox_nul = block.getFieldValue('nul') == 'TRUE';
         var checkbox_carrige = block.getFieldValue('carrige') == 'TRUE';
@@ -385,7 +385,7 @@
         if ( checkbox_carrige ) { code.pus( '\\r' ) };
         if ( checkbox_formfeed ) { code.pus( '\\f' ) };
 
-        return mecheAlphabet( code );
+        return quartetAlphabet( code );
     };
 
 //
@@ -408,7 +408,7 @@
         }
     };
 
-    MecheGenerator[ 'range' ] = function ( block ) {
+    QuartetGenerator[ 'range' ] = function ( block ) {
         var text_start = block.getFieldValue('start');
         var text_end = block.getFieldValue('end');
         return '[' + text_start + '-' + text_end + ']';
@@ -433,8 +433,8 @@
         }
     };
 
-    MecheGenerator[ 'match' ] = function ( block ) {
-        var statements_match = MecheGenerator.statementToCode(block, 'match').trim( );
+    QuartetGenerator[ 'match' ] = function ( block ) {
+        var statements_match = QuartetGenerator.statementToCode(block, 'match').trim( );
         return '(' + statements_match + ')';
     };
 
@@ -457,8 +457,8 @@
         }
     };
 
-    MecheGenerator[ 'sigma' ] = function ( block ) {
-        var statements_sequence = MecheGenerator.statementToCode(block, 'sigma').trim( );
+    QuartetGenerator[ 'sigma' ] = function ( block ) {
+        var statements_sequence = QuartetGenerator.statementToCode(block, 'sigma').trim( );
         return '[' + statements_sequence + ']';
     };
 
@@ -480,8 +480,8 @@
         }
     };
 
-    MecheGenerator['anything_but'] = function(block) {
-        var statements_anything_but = MecheGenerator.statementToCode(block, 'anything-but').trim( );
+    QuartetGenerator['anything_but'] = function(block) {
+        var statements_anything_but = QuartetGenerator.statementToCode(block, 'anything-but').trim( );
         return '[^' + statements_anything_but + ']';
     };
 
@@ -502,7 +502,7 @@
         }
     };
 
-    MecheGenerator['comment'] = function ( block ) {
+    QuartetGenerator['comment'] = function ( block ) {
         return '';
     };
 
@@ -526,10 +526,10 @@
         }
     };
 
-    MecheGenerator['repeat'] = function ( block ) {
+    QuartetGenerator['repeat'] = function ( block ) {
         var text_count = block.getFieldValue('count');
-        var statements_code = MecheGenerator.statementToCode(block, 'code').trim( );
-        return mecheSequence( statements_code ) + '{' + text_count + '}';
+        var statements_code = QuartetGenerator.statementToCode(block, 'code').trim( );
+        return quartetSequence( statements_code ) + '{' + text_count + '}';
     }
 
 //
@@ -552,10 +552,10 @@
         }
     };
 
-    MecheGenerator['repeat_at_least'] = function ( block ) {
+    QuartetGenerator['repeat_at_least'] = function ( block ) {
         var text_count = block.getFieldValue('count');
-        var statements_code = MecheGenerator.statementToCode(block, 'code').trim( );
-        return mecheSequence( statements_code ) + '{' + text_count + ',}';
+        var statements_code = QuartetGenerator.statementToCode(block, 'code').trim( );
+        return quartetSequence( statements_code ) + '{' + text_count + ',}';
     }
 
 //
@@ -579,12 +579,12 @@
         }
     };
 
-    MecheGenerator['repeat_in_range'] = function ( block ) {
+    QuartetGenerator['repeat_in_range'] = function ( block ) {
         var text_start = block.getFieldValue('start');
         var text_end = block.getFieldValue('end');
-        var statements_code = MecheGenerator.statementToCode(block, 'code').trim( );
+        var statements_code = QuartetGenerator.statementToCode(block, 'code').trim( );
 
-        return mecheSequence( statements_code ) + '{' + text_start + ',' + text_end + '}';
+        return quartetSequence( statements_code ) + '{' + text_start + ',' + text_end + '}';
     }
 
 //
@@ -611,13 +611,13 @@
         }
     };
 
-    MecheGenerator['lookahead'] = function(block) {
+    QuartetGenerator['lookahead'] = function(block) {
         var checkbox_reverse = block.getFieldValue('reverse') == 'TRUE';
-        var statements_match = MecheGenerator.statementToCode(block, 'match').trim( );
-        var statements_lookahead = MecheGenerator.statementToCode(block, 'lookahead').trim( );
+        var statements_match = QuartetGenerator.statementToCode(block, 'match').trim( );
+        var statements_lookahead = QuartetGenerator.statementToCode(block, 'lookahead').trim( );
 
         var reverseSign = (checkbox_reverse)? '!': '=';
-        return mecheSequence( statements_match ) + '(?' + reverseSign + mecheSequence( statements_lookahead ) + ')';
+        return quartetSequence( statements_match ) + '(?' + reverseSign + quartetSequence( statements_lookahead ) + ')';
     };
 
 // ────────────────────────────────────────────────────────────────────────────────

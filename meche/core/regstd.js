@@ -10,7 +10,7 @@
 // ─── TO UNICODE ─────────────────────────────────────────────────────────────────
 //
 
-    function mecheUnicodify ( text ) {
+    function quartetUnicodify ( text ) {
         let result = [ ];
         for ( let character of text ) {
             result.push( getUnicodeCharacter( character ) );
@@ -35,7 +35,7 @@
 // ─── SEQUENCE MAKER ─────────────────────────────────────────────────────────────
 //
 
-    function mecheSequence ( code ) {
+    function quartetSequence ( code ) {
         return ( code.length <= 1 )? code : '(?:' + code + ')';
     }
 
@@ -43,7 +43,7 @@
 // ─── ENCODE TEXT ────────────────────────────────────────────────────────────────
 //
 
-    function mecheEncodeText ( code ) {
+    function quartetEncodeText ( code ) {
         var result = [ ];
         for ( var character of code ) {
             switch ( character ) {
@@ -80,7 +80,7 @@
 // ─── SPACE ENCODE ───────────────────────────────────────────────────────────────
 //
 
-    function mecheSpaceEncode ( text ) {
+    function quartetSpaceEncode ( text ) {
         let result = '';
         for ( let character of code ) {
             switch ( character ) {
@@ -98,7 +98,7 @@
 // ─── SPACE DECODE ───────────────────────────────────────────────────────────────
 //
 
-    function mecheSpaceDecode ( text ) {
+    function quartetSpaceDecode ( text ) {
         return text.replace( /\\u0020/g, ' ' );
     }
 
@@ -106,7 +106,7 @@
 // ─── MAKE ALPHABET ──────────────────────────────────────────────────────────────
 //
 
-    function mecheAlphabet ( text ) {
+    function quartetAlphabet ( text ) {
         return ( text.length === 1 )? text : '[' + text.join('') + ']';
     }
 

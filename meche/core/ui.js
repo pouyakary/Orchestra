@@ -9,12 +9,12 @@
 // ─── UPDATE CODE ON CHANGE ──────────────────────────────────────────────────────
 //
 
-    function mecheOnUIChange ( event ) {
+    function quartetOnUIChange ( event ) {
         if ( event.type == Blockly.Events.MOVE ) { return };
-        var compiledRegex = MecheGenerator.workspaceToCode( workspace );
+        var compiledRegex = QuartetGenerator.workspaceToCode( workspace );
         if ( !/^\/.*\/$/.test( compiledRegex ) )  { return };
         document.getElementById( 'ribbon-console-regexp' ).innerText = compiledRegex;
-        mecheOnResize( );
+        quartetOnResize( );
     }
 
 //
@@ -30,10 +30,10 @@
 //
 
     window.onresize = function ( ) {
-        mecheOnResize( );
+        quartetOnResize( );
     }
 
-    function mecheOnResize ( ) {
+    function quartetOnResize ( ) {
         /*
         setTimeout( function ( ) {
             document.getElementsByClassName('blocklyFlyoutBackground')[ 0 ].setAttribute(

@@ -1,24 +1,24 @@
 
-let MecheGenerator = new Blockly.Generator('Meche');
+let QuartetGenerator = new Blockly.Generator('Quartet');
 
-MecheGenerator.init = function ( workspace ) {
+QuartetGenerator.init = function ( workspace ) {
 
 }
 
-MecheGenerator.finish = function ( code ) {
+QuartetGenerator.finish = function ( code ) {
     return code.trim( );
 };
 
-MecheGenerator.scrubNakedValue = function ( line ) {
+QuartetGenerator.scrubNakedValue = function ( line ) {
     return line.trim( );
 };
 
-MecheGenerator.quote_ = function ( text ) {
+QuartetGenerator.quote_ = function ( text ) {
     return text.trim( );
 };
 
-MecheGenerator.scrub_ = function ( block, code ) {
+QuartetGenerator.scrub_ = function ( block, code ) {
     var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-    var nextCode = MecheGenerator.blockToCode( nextBlock );
+    var nextCode = QuartetGenerator.blockToCode( nextBlock );
     return code.trim( ) + nextCode.trim( );
 };

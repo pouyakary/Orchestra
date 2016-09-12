@@ -98,7 +98,7 @@
         copyToBinaryFromDir( 'resources' );
         copyToBinaryFromDir( 'view' );
         copyToBinaryFromDir( 'electron' );
-        copyToBinaryFromDir( 'meche' );
+        copyToBinaryFromDir( 'quartet' );
         callback();
     });
 
