@@ -41,7 +41,15 @@
         "onresize",
         "prismjs",
         "Script's",
-        "subdirs"
+        "subdirs",
+        "Regman",
+        "regman",
+        "githubusercontent",
+        "Blockly",
+        "vtab",
+        "carrige",
+        "lookahead",
+        "Flyout"
     ],
     // flagWords - list of words to be always considered incorrect
     // This is useful for offensive words and common spelling errors.
