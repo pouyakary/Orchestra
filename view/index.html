@@ -14,9 +14,14 @@
         <script src="core/blockly-styles.js"></script>
         <script src="core/base.js"></script>
         <script src="core/ui.js"></script>
+        <script src="loading-screen.js"></script>
 	</head>
 
 	<body>
+        <div id="loading-view">
+			<img src="opening-logo.png" width="120">
+		</div>
+
 		<div class="heading" id="toolbar">
 			<!-- Tabs -->
 			<div id="header-tabs" class="editor-tab"></div>
@@ -104,6 +109,7 @@
 		<!-- Init Page -->
         <script>
             initWindow( );
+            CancelLoadingScreenAfterCompleteLoad( );
         </script>
 	</body>
 </html>

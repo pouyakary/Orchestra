@@ -99,6 +99,7 @@
         copyToBinaryFromDir( 'view' );
         copyToBinaryFromDir( 'electron' );
         copyToBinaryFromDir( 'quartet' );
+        copyToBinaryFromDir( 'ui' );
         callback();
     });
 
