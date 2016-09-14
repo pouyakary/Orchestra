@@ -73,7 +73,7 @@
                     result.push( character );
             }
         }
-        return result.join('');
+        return quartetEncodeHTML( result.join('') );
     }
 
 //
@@ -85,7 +85,7 @@
         for ( let character of code ) {
             switch ( character ) {
                 case ' ':
-                    result += __SPACE_UNICODE_STRING__;
+                    result += '&nbsp;';
                     return;
                 default:
                     result += character;
@@ -107,7 +107,22 @@
 //
 
     function quartetAlphabet ( text ) {
-        return ( text.length === 1 )? text : '[' + text.join('') + ']';
+        return quartetEncodeHTML( ( text.length === 1 )? text : '[' + text.join('') + ']' );
+    }
+
+//
+// ─── ENCODE FOR HTML ────────────────────────────────────────────────────────────
+//
+
+    function quartetEncodeHTML ( text ) {
+        return text.replace( /<|>/, match => {
+            switch ( match ) {
+                case '<':
+                    return '&lt;';
+                case '>':
+                    return '&gt;';
+            }
+        });
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
