@@ -242,8 +242,19 @@
     };
 
     QuartetGenerator['one_of'] = function(block) {
+        function cut ( text, start, end ) {
+            return text.substring( 0, start ) + text.substring( end );
+        }
         var statements_items = QuartetGenerator.statementToCode(block, 'Items').trim( );
-        return quartetSequence( statements_items.substring( 1 ) );
+        if ( statements_items.startsWith('<') ) {
+            if ( statements_items.length === 52 ) {
+                return '';
+            } else {
+                return quartetSequence( cut( statements_items, 45, 46 ) );
+            }
+        } else {
+            return quartetSequence( statements_items.substring( 1 ) );
+        }
     };
 
 //
