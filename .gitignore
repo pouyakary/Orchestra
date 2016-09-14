@@ -1,5 +1,5 @@
 _compiled/*
-_release/*
+release/**
 _documentation/*
 node_modules/*
 npm-debug.log
