@@ -380,10 +380,10 @@
         var checkbox_formfeed = block.getFieldValue('formfeed') == 'TRUE';
 
         var code = [ ];
-        if ( checkbox_vtab ) { code.pus( '\\v' ) };
-        if ( checkbox_nul ) { code.pus( '\\0' ) };
-        if ( checkbox_carrige ) { code.pus( '\\r' ) };
-        if ( checkbox_formfeed ) { code.pus( '\\f' ) };
+        if ( checkbox_vtab ) { code.push( '\\v' ) };
+        if ( checkbox_nul ) { code.push( '\\0' ) };
+        if ( checkbox_carrige ) { code.push( '\\r' ) };
+        if ( checkbox_formfeed ) { code.push( '\\f' ) };
 
         return quartetAlphabet( code );
     };
@@ -468,10 +468,17 @@
 
     Blockly.Blocks['anything_but'] = {
         init: function() {
-            this.appendStatementInput("anything-but")
-                .setCheck("String")
-                .appendField("Anything But");
-            this.setInputsInline(false);
+            this.appendDummyInput()
+                .appendField("Anything but ")
+                .appendField("0-9")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "numbers")
+                .appendField("a-z")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "lowercase")
+                .appendField("A-Z")
+                .appendField(new Blockly.FieldCheckbox("FALSE"), "uppercase")
+                .appendField("Other")
+                .appendField(new Blockly.FieldTextInput(""), "other");
+            this.setInputsInline(true);
             this.setPreviousStatement(true, "String");
             this.setNextStatement(true, "String");
             this.setColour(260);
@@ -481,8 +488,18 @@
     };
 
     QuartetGenerator['anything_but'] = function(block) {
-        var statements_anything_but = QuartetGenerator.statementToCode(block, 'anything-but').trim( );
-        return '[^' + statements_anything_but + ']';
+        var checkbox_numbers = block.getFieldValue('numbers') == 'TRUE';
+        var checkbox_lowercase = block.getFieldValue('lowercase') == 'TRUE';
+        var checkbox_uppercase = block.getFieldValue('uppercase') == 'TRUE';
+        var text_other = block.getFieldValue('other');
+
+        var code = '';
+        if ( checkbox_numbers ) { code += '0-9' };
+        if ( checkbox_lowercase ) { code += 'a-z' };
+        if ( checkbox_uppercase ) { code += 'A-Z' };
+        code += quartetEncodeText( text_other );
+
+        return '[^' + code + ']';
     };
 
 //
