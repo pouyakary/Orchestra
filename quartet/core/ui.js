@@ -22,6 +22,7 @@
 
     function quartetOnUIChange ( event ) {
         if ( event.type === Blockly.Events.MOVE ) return;
+        if ( workspace.topBlocks_.length > 1 ) return;
         if ( event.type === Blockly.Events.UI ) {
             if ( event.element === 'selected' ) {
                 quartetActiveBlockId = event.newValue || event.blockId;
@@ -29,12 +30,9 @@
         }
 
         var compiledRegex = QuartetGenerator.workspaceToCode( workspace );
-        if ( !/^\/.*\/$/.test( compiledRegex ) )  { return };
         // this is the master shared one...
         let consoleView = document.getElementById( 'ribbon-console-regexp' );
         consoleView.innerHTML = `/${ compiledRegex }/`;
-        CompiledRegEx = consoleView.innerText;
-        CompiledRegEx = CompiledRegEx.substring( 1, compiledRegex.length - 2 );
     }
 
 //
