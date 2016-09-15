@@ -9,6 +9,7 @@
 //
 
     var workspace;
+    var CompiledRegEx = '';
 
 //
 // ─── INIT WINDOW ────────────────────────────────────────────────────────────────
@@ -20,6 +21,7 @@
         setupEventListeners( );
         applyAdditionalStyles( );
         initMainMenu( );
+        initPlaygroundCodeMirror( );
     }
 
 //
