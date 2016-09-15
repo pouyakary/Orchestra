@@ -14,8 +14,12 @@
         <script src="core/blockly-styles.js"></script>
         <script src="core/base.js"></script>
         <script src="core/ui.js"></script>
+
+        <!-- UI -->
         <script src="loading-screen.js"></script>
         <script src="mainmenu.js"></script>
+        <script src="screen-controller.js"></script>
+        <script src="playground.js"></script>
 	</head>
 
 	<body>
@@ -29,11 +33,11 @@
 
 			<!-- Invisible Buttons -->
 			<div id="editor-tab-invisible" class="invisible-tab"
-				 onclick="">
+				 onclick="onChangeWindowToEditor( );">
 			</div>
 
-			<div id="programmer-tab-invisible" class="invisible-tab"
-				 onclick="">
+			<div id="playground-tab-invisible" class="invisible-tab"
+				 onclick="onChangeWindowToPlayground( );">
 			</div>
 
 			<div style="clear: both;"></div>
@@ -49,7 +53,7 @@
 					<div id="ribbon-general-save-file" class="ribbon-icon">Save</div>
 
 					<div class="ribbon-separator"></div>
-                    <div id="ribbon-editor-compile" class="ribbon-icon">Test Drive</div>
+                    <div id="ribbon-editor-compile" class="ribbon-icon" onclick="onPerformTestDrive( );">Test Drive</div>
 
                     <div class="ribbon-separator"></div>
                     <div id="ribbon-console-view">
@@ -79,6 +83,13 @@
 		</div>
 
 
+
+        <!-- Editor View Goes Here -->
+		<div id="PlaygroundView" class="tab-view" hidden="true">
+            <textarea id="playground-editor"></textarea>
+        </div>
+
+
 		<!-- Toolbox Definition -->
         <xml id="toolbox" style="display: none">
             <block type="comment"></block>
@@ -105,7 +116,6 @@
             <block type="line_start"></block>
             <block type="line_end"></block>
         </xml>
-
 
 
 		<!-- Init Page -->
