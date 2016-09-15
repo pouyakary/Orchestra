@@ -14,6 +14,7 @@
         setupComposer( );
         setupEventListeners( );
         applyAdditionalStyles( );
+        initMainMenu( );
     }
 
 //
