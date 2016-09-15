@@ -134,7 +134,9 @@
             {
                 label: name,
                 submenu: [
-                    AboutPageButton,
+                    {
+                        role: 'about'
+                    },
                     {
                         type: 'separator'
                     },

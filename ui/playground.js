@@ -16,7 +16,7 @@
 //
 
     function initPlaygroundCodeMirror ( ) {
-        EditorInstance = ace.edit( 'playground-editor' );
+
     }
 
 //

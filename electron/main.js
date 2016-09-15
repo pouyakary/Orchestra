@@ -30,7 +30,7 @@
             backgroundColor: 'white'
         });
 
-        //mainWindow.openDevTools( );
+        mainWindow.openDevTools( );
 
         mainWindow.loadURL( 'file://' + __dirname + '/index.html' );
 
