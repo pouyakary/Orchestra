@@ -100,6 +100,10 @@
         copyToBinaryFromDir( 'electron' );
         copyToBinaryFromDir( 'quartet' );
         copyToBinaryFromDir( 'ui' );
+        copyFile(
+            getLocalPath( 'package.json' ),
+            getLocalPath( path.join( resultDirPath , 'package.json' ) )
+        );
         callback();
     });
 
