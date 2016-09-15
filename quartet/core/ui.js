@@ -30,8 +30,11 @@
 
         var compiledRegex = QuartetGenerator.workspaceToCode( workspace );
         if ( !/^\/.*\/$/.test( compiledRegex ) )  { return };
-        document.getElementById( 'ribbon-console-regexp' ).innerHTML = compiledRegex;
-        quartetOnResize( );
+        // this is the master shared one...
+        let consoleView = document.getElementById( 'ribbon-console-regexp' );
+        consoleView.innerHTML = `/${ compiledRegex }/`;
+        CompiledRegEx = consoleView.innerText;
+        CompiledRegEx = CompiledRegEx.substring( 1, compiledRegex.length - 2 );
     }
 
 //

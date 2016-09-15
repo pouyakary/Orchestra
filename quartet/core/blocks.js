@@ -23,7 +23,7 @@
 
     QuartetGenerator['compose'] = function(block) {
         var statements_children = QuartetGenerator.statementToCode(block, 'children').trim( );
-        return '/' + statements_children.trim( ) + '/';
+        return statements_children.trim( );
     };
 
 //
