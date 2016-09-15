@@ -1,0 +1,42 @@
+
+//
+// Copyright 2016 Kary Foundation, Inc.
+//   Author: Pouya Kary <k@karyfoundation.org>
+//
+
+//
+// ─── IMPORTS ────────────────────────────────────────────────────────────────────
+//
+
+    @import '../../libs/kary-scheme';
+    @import '../../globals';
+
+//
+// ─── EDITOR ─────────────────────────────────────────────────────────────────────
+//
+
+    #playground-editor {
+        @editor-margin: 20px;
+        @editor-padding: 20px;
+        @total-additional-spaces: 2 * ( @editor-margin + @editor-padding );
+        padding: @editor-padding - 1px;
+        margin: @editor-margin - 1px;
+        width: calc( ~'100vw' - @total-additional-spaces );
+        height: ~'calc( 100vh - 39px ' - @total-additional-spaces ~')';
+        overflow-y: scroll;
+        overflow-wrap: break-word;
+        font-size: 15px;
+        font-family: @source-code-pro-typeface;
+        background-color: white;
+        border-radius: 10px;
+    }
+
+//
+// ─── HIGHLIGHTS ─────────────────────────────────────────────────────────────────
+//
+
+    .playground-match {
+        background-color: #eee;
+    }
+
+// ────────────────────────────────────────────────────────────────────────────────
