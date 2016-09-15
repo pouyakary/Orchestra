@@ -1,27 +1,58 @@
 
-let QuartetGenerator = new Blockly.Generator('Quartet');
+//
+// Copyright 2016 Kary Foundation, Inc.
+//   Author: Pouya Kary <k@karyfoundation.org>
+//
 
-QuartetGenerator.init = function ( workspace ) {
+//
+// ─── THE GENERATOR ──────────────────────────────────────────────────────────────
+//
 
-}
+    let QuartetGenerator = new Blockly.Generator('Quartet');
 
-QuartetGenerator.finish = function ( code ) {
-    return code.trim( );
-};
+//
+// ─── GENERATOR INIT ─────────────────────────────────────────────────────────────
+//
 
-QuartetGenerator.scrubNakedValue = function ( line ) {
-    return line.trim( );
-};
+    QuartetGenerator.init = function ( workspace ) {
 
-QuartetGenerator.quote_ = function ( text ) {
-    return text.trim( );
-};
-
-QuartetGenerator.scrub_ = function ( block, code ) {
-    if ( block.id === quartetActiveBlockId ) {
-        code = `<span class="console-highlight-active-block">${ code }</span>`;
     }
-    var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-    var nextCode = QuartetGenerator.blockToCode( nextBlock );
-    return code.trim( ) + nextCode.trim( );
-};
+
+//
+// ─── GENERATOR FINISH ───────────────────────────────────────────────────────────
+//
+
+    QuartetGenerator.finish = function ( code ) {
+        return code.trim( );
+    };
+
+//
+// ─── SCRUB NAKED VALUE ──────────────────────────────────────────────────────────
+//
+
+    QuartetGenerator.scrubNakedValue = function ( line ) {
+        return line.trim( );
+    };
+
+//
+// ─── QUOTE ──────────────────────────────────────────────────────────────────────
+//
+
+    QuartetGenerator.quote_ = function ( text ) {
+        return text.trim( );
+    };
+
+//
+// ─── SCRUB ──────────────────────────────────────────────────────────────────────
+//
+
+    QuartetGenerator.scrub_ = function ( block, code ) {
+        if ( block.id === quartetActiveBlockId ) {
+            code = `<span class="console-highlight-active-block">${ code }</span>`;
+        }
+        var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+        var nextCode = QuartetGenerator.blockToCode( nextBlock );
+        return code.trim( ) + nextCode.trim( );
+    };
+
+// ────────────────────────────────────────────────────────────────────────────────
