@@ -100,6 +100,8 @@
         copyToBinaryFromDir( 'electron' );
         copyToBinaryFromDir( 'quartet' );
         copyToBinaryFromDir( 'ui' );
+        copyToBinaryFromDir( 'libs' );
+        copyToBinaryFromDir( 'sounds' );
         copyFile(
             getLocalPath( 'package.json' ),
             getLocalPath( path.join( resultDirPath , 'package.json' ) )
