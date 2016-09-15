@@ -10,6 +10,7 @@
 
     var workspace;
     var CompiledRegEx = '';
+    var ComposeBlock;
 
 //
 // ─── INIT WINDOW ────────────────────────────────────────────────────────────────
@@ -29,7 +30,7 @@
 //
 
     function setUpWorkspace ( ) {
-        var xml = '<xml><block type="compose" deletable="false" x="500"></block></xml>';
+        var xml = '<xml><block type="compose" deletable="false"></block></xml>';
         var toolbox = document.getElementById( 'toolbox' );
 
         workspace = Blockly.inject( 'quartet-coding-view', {
@@ -40,6 +41,8 @@
         });
 
         Blockly.Xml.domToWorkspace( Blockly.Xml.textToDom( xml ), workspace );
+
+        ComposeBlock = workspace.getAllBlocks( )[ 0 ];
     }
 
 //

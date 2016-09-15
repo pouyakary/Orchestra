@@ -29,7 +29,7 @@
             }
         }
 
-        var compiledRegex = QuartetGenerator.workspaceToCode( workspace );
+        var compiledRegex = QuartetGenerator.blockToCode( ComposeBlock );
         // this is the master shared one...
         let consoleView = document.getElementById( 'ribbon-console-regexp' );
         consoleView.innerHTML = `/${ compiledRegex }/`;
