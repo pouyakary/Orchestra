@@ -22,7 +22,6 @@
 
     function quartetOnUIChange ( event ) {
         if ( event.type === Blockly.Events.MOVE ) return;
-        if ( workspace.topBlocks_.length > 1 ) return;
         if ( event.type === Blockly.Events.UI ) {
             if ( event.element === 'selected' ) {
                 quartetActiveBlockId = event.newValue || event.blockId;
