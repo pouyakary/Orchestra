@@ -1,8 +1,12 @@
 <html>
 	<head>
 		<title>Orchestra</title>
-		<!-- Main Graph Tools -->
+		<!-- Main Style Sheets -->
 		<link rel="stylesheet" href="style.css">
+
+        <!-- CodeMirror -->
+        <script src="src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+
 		<!-- Blockly Core -->
         <script src="blockly-core/blockly_compressed.js"></script>
         <script src="blockly-core/en.js"></script>
@@ -86,8 +90,12 @@
 
         <!-- Editor View Goes Here -->
 		<div id="PlaygroundView" class="tab-view" hidden="true">
-            <textarea id="playground-editor"></textarea>
+            <div id="playground-editor">hello world</div>
         </div>
+
+        <script>
+            var editor = ace.edit("playground-editor");
+        </script>
 
 
 		<!-- Toolbox Definition -->
