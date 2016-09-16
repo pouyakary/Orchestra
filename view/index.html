@@ -4,12 +4,11 @@
 		<!-- Main Style Sheets -->
 		<link rel="stylesheet" href="style.css">
 
-        <!-- CodeMirror -->
-        <script src="src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 
 		<!-- Blockly Core -->
         <script src="blockly-core/blockly_compressed.js"></script>
         <script src="blockly-core/en.js"></script>
+
 
         <!-- Quartet Core -->
         <script src="core/regstd.js"></script>
@@ -91,7 +90,7 @@
 
         <!-- Editor View Goes Here -->
 		<div id="PlaygroundView" class="tab-view" hidden="true">
-            <div id="playground-editor">hello world</div>
+            <div id="playground-editor"></div>
         </div>
 
 
@@ -125,8 +124,16 @@
 
 		<!-- Init Page -->
         <script>
+            const path = require('path');
+			const fs   = require('fs');
             initWindow( );
-            CancelLoadingScreenAfterCompleteLoad( );
         </script>
+
+        <script src="vs/loader.js"></script>
+		<script src="monaco.js"></script>
+		<script>
+            initMonacoEditor( );
+			CancelLoadingScreenAfterCompleteLoad( );
+		</script>
 	</body>
 </html>
