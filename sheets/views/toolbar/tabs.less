@@ -15,7 +15,7 @@
 //
 
     #header-tabs {
-        margin-left: 20px;
+        margin-left: @header-tabs-spacings;
         float: left;
         background-size: contain;
         background-position: left;
@@ -36,7 +36,7 @@
     }
 
     @tab-x-difference: 102px;
-    @tab-x-start: 27px;
+    @tab-x-start: 7px + @header-tabs-spacings;
 
     #editor-tab-invisible {
         left: @tab-x-start;
