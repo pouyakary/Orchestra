@@ -34,6 +34,9 @@
         document.getElementById( EditorWindowScreenElement ).hidden = true;
         document.getElementById( PlaygroundWindowScreenElement ).hidden = false;
         document.getElementById( TabsPlaceholder ).className = 'playground-tab';
+
+        initMonacoEditor( );
+        playgroundEditor.layout( );
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

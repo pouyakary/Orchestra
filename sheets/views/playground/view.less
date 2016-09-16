@@ -16,19 +16,13 @@
 //
 
     #playground-editor {
-        @editor-margin: 20px;
-        @editor-padding: 20px;
-        @total-additional-spaces: 2 * ( @editor-margin + @editor-padding );
-        padding: @editor-padding - 1px;
-        margin: @editor-margin - 1px;
-        width: calc( ~'100vw' - @total-additional-spaces );
-        height: ~'calc( 100vh - 39px ' - @total-additional-spaces ~')';
-        overflow-y: scroll;
-        overflow-wrap: break-word;
-        font-size: 15px;
-        font-family: @source-code-pro-typeface;
-        background-color: white;
-        border-radius: 10px;
+        width: 100vw;
+        height: ~'calc( 100vh - 39px )';
+    }
+
+    .monaco-editor .token.match {
+        background-color: #D6EEFF;
+        color: @kary-light-blue;
     }
 
 //

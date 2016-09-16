@@ -54,11 +54,7 @@
                     {
                         label: 'Select All',
                         accelerator: 'CmdOrCtrl+A',
-                        click: function ( item , focusedWindow ) {
-                            if ( focusedWindow ) {
-                                UI.OnCommandA( );
-                            }
-                        }
+                        role: 'selectall'
                     }
                 ]
             },
@@ -168,9 +164,7 @@
                     {
                         label: 'Quit',
                         accelerator: 'Command+Q',
-                        click: ( ) => {
-                            app.quit( )
-                        }
+                        click: ( ) => fireWindowCloseRequest( )
                     },
                 ]
             }

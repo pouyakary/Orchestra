@@ -1,11 +1,14 @@
 <html>
 	<head>
 		<title>Orchestra</title>
-		<!-- Main Graph Tools -->
+		<!-- Main Style Sheets -->
 		<link rel="stylesheet" href="style.css">
+
+
 		<!-- Blockly Core -->
         <script src="blockly-core/blockly_compressed.js"></script>
         <script src="blockly-core/en.js"></script>
+
 
         <!-- Quartet Core -->
         <script src="core/regstd.js"></script>
@@ -20,6 +23,7 @@
         <script src="mainmenu.js"></script>
         <script src="screen-controller.js"></script>
         <script src="playground.js"></script>
+        <script src="window.js"></script>
 	</head>
 
 	<body>
@@ -86,7 +90,7 @@
 
         <!-- Editor View Goes Here -->
 		<div id="PlaygroundView" class="tab-view" hidden="true">
-            <textarea id="playground-editor"></textarea>
+            <div id="playground-editor"></div>
         </div>
 
 
@@ -120,8 +124,16 @@
 
 		<!-- Init Page -->
         <script>
+            const path = require('path');
+			const fs   = require('fs');
             initWindow( );
-            CancelLoadingScreenAfterCompleteLoad( );
         </script>
+
+        <script src="vs/loader.js"></script>
+		<script src="monaco.js"></script>
+		<script>
+            initMonacoEditor( );
+			CancelLoadingScreenAfterCompleteLoad( );
+		</script>
 	</body>
 </html>

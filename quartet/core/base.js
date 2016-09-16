@@ -22,7 +22,7 @@
         setupEventListeners( );
         applyAdditionalStyles( );
         initMainMenu( );
-        initPlaygroundCodeMirror( );
+        initPlaygroundEditor( );
     }
 
 //

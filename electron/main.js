@@ -14,6 +14,7 @@
     const electron      = require( 'electron' );
     const app           = electron.app;
     const BrowserWindow = electron.BrowserWindow;
+    const { ipcMain }   = require( 'electron' );
 
 //
 // ─── GENERATE MAIN WINDOW ───────────────────────────────────────────────────────
@@ -27,10 +28,14 @@
         mainWindow = new BrowserWindow({
             width:  window_width,   minWidth: window_width - 150,
             height: window_height,  minHeight: window_height - 100,
-            backgroundColor: 'white'
+            backgroundColor: 'white',
+            //frame: false,
+            titleBarStyle: 'hidden-inset',
+            fullscreen: false
         });
 
-        mainWindow.openDevTools( );
+        //mainWindow.openDevTools( );
+        mainWindow.maximize( );
 
         mainWindow.loadURL( 'file://' + __dirname + '/index.html' );
 
@@ -39,6 +44,17 @@
             app.quit( );
         });
     }
+
+//
+// ─── ON WINDOW CLOSE STATUS ─────────────────────────────────────────────────────
+//
+
+    ipcMain.on( 'window-status', ( event, arg ) => {
+        if ( arg === 'close' ) {
+            mainWindow = null;
+            app.quit( );
+        }
+    });
 
 //
 // ─── ON READY ───────────────────────────────────────────────────────────────────
