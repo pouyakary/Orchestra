@@ -31,6 +31,7 @@
         var compiledRegex = QuartetGenerator.blockToCode( ComposeBlock );
         // this is the master shared one...
         let consoleView = document.getElementById( 'ribbon-console-regexp' );
+        CompiledRegEx = compiledRegex;
         consoleView.innerHTML = `/${ compiledRegex }/`;
     }
 

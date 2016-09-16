@@ -9,14 +9,15 @@
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
 //
 
-    const PlaygroundEditorID = 'playground-editor';
+    const playgroundEditorID = 'playground-editor';
+    var   playgroundEditor;
 
 //
 // ─── INIT CODE MIRROR ───────────────────────────────────────────────────────────
 //
 
-    function initPlaygroundCodeMirror ( ) {
-
+    function initPlaygroundEditor ( ) {
+        playgroundEditor = ace.edit( playgroundEditorID );
     }
 
 //
@@ -33,14 +34,9 @@
 //
 
     function onPerformMatch ( ) {
-        var editor = document.getElementById('playground-editor');
-        var text = editor.innerText;
-        console.log( text );
+        var text = playgroundEditor.getValue( );
         var regX = new RegExp( CompiledRegEx , 'gm' );
-        var highlightedText = text.replace( regX, match => {
-            return `<span class="playground-match">${ match }</span>`;
-        });
-        editor.innerHTML = highlightedText;
+        playgroundEditor.findAll( regX );
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
