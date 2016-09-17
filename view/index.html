@@ -22,8 +22,9 @@
 
         <!-- UI -->
         <script src="ui/loading-screen.js"></script>
-        <script src="ui/mainmenu.js"></script>
         <script src="ui/screen-controller.js"></script>
+        <script src="ui/serialization.js"></script>
+        <script src="ui/mainmenu.js"></script>
         <script src="ui/playground.js"></script>
         <script src="ui/window.js"></script>
 	</head>
@@ -54,9 +55,9 @@
 			<!--- EDITOR --->
 			<div id="graph-and-ribbon-half">
 				<div class="ribbon unselectable">
-					<div class="ribbon-icon ribbon-general-new-file">New</div>
-					<div class="ribbon-icon ribbon-general-open-file">Open</div>
-					<div class="ribbon-icon ribbon-general-save-file">Save</div>
+					<div class="ribbon-icon ribbon-general-new-file" onclick="onNewFile( )">New</div>
+					<div class="ribbon-icon ribbon-general-open-file" onclick="onOpenFile( )">Open</div>
+					<div class="ribbon-icon ribbon-general-save-file" onclick="onSaveFile( )">Save</div>
 
 					<div class="ribbon-separator"></div>
                     <div class="ribbon-icon ribbon-editor-compile" onclick="onPerformTestDrive( );">Test Drive</div>
