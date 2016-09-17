@@ -52,12 +52,12 @@
 			<!--- EDITOR --->
 			<div id="graph-and-ribbon-half">
 				<div class="ribbon unselectable">
-					<div id="ribbon-general-new-file" class="ribbon-icon">New</div>
-					<div id="ribbon-general-open-file" class="ribbon-icon">Open</div>
-					<div id="ribbon-general-save-file" class="ribbon-icon">Save</div>
+					<div class="ribbon-icon ribbon-general-new-file">New</div>
+					<div class="ribbon-icon ribbon-general-open-file">Open</div>
+					<div class="ribbon-icon ribbon-general-save-file">Save</div>
 
 					<div class="ribbon-separator"></div>
-                    <div id="ribbon-editor-compile" class="ribbon-icon" onclick="onPerformTestDrive( );">Test Drive</div>
+                    <div class="ribbon-icon ribbon-editor-compile" onclick="onPerformTestDrive( );">Test Drive</div>
 
                     <div class="ribbon-separator"></div>
                     <div id="ribbon-console-view">
@@ -73,10 +73,10 @@
                     </div>
 
                     <div class="ribbon-separator"></div>
-                    <div id="ribbon-editor-options" class="ribbon-icon">Options</div>
+                    <div class="ribbon-icon ribbon-editor-options">Options</div>
 
                     <div class="ribbon-separator"></div>
-                    <div id="ribbon-editor-help" class="ribbon-icon">Help</div>
+                    <div class="ribbon-icon ribbon-editor-help">Help</div>
 
 					<div style="clear: both;"></div>
 				</div>
@@ -90,6 +90,13 @@
 
         <!-- Editor View Goes Here -->
 		<div id="PlaygroundView" class="tab-view" hidden="true">
+            <div class="ribbon unselectable">
+                <div class="ribbon-starting-spacer"></div>
+                <div class="ribbon-icon ribbon-general-open-file">Load Text</div>
+                <div class="ribbon-separator"></div>
+                <div class="ribbon-icon ribbon-playground-smaller-text">Smaller Text</div>
+                <div class="ribbon-icon ribbon-playground-bigger-text">Bigger Text</div>
+            </div>
             <div id="playground-editor"></div>
         </div>
 
