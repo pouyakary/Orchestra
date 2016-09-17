@@ -34,7 +34,7 @@
             fullscreen: false
         });
 
-        //mainWindow.openDevTools( );
+        // mainWindow.openDevTools( );
         mainWindow.maximize( );
 
         mainWindow.loadURL( 'file://' + __dirname + '/index.html' );
