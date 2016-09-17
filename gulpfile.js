@@ -98,8 +98,7 @@
         copyToBinaryFromDir( 'resources' );
         copyToBinaryFromDir( 'view' );
         copyToBinaryFromDir( 'electron' );
-        copyToBinaryFromDir( 'quartet' );
-        copyToBinaryFromDir( 'ui' );
+        copyToBinaryFromDir( 'core' );
         copyToBinaryFromDir( 'libs' );
         copyToBinaryFromDir( 'sounds' );
         copyFile(

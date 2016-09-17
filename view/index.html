@@ -1,29 +1,31 @@
 <html>
 	<head>
 		<title>Orchestra</title>
+
 		<!-- Main Style Sheets -->
 		<link rel="stylesheet" href="style.css">
 
+        <!-- Global Storage -->
+        <script src="storage.js"></script>
 
 		<!-- Blockly Core -->
         <script src="blockly-core/blockly_compressed.js"></script>
         <script src="blockly-core/en.js"></script>
 
-
         <!-- Quartet Core -->
-        <script src="core/regstd.js"></script>
-        <script src="core/generator.js"></script>
-        <script src="core/blocks.js"></script>
-        <script src="core/blockly-styles.js"></script>
-        <script src="core/base.js"></script>
-        <script src="core/ui.js"></script>
+        <script src="quartet/regstd.js"></script>
+        <script src="quartet/generator.js"></script>
+        <script src="quartet/blocks.js"></script>
+        <script src="quartet/blockly-styles.js"></script>
+        <script src="quartet/base.js"></script>
+        <script src="quartet/ui.js"></script>
 
         <!-- UI -->
-        <script src="loading-screen.js"></script>
-        <script src="mainmenu.js"></script>
-        <script src="screen-controller.js"></script>
-        <script src="playground.js"></script>
-        <script src="window.js"></script>
+        <script src="ui/loading-screen.js"></script>
+        <script src="ui/mainmenu.js"></script>
+        <script src="ui/screen-controller.js"></script>
+        <script src="ui/playground.js"></script>
+        <script src="ui/window.js"></script>
 	</head>
 
 	<body>
@@ -131,8 +133,6 @@
 
 		<!-- Init Page -->
         <script>
-            const path = require('path');
-			const fs   = require('fs');
             initWindow( );
         </script>
 

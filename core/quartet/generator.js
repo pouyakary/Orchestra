@@ -5,10 +5,10 @@
 //
 
 //
-// ─── THE GENERATOR ──────────────────────────────────────────────────────────────
+// ─── INIT ───────────────────────────────────────────────────────────────────────
 //
 
-    let QuartetGenerator = new Blockly.Generator('Quartet');
+    QuartetGenerator = new Blockly.Generator('Quartet');
 
 //
 // ─── GENERATOR INIT ─────────────────────────────────────────────────────────────

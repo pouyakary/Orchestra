@@ -5,13 +5,6 @@
 //
 
 //
-// ─── IMPORTS ────────────────────────────────────────────────────────────────────
-//
-
-    const { ipcRenderer } = require( 'electron' );
-    const OrchestraWindow = require( 'electron' ).remote.getCurrentWindow( );
-
-//
 // ─── MESSAGES ───────────────────────────────────────────────────────────────────
 //
 
@@ -24,7 +17,8 @@
 //
 
     window.onresize = ( ) => {
-        playgroundEditor.layout( );
+        if ( playgroundEditor !== undefined )
+            playgroundEditor.layout( );
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

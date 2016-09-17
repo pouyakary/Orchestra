@@ -5,16 +5,6 @@
 //
 
 //
-// ─── DEFS ───────────────────────────────────────────────────────────────────────
-//
-
-    const EditorWindowScreenElement = 'EditorView';
-    const PlaygroundWindowScreenElement = 'PlaygroundView';
-    const TabsPlaceholder = 'header-tabs';
-
-    var CurrentActiveView = 'editor';
-
-//
 // ─── CHANGE TO EDITOR ───────────────────────────────────────────────────────────
 //
 
