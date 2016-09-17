@@ -13,6 +13,8 @@
         document.getElementById( EditorWindowScreenElement ).hidden = false;
         document.getElementById( PlaygroundWindowScreenElement ).hidden = true;
         document.getElementById( TabsPlaceholder ).className = 'editor-tab';
+
+        Blockly.fireUiEvent( window, 'resize' );
     }
 
 //
