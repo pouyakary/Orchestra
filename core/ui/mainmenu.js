@@ -131,23 +131,20 @@
                 role: 'help',
                 submenu: [
                     {
-                        label: "Kary Foundation Style Comment Toturials",
-                        click: ( ) => {
-                            require('electron').shell.openExternal('https://github.com/karyfoundation/comment/wiki')
-                        }
-                    },
-                    {
                         label: "Kary Foundtation's Website",
-                        click: ( ) => {
-                            require('electron').shell.openExternal('https://www.karyfoundation.org/')
-                        }
+                        click: ( ) => openExternal('https://www.karyfoundation.org/')
                     },
                     {
-                        label: "Comment IV on GitHub",
-                        click: ( ) => {
-                            require('electron').shell.openExternal('https://github.com/karyfoundation/comment')
-                        }
-                    }
+                        label: "Report an issue...",
+                        click: ( ) => openExternal('https://github.com/karyfoundation/orchestra/issues')
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: "RegExp on Mozilla Developer Network",
+                        click: ( ) => openExternal('https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/RegExp')
+                    },
                 ]
             },
 
