@@ -45,7 +45,7 @@
                     monaco.languages.setMonarchTokensProvider( MatchLanguageName, {
                         tokenizer: {
                             root: [
-                                [ new RegExp( CompiledRegEx, 'gm' ) , "match" ],
+                                [ new RegExp( CompiledRegEx, 'm') , "match" ],
                             ]
                         }
                     });

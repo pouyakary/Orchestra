@@ -11,7 +11,8 @@
     const { ipcRenderer } = require( 'electron' );
     const OrchestraWindow = require( 'electron' ).remote.getCurrentWindow( );
     const openExternal    = require('electron').shell.openExternal;
-    const clipboard = require('electron').clipboard;
+    const clipboard       = require('electron').clipboard;
+
 
     const path = require('path');
 	const fs   = require('fs');
