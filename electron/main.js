@@ -28,13 +28,13 @@
         mainWindow = new BrowserWindow({
             width:  window_width,   minWidth: window_width - 150,
             height: window_height,  minHeight: window_height - 100,
-            backgroundColor: 'white',
+            backgroundColor: '#F7F7F7',
             //frame: false,
             titleBarStyle: 'hidden-inset',
             fullscreen: false
         });
 
-        //mainWindow.openDevTools( );
+        // mainWindow.openDevTools( );
         mainWindow.maximize( );
 
         mainWindow.loadURL( 'file://' + __dirname + '/index.html' );

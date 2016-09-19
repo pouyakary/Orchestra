@@ -1,5 +1,10 @@
 
 //
+// Copyright 2016 Kary Foundation, Inc.
+//   Author: Pouya Kary <k@karyfoundation.org>
+//
+
+//
 // ─── INIT MONACO EDITOR ─────────────────────────────────────────────────────────
 //
 
@@ -40,7 +45,7 @@
                     monaco.languages.setMonarchTokensProvider( MatchLanguageName, {
                         tokenizer: {
                             root: [
-                                [ new RegExp( CompiledRegEx, 'gm' ) , "match" ],
+                                [ new RegExp( CompiledRegEx, 'm') , "match" ],
                             ]
                         }
                     });

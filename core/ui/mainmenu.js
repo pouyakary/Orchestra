@@ -5,16 +5,58 @@
 //
 
 //
-// ─── IMPORTS ────────────────────────────────────────────────────────────────────
-//
-
-    const openExternal = require('electron').shell.openExternal;
-
-//
 // ─── MENU ───────────────────────────────────────────────────────────────────────
 //
 
     var MainMenu = [
+
+        //
+        // ─── FILE ────────────────────────────────────────────────────────
+        //
+
+            {
+                label: 'File',
+                submenu: [
+                    {
+                        label: 'New File',
+                        accelerator: 'CmdOrCtrl+N',
+                        click: onNewFile
+                    },
+                    {
+                        label: 'New Window',
+                        accelerator: 'Shift+CmdOrCtrl+N',
+                        click: ( ) => { }
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: 'Open...',
+                        accelerator: 'CmdOrCtrl+O',
+                        click: onOpenFile
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: 'Save',
+                        accelerator: 'CmdOrCtrl+S',
+                        click: onSaveFile
+                    },
+                    {
+                        label: 'Save As',
+                        accelerator: 'Shift+CmdOrCtrl+S',
+                        click: onSaveFileAs
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: 'Export to Image',
+                        click: ( ) => { }
+                    },
+                ]
+            },
 
         //
         // ─── EDIT MENU ───────────────────────────────────────────────────
@@ -89,23 +131,20 @@
                 role: 'help',
                 submenu: [
                     {
-                        label: "Kary Foundation Style Comment Toturials",
-                        click: function( ) {
-                            require('electron').shell.openExternal('https://github.com/karyfoundation/comment/wiki')
-                        }
-                    },
-                    {
                         label: "Kary Foundtation's Website",
-                        click: function( ) {
-                            require('electron').shell.openExternal('https://www.karyfoundation.org/')
-                        }
+                        click: ( ) => openExternal('https://www.karyfoundation.org/')
                     },
                     {
-                        label: "Comment IV on GitHub",
-                        click: function( ) {
-                            require('electron').shell.openExternal('https://github.com/karyfoundation/comment')
-                        }
-                    }
+                        label: "Report an issue...",
+                        click: ( ) => openExternal('https://github.com/karyfoundation/orchestra/issues')
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: "RegExp on Mozilla Developer Network",
+                        click: ( ) => openExternal('https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/RegExp')
+                    },
                 ]
             },
 
@@ -118,21 +157,17 @@
 //
 
     var AboutPageButton = {
-        label: 'About Orchestra',
-        click: ( ) => {
-            UI.OpenAboutPage( );
-        }
+        role: 'about'
     }
 
     if ( process.platform == 'darwin' ) {
         var name = require( 'electron' ).remote.app.getName( );
+        var menuIndex = MainMenu.length - 1;
         MainMenu.unshift(
             {
                 label: name,
                 submenu: [
-                    {
-                        role: 'about'
-                    },
+                    AboutPageButton,
                     {
                         type: 'separator'
                     },
@@ -169,19 +204,8 @@
                 ]
             }
         );
-
-        // Window menu.
-        MainMenu[ 5 ].submenu.push(
-            {
-                type: 'separator'
-            },
-            {
-                label: 'Bring All to Front',
-                role: 'front'
-            }
-        );
     } else {
-        MainMenu[ 5 ].submenu.push( AboutPageButton );
+        MainMenu[ menuIndex ].submenu.push( AboutPageButton );
     }
 
 //

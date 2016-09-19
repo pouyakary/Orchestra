@@ -5,16 +5,6 @@
 //
 
 //
-// ─── DEFS ───────────────────────────────────────────────────────────────────────
-//
-
-    const EditorWindowScreenElement = 'EditorView';
-    const PlaygroundWindowScreenElement = 'PlaygroundView';
-    const TabsPlaceholder = 'header-tabs';
-
-    var CurrentActiveView = 'editor';
-
-//
 // ─── CHANGE TO EDITOR ───────────────────────────────────────────────────────────
 //
 
@@ -23,6 +13,8 @@
         document.getElementById( EditorWindowScreenElement ).hidden = false;
         document.getElementById( PlaygroundWindowScreenElement ).hidden = true;
         document.getElementById( TabsPlaceholder ).className = 'editor-tab';
+
+        Blockly.fireUiEvent( window, 'resize' );
     }
 
 //

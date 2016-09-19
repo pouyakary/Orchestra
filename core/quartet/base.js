@@ -5,14 +5,6 @@
 //
 
 //
-// ─── STORAGE ────────────────────────────────────────────────────────────────────
-//
-
-    var workspace;
-    var CompiledRegEx = '';
-    var ComposeBlock;
-
-//
 // ─── INIT WINDOW ────────────────────────────────────────────────────────────────
 //
 
@@ -22,7 +14,6 @@
         setupEventListeners( );
         applyAdditionalStyles( );
         initMainMenu( );
-        initPlaygroundEditor( );
     }
 
 //
