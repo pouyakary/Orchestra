@@ -13,10 +13,8 @@
 
         if ( event.type === Blockly.Events.CHANGE ) setFileDirty( );
 
-        if ( event.type === Blockly.Events.UI ) {
-            if ( event.element === 'selected' ) {
-                quartetActiveBlockId = event.newValue || event.blockId;
-            }
+        if ( event.type === Blockly.Events.UI && event.element === 'selected' ) {
+            quartetActiveBlockId = event.newValue || event.blockId;
         }
 
         var compiledRegex = QuartetGenerator.blockToCode( ComposeBlock );
