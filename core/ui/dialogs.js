@@ -89,20 +89,4 @@
         }
     }
 
-//
-// ─── WORKSPACE TO XML ───────────────────────────────────────────────────────────
-//
-
-    function serializeWorkspaceIntoXML ( ) {
-        return Blockly.Xml.domToText( Blockly.Xml.workspaceToDom( workspace ) );
-    }
-
-//
-// ─── LOAD XML ───────────────────────────────────────────────────────────────────
-//
-
-    function loadXMLIntoWorkspace ( ) {
-
-    }
-
 // ────────────────────────────────────────────────────────────────────────────────
