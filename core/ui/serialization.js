@@ -5,10 +5,29 @@
 //
 
 //
+// ─── SET DIRTY ──────────────────────────────────────────────────────────────────
+//
+
+    function setFileDirty ( ) {
+        currentFile.dirty = true;
+    }
+
+//
+// ─── SET FILE CLEAN ─────────────────────────────────────────────────────────────
+//
+
+    function setFileClean ( ) {
+        currentFile.dirty = false;
+    }
+
+//
 // ─── ON NEW FILE ────────────────────────────────────────────────────────────────
 //
 
     function onNewFile ( ) {
+        // reset the file
+        currentFile = DefaultFileObject( );
+        setFileDirty( );
         alert('new file!');
     }
 
@@ -25,7 +44,34 @@
 //
 
     function onSaveFile ( ) {
-        alert('save file!');
+        // nothing to be saved
+        if ( !currentFile.dirty ) return;
+
+        // getting the path
+        if ( currentFile.path === undefined ) {
+            // Asking the user for file path
+            currentFile.path = dialog.showSaveDialog( OrchestraWindow, {
+                title: "Save your Quartet File",
+                filters: [{
+                    name: 'Quartet',
+                    extensions: [ 'quartet' ]
+                }]
+            });
+            if ( filePath === undefined ) return;
+        }
+
+        // Going with the file path
+        let workspaceXML = serializeWorkspaceIntoXML( );
+
+        // save the file
+        fs.writeFile( filePath, workspaceXML, err => {
+            if ( err ) {
+                alert(`Could not save your file at "${ filePath }"`);
+            }
+        });
+
+        // show that we're done
+        setFileClean( );
     }
 
 //
