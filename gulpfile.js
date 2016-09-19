@@ -97,7 +97,6 @@
     gulp.task( 'copyResourceFiles', callback => {
         copyToBinaryFromDir( 'resources' );
         copyToBinaryFromDir( 'view' );
-        copyToBinaryFromDir( 'electron' );
         copyToBinaryFromDir( 'core' );
         copyToBinaryFromDir( 'libs' );
         copyToBinaryFromDir( 'sounds' );
