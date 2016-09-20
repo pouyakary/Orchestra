@@ -1,0 +1,85 @@
+
+
+//
+// Copyright 2016 Kary Foundation, Inc.
+//   Author: Pouya Kary <k@karyfoundation.org>
+//
+
+//
+// ─── INCLUDES ───────────────────────────────────────────────────────────────────
+//
+
+    @import '../globals';
+
+//
+// ─── SIZING ─────────────────────────────────────────────────────────────────────
+//
+
+    @window-button-size: 10px;
+
+    @window-button-left-base-start: 13px;
+
+    @window-button-left-distance: 20px;
+
+//
+// ─── BUTTON BASE ────────────────────────────────────────────────────────────────
+//
+
+    .window-button-base {
+        position: fixed;
+        top: 13px;
+        width: @window-button-size;
+        height: @window-button-size;
+        border-radius: @window-button-size;
+        border: 0.5px solid transparent;
+    }
+
+//
+// ─── CLOSE BUTTON ───────────────────────────────────────────────────────────────
+//
+
+    #window-button-close {
+        .window-button-base;
+        left: @window-button-left-base-start;
+        background-color: #FF6159;
+        border-color: #F0574F;
+    }
+
+    #window-button-close:active {
+        background-color: #BF4943;
+        border-color: #AD3A34;
+    }
+
+//
+// ─── MINIMIZE BUTTON ────────────────────────────────────────────────────────────
+//
+
+    #window-button-minimize {
+        .window-button-base;
+        left: @window-button-left-base-start + @window-button-left-distance;
+        background-color: #FFC330;
+        border-color: #F1B428;
+    }
+
+    #window-button-minimize:active {
+        background-color: #BF9123;
+        border-color: #B5861F;
+    }
+
+//
+// ─── MAXIMIZE ───────────────────────────────────────────────────────────────────
+//
+
+    #window-button-maximize {
+        .window-button-base;
+        left: @window-button-left-base-start + 2 * @window-button-left-distance;
+        background-color: #29CD42;
+        border-color: #16BE2F;
+    }
+
+    #window-button-maximize:active {
+        background-color: #1F9D33;
+        border-color: #258E30;
+    }
+
+// ────────────────────────────────────────────────────────────────────────────────
