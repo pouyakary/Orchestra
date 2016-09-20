@@ -5,23 +5,24 @@
 //
 
 //
-// ─── INIT WINDOW ────────────────────────────────────────────────────────────────
+// ─── SETUP WORKSPACE ────────────────────────────────────────────────────────────
 //
 
-    function initWindow ( ) {
-        setUpWorkspace( );
+    function setupWorkspaceWithNewFile ( xml ) {
+        if ( xml === undefined ) {
+            setupWorkspace( defaultFileXML );
+        } else {
+            setupWorkspace( xml );
+        }
         setupComposer( );
         setupEventListeners( );
-        applyAdditionalStyles( );
-        initMainMenu( );
     }
 
 //
 // ─── SETUP WORKSPACE ────────────────────────────────────────────────────────────
 //
 
-    function setUpWorkspace ( ) {
-        var xml = '<xml><block type="compose" deletable="false"></block></xml>';
+    function setupWorkspace ( fileXML ) {
         var toolbox = document.getElementById( 'toolbox' );
 
         workspace = Blockly.inject( 'quartet-coding-view', {
@@ -31,7 +32,7 @@
             scrollbars: true,
         });
 
-        Blockly.Xml.domToWorkspace( Blockly.Xml.textToDom( xml ), workspace );
+        Blockly.Xml.domToWorkspace( Blockly.Xml.textToDom( fileXML ), workspace );
 
         ComposeBlock = workspace.getAllBlocks( )[ 0 ];
     }

@@ -11,7 +11,7 @@
     function onNewFile ( ) {
         // reset the file
         currentFile = defaultFileObject;
-        setFileDirty( true );
+        setupWorkspaceWithNewFile( );
     }
 
 //
@@ -44,25 +44,6 @@
 
     function onSaveFileAs ( ) {
         onSaveFile( true );
-    }
-
-//
-// ─── SAVE FILE ──────────────────────────────────────────────────────────────────
-//
-
-    function saveFileWithInfo ( ) {
-        // Going with the file path
-        let workspaceXML = serializeWorkspaceIntoXML( );
-
-        // save the file
-        fs.writeFile( currentFile.path, workspaceXML, err => {
-            if ( err ) {
-                alert(`Could not save your file at "${ currentFile.path }"`);
-            }
-        });
-
-        // show that we're done
-        setFileDirty( false );
     }
 
 //
