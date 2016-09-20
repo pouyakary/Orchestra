@@ -128,7 +128,6 @@
                         if ( error ) {
                             console.log('could not store the less file');
                         } else {
-                            console.log('compiled less source codes successfully...');
                             callback();
                         }
                     }
