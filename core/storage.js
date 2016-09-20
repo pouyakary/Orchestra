@@ -27,7 +27,7 @@
     const playgroundEditorID = 'playground-editor'
     const __SPACE_UNICODE_STRING__ = "\\u0020"
     const DefaultFileObject = {
-        path: undefined,
+        path: 'Undefined',
         dirty: true,
     }
 
