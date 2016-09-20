@@ -46,13 +46,19 @@
 
     function checkPathAndAskForPathIfNeeded ( forceAsk = false ) {
         if ( currentFile.path === defaultEmptyPath || forceAsk ) {
-            let newPath = dialog.showSaveDialog( OrchestraWindow, {
-                title: "Choose a path for your file",
-                filters: [{
-                    name: 'Quartet',
-                    extensions: [ 'quartet' ],
-                }]
-            });
+            const newPath = dialog.showSaveDialog(
+                // use sheet style for full screen and separate window for normal:
+                ( OrchestraWindow.isMaximized( ) )? OrchestraWindow : null,
+                // options
+                {
+                    title: "Choose a path for your file",
+                    filters: [{
+                        name: 'Quartet',
+                        extensions: [ 'quartet' ],
+                    }]
+                }
+            );
+
             if ( newPath !== undefined ) {
                 currentFile.path = newPath;
                 return true;
