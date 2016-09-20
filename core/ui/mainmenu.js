@@ -119,6 +119,13 @@
                         accelerator: 'CmdOrCtrl+W',
                         role: 'close'
                     },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: "Open Developer Tools",
+                        click: OrchestraWindow.openDevTools
+                    }
                 ]
             },
 
