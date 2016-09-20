@@ -44,17 +44,6 @@
     }
 
 //
-// ─── ON WINDOW CLOSE STATUS ─────────────────────────────────────────────────────
-//
-
-    ipcMain.on( 'window-status', ( event, arg ) => {
-        if ( arg === 'close' ) {
-            mainWindow = null;
-            app.quit( );
-        }
-    });
-
-//
 // ─── ON READY ───────────────────────────────────────────────────────────────────
 //
 

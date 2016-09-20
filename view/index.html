@@ -28,6 +28,7 @@
         <script src="ui/dialogs.js"></script>
         <script src="ui/mainmenu.js"></script>
         <script src="ui/window.js"></script>
+        <script src="ui/window-buttons.js"></script>
         <script src="ui/console.js"></script>
 	</head>
 
@@ -39,9 +40,18 @@
 		<div class="heading" id="toolbar">
             <!-- Window Buttons -->
             <div id="window-buttons">
-                <div id="window-button-close"></div>
-                <div id="window-button-minimize"></div>
-                <div id="window-button-maximize"></div>
+                <div id="window-button-close"
+                     class="window-button-close-active"
+                     onclick="fireWindowCloseRequest( )">
+                </div>
+                <div id="window-button-minimize"
+                     class="window-button-minimize-active"
+                     onclick="fireWindowMinimizeRequest( )">
+                </div>
+                <div id="window-button-maximize"
+                     class="window-button-maximize-active"
+                     onclick="fireWindowMaximizeRequest( )">
+                </div>
             </div>
 
 			<!-- Tabs -->

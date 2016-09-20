@@ -15,11 +15,31 @@
     }
 
 //
-// ─── MESSAGES ───────────────────────────────────────────────────────────────────
+// ─── ON CLOSE ───────────────────────────────────────────────────────────────────
 //
 
     function fireWindowCloseRequest ( ) {
-        ipcRenderer.send( 'window-status', 'close' );
+        OrchestraWindow.close( );
+    }
+
+//
+// ─── ON MINIMIZE ────────────────────────────────────────────────────────────────
+//
+
+    function fireWindowMinimizeRequest ( ) {
+        OrchestraWindow.minimize( );
+    }
+
+//
+// ─── ON MAXIMIZE ────────────────────────────────────────────────────────────────
+//
+
+    function fireWindowMaximizeRequest ( ) {
+        if ( OrchestraWindow.isMaximized( ) ) {
+            OrchestraWindow.unmaximize( );
+        } else {
+            OrchestraWindow.maximize( );
+        }
     }
 
 //
