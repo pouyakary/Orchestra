@@ -10,7 +10,7 @@
 
     function onNewFile ( ) {
         // reset the file
-        currentFile = DefaultFileObject;
+        currentFile = defaultFileObject;
         setFileDirty( true );
     }
 
