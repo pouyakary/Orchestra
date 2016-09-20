@@ -10,7 +10,7 @@
 
     function setupWorkspaceWithNewFile ( xml ) {
         if ( xml === undefined ) {
-            setupWorkspace( defaultFileXML );
+            setupWorkspace( );
         } else {
             setupWorkspace( xml );
         }
@@ -22,7 +22,7 @@
 // ─── SETUP WORKSPACE ────────────────────────────────────────────────────────────
 //
 
-    function setupWorkspace ( fileXML ) {
+    function setupWorkspace ( fileXML = defaultFileXML ) {
         var toolbox = document.getElementById( 'toolbox' );
 
         workspace = Blockly.inject( 'quartet-coding-view', {
