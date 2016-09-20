@@ -9,9 +9,15 @@
 //
 
     function quartetOnUIChange ( event ) {
-        if ( event.type === Blockly.Events.MOVE ) return;
 
-        if ( event.type === Blockly.Events.CHANGE ) setFileDirty( true );
+        switch ( event.type ) {
+            case Blockly.Events.MOVE:
+                return;
+            case Blockly.Events.UI:
+                break;
+            default:
+                setFileDirty( true );
+        }
 
         if ( event.type === Blockly.Events.UI && event.element === 'selected' ) {
             quartetActiveBlockId = event.newValue || event.blockId;

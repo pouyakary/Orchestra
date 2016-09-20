@@ -13,20 +13,20 @@
     }
 
 //
-// ─── SET CONSOLE TITLE ──────────────────────────────────────────────────────────
-//
-
-    function setConsoleTitle ( title ) {
-        document.getElementById( 'ribbon-console-title' ).innerHTML = title;
-    }
-
-//
 // ─── UPDATE CONSOLE TITLE ───────────────────────────────────────────────────────
 //
 
     function updateConsoleTitle ( ) {
         let dirtStatus = ( currentFile.dirty )? ' &bullet; Not Saved' : '';
         setConsoleTitle(`${ path.basename( currentFile.path ) }${ dirtStatus }`);
+    }
+
+//
+// ─── SET CONSOLE TITLE ──────────────────────────────────────────────────────────
+//
+
+    function setConsoleTitle ( title ) {
+        document.getElementById( 'ribbon-console-title' ).innerHTML = title;
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

@@ -41,7 +41,7 @@
                     {
                         label: 'Save',
                         accelerator: 'CmdOrCtrl+S',
-                        click: onSaveFile
+                        click: ( ) => onSaveFile( )
                     },
                     {
                         label: 'Save As',

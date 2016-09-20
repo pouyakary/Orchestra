@@ -27,15 +27,9 @@
 //
 
     function onSaveFile ( force = false ) {
-        // nothing to be saved
-        if ( !currentFile.dirty ) return;
-
-        // getting the path
-        checkPathAndAskForPathIfNeeded( force );
-        if ( !currentFile.dirty ) return;
-
-        // saving
-        saveFileWithInfo( );
+        if ( checkPathAndAskForPathIfNeeded( force ) ) {
+            saveFileWithInfo( );
+        }
     }
 
 //
@@ -51,16 +45,23 @@
 //
 
     function checkPathAndAskForPathIfNeeded ( forceAsk = false ) {
-        if ( currentFile.path === undefined || forceAsk ) {
-            // Asking the user for file path
-             currentFile.path = dialog.showSaveDialog( OrchestraWindow, {
-                // title: "Choose a path for your file",
+        if ( currentFile.path === defaultEmptyPath || forceAsk ) {
+            let newPath = dialog.showSaveDialog( OrchestraWindow, {
+                title: "Choose a path for your file",
                 filters: [{
                     name: 'Quartet',
                     extensions: [ 'quartet' ],
                 }]
             });
+            if ( newPath !== undefined ) {
+                currentFile.path = newPath;
+                return true;
+            } else {
+                currentFile = defaultFileObject;
+                return false;
+            }
         }
+        return true;
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

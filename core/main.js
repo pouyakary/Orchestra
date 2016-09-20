@@ -12,9 +12,7 @@
 //
 
     const electron      = require( 'electron' );
-    const app           = electron.app;
-    const BrowserWindow = electron.BrowserWindow;
-    const { ipcMain }   = require( 'electron' );
+    const { ipcMain, BrowserWindow, app } = require( 'electron' );
 
 //
 // ─── GENERATE MAIN WINDOW ───────────────────────────────────────────────────────
@@ -34,12 +32,12 @@
             fullscreen: false
         });
 
-        // mainWindow.openDevTools( );
+        mainWindow.openDevTools( );
         mainWindow.maximize( );
 
-        mainWindow.loadURL( 'file://' + __dirname + '/index.html' );
+        mainWindow.loadURL( `file://${ __dirname }/index.html` );
 
-        mainWindow.on( 'closed' , function( ) {
+        mainWindow.on( 'closed' , ( ) => {
             mainWindow = null;
             app.quit( );
         });

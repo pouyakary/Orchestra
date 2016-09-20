@@ -30,7 +30,7 @@
     function serializeFile ( ) {
         return JSON.stringify({
             workspaceXML: serializeWorkspaceIntoXML( ),
-            playgroundText: playgroundText.getText( ),
+            playgroundText: playgroundEditor.getValue( ),
         });
     }
 
@@ -51,14 +51,14 @@
         let fileJSON = serializeFile( );
 
         // save the file
-        fs.writeFile( currentFile.path, workspaceXML, err => {
+        fs.writeFile( currentFile.path, fileJSON, err => {
             if ( err ) {
                 alert(`Could not save your file at "${ currentFile.path }"`);
+                currentFile = defaultFileObject;
+            } else {
+                setFileDirty( false );
             }
         });
-
-        // show that we're done
-        setFileDirty( false );
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

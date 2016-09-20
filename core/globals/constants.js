@@ -10,8 +10,10 @@
 
     const defaultFileXML = '<xml><block type="compose" deletable="false"></block></xml>';
 
+    const defaultEmptyPath = 'Undefined';
+
     const defaultFileObject = {
-        path: 'Undefined',
+        path: defaultEmptyPath,
         dirty: true,
     };
 
@@ -19,11 +21,10 @@
 // ─── ELECTRON LOADS ─────────────────────────────────────────────────────────────
 //
 
-    const { ipcRenderer } = require( 'electron' );
-    const { dialog }      = require( 'electron' ).remote;
+    const { ipcRenderer, clipboard } = require( 'electron' );
+    const { dialog } = require( 'electron' ).remote;
     const OrchestraWindow = require( 'electron' ).remote.getCurrentWindow( );
-    const openExternal    = require( 'electron' ).shell.openExternal;
-    const clipboard       = require( 'electron' ).clipboard;
+    const openExternal = require( 'electron' ).shell.openExternal;
 
 //
 // ─── NODE LOADS ─────────────────────────────────────────────────────────────────
