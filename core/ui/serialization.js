@@ -10,8 +10,8 @@
 
     function onNewFile ( ) {
         // reset the file
-        currentFile = DefaultFileObject( );
-        setFileDirty( );
+        currentFile = DefaultFileObject;
+        setFileDirty( true );
         alert('new file!');
     }
 
@@ -69,7 +69,7 @@
         });
 
         // show that we're done
-        setFileClean( );
+        setFileDirty( false );
     }
 
 //

@@ -10,9 +10,8 @@
 
     function onNewFile ( ) {
         // reset the file
-        currentFile = DefaultFileObject( );
-        setFileDirty( );
-        alert('new file!');
+        currentFile = DefaultFileObject;
+        setFileDirty( true );
     }
 
 //
@@ -27,12 +26,13 @@
 // ─── ON SAVE FILE ───────────────────────────────────────────────────────────────
 //
 
-    function onSaveFile ( ) {
+    function onSaveFile ( force = false ) {
         // nothing to be saved
         if ( !currentFile.dirty ) return;
 
         // getting the path
-        checkPathAndAskForPathIfNeeded( );
+        checkPathAndAskForPathIfNeeded( force );
+        if ( !currentFile.dirty ) return;
 
         // saving
         saveFileWithInfo( );
@@ -43,14 +43,7 @@
 //
 
     function onSaveFileAs ( ) {
-        // nothing to be saved
-        if ( !currentFile.dirty ) return;
-
-        // getting the path
-        checkPathAndAskForPathIfNeeded( false );
-
-        // saving
-        saveFileWithInfo( );
+        onSaveFile( true );
     }
 
 //
@@ -69,7 +62,7 @@
         });
 
         // show that we're done
-        setFileClean( );
+        setFileDirty( false );
     }
 
 //

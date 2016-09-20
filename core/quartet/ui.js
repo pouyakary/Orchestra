@@ -11,17 +11,16 @@
     function quartetOnUIChange ( event ) {
         if ( event.type === Blockly.Events.MOVE ) return;
 
-        if ( event.type === Blockly.Events.CHANGE ) setFileDirty( );
+        if ( event.type === Blockly.Events.CHANGE ) setFileDirty( true );
 
         if ( event.type === Blockly.Events.UI && event.element === 'selected' ) {
             quartetActiveBlockId = event.newValue || event.blockId;
         }
 
         var compiledRegex = QuartetGenerator.blockToCode( ComposeBlock );
-        // this is the master shared one...
-        let consoleView = document.getElementById( 'ribbon-console-regexp' );
+
         CompiledRegEx = compiledRegex;
-        consoleView.innerHTML = `/${ compiledRegex }/`;
+        setConsoleRegEx( `/${ compiledRegex }/` );
     }
 
 //

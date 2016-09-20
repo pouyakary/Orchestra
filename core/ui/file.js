@@ -8,16 +8,9 @@
 // ─── SET DIRTY ──────────────────────────────────────────────────────────────────
 //
 
-    function setFileDirty ( ) {
-        currentFile.dirty = true;
-    }
-
-//
-// ─── SET FILE CLEAN ─────────────────────────────────────────────────────────────
-//
-
-    function setFileClean ( ) {
-        currentFile.dirty = false;
+    function setFileDirty ( dirt ) {
+        currentFile.dirty = dirt;
+        updateConsoleTitle( );
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
