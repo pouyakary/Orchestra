@@ -17,8 +17,11 @@
 //
 
     function updateConsoleTitle ( ) {
-        let dirtStatus = ( currentFile.dirty )? ' &bullet; Not Saved' : '';
-        setConsoleTitle(`${ path.basename( currentFile.path ) }${ dirtStatus }`);
+        let title = ( currentFile.path === defaultEmptyPath )?
+            'Untitled.quartet' : path.basename( currentFile.path );
+        let dirtStatus = ( currentFile.dirty )?
+            ' &bullet; Not Saved' : '';
+        setConsoleTitle(`${ title }${ dirtStatus }`);
     }
 
 //
