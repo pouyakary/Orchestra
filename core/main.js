@@ -27,8 +27,8 @@
             width:  window_width,   minWidth: window_width - 150,
             height: window_height,  minHeight: window_height - 100,
             backgroundColor: '#F7F7F7',
-            //frame: false,
-            titleBarStyle: 'hidden-inset',
+            frame: false,
+            //titleBarStyle: 'hidden-inset',
             fullscreen: false
         });
 
