@@ -8,22 +8,22 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    var gulp = require('gulp');
-    var exec = require('child_process').exec;
-    var util = require('util');
-    var fs   = require('fs-extra');
-    var path = require('path');
-    var ugly = require('gulp-uglify');
-    var less = require('less');
-    var mv   = require('mv');
+    var gulp        = require('gulp');
+    var electron    = require('gulp-electron');
+    var packageJson = require('./package.json');
+    var exec        = require('child_process').exec;
+    var util        = require('util');
+    var path        = require('path');
+    var fs          = require('fs-extra');
+    var ugly        = require('gulp-uglify');
+    var less        = require('less');
+    var mv          = require('mv');
 
 //
-// ─── P ──────────────────────────────────────────────────────────────────────────
+// ─── CONSTANTS ──────────────────────────────────────────────────────────────────
 //
 
-    function p ( message ) {
-        console.log( message );
-    }
+    const version = "v1.0";
 
 //
 // ─── CONSTS ─────────────────────────────────────────────────────────────────────
@@ -139,10 +139,26 @@
     });
 
 //
+// ─── ELECTRON PACKER ────────────────────────────────────────────────────────────
+//
+
+    gulp.task( 'electron', ['copyResourceFiles', 'sheets'], ( ) => {
+        shell('electron-packager _compiled "Orchestra" --platform=darwin --arch=x64 --overwrite=true --app-copyrigh="Copyright 2016 by Kary Foundation, Inc." --app-version="Summer Builds 2016" --icon=./designs/icon/icns/electron.icns --name="Orchestra" --out=_release');
+    });
+
+//
+// ─── AFTER PACK ─────────────────────────────────────────────────────────────────
+//
+
+    gulp.task( 'after-pack', [ 'electron' ], ( ) => {
+
+    });
+
+//
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
 //
 
     /** Where everything starts */
-    gulp.task( 'default', ['copyResourceFiles', 'sheets']);
+    gulp.task( 'default', [ 'after-pack' ]);
 
 // ────────────────────────────────────────────────────────────────────────────────
