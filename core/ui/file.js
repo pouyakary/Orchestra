@@ -19,7 +19,7 @@
 
     function loadFile ( fileJSONString ) {
         let fileJSON = JSON.parse( fileJSONString );
-        setupWorkspaceWithNewFile( fileJSON.workspaceXML );
+        // setupWorkspaceWithNewFile( fileJSON.workspaceXML );
         playgroundEditor.setValue( fileJSON.playgroundText );
     }
 

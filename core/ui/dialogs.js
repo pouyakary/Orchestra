@@ -11,7 +11,7 @@
     function onNewFile ( ) {
         // reset the file
         currentFile = defaultFileObject;
-        setupWorkspaceWithNewFile( );
+        // setupWorkspaceWithNewFile( );
     }
 
 //
@@ -19,7 +19,14 @@
 //
 
     function onOpenFile ( ) {
-        alert('open file!');
+        let filePath = dialog.showOpenDialog( getWindowForDialogSheets( ), {
+            properties: [ 'openFile' ],
+            filters: [{
+                name: 'Quartet Language',
+                extensions: [ 'quartet' ]
+            }]
+        });
+        if ( filePath === undefined ) return;
     }
 
 //
@@ -55,7 +62,6 @@
     function checkPathAndAskForPathIfNeeded ( forceAsk = false ) {
         if ( currentFile.path === defaultEmptyPath || forceAsk ) {
             const newPath = dialog.showSaveDialog( getWindowForDialogSheets( ), {
-                title: "Choose a path for your file",
                 filters: [{
                     name: 'Quartet',
                     extensions: [ 'quartet' ],
