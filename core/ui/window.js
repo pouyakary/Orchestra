@@ -21,7 +21,7 @@
     function fireWindowCloseRequest ( ) {
         if ( currentFile.dirty ) {
             let ans = dialog.showMessageBox( getWindowForDialogSheets( ), {
-                buttons: [ "Okay let's save", "Ah! It's fine, let's leave." ],
+                buttons: [ "Okay let's save", "It's fine; I don't need it!" ],
                 title: "Orchestra",
                 message: "You haven't saved your file! Do you want to save it before you leave?"
             });
