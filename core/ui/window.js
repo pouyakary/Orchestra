@@ -20,7 +20,14 @@
 
     function fireWindowCloseRequest ( ) {
         if ( currentFile.dirty ) {
-            alert(`Don't you wanna save your file before quitting?`);
+            let ans = dialog.showMessageBox( getWindowForDialogSheets( ), {
+                buttons: [ "Okay let's save", "Ah! It's fine, let's leave." ],
+                title: "Orchestra",
+                message: "You haven't saved your file! Do you want to save it before you leave?"
+            });
+            if ( ans === 0 ) {
+                onSaveFile( );
+            }
         }
         OrchestraWindow.close( );
     }
@@ -46,6 +53,26 @@
     }
 
 //
+// ─── WINDOW BUTTONS BLUR ────────────────────────────────────────────────────────
+//
+
+    function makeWindowButtonsBlur ( ) {
+        document.getElementById('window-button-close').className = 'window-buttons-blur-mode';
+        document.getElementById('window-button-minimize').className = 'window-buttons-blur-mode';
+        document.getElementById('window-button-maximize').className = 'window-buttons-blur-mode';
+    }
+
+//
+// ─── MAKE WINDOW BUTTONS ACTIVE ─────────────────────────────────────────────────
+//
+
+    function makeWindowButtonsActive ( ) {
+        document.getElementById('window-button-close').className = 'window-button-close-active';
+        document.getElementById('window-button-minimize').className = 'window-button-minimize-active';
+        document.getElementById('window-button-maximize').className = 'window-button-maximize-active';
+    }
+
+//
 // ─── RESIZE ─────────────────────────────────────────────────────────────────────
 //
 
@@ -59,9 +86,7 @@
 //
 
     OrchestraWindow.addListener( 'blur', ( ) => {
-        document.getElementById('window-button-close').className = 'window-buttons-blur-mode';
-        document.getElementById('window-button-minimize').className = 'window-buttons-blur-mode';
-        document.getElementById('window-button-maximize').className = 'window-buttons-blur-mode';
+        makeWindowButtonsBlur( );
     });
 
 //
@@ -69,9 +94,7 @@
 //
 
     OrchestraWindow.addListener( 'focus', ( ) => {
-        document.getElementById('window-button-close').className = 'window-button-close-active';
-        document.getElementById('window-button-minimize').className = 'window-button-minimize-active';
-        document.getElementById('window-button-maximize').className = 'window-button-maximize-active';
+        makeWindowButtonsActive( );
     });
 
 // ────────────────────────────────────────────────────────────────────────────────
