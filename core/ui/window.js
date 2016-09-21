@@ -19,6 +19,9 @@
 //
 
     function fireWindowCloseRequest ( ) {
+        if ( currentFile.dirty ) {
+            alert(`Don't you wanna save your file before quitting?`);
+        }
         OrchestraWindow.close( );
     }
 
@@ -50,5 +53,25 @@
         if ( playgroundEditor !== undefined )
             playgroundEditor.layout( );
     }
+
+//
+// ─── BLUR ───────────────────────────────────────────────────────────────────────
+//
+
+    OrchestraWindow.addListener( 'blur', ( ) => {
+        document.getElementById('window-button-close').className = 'window-buttons-blur-mode';
+        document.getElementById('window-button-minimize').className = 'window-buttons-blur-mode';
+        document.getElementById('window-button-maximize').className = 'window-buttons-blur-mode';
+    });
+
+//
+// ─── GAIN FOCUS ─────────────────────────────────────────────────────────────────
+//
+
+    OrchestraWindow.addListener( 'focus', ( ) => {
+        document.getElementById('window-button-close').className = 'window-button-close-active';
+        document.getElementById('window-button-minimize').className = 'window-button-minimize-active';
+        document.getElementById('window-button-maximize').className = 'window-button-maximize-active';
+    });
 
 // ────────────────────────────────────────────────────────────────────────────────
