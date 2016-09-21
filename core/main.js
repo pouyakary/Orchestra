@@ -24,6 +24,7 @@
         const window_width = 1100;
         const window_height = 640;
         mainWindow = new BrowserWindow({
+            show: false,
             width:  window_width,   minWidth: window_width - 150,
             height: window_height,  minHeight: window_height - 100,
             backgroundColor: '#F7F7F7',
@@ -31,6 +32,10 @@
             //titleBarStyle: 'hidden-inset',
             fullscreen: false
         });
+
+        mainWindow.once('ready-to-show', () => {
+            mainWindow.show()
+        })
 
         //mainWindow.openDevTools( );
         mainWindow.maximize( );
