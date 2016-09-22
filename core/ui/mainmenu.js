@@ -53,6 +53,7 @@
                     },
                     {
                         label: 'Export to SVG',
+                        accelerator: 'CmdOrCtrl+E',
                         click: onExportWorkspaceToSVG
                     },
                 ]
