@@ -21,9 +21,9 @@
     function fireWindowCloseRequest ( ) {
         if ( currentFile.dirty ) {
             const ans = dialog.showMessageBox( getWindowForDialogSheets( ), {
-                buttons: [ "Yeah, Save It", "Nope, Forget It", "Don't Close" ],
+                buttons: [ "Let's Save", "Just Quit", "Oh! Don't Close!" ],
                 title: "Orchestra",
-                message: "You haven't saved your file! Do you want to save it before you leave?"
+                message: `You have changes that are not saved. Should we do something or pretend this conversation never happened?`
             });
             if ( ans === 0 ) {
                 onSaveFile( );
