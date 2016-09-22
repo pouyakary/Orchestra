@@ -21,12 +21,14 @@
     function fireWindowCloseRequest ( ) {
         if ( currentFile.dirty ) {
             const ans = dialog.showMessageBox( getWindowForDialogSheets( ), {
-                buttons: [ "Okay let's save", "It's fine; I don't need it!" ],
+                buttons: [ "Yeah, Save It", "Nope, Forget It", "Don't Close" ],
                 title: "Orchestra",
                 message: "You haven't saved your file! Do you want to save it before you leave?"
             });
             if ( ans === 0 ) {
                 onSaveFile( );
+            } else if ( ans === 2 ) {
+                return;
             }
         }
         OrchestraWindow.close( );
