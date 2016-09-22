@@ -52,7 +52,7 @@
                         type: 'separator'
                     },
                     {
-                        label: 'Export to Image',
+                        label: 'Export to SVG',
                         click: onExportWorkspaceToSVG
                     },
                 ]
