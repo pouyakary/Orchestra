@@ -47,11 +47,11 @@
 //
 
     function applyAdditionalStyles ( ) {
-        blocklyAdditionalStyles.forEach( function ( blockStyle ) {
-            var elements = document.getElementsByClassName( blockStyle.class );
-            for ( var index = 0; index < elements.length; index++ ) {
-                var element = elements[ index ];
-                blockStyle.styles.forEach( function ( style ) {
+        blocklyAdditionalStyles.forEach( blockStyle => {
+            let elements = document.getElementsByClassName( blockStyle.class );
+            for ( let index = 0; index < elements.length; index++ ) {
+                let element = elements[ index ];
+                blockStyle.styles.forEach( style => {
                     element.style[ style.key ] = style.value;
                 });
             }

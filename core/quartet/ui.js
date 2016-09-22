@@ -23,7 +23,7 @@
             quartetActiveBlockId = event.newValue || event.blockId;
         }
 
-        var compiledRegex = QuartetGenerator.blockToCode( ComposeBlock );
+        let compiledRegex = QuartetGenerator.blockToCode( ComposeBlock );
 
         CompiledRegEx = compiledRegex;
         setConsoleRegEx( `/${ compiledRegex }/` );

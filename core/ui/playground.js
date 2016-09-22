@@ -9,7 +9,7 @@
 //
 
     function initMonacoEditor ( ) {
-        var lastValue = '';
+        let lastValue = '';
         if ( playgroundEditor !== null && playgroundEditor !== undefined ) {
             lastValue = playgroundEditor.getValue( );
             playgroundEditor = undefined;
@@ -17,7 +17,7 @@
         }
 
         function uriFromPath ( _path ) {
-            var pathName = path.resolve( _path ).replace( /\\/g, '/' );
+            const pathName = path.resolve( _path ).replace( /\\/g, '/' );
             if ( pathName.length > 0 && pathName.charAt( 0 ) !== '/' ) {
                 pathName = '/' + pathName;
             }

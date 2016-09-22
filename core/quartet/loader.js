@@ -20,7 +20,7 @@
 //
 
     function loadXMLtoWorkspace ( xml ) {
-        var blockyDOM = Blockly.Xml.textToDom( xml );
+        let blockyDOM = Blockly.Xml.textToDom( xml );
         Blockly.mainWorkspace.clear( );
         Blockly.Xml.domToWorkspace( Blockly.mainWorkspace , blockyDOM );
     }

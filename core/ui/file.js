@@ -18,7 +18,7 @@
 //
 
     function loadFile ( fileJSONString ) {
-        let fileJSON = JSON.parse( fileJSONString );
+        const fileJSON = JSON.parse( fileJSONString );
         // setupWorkspaceWithNewFile( fileJSON.workspaceXML );
         playgroundEditor.setValue( fileJSON.playgroundText );
     }
@@ -48,7 +48,7 @@
 
     function saveFileWithInfo ( ) {
         // Going with the file path
-        let fileJSON = serializeFile( );
+        const fileJSON = serializeFile( );
 
         // save the file
         fs.writeFile( currentFile.path, fileJSON, err => {

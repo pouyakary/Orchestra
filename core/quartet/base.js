@@ -17,7 +17,7 @@
 //
 
     function setupWorkspace ( ) {
-        var toolbox = document.getElementById( 'toolbox' );
+        const toolbox = document.getElementById( 'toolbox' );
 
         workspace = Blockly.inject( 'quartet-coding-view', {
             collapse: true,

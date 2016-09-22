@@ -42,8 +42,8 @@
 //
 
     function quartetEncodeText ( code ) {
-        var result = [ ];
-        for ( var character of code ) {
+        let result = [ ];
+        for ( let character of code ) {
             switch ( character ) {
                 case '.':
                 case '\\':

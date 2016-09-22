@@ -4,14 +4,13 @@
 //   Author: Pouya Kary <k@karyfoundation.org>
 //
 
-
 'use strict';
 
 //
 // ─── DEFS ───────────────────────────────────────────────────────────────────────
 //
 
-    const electron      = require( 'electron' );
+    const electron = require( 'electron' );
     const { ipcMain, BrowserWindow, app } = require( 'electron' );
 
 //
@@ -38,6 +37,7 @@
         })
 
         //mainWindow.openDevTools( );
+
         mainWindow.maximize( );
 
         mainWindow.loadURL( `file://${ __dirname }/index.html` );
