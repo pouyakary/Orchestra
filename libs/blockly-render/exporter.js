@@ -3,9 +3,13 @@
 // by Austin Cory Bart.
 
 function renderWorkspaceIntoSVG ( ) {
-    aleph = workspace.getParentSvg( ).cloneNode(true);
-    aleph.removeAttribute("width");
-    aleph.removeAttribute("height");
+    aleph = workspace.getParentSvg( ).cloneNode( true );
+    let composeCanvas = document.getElementById( composeBlockIDforSVGCanvas );
+
+    // sizing
+    let bbox = composeCanvas.getBBox( );
+    aleph.setAttribute( 'width', `${ bbox.width }px` );
+    aleph.setAttribute( 'height', `${ bbox.height }px` );
 
     aleph.children[ 0 ].children[ 0 ].remove( );
     aleph.children[ 1 ].children[ 0 ].remove( );
@@ -16,12 +20,13 @@ function renderWorkspaceIntoSVG ( ) {
     aleph.children[ 1 ].children[ 1 ].remove( );
 
    aleph.children[ 1 ].children[ 0 ].removeAttribute('transform');
+   aleph.children[ 1 ].children[ 0 ].children[ 0 ].removeAttribute('transform');
+
+   console.log( aleph );
 
     var linkElm = document.createElementNS("http://www.w3.org/1999/xhtml", "style");
     linkElm.textContent = '.blocklyDraggable {}\
           .blocklySvg {\
-            background-color: #fff;\
-            border: 1px solid #ddd;\
             overflow: hidden;\
           }\
           .blocklyWidgetDiv {\

@@ -41,6 +41,7 @@
     const PlaygroundWindowScreenElement = 'PlaygroundView';
     const TabsPlaceholder = 'header-tabs';
     const playgroundEditorID = 'playground-editor';
+    const composeBlockIDforSVGCanvas = 'TheComposeBlockSVGCanvas';
 
 //
 // ─── SPECIAL CHARS ──────────────────────────────────────────────────────────────

@@ -35,6 +35,7 @@
 
     function setupComposeBlock ( ) {
         ComposeBlock = workspace.getAllBlocks( )[ 0 ];
+        workspace.getCanvas( ).setAttribute( 'id', composeBlockIDforSVGCanvas );
         ComposeBlock.moveBy( 40, 40 );
     }
 
