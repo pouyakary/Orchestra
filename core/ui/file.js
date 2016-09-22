@@ -87,4 +87,15 @@
         });
     }
 
+//
+// ─── EXPORT SVG IMAGE ───────────────────────────────────────────────────────────
+//
+
+    function exportSVGImageTo ( filePath ) {
+        const fileSVGString = renderWorkspaceIntoSVG( );
+        fs.writeFile( filePath, fileSVGString, error => {
+            if ( error ) alert( 'File could not be saved. Please try again.' );
+        });
+    }
+
 // ────────────────────────────────────────────────────────────────────────────────

@@ -53,7 +53,7 @@
                     },
                     {
                         label: 'Export to Image',
-                        click: ( ) => { }
+                        click: onExportWorkspaceToSVG
                     },
                 ]
             },

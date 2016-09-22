@@ -51,6 +51,27 @@
     }
 
 //
+// ─── ON EXPORT SVG FILE ─────────────────────────────────────────────────────────
+//
+
+    function onExportWorkspaceToSVG ( ) {
+        if ( workspace.getTopBlocks( ).length === 1 ) {
+            let filePath = dialog.showSaveDialog( getWindowForDialogSheets( ), {
+                filters: [{
+                    name: 'SVG',
+                    extensions: [ 'svg' ],
+                }]
+            });
+
+            if ( filePath !== undefined ) {
+                exportSVGImageTo( filePath );
+            }
+        } else {
+            alert("Your workspace contains blocks in top level other than Quartet Compose Block. Please clean up your workspace and try again.");
+        }
+    }
+
+//
 // ─── GET WINDOW FOR DIALOG SHEETS ───────────────────────────────────────────────
 //
 
