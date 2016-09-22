@@ -61,4 +61,30 @@
         });
     }
 
+//
+// ─── OPEN FILE ──────────────────────────────────────────────────────────────────
+//
+
+    function openFileWithPath ( filePath ) {
+        // open the file
+        fs.readFile( filePath, ( err, fileJSONString ) => {
+            if ( err ) {
+                alert('Error: Could not open the file.');
+                return;
+            };
+
+            try {
+                let fileJSON = JSON.parse( fileJSONString );
+                if ( fileJSON.workspaceXML !== undefined && fileJSON.workspaceXML !== null ) {
+                    updateWorkspaceWithNewXML( fileJSON.workspaceXML );
+                    currentFile.path = filePath;
+                    setFileDirty( true );
+                }
+
+            } catch ( error ) {
+                alert('Could not load the file because of a broken file problem.');
+            }
+        });
+    }
+
 // ────────────────────────────────────────────────────────────────────────────────

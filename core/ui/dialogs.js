@@ -18,6 +18,7 @@
 //
 
     function onOpenFile ( ) {
+        // get file path
         let filePath = dialog.showOpenDialog( getWindowForDialogSheets( ), {
             properties: [ 'openFile' ],
             filters: [{
@@ -26,6 +27,9 @@
             }]
         });
         if ( filePath === undefined ) return;
+
+        // done let's load.
+        openFileWithPath( filePath[ 0 ] );
     }
 
 //
