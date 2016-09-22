@@ -9,9 +9,8 @@
 //
 
     function onNewFile ( ) {
-        // reset the file
         currentFile = defaultFileObject;
-        // setupWorkspaceWithNewFile( );
+        updateWorkspaceWithNewXML( defaultFileXML );
     }
 
 //

@@ -9,8 +9,8 @@
 //
 
     function initWindow ( ) {
+        setupWorkspace( );
         onNewFile( );
-        applyAdditionalStyles( );
         initMainMenu( );
     }
 
