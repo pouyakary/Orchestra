@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Heading -->
     <h1>Quartet Blocks</h1>
+
+    <div class="separator"></div>
+
+    <!-- Compose Block -->
     <div class="row">
         <div class="column text">
             <h2>Compose Block</h2>
@@ -18,7 +23,9 @@
         </div>
     </div>
 
+    <div class="separator"></div>
 
+    <!-- Comment Block -->
     <div class="row">
         <div class="column text">
             <h2>Comment Block</h2>
@@ -29,14 +36,28 @@
         </div>
     </div>
 
+    <div class="separator"></div>
 
+    <!-- One or more Block -->
     <div class="row">
         <div class="column text">
-            <h2>Comment Block</h2>
-            Just as in a textual programming language where you can put text that has no effect on the behavior of the program, Comment Block in Quartet provides the same functionality.
+            <h2>"One or more" Block</h2>
+            "One or more" block matches one or more than one sequence of letters following by each other.
+
+            <h3>RegEx Equivalence</h3>
+            "One or More" is the Kleene plus which means in the wildcard format you'd write it as <code>+</code>.
         </div>
         <div class="column block">
             <img src="blocks/one-or-more.svg">
+        </div>
+    </div>
+    <div class="row">
+        <div class="column text">
+            <h3>Example</h3>
+            The following Quartet compiles to wildcard <code>/a+/</code> and matches one or more of the letter <code>'a'</code> followed by each other. So <code>"a"</code>, <code>"aa"</code>, <code>"aaaaaa"</code> are all matched. In the string <code>"abaa"</code> however, It will match two substrings as <code>"a"</code> and <code>"aa"</code>.
+        </div>
+        <div class="column block">
+            <img src="blocks/ex-one-or-more.svg">
         </div>
     </div>
 </body>

@@ -13,14 +13,27 @@ h2 {
     color: #9F0D97;
 }
 
+h3 {
+    margin: 30px 0 2px 0;
+    color: #5D5D5D;
+    font-weight: normal;
+}
+
 h1 {
     font-size: 36px;
     color: #2A75C0;
 }
 
+p {
+    margin: 0;
+    padding: 0 0 20px 0;
+}
+
+code {
+    color: #C03207;
+}
+
 .row {
-    border-top: 3px #eee solid;
-    padding-top: 20px;
     display: flex;
     margin-bottom: 20px;
 }
@@ -41,4 +54,9 @@ h1 {
     background-color: #F5F5F5;
     padding: 20px;
     border-radius: 7px;
+}
+
+.separator {
+    border-top: 3px #eee solid;
+    padding-top: 20px;
 }
