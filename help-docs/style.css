@@ -1,0 +1,44 @@
+
+body {
+    padding: 20px;
+    font-family: Helvetica;
+    max-width: 800px;
+    margin: auto;
+    padding-bottom: 100px;
+}
+
+h2 {
+    margin: 1px 0 2px 0;
+    font-family: 'Helvetica Neue';
+    color: #9F0D97;
+}
+
+h1 {
+    font-size: 36px;
+    color: #2A75C0;
+}
+
+.row {
+    border-top: 3px #eee solid;
+    padding-top: 20px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.column {
+    flex: 3;
+}
+
+.text {
+    flex: 5;
+    padding: 0 30px 10px 0;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.block {
+    user-select: none;
+    background-color: #F5F5F5;
+    padding: 20px;
+    border-radius: 7px;
+}
