@@ -38,7 +38,7 @@
 //
 
     function fireWindowCloseRequest ( ) {
-        if ( onBeforeWindowClose( ) )
+        if ( onBeforeWindowClose( 'Close') )
             OrchestraWindow.close( );
     }
 
@@ -47,7 +47,7 @@
 //
 
     function fireAppQuitRequest ( ) {
-        if ( onBeforeWindowClose( ) )
+        if ( onBeforeWindowClose( 'Quit' ) )
             ipcRenderer.send( 'app-quit' );
     }
 
@@ -55,12 +55,13 @@
 // ─── ON BEFORE WINDOW CLOSE ─────────────────────────────────────────────────────
 //
 
-    function onBeforeWindowClose ( ) {
+    function onBeforeWindowClose ( closeButtonText ) {
         if ( getFileDirtStatus( ) ) {
             const ans = dialog.showMessageBox( getWindowForDialogSheets( ), {
-                buttons: [ "Let's Save", "Just Quit", "Oh! Don't Close!" ],
+                buttons: [ "Let's Save", `Just ${ closeButtonText }`, "Oh! Don't Close!" ],
                 title: "Orchestra",
-                message: `You have changes that are not saved. Should we do something or pretend this conversation never happened?`
+                message: 'You have changes that are not saved. Should we do something or pretend this conversation never happened?',
+                detail: "If you don't save your changes they will be lost and believe us that there's no way to recover them. After all, the decision is yours",
             });
             if ( ans === 0 ) {
                 onSaveFile( );
