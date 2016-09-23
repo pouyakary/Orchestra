@@ -58,14 +58,14 @@
     function onBeforeWindowClose ( closeButtonText ) {
         if ( getFileDirtStatus( ) ) {
             const ans = dialog.showMessageBox( getWindowForDialogSheets( ), {
-                buttons: [ "Let's Save", `Just ${ closeButtonText }`, "Oh! Don't Close!" ],
+                buttons: [ "Let's Save",  "Don't Close", `Nah! Just ${ closeButtonText }`],
                 title: "Orchestra",
                 message: 'You have changes that are not saved. Should we do something or pretend this conversation never happened?',
                 detail: "A Jedi always takes care of it's files. Be in the good side and may the Force be with you.",
             });
             if ( ans === 0 ) {
                 onSaveFile( );
-            } else if ( ans === 2 ) {
+            } else if ( ans === 1 ) {
                 return false;
             }
         }
