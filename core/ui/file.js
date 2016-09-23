@@ -8,9 +8,8 @@
 // ─── SET DIRTY ──────────────────────────────────────────────────────────────────
 //
 
-    function setFileDirty ( ) {
+    function setFileDirty ( dirt ) {
         currentFile.dirty = dirt;
-        currentFile.emptyNewFile = false;
         updateConsoleTitle( );
     }
 
@@ -87,7 +86,7 @@
         // open the file
         fs.readFile( filePath, ( err, fileJSONString ) => {
             if ( err ) {
-                alert('Error: Could not open the file.');
+                report('Error: Could not open the file.');
                 return;
             };
 
@@ -100,7 +99,7 @@
                 }
 
             } catch ( error ) {
-                alert('Could not load the file because of a broken file problem.');
+                report( `Could not load the file because of a broken file problem.${ error }` );
             }
         });
     }

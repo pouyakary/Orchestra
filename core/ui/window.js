@@ -24,6 +24,16 @@
     }
 
 //
+// ─── PUSH ERROR NOTIFICATION ────────────────────────────────────────────────────
+//
+
+    function report ( text ) {
+        new Notification( 'Orchestra', {
+            body: text
+        });
+    }
+
+//
 // ─── ON CLOSE ───────────────────────────────────────────────────────────────────
 //
 
