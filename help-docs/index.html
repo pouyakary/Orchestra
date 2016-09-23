@@ -6,15 +6,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Heading -->
-    <h1>Quartet Blocks</h1>
 
-    <div class="separator"></div>
+
+    <!-- Heading -->
+    <h1>Basics Blocks</h1>
 
     <!-- Compose Block -->
     <div class="row">
         <div class="column text">
-            <h2>Compose Block</h2>
+            <h2>Compose</h2>
             Compose is the main block where everything happens in it.
             You can't add or remove it, what you do must be placed inside the compose block, Quartet looks for blocks inside of the Compose Block. This also means that anything outside of the compose block is being ignored.
         </div>
@@ -23,12 +23,15 @@
         </div>
     </div>
 
-    <div class="separator"></div>
+
+
+
 
     <!-- Comment Block -->
+    <div class="separator"></div>
     <div class="row">
         <div class="column text">
-            <h2>Comment Block</h2>
+            <h2>Comment</h2>
             Just as in a textual programming language where you can put text that has no effect on the behavior of the program, Comment Block in Quartet provides the same functionality.
         </div>
         <div class="column block">
@@ -38,14 +41,22 @@
 
     <div class="separator"></div>
 
+
+
+
+    <!-- Heading -->
+    <h1>Control Structures</h1>
+
     <!-- One or more Block -->
     <div class="row">
         <div class="column text">
-            <h2>"One or more" Block</h2>
-            "One or more" block matches one or more than one sequence of letters following by each other.
+            <h2>One or more</h2>
+            <p>
+                "One or more" block matches one or more than one sequence of letters following by each other.
+            </p>
 
-            <h3>RegEx Equivalence</h3>
-            "One or More" is the Kleene plus which means in the wildcard format you'd write it as <code>+</code>.
+            <h3>RegEx Specs</h3>
+            "One or More" is the Kleene plus which means in the wildcard format you'd write it as <code>+</code>
         </div>
         <div class="column block">
             <img src="blocks/one-or-more.svg">
@@ -60,5 +71,39 @@
             <img src="blocks/ex-one-or-more.svg">
         </div>
     </div>
+
+
+
+
+
+    <!-- Any number of Block -->
+    <div class="separator"></div>
+    <div class="row">
+        <div class="column text">
+            <h2>Any number of</h2>
+            <p>
+                "Any number of" block, matches any number of it's value. Just like "One or more" it matches one or more than one of a given value, but it also it matches "zero" number of the given value. That statement means the sequence can be optional.
+            </p>
+
+            <h3>RegEx Specs</h3>
+            "Any number of" is the Kleene star which means in the wildcard format you'd write it as <code>*</code>
+        </div>
+        <div class="column block">
+            <img src="blocks/any-number-of.svg">
+        </div>
+    </div>
+    <div class="row">
+        <div class="column text">
+            <h3>Example</h3>
+            The following Quartet compiles to wildcard <code>/ab*a/</code> and matches at least <code>"aa"</code> but also <code>"aba"</code>, <code>"abbbbba"</code>.
+        </div>
+        <div class="column block">
+            <img src="blocks/ex-any-number-of.svg">
+        </div>
+    </div>
+
+
+    <div class="separator"></div>
+
 </body>
 </html>

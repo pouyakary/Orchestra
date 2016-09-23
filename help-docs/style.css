@@ -1,10 +1,9 @@
 
 body {
-    padding: 20px;
     font-family: Helvetica;
     max-width: 800px;
     margin: auto;
-    padding-bottom: 100px;
+    padding-bottom: 150px;
 }
 
 h2 {
@@ -14,7 +13,7 @@ h2 {
 }
 
 h3 {
-    margin: 30px 0 2px 0;
+    margin: 0px 0 2px 0;
     color: #5D5D5D;
     font-weight: normal;
 }
@@ -22,6 +21,7 @@ h3 {
 h1 {
     font-size: 36px;
     color: #2A75C0;
+    margin: 80px 0 30px 0;
 }
 
 p {
@@ -57,6 +57,5 @@ code {
 }
 
 .separator {
-    border-top: 3px #eee solid;
-    padding-top: 20px;
+    padding-top: 50px;
 }
