@@ -25,7 +25,7 @@
                     {
                         label: 'New Window',
                         accelerator: 'Shift+CmdOrCtrl+N',
-                        click: ( ) => { }
+                        click: openNewWindow
                     },
                     {
                         type: 'separator'
@@ -207,7 +207,7 @@
                     {
                         label: 'Quit',
                         accelerator: 'Command+Q',
-                        click: ( ) => fireWindowCloseRequest( )
+                        click: fireAppQuitRequest
                     },
                 ]
             }
@@ -225,16 +225,23 @@
         const Menu = remote.Menu;
         const MenuItem = remote.MenuItem;
 
-        var menu = new Menu();
+        OrchestraAppMenu = new Menu();
 
-        /*window.addEventListener( 'contextmenu' , function ( e ) {
-            e.preventDefault( );
-            menu.popup( remote.getCurrentWindow() );
-        }, false);*/
-
-        var menu = Menu.buildFromTemplate( MainMenu );
-        Menu.setApplicationMenu( menu );
+        OrchestraAppMenu = Menu.buildFromTemplate( MainMenu );
+        Menu.setApplicationMenu( OrchestraAppMenu );
     }
 
+//
+// ─── ON MENU DISABLE ────────────────────────────────────────────────────────────
+//
+
+    function setMenuEnableFactor ( control ) {
+        for ( let menuIndex = 0; menuIndex < OrchestraAppMenu.items.length; menuIndex++ ) {
+            let submenu = OrchestraAppMenu.items[ menuIndex ].submenu.items;
+            for ( let submenuIndex = 0; submenuIndex < submenu.length; submenuIndex++ ) {
+                submenu[ submenuIndex ].enabled = control;
+            }
+        }
+    }
 
 // ────────────────────────────────────────────────────────────────────────────────

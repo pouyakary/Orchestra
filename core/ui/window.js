@@ -12,6 +12,7 @@
         setupWorkspace( );
         onNewFile( );
         initMainMenu( );
+        setMenuEnableFactor( true );
     }
 
 //
@@ -27,6 +28,24 @@
 //
 
     function fireWindowCloseRequest ( ) {
+        if ( onBeforeWindowClose( ) )
+            OrchestraWindow.close( );
+    }
+
+//
+// ─── ON QUIT ────────────────────────────────────────────────────────────────────
+//
+
+    function fireAppQuitRequest ( ) {
+        if ( onBeforeWindowClose( ) )
+            ipcRenderer.send( 'app-quit' );
+    }
+
+//
+// ─── ON BEFORE WINDOW CLOSE ─────────────────────────────────────────────────────
+//
+
+    function onBeforeWindowClose ( ) {
         if ( currentFile.dirty ) {
             const ans = dialog.showMessageBox( getWindowForDialogSheets( ), {
                 buttons: [ "Let's Save", "Just Quit", "Oh! Don't Close!" ],
@@ -36,10 +55,11 @@
             if ( ans === 0 ) {
                 onSaveFile( );
             } else if ( ans === 2 ) {
-                return;
+                return false;
             }
         }
-        OrchestraWindow.close( );
+        setMenuEnableFactor( false );
+        return true;
     }
 
 //
@@ -92,10 +112,19 @@
     }
 
 //
+// ─── OPEN NEW WINDOW ────────────────────────────────────────────────────────────
+//
+
+    function openNewWindow ( ) {
+        ipcRenderer.send( 'open-new-window' );
+    }
+
+//
 // ─── BLUR ───────────────────────────────────────────────────────────────────────
 //
 
     OrchestraWindow.addListener( 'blur', ( ) => {
+        setMenuEnableFactor( false );
         makeWindowButtonsBlur( );
     });
 
@@ -104,6 +133,7 @@
 //
 
     OrchestraWindow.addListener( 'focus', ( ) => {
+        setMenuEnableFactor( true );
         makeWindowButtonsActive( );
     });
 
