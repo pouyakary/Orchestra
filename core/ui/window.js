@@ -46,7 +46,7 @@
 //
 
     function onBeforeWindowClose ( ) {
-        if ( currentFile.dirty ) {
+        if ( getFileDirtStatus( ) ) {
             const ans = dialog.showMessageBox( getWindowForDialogSheets( ), {
                 buttons: [ "Let's Save", "Just Quit", "Oh! Don't Close!" ],
                 title: "Orchestra",

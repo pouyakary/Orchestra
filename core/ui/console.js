@@ -17,10 +17,10 @@
 //
 
     function updateConsoleTitle ( ) {
-        let title = ( currentFile.path === defaultEmptyPath )?
-            'Untitled.quartet' : path.basename( currentFile.path );
-        let dirtStatus = ( currentFile.dirty )?
+        let title = getFileName( );
+        let dirtStatus = ( getFileDirtStatus( ) )?
             ' &bullet; Not Saved' : '';
+        document.title = title;
         setConsoleTitle(`${ title }${ dirtStatus }`);
     }
 

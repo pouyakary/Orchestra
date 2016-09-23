@@ -14,6 +14,7 @@
             case Blockly.Events.MOVE:
                 return;
             case Blockly.Events.UI:
+                currentFile.emptyNewFile = false;
                 break;
             default:
                 setFileDirty( true );

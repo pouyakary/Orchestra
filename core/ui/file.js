@@ -8,9 +8,27 @@
 // ─── SET DIRTY ──────────────────────────────────────────────────────────────────
 //
 
-    function setFileDirty ( dirt ) {
+    function setFileDirty ( ) {
         currentFile.dirty = dirt;
+        currentFile.emptyNewFile = false;
         updateConsoleTitle( );
+    }
+
+//
+// ─── GET FILE DIRT STATUS ───────────────────────────────────────────────────────
+//
+
+    function getFileDirtStatus ( ) {
+        return ( currentFile.emptyNewFile )? false : currentFile.dirty;
+    }
+
+//
+// ─── GET FILE NAME ──────────────────────────────────────────────────────────────
+//
+
+    function getFileName ( ) {
+        return ( currentFile.path === defaultEmptyPath )?
+            'Untitled.quartet' : path.basename( currentFile.path );
     }
 
 //

@@ -8,7 +8,8 @@
 // ─── ON NEW FILE ────────────────────────────────────────────────────────────────
 //
 
-    function onNewFile ( ) {
+    function onNewFile ( force = false ) {
+        if ( !( checkForSavingChanges( ) || force ) ) return;
         currentFile = defaultFileObject;
         updateWorkspaceWithNewXML( defaultFileXML );
     }
@@ -18,6 +19,8 @@
 //
 
     function onOpenFile ( ) {
+        if ( !checkForSavingChanges( ) ) return;
+
         // get file path
         let filePath = dialog.showOpenDialog( getWindowForDialogSheets( ), {
             properties: [ 'openFile' ],
@@ -97,6 +100,27 @@
                 return true;
             } else {
                 currentFile = defaultFileObject;
+                return false;
+            }
+        }
+        return true;
+    }
+
+//
+// ─── SAVE BEFORE FILE CHANGE ────────────────────────────────────────────────────
+//
+
+    function checkForSavingChanges ( ) {
+        if ( getFileDirtStatus( ) ) {
+            const ans = dialog.showMessageBox( getWindowForDialogSheets( ), {
+                buttons: [ "Save", "Cancel", "Don't Save" ],
+                title: "Orchestra",
+                message: `Do you want to save your changes to '${ getFileName( ) }'?`,
+                detail: "Your changes will be lost if you don't save right now."
+            });
+            if ( ans === 0 ) {
+                onSaveFile( );
+            } else if ( ans === 1 ) {
                 return false;
             }
         }

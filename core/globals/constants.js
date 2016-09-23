@@ -15,6 +15,7 @@
     const defaultFileObject = {
         path: defaultEmptyPath,
         dirty: true,
+        emptyNewFile: true,
     };
 
 //
