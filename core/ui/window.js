@@ -61,7 +61,7 @@
                 buttons: [ "Let's Save", `Just ${ closeButtonText }`, "Oh! Don't Close!" ],
                 title: "Orchestra",
                 message: 'You have changes that are not saved. Should we do something or pretend this conversation never happened?',
-                detail: "If you don't save your changes they will be lost and believe us that there's no way to recover them. After all, the decision is yours",
+                detail: "A Jedi always takes care of it's files. Be in the good side and may the Force be with you.",
             });
             if ( ans === 0 ) {
                 onSaveFile( );

@@ -113,17 +113,19 @@
     function checkForSavingChanges ( ) {
         if ( getFileDirtStatus( ) ) {
             const ans = dialog.showMessageBox( getWindowForDialogSheets( ), {
-                buttons: [ "Save", "Cancel", "Don't Save" ],
+                buttons: [ "Save Them", "Cancel", "Don't Save" ],
                 title: "Orchestra",
-                message: `Do you want to save your changes to '${ getFileName( ) }'?`,
-                detail: "Your changes will be lost if you don't save right now."
+                message: "Don't let your saves be lost",
+                detail: "If you don't save then everything since your last save will be lost. You're a developer you know that."
             });
+
             if ( ans === 0 ) {
                 onSaveFile( );
             } else if ( ans === 1 ) {
                 return false;
             }
         }
+
         return true;
     }
 
