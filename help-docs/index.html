@@ -38,7 +38,6 @@
             <img src="blocks/comment.svg">
         </div>
     </div>
-    <div class="separator"></div>
 
 
 
@@ -48,7 +47,7 @@
     <h1>Input Blocks</h1>
     <div class="row">
         <div class="column text">
-            <h2>Text</h2>
+            <h2>Plain Text</h2>
             Text block is to insert plain text. It encodes the special characters and places the entire text into a sequence group (<code>(?: )</code> in wildcard format) hence the entire text is being treated safely as one group.
         </div>
         <div class="column block">
@@ -91,7 +90,7 @@
     <div class="row">
         <div class="column text">
             <h3>Example</h3>
-            The following Quartet compiles to <code>/[a-z]+/</code>.
+            ECMAScript (as even in the latest drafts) has no support for Look-behind thus as our strategy Quartet does not provide a block for look-behind too. However if targeting special RegEx engines that support lookbehind you can inject a wildcard like this that compiles to <code>/(?&lt;=ABC)/</code>.
         </div>
         <div class="column block">
             <img src="blocks/ex-unsafe-wildcard.svg">
@@ -222,7 +221,34 @@
         </div>
     </div>
 
-    <div class="separator"></div>
 
+
+
+
+    <!-- Any number of Block -->
+    <div class="separator"></div>
+    <div class="row">
+        <div class="column text">
+            <h2>Options</h2>
+            <p>
+                The combination of <b>One of Options</b> and <b>Option</b> blocks makes it possible for you to define multiple possibilities in your code. Each time the Quartet reaches the <b>One of options</b> block one of it's options must happen. Remember that the <b>Option</b> block can only be used inside of the <b>One of Options</b> block and <b>One of Options</b> block can not contain anything but <b>Option</b> blocks. (This approach lets you create more sophisticated options with clear borders.)
+            </p>
+
+            <h3>RegEx Specs</h3>
+            "Any number of" is the Kleene star which means in the wildcard format you'd write it as <code>*</code>
+        </div>
+        <div class="column block">
+            <img src="blocks/one-of-options-and-option.svg">
+        </div>
+    </div>
+    <div class="row">
+        <div class="column text">
+            <h3>Example</h3>
+            This Quartet finds different ways to say <code>"Hello World"</code> like <code>"Howdy World"</code> and so on...
+        </div>
+        <div class="column block">
+            <img src="blocks/ex-one-of-options-and-option.svg">
+        </div>
+    </div>
 </body>
 </html>
