@@ -31,6 +31,9 @@ p {
 
 code {
     color: #B36D00;
+    background-color: #FFF5D6;
+    padding: 0 5px 0 5px;
+    border-radius: 3px;
 }
 
 .row {
