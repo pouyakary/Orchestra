@@ -67,12 +67,14 @@
     <div class="row">
         <div class="column text">
             <h3>Example 2</h3>
-            The following code compiles to <code>/(?:Hello World\!)*/</code>
+            The following Quartet compiles to <code>/(?:Hello World\!)*/</code>.
         </div>
         <div class="column block">
             <img src="blocks/ex-text-2.svg">
         </div>
     </div>
+
+
 
 
     <!-- Unsafe Wildcard -->
@@ -89,10 +91,35 @@
     <div class="row">
         <div class="column text">
             <h3>Example</h3>
-            The following code compiles to <code>/[a-z]+/</code>
+            The following Quartet compiles to <code>/[a-z]+/</code>.
         </div>
         <div class="column block">
             <img src="blocks/ex-unsafe-wildcard.svg">
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Encode Unicode -->
+    <div class="separator"></div>
+    <div class="row">
+        <div class="column text">
+            <h2>Encode Unicode</h2>
+            In order to use Unicode in your RegExes you can use this blocks. Characters inside of the block are being translated into safe Unicode inputs. So that you can use them safely. This also makes the final RegEx to be independent from <code>u</code> flag.
+        </div>
+        <div class="column block">
+            <img src="blocks/unicode-input.svg">
+        </div>
+    </div>
+    <div class="row">
+        <div class="column text">
+            <h3>Example</h3>
+            The following Quartet compiles to <code>/\uD83D/</code>.
+        </div>
+        <div class="column block">
+            <img src="blocks/ex-unicode-input.png" width="175">
         </div>
     </div>
 
