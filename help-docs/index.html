@@ -40,6 +40,34 @@
     </div>
 
     <div class="separator"></div>
+    <div class="row">
+        <div class="column text">
+            <h2>Text</h2>
+            Text block is to insert plain text. It encodes the special characters and places the entire text into a sequence group (<code>(?: )</code> in wildcard format) hence the entire text is being treated safely as one group.
+        </div>
+        <div class="column block">
+            <img src="blocks/text.svg">
+        </div>
+    </div>
+    <div class="row">
+        <div class="column text">
+            <h3>Example 1</h3>
+            The following code compiles to <code>/Hello World\!/</code>
+        </div>
+        <div class="column block">
+            <img src="blocks/ex-text.svg">
+        </div>
+    </div>
+        <div class="row">
+        <div class="column text">
+            <h3>Example 2</h3>
+            The following code compiles to <code>/(?:Hello World\!)*/</code>
+        </div>
+        <div class="column block">
+            <img src="blocks/ex-text-2.svg">
+        </div>
+    </div>
+    <div class="separator"></div>
 
 
 
