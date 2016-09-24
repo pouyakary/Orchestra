@@ -117,7 +117,7 @@
     Blockly.Blocks[ 'free_form_regex' ] = {
         init: function ( ) {
             this.appendDummyInput( )
-                .appendField( "Freeform RegExp" )
+                .appendField( "Unsafe Wildcard" )
                 .appendField( new Blockly.FieldTextInput( "" ), "regex" );
             this.setInputsInline( true );
             this.setPreviousStatement( true, "String" );

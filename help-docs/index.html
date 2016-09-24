@@ -38,8 +38,14 @@
             <img src="blocks/comment.svg">
         </div>
     </div>
-
     <div class="separator"></div>
+
+
+
+
+
+    <!-- Heading -->
+    <h1>Input Blocks</h1>
     <div class="row">
         <div class="column text">
             <h2>Text</h2>
@@ -58,7 +64,7 @@
             <img src="blocks/ex-text.svg">
         </div>
     </div>
-        <div class="row">
+    <div class="row">
         <div class="column text">
             <h3>Example 2</h3>
             The following code compiles to <code>/(?:Hello World\!)*/</code>
@@ -67,9 +73,28 @@
             <img src="blocks/ex-text-2.svg">
         </div>
     </div>
+
+
+    <!-- Unsafe Wildcard -->
     <div class="separator"></div>
-
-
+    <div class="row">
+        <div class="column text">
+            <h2>Unsafe Wildcard</h2>
+            Unsafe Wildcard is used to inject wildcard grammar into the final Quartet. Quartet targets JavaScript's RegEx implementation which is a very standard implementation by the way, However other languages have some extra RegEx goodies. In order for you to have those goodies inside of the Quartet, you may use this unsafe block and add whatever text you want to the Quartet at any position.
+        </div>
+        <div class="column block">
+            <img src="blocks/unsafe-wildcard.svg">
+        </div>
+    </div>
+    <div class="row">
+        <div class="column text">
+            <h3>Example</h3>
+            The following code compiles to <code>/[a-z]+/</code>
+        </div>
+        <div class="column block">
+            <img src="blocks/ex-unsafe-wildcard.svg">
+        </div>
+    </div>
 
 
     <!-- Heading -->
