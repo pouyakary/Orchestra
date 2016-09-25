@@ -82,17 +82,7 @@
 //
 
     function quartetSpaceEncode ( text ) {
-        let result = '';
-        for ( let character of code ) {
-            switch ( character ) {
-                case ' ':
-                    result += '&nbsp;';
-                    return;
-                default:
-                    result += character;
-            }
-        }
-        return result;
+        return text.replace(/ /g, '&nbsp;');
     }
 
 //

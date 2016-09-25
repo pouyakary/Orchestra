@@ -129,7 +129,7 @@
     };
 
     QuartetGenerator[ 'free_form_regex' ] = function ( block ) {
-        return block.getFieldValue( 'regex' );
+        return quartetSpaceEncode( block.getFieldValue( 'regex' ) );
     };
 
 //
