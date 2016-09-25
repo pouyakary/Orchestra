@@ -34,7 +34,7 @@
 //
 
     function quartetSequence ( code ) {
-        return ( code.length <= 1 )? code : '(?:' + code + ')';
+        return ( quartetGetStringLength( code ) <= 1 )? code : '(?:' + code + ')';
     }
 
 //
@@ -67,6 +67,9 @@
                 case '-':
                     result.push( `\\${ character }` );
                     break;
+                case ' ':
+                    result.push( '&nbsp;');
+                    break;
                 default:
                     result.push( character );
             }
@@ -93,6 +96,14 @@
     }
 
 //
+// ─── GET STRING LENGTH ──────────────────────────────────────────────────────────
+//
+
+    function quartetGetStringLength ( text ) {
+        return text.replace('&nbsp;', '').length;
+    }
+
+//
 // ─── SPACE DECODE ───────────────────────────────────────────────────────────────
 //
 
@@ -105,7 +116,7 @@
 //
 
     function quartetAlphabet ( text ) {
-        return quartetEncodeHTML( ( text.length === 1 )? text : '[' + text.join('') + ']' );
+        return quartetEncodeHTML( ( text.length === 1 )? text[ 0 ] : '[' + text.join('') + ']' );
     }
 
 //
