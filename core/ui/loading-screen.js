@@ -15,8 +15,8 @@
                 loadingView.className = 'dead-loading-view';
                 setTimeout(( ) => {
                     loadingView.remove( );
-                }, 2000);
-            }, 1300 );
+                }, 1000);
+            });
         });
     }
 
