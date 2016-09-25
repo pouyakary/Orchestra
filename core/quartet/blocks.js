@@ -353,12 +353,18 @@
         var checkbox_tab = block.getFieldValue('tab') == 'TRUE';
         var checkbox_linefeed = block.getFieldValue('linefeed') == 'TRUE';
 
-        var chars = [ ];
-        if ( checkbox_space ) { chars.push( '\\s' ) };
-        if ( checkbox_tab ) { chars.push( '\\t' ) };
-        if ( checkbox_linefeed ) { chars.push( '\\n' ) };
+        if ( checkbox_space && checkbox_tab && checkbox_linefeed ) {
+            return '\\s';
+        } else if ( checkbox_space || checkbox_linefeed || checkbox_tab ) {
+            var chars = [ ];
+            if ( checkbox_space ) { chars.push( '&nbsp;' ) };
+            if ( checkbox_tab ) { chars.push( '\\t' ) };
+            if ( checkbox_linefeed ) { chars.push( '\\n' ) };
 
-        return quartetAlphabet( chars );
+            return quartetAlphabet( chars );
+        } else {
+            return '';
+        }
     };
 
 //
