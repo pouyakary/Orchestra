@@ -24,6 +24,7 @@
 //
 
     let windowCount = 0;
+    let isHelpWindowOpen = false;
 
 //
 // ─── GENERATE MAIN WINDOW ───────────────────────────────────────────────────────
@@ -66,24 +67,26 @@
 //
 
     function openHelpWindow ( ) {
-        let helpWindow;
+        if ( isHelpWindowOpen ) return;
+        isHelpWindowOpen = true;
 
-        const window_width = 900;
-        const window_height = 800;
+        let helpWindow;
         helpWindow = new BrowserWindow({
-            show: false,
-            width:  window_width, minWidth: 840,
-            height: window_height, minHeight: 200,
+            //show: false,
+            title: "Quartet Docs",
+            width:  1000, minWidth: 900,
+            height: 600, minHeight: 200,
             backgroundColor: 'white',
         });
 
         helpWindow.loadURL( `file://${ __dirname }/help/index.html` );
-
+/*
         helpWindow.once('ready-to-show', () => {
             helpWindow.show()
-        });
+        });*/
 
         helpWindow.on( 'closed' , ( ) => {
+            isHelpWindowOpen = false;
             helpWindow = null;
         });
     }
@@ -98,7 +101,7 @@
 // ─── ON OPEN HELP WINDOW ────────────────────────────────────────────────────────
 //
 
-    ipcMain.on ( 'open-help-window', ( event, arg ) => openHelpWindow ( ));
+    ipcMain.on ( 'open-help-page', ( event, arg ) => openHelpWindow ( ));
 
 //
 // ─── ON WINDOW ASKS ─────────────────────────────────────────────────────────────
