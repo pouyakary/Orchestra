@@ -23,7 +23,7 @@
 // ─── STORAGE ────────────────────────────────────────────────────────────────────
 //
 
-    let windows = [ ];
+    let windowCount = 0;
 
 //
 // ─── GENERATE MAIN WINDOW ───────────────────────────────────────────────────────
@@ -44,23 +44,47 @@
             fullscreen: false
         });
 
-        editorWindow.once('ready-to-show', () => {
-            editorWindow.show()
-        });
-
-        let windowId = generateUUID( );
-        editorWindow[ uniqueWindowIdKey ] = windowId;
-        windows.push( windowId );
-
-        //editorWindow.openDevTools( );
-
         editorWindow.maximize( );
+        windowCount++;
 
         editorWindow.loadURL( `file://${ __dirname }/index.html` );
 
+
+        editorWindow.once('ready-to-show', ( ) => {
+            editorWindow.show( );
+        });
+
+        //editorWindow.openDevTools( );
+
         editorWindow.on( 'closed' , ( ) => {
-            removeFromArray( windowId, windows );
-            editorWindow = null;
+            windowCount--;
+        });
+    }
+
+//
+// ─── OPEN HELP WINDOW ───────────────────────────────────────────────────────────
+//
+
+    function openHelpWindow ( ) {
+        let helpWindow;
+
+        const window_width = 900;
+        const window_height = 800;
+        helpWindow = new BrowserWindow({
+            show: false,
+            width:  window_width, minWidth: 840,
+            height: window_height, minHeight: 200,
+            backgroundColor: 'white',
+        });
+
+        helpWindow.loadURL( `file://${ __dirname }/help/index.html` );
+
+        helpWindow.once('ready-to-show', () => {
+            helpWindow.show()
+        });
+
+        helpWindow.on( 'closed' , ( ) => {
+            helpWindow = null;
         });
     }
 
@@ -71,20 +95,22 @@
     app.on( 'ready' , createWindow );
 
 //
+// ─── ON OPEN HELP WINDOW ────────────────────────────────────────────────────────
+//
+
+    ipcMain.on ( 'open-help-window', ( event, arg ) => openHelpWindow ( ));
+
+//
 // ─── ON WINDOW ASKS ─────────────────────────────────────────────────────────────
 //
 
-    ipcMain.on( 'open-new-window', ( event, arg ) => {
-        createWindow( );
-    });
+    ipcMain.on( 'open-new-window', ( event, arg ) => createWindow( ) );
 
 //
 // ─── ON APP QUIT REQUEST ────────────────────────────────────────────────────────
 //
 
-    ipcMain.on( 'app-quit', ( event, arg ) => {
-        app.quit( );
-    });
+    ipcMain.on( 'app-quit', ( event, arg ) => app.quit( ) );
 
 //
 // ─── QUIT APP ON WINDOWS CLOSE ──────────────────────────────────────────────────
@@ -105,35 +131,9 @@
     app.on( 'activate', ( ) => {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
-        if ( windows.length === 0 ) {
+        if ( windowCount === 0 ) {
             createWindow( );
         }
     });
-
-//
-// ─── SUPPORTING FUNCTIONS ───────────────────────────────────────────────────────
-//
-
-    function removeFromArray ( item, array ) {
-        for ( var i = array.length - 1; i >= 0; i-- ) {
-            if ( array[ i ] === item ) {
-                array.splice( i, 1 );
-            }
-        }
-    }
-
-//
-// ─── GENERATE UUID ──────────────────────────────────────────────────────────────
-//
-
-    function generateUUID ( ) {
-        var d = new Date( ).getTime( );
-        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace( /[xy]/g, c => {
-            var r = ( d + Math.random( ) * 16 ) %16 | 0;
-            d = Math.floor( d / 16 );
-            return ( c == 'x' ? r : ( r &0x3 | 0x8 ) ).toString( 16 );
-        });
-        return uuid;
-    }
 
 // ────────────────────────────────────────────────────────────────────────────────

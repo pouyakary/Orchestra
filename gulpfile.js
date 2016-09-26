@@ -100,6 +100,7 @@
         copyToBinaryFromDir( 'core' );
         copyToBinaryFromDir( 'libs' );
         copyToBinaryFromDir( 'sounds' );
+        copyToBinaryFromDir( 'help-docs' );
         copyFile(
             getLocalPath( 'package.json' ),
             getLocalPath( path.join( resultDirPath , 'package.json' ) )
