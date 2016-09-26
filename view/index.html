@@ -86,7 +86,7 @@
 
                     <div class="ribbon-separator"></div>
                     <div id="ribbon-console-view">
-                        <div id="ribbon-console-title">Undefined</div>
+                        <div id="ribbon-console-title"></div>
                         <div id="ribbon-console-regexp"></div>
                         <button id="ribbon-console-copy-hover-button" onclick="onCopyRegExp( );">
                             <div>
@@ -101,7 +101,7 @@
                     <div class="ribbon-icon ribbon-editor-options">Options</div>
 
                     <div class="ribbon-separator"></div>
-                    <div class="ribbon-icon ribbon-editor-help" onclick="onOpenHelpPage( );">Help</div>
+                    <div class="ribbon-icon ribbon-editor-help" onclick="onOpenHelpPage( );">Reference</div>
 
 					<div style="clear: both;"></div>
 				</div>
@@ -163,6 +163,9 @@
 		<script src="ui/playground.js"></script>
 		<script>
             initMonacoEditor( );
+            function openHelpWindowForReference ( refID ) {
+                ipcRenderer.send( 'open-help-for-ref', refID );
+            }
 			CancelLoadingScreenAfterCompleteLoad( );
 		</script>
 	</body>

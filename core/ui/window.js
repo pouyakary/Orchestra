@@ -139,6 +139,14 @@
     }
 
 //
+// ─── OPEN HELP WINDOW FOR REFERENCE ─────────────────────────────────────────────
+//
+
+    function openHelpWindowForReference ( refID ) {
+        ipcRenderer.send( 'open-help-for-ref', refID );
+    }
+
+//
 // ─── BLUR ───────────────────────────────────────────────────────────────────────
 //
 

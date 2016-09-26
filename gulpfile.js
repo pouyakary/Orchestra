@@ -39,7 +39,6 @@
     function shell ( command , callback ) {
         exec( command, err => {
             if ( err ) return callback( err );
-            callback( );
         });
     }
 

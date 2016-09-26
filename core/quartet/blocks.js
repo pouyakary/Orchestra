@@ -5,10 +5,19 @@
 //
 
 //
+// ─── SUPPORTING FUNCTIONS ───────────────────────────────────────────────────────
+//
+
+    function getHelpURLbyID ( id ) {
+        return `javascript: openHelpWindowForReference("${ id }");`;
+    }
+
+//
 // ─── COMPOSE ────────────────────────────────────────────────────────────────────
 //
 
     Blockly.Blocks['compose'] = {
+        helpUrl: getHelpURLbyID( 'compose' ),
         init: function() {
             this.appendDummyInput()
                 .appendField("Quartet");
@@ -17,7 +26,7 @@
             this.setInputsInline(false);
             this.setColour(120);
             this.setTooltip('');
-            this.setHelpUrl('http://www.example.com/');
+            this.setHelpUrl( 'compose' );
         }
     };
 
