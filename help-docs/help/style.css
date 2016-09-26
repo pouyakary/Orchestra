@@ -57,6 +57,8 @@ code {
     background-color: #F5F5F5;
     padding: 20px;
     border-radius: 7px;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .separator {
