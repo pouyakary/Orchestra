@@ -3,283 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
+    <script src="window.js"></script>
 </head>
-<body>
 
+<body onload="onLoad( )">
+    <sidebar id="sidebar"></sidebar>
 
-    <!-- Heading -->
-    <h1>Basics Blocks</h1>
+    <main id="content">
+        <div class="block-group" id="basic-blocks">
+            <!-- Heading -->
+            <h1>Basics Blocks</h1>
 
-    <!-- Compose Block -->
-    <div class="row" id="ref-compose">
-        <div class="column text">
-            <h2>Compose</h2>
-            <b>Compose</b> is the main block where everything happens in it.
-            You can't add or remove it, what you do must be placed inside the compose block, Quartet looks for blocks inside of the <b>Compose</b> Block. This also means that anything outside of the <b>Compose</b> block is being ignored.
+            <!-- Compose Block -->
+            <div class="row" id="ref-compose">
+                <div class="column text">
+                    <h2>Compose</h2>
+                    <b>Compose</b> is the main block where everything happens in it.
+                    You can't add or remove it, what you do must be placed inside the compose block, Quartet looks for blocks inside of the <b>Compose</b> Block. This also means that anything outside of the <b>Compose</b> block is being ignored.
+                </div>
+                <div class="column block">
+                    <img src="blocks/compose.svg">
+                </div>
+            </div>
+
+            <!-- Comment Block -->
+            <div class="separator"></div>
+            <div class="row" id="ref-comment">
+                <div class="column text">
+                    <h2>Comment</h2>
+                    Just as in a textual programming language where you can put text that has no effect on the behavior of the program, <b>Comment</b> Block in Quartet provides the same functionality.
+                </div>
+                <div class="column block">
+                    <img src="blocks/comment.svg">
+                </div>
+            </div>
         </div>
-        <div class="column block">
-            <img src="blocks/compose.svg">
+
+
+
+        <div class="block-group" id="input-blocks">
+            <!-- Heading -->
+            <h1>Input Blocks</h1>
+            <div class="row" id="ref-encode">
+                <div class="column text">
+                    <h2>Plain Text</h2>
+                    <b>Plain Text</b> block is to insert plain text. It encodes the special characters and places the entire text into a sequence group ( <code>(?: )</code> in wildcard format) hence the entire text is being treated safely as one group.
+                </div>
+                <div class="column block">
+                    <img src="blocks/text.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example 1</h3>
+                    The following code compiles to <code>/Hello World\!/</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-text.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example 2</h3>
+                    The following Quartet compiles to <code>/(?:Hello World\!)*/</code>.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-text-2.svg">
+                </div>
+            </div>
+
+
+
+
+            <!-- Unsafe Wildcard -->
+            <div class="separator"></div>
+            <div class="row" id="ref-free_form_regex">
+                <div class="column text">
+                    <h2>Unsafe Wildcard</h2>
+                    <b>Unsafe Wildcard</b> is used to inject wildcard grammar into the final Quartet. Quartet targets JavaScript's RegEx implementation which is a very standard implementation by the way, However other languages have some extra RegEx goodies. In order for you to have those goodies inside of the Quartet, you may use this unsafe block and add whatever text you want to the Quartet at any position.
+                </div>
+                <div class="column block">
+                    <img src="blocks/unsafe-wildcard.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    ECMAScript (as even in the latest drafts) has no support for Look-behind thus as our strategy Quartet does not provide a block for look-behind too. However if targeting special RegEx engines that support lookbehind you can inject a wildcard like this that compiles to <code>/(?&lt;=ABC)/</code>.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-unsafe-wildcard.svg">
+                </div>
+            </div>
+
+
+
+
+
+            <!-- Encode Unicode -->
+            <div class="separator"></div>
+            <div class="row" id="ref-unicode">
+                <div class="column text">
+                    <h2>Encode Unicode</h2>
+                    In order to use Unicode in your RegExes you can use this blocks. Characters inside of the block are being translated into safe Unicode inputs. So that you can use them safely. This also makes the final RegEx to be independent from <code>u</code> flag.
+                </div>
+                <div class="column block">
+                    <img src="blocks/unicode-input.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    The following Quartet compiles to <code>/\uD83D/</code>.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-unicode-input.png" width="175">
+                </div>
+            </div>
         </div>
-    </div>
 
 
 
 
 
-    <!-- Comment Block -->
-    <div class="separator"></div>
-    <div class="row" id="ref-comment">
-        <div class="column text">
-            <h2>Comment</h2>
-            Just as in a textual programming language where you can put text that has no effect on the behavior of the program, <b>Comment</b> Block in Quartet provides the same functionality.
+        <div class="block-group" id="control-blocks">
+            <!-- Heading -->
+            <h1>Control Structures</h1>
+
+            <!-- One or more Block -->
+            <div class="row" id="ref-one_or_more">
+                <div class="column text">
+                    <h2>One or more</h2>
+                    <p>
+                        <b>One or more</b> block matches one or more than one sequence of letters following by each other.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    <b>One or More</b> is the Kleene plus which means in the wildcard format you'd write it as <code>+</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/one-or-more.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    The following Quartet compiles to wildcard <code>/a+/</code> and matches one or more of the letter <code>'a'</code> followed by each other. So <code>"a"</code>, <code>"aa"</code>, <code>"aaaaaa"</code> are all matched. In the string <code>"abaa"</code> however, It will match two substrings as <code>"a"</code> and <code>"aa"</code>.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-one-or-more.svg">
+                </div>
+            </div>
+
+
+
+
+
+            <!-- Any number of Block -->
+            <div class="separator"></div>
+            <div class="row" id="row-any_number_of">
+                <div class="column text">
+                    <h2>Any number of</h2>
+                    <p>
+                        <b>Any number of</b> block, matches any number of it's value. Just like "One or more" it matches one or more than one of a given value, but it also it matches "zero" number of the given value. That statement means the sequence can be optional.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    <b>Any number of</b> is the Kleene star which means in the wildcard format you'd write it as <code>*</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/any-number-of.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    The following Quartet compiles to wildcard <code>/ab*a/</code> and matches at least <code>"aa"</code> but also <code>"aba"</code>, <code>"abbbbba"</code>.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-any-number-of.svg">
+                </div>
+            </div>
+
+
+
+
+
+            <!-- Maybe Block -->
+            <div class="separator"></div>
+            <div class="row" id="ref-maybe">
+                <div class="column text">
+                    <h2>Maybe</h2>
+                    <p>
+                        Maybe makes it's value optional. So the value can either appear or not appear.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    Maybe compiled to wildcard using the <code>?</code> operator.
+                </div>
+                <div class="column block">
+                    <img src="blocks/maybe.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example 1</h3>
+                    The following Quartet compiles to wildcard <code>/ab?c/</code> and matches either <code>"abc"</code> or <code>"ac"</code>.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-maybe-1.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example 2</h3>
+                    These two Quartets are equivalent to each other.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-maybe-2.svg"><br/><br/>
+                    <img src="blocks/ex-maybe-3.svg">
+                </div>
+            </div>
+
+
+
+
+
+            <!-- Any number of Block -->
+            <div class="separator"></div>
+            <div id="ref-option"></div>
+            <div class="row" id="ref-one_of">
+                <div class="column text">
+                    <h2>Options</h2>
+                    <p>
+                        The combination of <b>One of Options</b> and <b>Option</b> blocks makes it possible for you to define multiple possibilities in your code. Each time the Quartet reaches the <b>One of options</b> block one of it's options must happen. Remember that the <b>Option</b> block can only be used inside of the <b>One of Options</b> block and <b>One of Options</b> block can not contain anything but <b>Option</b> blocks. (This approach lets you create more sophisticated options with clear borders.)
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    "Any number of" is the Kleene star which means in the wildcard format you'd write it as <code>*</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/one-of-options-and-option.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    This Quartet finds different ways to say <code>"Hello World"</code> like <code>"Howdy World"</code> and so on...
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-one-of-options-and-option.svg">
+                </div>
+            </div>
+
+
+
+
+
+            <!-- Any number of Block -->
+            <div class="separator"></div>
+            <div id="ref-option"></div>
+            <div class="row" id="ref-one_of">
+                <div class="column text">
+                    <h2>Options</h2>
+                    <p>
+                        The combination of <b>One of Options</b> and <b>Option</b> blocks makes it possible for you to define multiple possibilities in your code. Each time the Quartet reaches the <b>One of options</b> block one of it's options must happen. Remember that the <b>Option</b> block can only be used inside of the <b>One of Options</b> block and <b>One of Options</b> block can not contain anything but <b>Option</b> blocks. (This approach lets you create more sophisticated options with clear borders.)
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    "Any number of" is the Kleene star which means in the wildcard format you'd write it as <code>*</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/one-of-options-and-option.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    This Quartet finds different ways to say <code>"Hello World"</code> like <code>"Howdy World"</code> and so on...
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-one-of-options-and-option.svg">
+                </div>
+            </div>
         </div>
-        <div class="column block">
-            <img src="blocks/comment.svg">
-        </div>
-    </div>
-
-
-
-
-
-    <!-- Heading -->
-    <h1>Input Blocks</h1>
-    <div class="row" id="ref-encode">
-        <div class="column text">
-            <h2>Plain Text</h2>
-            <b>Plain Text</b> block is to insert plain text. It encodes the special characters and places the entire text into a sequence group ( <code>(?: )</code> in wildcard format) hence the entire text is being treated safely as one group.
-        </div>
-        <div class="column block">
-            <img src="blocks/text.svg">
-        </div>
-    </div>
-    <div class="row">
-        <div class="column text">
-            <h3>Example 1</h3>
-            The following code compiles to <code>/Hello World\!/</code>
-        </div>
-        <div class="column block">
-            <img src="blocks/ex-text.svg">
-        </div>
-    </div>
-    <div class="row">
-        <div class="column text">
-            <h3>Example 2</h3>
-            The following Quartet compiles to <code>/(?:Hello World\!)*/</code>.
-        </div>
-        <div class="column block">
-            <img src="blocks/ex-text-2.svg">
-        </div>
-    </div>
-
-
-
-
-    <!-- Unsafe Wildcard -->
-    <div class="separator"></div>
-    <div class="row" id="ref-free_form_regex">
-        <div class="column text">
-            <h2>Unsafe Wildcard</h2>
-            <b>Unsafe Wildcard</b> is used to inject wildcard grammar into the final Quartet. Quartet targets JavaScript's RegEx implementation which is a very standard implementation by the way, However other languages have some extra RegEx goodies. In order for you to have those goodies inside of the Quartet, you may use this unsafe block and add whatever text you want to the Quartet at any position.
-        </div>
-        <div class="column block">
-            <img src="blocks/unsafe-wildcard.svg">
-        </div>
-    </div>
-    <div class="row">
-        <div class="column text">
-            <h3>Example</h3>
-            ECMAScript (as even in the latest drafts) has no support for Look-behind thus as our strategy Quartet does not provide a block for look-behind too. However if targeting special RegEx engines that support lookbehind you can inject a wildcard like this that compiles to <code>/(?&lt;=ABC)/</code>.
-        </div>
-        <div class="column block">
-            <img src="blocks/ex-unsafe-wildcard.svg">
-        </div>
-    </div>
-
-
-
-
-
-    <!-- Encode Unicode -->
-    <div class="separator"></div>
-    <div class="row" id="ref-unicode">
-        <div class="column text">
-            <h2>Encode Unicode</h2>
-            In order to use Unicode in your RegExes you can use this blocks. Characters inside of the block are being translated into safe Unicode inputs. So that you can use them safely. This also makes the final RegEx to be independent from <code>u</code> flag.
-        </div>
-        <div class="column block">
-            <img src="blocks/unicode-input.svg">
-        </div>
-    </div>
-    <div class="row">
-        <div class="column text">
-            <h3>Example</h3>
-            The following Quartet compiles to <code>/\uD83D/</code>.
-        </div>
-        <div class="column block">
-            <img src="blocks/ex-unicode-input.png" width="175">
-        </div>
-    </div>
-
-
-    <!-- Heading -->
-    <h1>Control Structures</h1>
-
-    <!-- One or more Block -->
-    <div class="row" id="ref-one_or_more">
-        <div class="column text">
-            <h2>One or more</h2>
-            <p>
-                <b>One or more</b> block matches one or more than one sequence of letters following by each other.
-            </p>
-
-            <h3>RegEx Specs</h3>
-            <b>One or More</b> is the Kleene plus which means in the wildcard format you'd write it as <code>+</code>
-        </div>
-        <div class="column block">
-            <img src="blocks/one-or-more.svg">
-        </div>
-    </div>
-    <div class="row">
-        <div class="column text">
-            <h3>Example</h3>
-            The following Quartet compiles to wildcard <code>/a+/</code> and matches one or more of the letter <code>'a'</code> followed by each other. So <code>"a"</code>, <code>"aa"</code>, <code>"aaaaaa"</code> are all matched. In the string <code>"abaa"</code> however, It will match two substrings as <code>"a"</code> and <code>"aa"</code>.
-        </div>
-        <div class="column block">
-            <img src="blocks/ex-one-or-more.svg">
-        </div>
-    </div>
-
-
-
-
-
-    <!-- Any number of Block -->
-    <div class="separator"></div>
-    <div class="row" id="row-any_number_of">
-        <div class="column text">
-            <h2>Any number of</h2>
-            <p>
-                <b>Any number of</b> block, matches any number of it's value. Just like "One or more" it matches one or more than one of a given value, but it also it matches "zero" number of the given value. That statement means the sequence can be optional.
-            </p>
-
-            <h3>RegEx Specs</h3>
-            <b>Any number of</b> is the Kleene star which means in the wildcard format you'd write it as <code>*</code>
-        </div>
-        <div class="column block">
-            <img src="blocks/any-number-of.svg">
-        </div>
-    </div>
-    <div class="row">
-        <div class="column text">
-            <h3>Example</h3>
-            The following Quartet compiles to wildcard <code>/ab*a/</code> and matches at least <code>"aa"</code> but also <code>"aba"</code>, <code>"abbbbba"</code>.
-        </div>
-        <div class="column block">
-            <img src="blocks/ex-any-number-of.svg">
-        </div>
-    </div>
-
-
-
-
-
-    <!-- Maybe Block -->
-    <div class="separator"></div>
-    <div class="row" id="ref-maybe">
-        <div class="column text">
-            <h2>Maybe</h2>
-            <p>
-                Maybe makes it's value optional. So the value can either appear or not appear.
-            </p>
-
-            <h3>RegEx Specs</h3>
-            Maybe compiled to wildcard using the <code>?</code> operator.
-        </div>
-        <div class="column block">
-            <img src="blocks/maybe.svg">
-        </div>
-    </div>
-    <div class="row">
-        <div class="column text">
-            <h3>Example 1</h3>
-            The following Quartet compiles to wildcard <code>/ab?c/</code> and matches either <code>"abc"</code> or <code>"ac"</code>.
-        </div>
-        <div class="column block">
-            <img src="blocks/ex-maybe-1.svg">
-        </div>
-    </div>
-    <div class="row">
-        <div class="column text">
-            <h3>Example 2</h3>
-            These two Quartets are equivalent to each other.
-        </div>
-        <div class="column block">
-            <img src="blocks/ex-maybe-2.svg"><br/><br/>
-            <img src="blocks/ex-maybe-3.svg">
-        </div>
-    </div>
-
-
-
-
-
-    <!-- Any number of Block -->
-    <div class="separator"></div>
-    <div id="ref-option"></div>
-    <div class="row" id="ref-one_of">
-        <div class="column text">
-            <h2>Options</h2>
-            <p>
-                The combination of <b>One of Options</b> and <b>Option</b> blocks makes it possible for you to define multiple possibilities in your code. Each time the Quartet reaches the <b>One of options</b> block one of it's options must happen. Remember that the <b>Option</b> block can only be used inside of the <b>One of Options</b> block and <b>One of Options</b> block can not contain anything but <b>Option</b> blocks. (This approach lets you create more sophisticated options with clear borders.)
-            </p>
-
-            <h3>RegEx Specs</h3>
-            "Any number of" is the Kleene star which means in the wildcard format you'd write it as <code>*</code>
-        </div>
-        <div class="column block">
-            <img src="blocks/one-of-options-and-option.svg">
-        </div>
-    </div>
-    <div class="row">
-        <div class="column text">
-            <h3>Example</h3>
-            This Quartet finds different ways to say <code>"Hello World"</code> like <code>"Howdy World"</code> and so on...
-        </div>
-        <div class="column block">
-            <img src="blocks/ex-one-of-options-and-option.svg">
-        </div>
-    </div>
-
-
-
-
-
-    <!-- Any number of Block -->
-    <div class="separator"></div>
-    <div id="ref-option"></div>
-    <div class="row" id="ref-one_of">
-        <div class="column text">
-            <h2>Options</h2>
-            <p>
-                The combination of <b>One of Options</b> and <b>Option</b> blocks makes it possible for you to define multiple possibilities in your code. Each time the Quartet reaches the <b>One of options</b> block one of it's options must happen. Remember that the <b>Option</b> block can only be used inside of the <b>One of Options</b> block and <b>One of Options</b> block can not contain anything but <b>Option</b> blocks. (This approach lets you create more sophisticated options with clear borders.)
-            </p>
-
-            <h3>RegEx Specs</h3>
-            "Any number of" is the Kleene star which means in the wildcard format you'd write it as <code>*</code>
-        </div>
-        <div class="column block">
-            <img src="blocks/one-of-options-and-option.svg">
-        </div>
-    </div>
-    <div class="row">
-        <div class="column text">
-            <h3>Example</h3>
-            This Quartet finds different ways to say <code>"Hello World"</code> like <code>"Howdy World"</code> and so on...
-        </div>
-        <div class="column block">
-            <img src="blocks/ex-one-of-options-and-option.svg">
-        </div>
-    </div>
+    </main>
 </body>
 </html>
