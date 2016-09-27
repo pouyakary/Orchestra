@@ -28,7 +28,7 @@
 
     <!-- Comment Block -->
     <div class="separator"></div>
-    <div class="row">
+    <div class="row" id="ref-comment">
         <div class="column text">
             <h2>Comment</h2>
             Just as in a textual programming language where you can put text that has no effect on the behavior of the program, <b>Comment</b> Block in Quartet provides the same functionality.
@@ -44,7 +44,7 @@
 
     <!-- Heading -->
     <h1>Input Blocks</h1>
-    <div class="row">
+    <div class="row" id="ref-encode">
         <div class="column text">
             <h2>Plain Text</h2>
             <b>Plain Text</b> block is to insert plain text. It encodes the special characters and places the entire text into a sequence group ( <code>(?: )</code> in wildcard format) hence the entire text is being treated safely as one group.
@@ -77,7 +77,7 @@
 
     <!-- Unsafe Wildcard -->
     <div class="separator"></div>
-    <div class="row">
+    <div class="row" id="ref-free_form_regex">
         <div class="column text">
             <h2>Unsafe Wildcard</h2>
             <b>Unsafe Wildcard</b> is used to inject wildcard grammar into the final Quartet. Quartet targets JavaScript's RegEx implementation which is a very standard implementation by the way, However other languages have some extra RegEx goodies. In order for you to have those goodies inside of the Quartet, you may use this unsafe block and add whatever text you want to the Quartet at any position.
@@ -102,7 +102,7 @@
 
     <!-- Encode Unicode -->
     <div class="separator"></div>
-    <div class="row">
+    <div class="row" id="ref-unicode">
         <div class="column text">
             <h2>Encode Unicode</h2>
             In order to use Unicode in your RegExes you can use this blocks. Characters inside of the block are being translated into safe Unicode inputs. So that you can use them safely. This also makes the final RegEx to be independent from <code>u</code> flag.
@@ -126,7 +126,7 @@
     <h1>Control Structures</h1>
 
     <!-- One or more Block -->
-    <div class="row">
+    <div class="row" id="ref-one_or_more">
         <div class="column text">
             <h2>One or more</h2>
             <p>
@@ -156,7 +156,7 @@
 
     <!-- Any number of Block -->
     <div class="separator"></div>
-    <div class="row">
+    <div class="row" id="row-any_number_of">
         <div class="column text">
             <h2>Any number of</h2>
             <p>
@@ -186,7 +186,7 @@
 
     <!-- Maybe Block -->
     <div class="separator"></div>
-    <div class="row">
+    <div class="row" id="ref-maybe">
         <div class="column text">
             <h2>Maybe</h2>
             <p>
@@ -226,7 +226,39 @@
 
     <!-- Any number of Block -->
     <div class="separator"></div>
+    <div id="ref-option"></div>
+    <div class="row" id="ref-one_of">
+        <div class="column text">
+            <h2>Options</h2>
+            <p>
+                The combination of <b>One of Options</b> and <b>Option</b> blocks makes it possible for you to define multiple possibilities in your code. Each time the Quartet reaches the <b>One of options</b> block one of it's options must happen. Remember that the <b>Option</b> block can only be used inside of the <b>One of Options</b> block and <b>One of Options</b> block can not contain anything but <b>Option</b> blocks. (This approach lets you create more sophisticated options with clear borders.)
+            </p>
+
+            <h3>RegEx Specs</h3>
+            "Any number of" is the Kleene star which means in the wildcard format you'd write it as <code>*</code>
+        </div>
+        <div class="column block">
+            <img src="blocks/one-of-options-and-option.svg">
+        </div>
+    </div>
     <div class="row">
+        <div class="column text">
+            <h3>Example</h3>
+            This Quartet finds different ways to say <code>"Hello World"</code> like <code>"Howdy World"</code> and so on...
+        </div>
+        <div class="column block">
+            <img src="blocks/ex-one-of-options-and-option.svg">
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Any number of Block -->
+    <div class="separator"></div>
+    <div id="ref-option"></div>
+    <div class="row" id="ref-one_of">
         <div class="column text">
             <h2>Options</h2>
             <p>

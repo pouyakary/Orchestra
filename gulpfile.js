@@ -99,7 +99,7 @@
         copyToBinaryFromDir( 'core' );
         copyToBinaryFromDir( 'libs' );
         copyToBinaryFromDir( 'sounds' );
-        copyToBinaryFromDir( 'help-docs' );
+        copyToBinaryFromDir( 'windows' );
         copyFile(
             getLocalPath( 'package.json' ),
             getLocalPath( path.join( resultDirPath , 'package.json' ) )
