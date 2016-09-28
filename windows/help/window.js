@@ -53,8 +53,22 @@
 //
 
     function scrollToID ( id ) {
-        alert( id );
-        window.scrollTo( 0, document.getElementById( id ).offsetTop - 100 );
+        let topMargin = ( /^ref-/.test( id ) )? 35 : 100;
+
+        let distance = Math.abs( window.pageYOffset - document.getElementById( id ).offsetTop );
+        let time;
+        if ( distance < 200 ) {
+            time = distance * 4;
+        } else if ( distance > 1500 ) {
+            time = 1500;
+        } else {
+            time = distance;
+        }
+
+        jump( `#${ id }` , {
+            offset: -topMargin,
+            duration: time,
+        })
     }
 
 //
@@ -90,11 +104,10 @@
         sidebar.appendChild( sectionSidebarElement );
 
         // Children setup
-        let blockHeaders = section.querySelectorAll('h2');
-        for ( let index = 0; index < blockHeaders.length; index++ ) {
-            createHeaderSidebarEntry( blockHeaders[ index ] );
+        let blockRows = section.querySelectorAll('.row');
+        for ( let index = 0; index < blockRows.length; index++ ) {
+            createHeaderSidebarEntry( blockRows[ index ] );
         }
-
     }
 
 //
@@ -102,12 +115,20 @@
 //
 
     /** @param {Element} header */
-    function createHeaderSidebarEntry ( header ) {
-        let headerSidebarElement = document.createElement('div');
-        headerSidebarElement.className = 'sidebar-header-item';
-        headerSidebarElement.innerText = header.innerText;
-        addFunctionForScrollOnClick( headerSidebarElement, header.id );
-        sidebar.appendChild( headerSidebarElement );
+    function createHeaderSidebarEntry ( blockRow ) {
+        try {
+            if ( blockRow.id === '' ) return;
+
+            let headerSidebarElement = document.createElement('div');
+            headerSidebarElement.className = 'sidebar-header-item';
+
+            headerSidebarElement.innerText = blockRow.querySelector('h2').innerText;
+
+            addFunctionForScrollOnClick( headerSidebarElement, blockRow.id );
+            sidebar.appendChild( headerSidebarElement );
+        } catch ( error ) {
+            console.log( error );
+        }
     }
 
 //
