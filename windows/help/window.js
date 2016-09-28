@@ -8,15 +8,22 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    const { ipcRenderer } = require('electron');
+    //const { ipcRenderer } = require('electron');
 
 //
 // ─── EVENTS ─────────────────────────────────────────────────────────────────────
 //
 
+    /*
     ipcRenderer.on ( 'help-window-open-ref', ( event, arg ) => {
         scrollToID( arg );
-    });
+    });*/
+
+    window.onload = onLoad;
+
+//
+// ─── ON LOAD FUNCTION ───────────────────────────────────────────────────────────
+//
 
     function onLoad ( ) {
         createTableOfContents( );
@@ -46,6 +53,7 @@
 //
 
     function scrollToID ( id ) {
+        alert( id );
         window.scrollTo( 0, document.getElementById( id ).offsetTop - 100 );
     }
 
