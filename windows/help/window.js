@@ -54,6 +54,7 @@
     function scrollToID ( id ) {
         let topMargin = ( /^ref-/.test( id ) )? 35 : 100;
 
+        /*
         let distance = Math.abs( window.pageYOffset - document.getElementById( id ).offsetTop );
         let time;
         if ( distance < 200 ) {
@@ -62,11 +63,11 @@
             time = 1500;
         } else {
             time = distance;
-        }
+        }*/
 
         jump( `#${ id }` , {
             offset: -topMargin,
-            duration: time,
+            duration: 300,
         })
     }
 
