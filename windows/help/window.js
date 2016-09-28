@@ -1,10 +1,22 @@
 
 //
+// Copyright 2016 Kary Foundation, Inc.
+//   Author: Pouya Kary <k@karyfoundation.org>
+//
+
+//
+// ─── IMPORTS ────────────────────────────────────────────────────────────────────
+//
+
+    const { ipcRenderer } = require('electron');
+
+//
 // ─── EVENTS ─────────────────────────────────────────────────────────────────────
 //
 
     function onLoad ( ) {
         createTableOfContents( );
+        moveToReferenceAtLoad( );
     }
 
 //
@@ -15,11 +27,33 @@
     let sidebar;
 
 //
+// ─── PARSE URL AT RUN TIME ──────────────────────────────────────────────────────
+//
+
+    function moveToReferenceAtLoad ( ) {
+        let id = getQueryString('ref');
+        if ( id !== null ) {
+            scrollToID( `ref-${ id }` );
+        }
+    }
+
+//
+// ─── GET QUERY STRING ───────────────────────────────────────────────────────────
+//
+
+    function getQueryString ( field ) {
+        var href = window.location.href;
+        var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+        var string = reg.exec(href);
+        return string ? string[1] : null;
+    };
+
+//
 // ─── SCROLL TO ID ───────────────────────────────────────────────────────────────
 //
 
     function scrollToID ( id ) {
-
+        window.scrollTo( 0, document.getElementById( id ).offsetTop - 100 );
     }
 
 //
@@ -50,7 +84,7 @@
         // Header setup
         let sectionSidebarElement = document.createElement('div');
         sectionSidebarElement.className = 'sidebar-section-item';
-        sectionSidebarElement.onclick = scrollToID( section.id );
+        addFunctionForScrollOnClick( sectionSidebarElement, section.id );
         sectionSidebarElement.innerText = section.querySelector('h1').innerText;
         sidebar.appendChild( sectionSidebarElement );
 
@@ -71,8 +105,18 @@
         let headerSidebarElement = document.createElement('div');
         headerSidebarElement.className = 'sidebar-header-item';
         headerSidebarElement.innerText = header.innerText;
-        headerSidebarElement.onclick = scrollToID( header.id );
+        addFunctionForScrollOnClick( headerSidebarElement, header.id );
         sidebar.appendChild( headerSidebarElement );
+    }
+
+//
+// ─── ADD SCROLL EVENT ───────────────────────────────────────────────────────────
+//
+
+    function addFunctionForScrollOnClick ( element, destId ) {
+        element.onclick = ( ) => {
+            scrollToID( destId )
+        };
     }
 
 //

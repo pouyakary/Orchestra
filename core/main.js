@@ -67,23 +67,22 @@
 // ─── OPEN HELP WINDOW ───────────────────────────────────────────────────────────
 //
 
-    function openHelpWindow ( refID = "" ) {
+    function openHelpWindow ( arg = '' ) {
         if ( isHelpWindowOpen ) return;
         isHelpWindowOpen = true;
 
         helpWindow = new BrowserWindow({
             title: "Quartet's Block Reference",
-            width:  1000, minWidth: 900,
+            width:  1050, minWidth: 1050, maxWidth: 1050,
             height: 600, minHeight: 200,
             backgroundColor: 'white',
         });
 
-        if ( refID === "" ) {
+        if ( arg === '' ) {
             helpWindow.loadURL( `file://${ __dirname }/help/index.html` );
         } else {
-            helpWindow.loadURL( `file://${ __dirname }/help/index.html#ref-${ refID }` );
+            helpWindow.loadURL( `file://${ __dirname }/help/index.html?ref=${ arg }` );
         }
-
 
         helpWindow.on( 'closed' , ( ) => {
             isHelpWindowOpen = false;
@@ -109,8 +108,8 @@
 
     ipcMain.on ( 'open-help-for-ref', ( event, arg ) => {
         if ( isHelpWindowOpen ) {
-            helpWindow.loadURL( `file://${ __dirname }/help/index.html#ref-${ arg }` );
             helpWindow.focus( );
+            helpWindow.webContents.send( 'help-window-open-ref', `ref-${ arg }` );
         } else {
             openHelpWindow( arg );
         }
