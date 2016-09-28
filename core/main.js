@@ -79,9 +79,9 @@
         });
 
         if ( arg === '' ) {
-            helpWindow.loadURL( `file://${ __dirname }/help/index.html` );
+            helpWindow.loadURL( `file://${ __dirname }/help/index.html?none` );
         } else {
-            helpWindow.loadURL( `file://${ __dirname }/help/index.html?ref=${ arg }` );
+            helpWindow.loadURL( `file://${ __dirname }/help/index.html?ref-${ arg }` );
         }
 
         helpWindow.on( 'closed' , ( ) => {

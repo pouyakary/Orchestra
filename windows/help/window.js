@@ -14,6 +14,10 @@
 // ─── EVENTS ─────────────────────────────────────────────────────────────────────
 //
 
+    ipcRenderer.on ( 'help-window-open-ref', ( event, arg ) => {
+        scrollToID( arg );
+    });
+
     function onLoad ( ) {
         createTableOfContents( );
         moveToReferenceAtLoad( );
@@ -31,22 +35,11 @@
 //
 
     function moveToReferenceAtLoad ( ) {
-        let id = getQueryString('ref');
-        if ( id !== null ) {
-            scrollToID( `ref-${ id }` );
+        let id = window.location.search.substring( 1 );
+        if ( id !== 'none' ) {
+            scrollToID( id );
         }
     }
-
-//
-// ─── GET QUERY STRING ───────────────────────────────────────────────────────────
-//
-
-    function getQueryString ( field ) {
-        var href = window.location.href;
-        var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
-        var string = reg.exec(href);
-        return string ? string[1] : null;
-    };
 
 //
 // ─── SCROLL TO ID ───────────────────────────────────────────────────────────────
