@@ -8,16 +8,15 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    //const { ipcRenderer } = require('electron');
+    const { ipcRenderer } = require('electron');
 
 //
 // ─── EVENTS ─────────────────────────────────────────────────────────────────────
 //
 
-    /*
     ipcRenderer.on ( 'help-window-open-ref', ( event, arg ) => {
         scrollToID( arg );
-    });*/
+    });
 
     window.onload = onLoad;
 
