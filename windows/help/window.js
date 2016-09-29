@@ -43,7 +43,7 @@
     function moveToReferenceAtLoad ( ) {
         let id = window.location.search.substring( 1 );
         if ( id !== 'none' ) {
-            scrollToID( id );
+            scrollToID( id, true );
         }
     }
 
@@ -51,24 +51,16 @@
 // ─── SCROLL TO ID ───────────────────────────────────────────────────────────────
 //
 
-    function scrollToID ( id ) {
+    function scrollToID ( id , noAnimation = true ) {
         let topMargin = ( /^ref-/.test( id ) )? 35 : 100;
-
-        /*
-        let distance = Math.abs( window.pageYOffset - document.getElementById( id ).offsetTop );
-        let time;
-        if ( distance < 200 ) {
-            time = distance * 4;
-        } else if ( distance > 1500 ) {
-            time = 1500;
+        if ( noAnimation ) {
+            window.scrollTo( 0, document.getElementById( id ).offsetTop - topMargin );
         } else {
-            time = distance;
-        }*/
-
-        jump( `#${ id }` , {
-            offset: -topMargin,
-            duration: 300,
-        })
+            jump( `#${ id }` , {
+                offset: -topMargin,
+                duration: 300,
+            });
+        }
     }
 
 //
