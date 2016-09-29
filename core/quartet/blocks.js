@@ -665,7 +665,7 @@
         var statements_lookahead = QuartetGenerator.statementToCode(block, 'lookahead').trim( );
 
         var reverseSign = (checkbox_reverse)? '!': '=';
-        return quartetSequence( statements_match ) + '(?' + reverseSign + quartetSequence( statements_lookahead ) + ')';
+        return quartetSequence( statements_match ) + '(?' + reverseSign + statements_lookahead + ')';
     };
 
 // ────────────────────────────────────────────────────────────────────────────────
