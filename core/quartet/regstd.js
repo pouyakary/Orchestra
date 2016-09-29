@@ -111,8 +111,9 @@
 // ─── MAKE ALPHABET ──────────────────────────────────────────────────────────────
 //
 
-    function quartetAlphabet ( text ) {
-        return quartetEncodeHTML( ( text.length === 1 )? text[ 0 ] : '[' + text.join('') + ']' );
+    function quartetAlphabet ( sigma ) {
+        if ( sigma.length === 0 ) return '';
+        return quartetEncodeHTML( ( sigma.length === 1 )? sigma[ 0 ] : '[' + sigma.join('') + ']' );
     }
 
 //
