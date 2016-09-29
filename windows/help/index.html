@@ -427,7 +427,7 @@
 
 
 
-            <!-- Any Character -->
+            <!-- Basic Whitespace Set -->
             <div class="separator"></div>
             <div class="row" id="ref-whitespace">
                 <div class="column text">
@@ -441,6 +441,31 @@
                 </div>
                 <div class="column block">
                     <img src="blocks/basic-whitespace-set.svg">
+                </div>
+            </div>
+
+
+
+            <!-- Advanced Whitespace Set -->
+            <div class="separator"></div>
+            <div class="row" id="ref-special_whitespace">
+                <div class="column text">
+                    <h2>Advanced Whitespace Set</h2>
+                    <p>
+                        <b>Advanced Whitespace Set</b> is a set of whitespace characters that are rarely used thus they are being grouped in a separate block than the <b>Basic Whitespace Set</b>. These characters are:
+                        <ul>
+                            <li>Vertical Tab <code>\v</code></li>
+                            <li>NUL <code>\0</code></li>
+                            <li>Carriage Return <code>\r</code></li>
+                            <li>Form-feed <code>\f</code></li>
+                        </ul>
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    If one character be selected, just the character will be returned for example: <code>\v</code> but for more than one selected character an alphabet of the selected characters will be returned: <code>[\v\r]</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/advanced-whitespace-set.svg">
                 </div>
             </div>
         </div>
