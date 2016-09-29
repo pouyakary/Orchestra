@@ -75,7 +75,6 @@
 
 
 
-
             <!-- Unsafe Wildcard -->
             <div class="separator"></div>
             <div class="row" id="ref-free_form_regex">
@@ -96,8 +95,6 @@
                     <img src="blocks/ex-unsafe-wildcard.svg">
                 </div>
             </div>
-
-
 
 
 
@@ -122,8 +119,6 @@
                 </div>
             </div>
         </div>
-
-
 
 
 
@@ -158,8 +153,6 @@
 
 
 
-
-
             <!-- Any number of Block -->
             <div class="separator"></div>
             <div class="row" id="ref-any_number_of">
@@ -185,8 +178,6 @@
                     <img src="blocks/ex-any-number-of.svg">
                 </div>
             </div>
-
-
 
 
 
@@ -228,9 +219,7 @@
 
 
 
-
-
-            <!-- Any number of Block -->
+            <!-- Options Block -->
             <div class="separator"></div>
             <div id="ref-option"></div>
             <div class="row" id="ref-one_of">
@@ -259,32 +248,29 @@
 
 
 
-
-
-            <!-- Any number of Block -->
+            <!-- Match Block -->
             <div class="separator"></div>
-            <div id="ref-option"></div>
-            <div class="row" id="ref-one_of">
+            <div class="row" id="ref-match">
                 <div class="column text">
-                    <h2>Options</h2>
+                    <h2>Remember Match</h2>
                     <p>
-                        The combination of <b>One of Options</b> and <b>Option</b> blocks makes it possible for you to define multiple possibilities in your code. Each time the Quartet reaches the <b>One of options</b> block one of it's options must happen. Remember that the <b>Option</b> block can only be used inside of the <b>One of Options</b> block and <b>One of Options</b> block can not contain anything but <b>Option</b> blocks. (This approach lets you create more sophisticated options with clear borders.)
+                        <b>Remember Match</b> is used to capture a portion of your Quartet formula and save it to a give memory.
                     </p>
 
                     <h3>RegEx Specs</h3>
-                    "Any number of" is the Kleene star which means in the wildcard format you'd write it as <code>*</code>
+                    <b>Remember Match</b> compiles to wildcard by placing <code>( )</code> over it's value.
                 </div>
                 <div class="column block">
-                    <img src="blocks/one-of-options-and-option.svg">
+                    <img src="blocks/match.svg">
                 </div>
             </div>
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    This Quartet finds different ways to say <code>"Hello World"</code> like <code>"Howdy World"</code> and so on...
+                    Imagine you wanna find the Top level domain name and the website's address using a URL of form <code>www.websitename.domain</code>. This Quartet compiles to <code>/www\.([0-9a-z\-])\.([0-9a-z\-])/</code> and in a JavaScript environment you can use <code>$1</code> and <code>$2</code> to find website name and domain name.
                 </div>
                 <div class="column block">
-                    <img src="blocks/ex-one-of-options-and-option.svg">
+                    <img src="blocks/ex-match.svg">
                 </div>
             </div>
         </div>
