@@ -642,13 +642,13 @@
     Blockly.Blocks['lookahead'] = {
         init: function() {
             this.appendDummyInput()
-                .appendField("Match ( not be followed by lookahead")
+                .appendField("Accept (")
                 .appendField(new Blockly.FieldCheckbox("FALSE"), "reverse")
-                .appendField(")");
+                .appendField(" Don't Accept )");
             this.appendStatementInput("match")
                 .setCheck("String");
             this.appendDummyInput()
-                .appendField("Lookahead ");
+                .appendField("If lookahead was");
             this.appendStatementInput("lookahead")
                 .setCheck("String");
             this.setPreviousStatement(true, "String");
