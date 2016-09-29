@@ -122,7 +122,7 @@
             let headerSidebarElement = document.createElement('div');
             headerSidebarElement.className = 'sidebar-header-item';
 
-            headerSidebarElement.innerText = blockRow.querySelector('h2').innerText;
+            headerSidebarElement.innerHTML = '&bullet; ' + blockRow.querySelector('h2').innerText;
 
             addFunctionForScrollOnClick( headerSidebarElement, blockRow.id );
             sidebar.appendChild( headerSidebarElement );
