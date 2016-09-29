@@ -42,6 +42,8 @@
 
 
 
+
+
         <div class="block-group" id="input-blocks">
             <h1>Input Blocks</h1>
 
@@ -119,6 +121,8 @@
                 </div>
             </div>
         </div>
+
+
 
 
 
@@ -383,6 +387,39 @@
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-repeat-in-range.svg">
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="block-group" id="special-char-blocks">
+            <!-- Heading -->
+            <h1>Special Characters</h1>
+
+            <!-- Any Character -->
+            <div class="row" id="ref-any">
+                <div class="column text">
+                    <h2>Any Character</h2>
+                    <p>
+                        <b>Any Character</b> matches any character but the <b>new line</b> (<code>\n</code>) character.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    Any Character is the dot sign of wildcard and simply compiles to <code>.</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/any-char.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    This Quartet compiles to <code>/.+/</code> and matches the content of a line.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-any-char.svg">
                 </div>
             </div>
         </div>
