@@ -273,6 +273,34 @@
                     <img src="blocks/ex-match.svg">
                 </div>
             </div>
+
+
+
+            <!-- Lookahead Block -->
+            <div class="separator"></div>
+            <div class="row" id="ref-lookahead">
+                <div class="column text">
+                    <h2>Lookahead</h2>
+                    <p>
+                        <b>Lookahead</b> accepts a given sequence only if it was being followed by it's lookahead part. By check marking the <b>Don't Accept</b>, it will reverse the logic so that it will accept it's value if it's not being followed by it's lookahead.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    <b>Lookahead</b> compiles compiles to wildcard by adding a lookahead grammar after  it's value as <code>(?=)</code> and <code>(?!)</code> for the reverse logic. Look at the example for the full understanding of that.
+                </div>
+                <div class="column block">
+                    <img src="blocks/lookahead.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    In this lookahead we want to find all the <code>"Regular"</code> strings that are being in the <code>"Regular Expression"</code> strings. You can use match but you can also use this Quartet. This Quartet compiles to this wildcard: <code>/(?:Regular)(?= Expression)/</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-lookahead.svg">
+                </div>
+            </div>
         </div>
     </main>
 </body>
