@@ -30,9 +30,7 @@
     function getUnicodeCharacter ( character ) {
         let num = character.charCodeAt( 0 ).toString( 16 ).toUpperCase( );
         let size = 4 - num.length;
-        for ( let index = 0; index < size; index++ ) {
-            num = '0' + num;
-        }
+        for ( let index = 0; index < size; index++ ) num = '0' + num;
         return '\\u' + num;
     }
 
