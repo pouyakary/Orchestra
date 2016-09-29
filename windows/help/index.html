@@ -301,6 +301,34 @@
                     <img src="blocks/ex-lookahead.svg">
                 </div>
             </div>
+
+
+
+            <!-- Repeat Block -->
+            <div class="separator"></div>
+            <div class="row" id="ref-repeat">
+                <div class="column text">
+                    <h2>Repeat 'n' times</h2>
+                    <p>
+                        <b>Repeat 'n' times</b> accepts a sequence only if it is repeated <b>n</b> times.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    <b>Repeat 'n' times</b> times compiles to <code>(?:value){n}</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/repeat.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    This Quartet compiles to <code>/w{3}/</code> and matches the string <code>"www"</code>.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-repeat.svg">
+                </div>
+            </div>
         </div>
     </main>
 </body>
