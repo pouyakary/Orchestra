@@ -9,7 +9,7 @@
 //
 
     // regex-sequence.quartet
-    const sequenceRegEx = /^(?:\(\?\:|\(\?\=|\(\?\!).*\)$/;
+    const sequenceRegEx = /(?:^\(.*\)$|^\[.*\]$)/;
 
 //
 // ─── TO UNICODE ─────────────────────────────────────────────────────────────────
@@ -41,7 +41,7 @@
 //
 
     function quartetSequence ( code ) {
-        if ( se.test( code ) ) return code;
+        if ( sequenceRegEx.test( code ) ) return code;
         return ( quartetGetStringLength( code ) <= 1 )? code : '(?:' + code + ')';
     }
 
