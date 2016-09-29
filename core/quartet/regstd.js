@@ -9,7 +9,7 @@
 //
 
     // regex-sequence.quartet
-    const sequenceRegEx = /(?:^\(.*\)$|^\[.*\]$)/;
+    const sequenceRegEx = /^(?:\(.*\)|\[.*\])$/;
 
 //
 // ─── TO UNICODE ─────────────────────────────────────────────────────────────────
