@@ -398,6 +398,8 @@
             <!-- Heading -->
             <h1>Special Characters</h1>
 
+
+
             <!-- Any Character -->
             <div class="row" id="ref-any">
                 <div class="column text">
@@ -420,6 +422,25 @@
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-any-char.svg">
+                </div>
+            </div>
+
+
+
+            <!-- Any Character -->
+            <div class="separator"></div>
+            <div class="row" id="ref-whitespace">
+                <div class="column text">
+                    <h2>Basic Whitespace Set</h2>
+                    <p>
+                        The <b>Basic Whitespace Set</b> block let's you use the 4 basic whitespace characters (<b>Single Non Breaking Space</b>, <b>Tab Character</b> and <b>New Line Feed Character '\n'</b>)
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    If one of the chars be selected only it will be exported, so a compilation like <code>\n</code>, for a combination of two, Quartet compiler generates an alphabet of chars <code>[\t\n]</code> and in case all the 3 chars are selected the compilation would be the RegEx special escape sequence for non-breaking space + tab + new line feed that is the character: <code>\s</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/basic-whitespace-set.svg">
                 </div>
             </div>
         </div>
