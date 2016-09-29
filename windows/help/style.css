@@ -1,6 +1,6 @@
 
 html {
-    font-family: Helvetica;
+    font-family: 'Helvetica Neue', Helvetica, Arial;
 }
 
 body {
@@ -69,7 +69,6 @@ main {
 h2 {
     font-size: 1.4rem;
     margin: 1px 0 2px 0;
-    font-family: 'Helvetica Neue';
     color: #9F0D97;
 }
 
