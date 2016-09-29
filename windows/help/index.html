@@ -329,6 +329,34 @@
                     <img src="blocks/ex-repeat.svg">
                 </div>
             </div>
+
+
+
+            <!-- Repeat at least Block -->
+            <div class="separator"></div>
+            <div class="row" id="ref-repeat_at_least">
+                <div class="column text">
+                    <h2>Repeat at least 'n' times</h2>
+                    <p>
+                        <b>Repeat at least 'n' times</b> is like the <b>One or more</b> block but the difference is that you can set the minimum repeat times to anything you want and not just one.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    <b>Repeat at least 'n' times</b> times compiles to <code>(?:value){n,}</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/repeat-at-least.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    This Quartet matches any <b>LOL</b> text with at least <code>3</code> repeats of O. So both of <code>"LOOOL"</code> and <code>"LOOOOOL"</code> are accepted, but <code>"LOOL"</code> is rejected. This Quartet Compiles to <code>/LO{3,}L/</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-repeat-at-least.svg">
+                </div>
+            </div>
         </div>
     </main>
 </body>
