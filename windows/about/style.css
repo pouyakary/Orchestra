@@ -1,23 +1,59 @@
 
 html {
     font-size: 14px;
-    background-color: #eee;
 }
 
 body {
+    background-color: #ECECEC;
     margin: 0;
     padding: 0;
     font-family: Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+p {
+    line-height: 1.5;
 }
 
 h1, h2, h3, h4 {
     padding: 0;
     margin: 0;
+    color: #9F0D97;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    margin-bottom: 3px;
 }
 
 #main-background {
     padding: 50px;
-    background-color: white;
+    width: 550px;
+    height: 320px;
+}
+
+#main-text {
+    position: fixed;
+    left: 160px;
+    top: 30px;
     width: 450px;
-    height: 270px;
+    overflow: hidden;
+}
+
+#icon {
+    background-image: url('./icon.png');
+    width: 120px;
+    height: 120px;
+    background-size: contain;
+    background-position: center;
+    position: fixed;
+    top: 30px;
+    left: 25px;
 }

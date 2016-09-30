@@ -25,6 +25,7 @@
 
     let windowCount = 0;
     let isHelpWindowOpen = false;
+    let isAboutWindowOpen = false;
     let helpWindow;
 
 //
@@ -91,6 +92,32 @@
     }
 
 //
+// ─── OPEN ABOUT PAGE ────────────────────────────────────────────────────────────
+//
+
+    function openAboutWindow ( ) {
+        if ( isAboutWindowOpen ) return;
+        isAboutWindowOpen = true;
+
+        let aboutWindow = new BrowserWindow({
+            width: 650, minWidth: 650, maxWidth: 650,
+            height: 430, minHeight: 430, maxHeight: 430,
+            show: false
+        });
+
+        aboutWindow.loadURL( `file://${ __dirname }/about/index.html` );
+
+        aboutWindow.once( 'ready-to-show', ( ) => {
+            aboutWindow.show( )
+        });
+
+        aboutWindow.on( 'closed' , ( ) => {
+            isAboutWindowOpen = false;
+            aboutWindow = null;
+        });
+    }
+
+//
 // ─── ON READY ───────────────────────────────────────────────────────────────────
 //
 
@@ -120,6 +147,12 @@
 //
 
     ipcMain.on( 'open-new-window', ( event, arg ) => createWindow( ) );
+
+//
+// ─── OPEN ABOUT PAGE ────────────────────────────────────────────────────────────
+//
+
+    ipcMain.on( 'open-about-page', ( event, arg ) => openAboutWindow( ) );
 
 //
 // ─── ON APP QUIT REQUEST ────────────────────────────────────────────────────────

@@ -165,7 +165,8 @@
 //
 
     var AboutPageButton = {
-        role: 'about'
+        label: 'About Orchestra',
+        click: openAboutPage
     }
 
     if ( process.platform == 'darwin' ) {
