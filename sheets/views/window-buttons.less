@@ -32,6 +32,8 @@
         height: @window-button-size;
         border-radius: @window-button-size;
         border: 0.5px solid transparent;
+        background-size: 0 0;
+        overflow: hidden;
     }
 
 //
@@ -50,6 +52,7 @@
     #window-button-close {
         .window-button-base;
         left: @window-button-left-base-start;
+        background-image: url('mac-traffic-close.png');
     }
 
     .window-button-close-active {
@@ -69,6 +72,7 @@
     #window-button-minimize {
         .window-button-base;
         left: @window-button-left-base-start + @window-button-left-distance;
+        background-image: url('mac-traffic-minimize.png');
     }
 
     .window-button-minimize-active {
@@ -88,6 +92,7 @@
     #window-button-maximize {
         .window-button-base;
         left: @window-button-left-base-start + 2 * @window-button-left-distance;
+        background-image: url('mac-traffic-expand.png');
     }
 
     .window-button-maximize-active {

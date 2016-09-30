@@ -13,6 +13,7 @@
         onNewFile( );
         initMainMenu( );
         setMenuEnableFactor( true );
+        appendTrafficLightEvents( );
     }
 
 //
