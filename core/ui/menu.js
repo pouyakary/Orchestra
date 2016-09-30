@@ -139,6 +139,24 @@
                 role: 'help',
                 submenu: [
                     {
+                        label: "Quartet Language's Reference (Offline)",
+                        click: onOpenHelpPage
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: "RegExp on ECMA-262 Edition 6.0 (June 2015)",
+                        click: ( ) => openExternal('http://www.ecma-international.org/ecma-262/6.0/#sec-regexp-regular-expression-objects')
+                    },
+                    {
+                        label: "RegExp on Mozilla Developer Network",
+                        click: ( ) => openExternal('https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/RegExp')
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
                         label: "Kary Foundtation's Website",
                         click: ( ) => openExternal('https://www.karyfoundation.org/')
                     },
@@ -147,11 +165,8 @@
                         click: ( ) => openExternal('https://github.com/karyfoundation/orchestra/issues')
                     },
                     {
-                        type: 'separator'
-                    },
-                    {
-                        label: "RegExp on Mozilla Developer Network",
-                        click: ( ) => openExternal('https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/RegExp')
+                        label: "Orchestra and Quartet on GitHub",
+                        click: ( ) => openExternal('https://github.com/karyfoundation/orchestra')
                     },
                 ]
             },
