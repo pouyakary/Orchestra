@@ -1,10 +1,10 @@
 
 html {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 body {
-    background-color: #ECECEC;
+    background-color: black;
     margin: 0;
     padding: 0;
     font-family: Helvetica, sans-serif;
@@ -34,9 +34,10 @@ li {
 }
 
 #main-background {
+    background-color: #ECECEC;
     padding: 50px;
     width: 550px;
-    height: 320px;
+    height: 290px;
 }
 
 #main-text {

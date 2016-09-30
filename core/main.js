@@ -19,6 +19,11 @@
 
     const uniqueWindowIdKey = 'orchestra-unique-window-id';
 
+    const orchestraVersion = '1.0';
+    const orchestraBuild = '170';
+
+    const quartetVersion = '1.2';
+
 //
 // ─── STORAGE ────────────────────────────────────────────────────────────────────
 //
@@ -100,16 +105,18 @@
         isAboutWindowOpen = true;
 
         let aboutWindow = new BrowserWindow({
+            title: ' ',
             width: 650, minWidth: 650, maxWidth: 650,
-            height: 430, minHeight: 430, maxHeight: 430,
-            show: false
+            height: 410, minHeight: 410, maxHeight: 410,
+            backgroundColor: '#ECECEC',
+            //show: false
         });
 
-        aboutWindow.loadURL( `file://${ __dirname }/about/index.html` );
+        aboutWindow.loadURL( `file://${ __dirname }/about/index.html?ov=${ orchestraVersion }&ob=${ orchestraBuild }&qv=${ quartetVersion }` );
 
-        aboutWindow.once( 'ready-to-show', ( ) => {
+        /*aboutWindow.once( 'ready-to-show', ( ) => {
             aboutWindow.show( )
-        });
+        });*/
 
         aboutWindow.on( 'closed' , ( ) => {
             isAboutWindowOpen = false;
