@@ -474,15 +474,15 @@
     };
 
 //
-// ─── SEQUENCE ───────────────────────────────────────────────────────────────────
+// ─── SIGMA ──────────────────────────────────────────────────────────────────────
 //
 
     Blockly.Blocks['sigma'] = {
         init: function() {
             this.appendDummyInput( )
-                .appendField("Sigma");
+                .appendField("Sigma (Custom Alphabet)");
             this.appendStatementInput("sigma")
-                .setCheck("String");
+                .setCheck("SigmaType");
             this.setInputsInline(false);
             this.setPreviousStatement(true, "String");
             this.setNextStatement(true, "String");
@@ -495,6 +495,49 @@
     QuartetGenerator[ 'sigma' ] = function ( block ) {
         var statements_sequence = QuartetGenerator.statementToCode(block, 'sigma').trim( );
         return '[' + statements_sequence + ']';
+    };
+
+//
+// ─── EXCLUDE SET ────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['exclude'] = {
+        init: function() {
+            this.appendDummyInput( )
+                .appendField("Exclude Set (Custom Anything But)");
+            this.appendStatementInput("sigma")
+                .setCheck("SigmaType");
+            this.setInputsInline(false);
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(260);
+        }
+    };
+
+    QuartetGenerator[ 'exclude' ] = function ( block ) {
+        var statements_sequence = QuartetGenerator.statementToCode(block, 'sigma').trim( );
+        return '[^' + statements_sequence + ']';
+    };
+
+//
+// ─── SIGMA RANGE ────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['sigma_range'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Sigma Range from")
+                .appendField(new Blockly.FieldTextInput("a"), "starting-point")
+                .appendField("to")
+                .appendField(new Blockly.FieldTextInput("z"), "end-point");
+            this.setPreviousStatement(true, "SigmaType");
+            this.setNextStatement(true, "SigmaType");
+            this.setColour(160);
+        }
+    };
+
+    QuartetGenerator[ 'sigma_range' ] = function ( block ) {
+        return block.getFieldValue('starting-point') + '-' + block.getFieldValue('end-point');
     };
 
 //
