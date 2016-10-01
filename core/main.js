@@ -53,7 +53,7 @@
             backgroundColor: '#F7F7F7',
             frame: false,
             //titleBarStyle: 'hidden-inset',
-            fullscreen: false
+            //fullscreen: false
         });
 
         editorWindow.maximize( );
@@ -66,7 +66,7 @@
             editorWindow.show( );
         });
 
-        //editorWindow.openDevTools( );
+        editorWindow.openDevTools( );
 
         editorWindow.on( 'closed' , ( ) => {
             windowCount--;
