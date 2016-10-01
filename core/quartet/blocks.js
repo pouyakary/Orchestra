@@ -532,7 +532,7 @@
                 .appendField(new Blockly.FieldTextInput("z"), "end-point");
             this.setPreviousStatement(true, "SigmaType");
             this.setNextStatement(true, "SigmaType");
-            this.setColour(160);
+            this.setColour(230);
         }
     };
 
@@ -551,7 +551,7 @@
                 .appendField(new Blockly.FieldTextInput(""), "chars");
             this.setPreviousStatement(true, "SigmaType");
             this.setNextStatement(true, "SigmaType");
-            this.setColour(160);
+            this.setColour(230);
         }
     };
 
@@ -570,7 +570,7 @@
                 .appendField(new Blockly.FieldTextInput(""), "escapes");
             this.setPreviousStatement(true, "SigmaType");
             this.setNextStatement(true, "SigmaType");
-            this.setColour(160);
+            this.setColour(230);
             this.setTooltip('');
             this.setHelpUrl('http://www.example.com/');
         }
