@@ -560,6 +560,27 @@
     };
 
 //
+// ─── SIGMA WILDCARD ESCAPES ─────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['sigma_wildcard'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Sigma Wildcard Escapes")
+                .appendField(new Blockly.FieldTextInput(""), "escapes");
+            this.setPreviousStatement(true, "SigmaType");
+            this.setNextStatement(true, "SigmaType");
+            this.setColour(160);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    QuartetGenerator[ 'sigma_wildcard' ] = function ( block ) {
+        return block.getFieldValue( 'escapes' );
+    };
+
+//
 // ─── ANYTHING BUT ───────────────────────────────────────────────────────────────
 //
 
