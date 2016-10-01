@@ -541,6 +541,25 @@
     };
 
 //
+// ─── SIGMA CHAR INPUT ───────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['sigma_chars'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Sigma Characters")
+                .appendField(new Blockly.FieldTextInput(""), "chars");
+            this.setPreviousStatement(true, "SigmaType");
+            this.setNextStatement(true, "SigmaType");
+            this.setColour(160);
+        }
+    };
+
+    QuartetGenerator[ 'sigma_chars' ] = function ( block ) {
+        return quartetEncodeText( block.getFieldValue( 'chars' ) );
+    };
+
+//
 // ─── ANYTHING BUT ───────────────────────────────────────────────────────────────
 //
 
