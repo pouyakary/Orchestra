@@ -283,7 +283,8 @@
         init: function() {
             this.appendStatementInput("NAME")
                 .setCheck(null)
-                .appendField("Option");
+                .appendField("Option")
+                .setCheck("String");
             this.setInputsInline(true);
             this.setPreviousStatement(true, "QuartetOption");
             this.setNextStatement(true, "QuartetOption");
