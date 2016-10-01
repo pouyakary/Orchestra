@@ -12,7 +12,11 @@
 # ─── CLEAN UP ───────────────────────────────────────────────────────────────────
 #
 
-    rm -rf _compiled
+    if [ -f _compiled ]
+        then
+            rm -rf _compiled
+        fi
+
     mkdir _compiled
 
 #
@@ -25,6 +29,9 @@
 # ─── RUNNING ────────────────────────────────────────────────────────────────────
 #
 
-    "_release/Orchestra-darwin-x64/Orchestra.app/Contents/MacOS/Orchestra"
+    if [ "$(uname)" == 'Darwin' ]
+        then
+            "_release/Orchestra-darwin-x64/Orchestra.app/Contents/MacOS/Orchestra"
+        fi
 
 # ────────────────────────────────────────────────────────────────────────────────
