@@ -480,7 +480,7 @@
     Blockly.Blocks['sigma'] = {
         init: function() {
             this.appendDummyInput( )
-                .appendField("Sigma (Custom Alphabet)");
+                .appendField("Sigma (Advanced Alphabet)");
             this.appendStatementInput("sigma")
                 .setCheck("SigmaType");
             this.setInputsInline(false);
@@ -504,7 +504,7 @@
     Blockly.Blocks['exclude'] = {
         init: function() {
             this.appendDummyInput( )
-                .appendField("Exclude Set (Custom Anything But)");
+                .appendField("Exclude Set (Advanced Anything But)");
             this.appendStatementInput("sigma")
                 .setCheck("SigmaType");
             this.setInputsInline(false);

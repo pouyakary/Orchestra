@@ -66,7 +66,7 @@
             editorWindow.show( );
         });
 
-        editorWindow.openDevTools( );
+        // editorWindow.openDevTools( );
 
         editorWindow.on( 'closed' , ( ) => {
             windowCount--;
