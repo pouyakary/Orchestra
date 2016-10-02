@@ -31,9 +31,16 @@
         let compiledRegex = QuartetGenerator.blockToCode( ComposeBlock );
 
         setConsoleRegEx( `/${ compiledRegex }/` );
+    }
 
-        CompiledRegEx = getCurrentRegExpFromConsole( );
-        CompiledRegEx = CompiledRegEx.substring( 1, CompiledRegEx.length - 1 );
+//
+// ─── FETCH LATEST COMPILED REGEX ────────────────────────────────────────────────
+//
+
+    function fetchLatestCompiledRegExp ( ) {
+        let latestCompiledRegEx = getCurrentRegExpFromConsole( );
+        if ( latestCompiledRegEx.length < 3 ) return '';
+        return latestCompiledRegEx.substring( 1, latestCompiledRegEx.length - 1 )
     }
 
 //
@@ -43,7 +50,7 @@
     function getCurrentRegExpFromConsole ( ) {
         return document.getElementById('ribbon-console-regexp')
             .innerText
-            .replace('\u00A0', ' ');
+            .replace(/\u00A0/g, ' ');
     }
 
 //

@@ -33,7 +33,6 @@
     var QuartetGenerator;
     var quartetActiveBlockId = '';
     var workspace;
-    var CompiledRegEx = '';
     var ComposeBlock;
 
 //

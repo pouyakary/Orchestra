@@ -44,6 +44,7 @@
             monaco.languages.register({ id: MatchLanguageName });
 
             let tokenizer = {};
+            let CompiledRegEx = fetchLatestCompiledRegExp( );
 
             if ( CompiledRegEx !== '' ) {
                 try {
