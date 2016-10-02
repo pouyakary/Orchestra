@@ -102,6 +102,10 @@
                     setFileDirty( true );
                 }
 
+                if ( fileJSON.playgroundText !== undefined && fileJSON.playgroundText !== '' ) {
+                    playgroundEditor.setValue( fileJSON.playgroundText );
+                }
+
             } catch ( error ) {
                 report( `Could not load the file because of a broken file problem.${ error }` );
             }
