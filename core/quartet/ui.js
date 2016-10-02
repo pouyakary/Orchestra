@@ -30,8 +30,20 @@
 
         let compiledRegex = QuartetGenerator.blockToCode( ComposeBlock );
 
-        CompiledRegEx = compiledRegex;
         setConsoleRegEx( `/${ compiledRegex }/` );
+
+        CompiledRegEx = getCurrentRegExpFromConsole( );
+        CompiledRegEx = CompiledRegEx.substring( 1, CompiledRegEx.length - 1 );
+    }
+
+//
+// ─── GET CURRENT REGEX ──────────────────────────────────────────────────────────
+//
+
+    function getCurrentRegExpFromConsole ( ) {
+        return document.getElementById('ribbon-console-regexp')
+            .innerText
+            .replace('\u00A0', ' ');
     }
 
 //
@@ -39,7 +51,7 @@
 //
 
     function onCopyRegExp ( ) {
-        clipboard.writeText( document.getElementById( 'ribbon-console-regexp' ).innerText );
+        clipboard.writeText( getCurrentRegExpFromConsole( ) );
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
