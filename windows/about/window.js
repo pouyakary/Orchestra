@@ -15,6 +15,13 @@
     const openExternal = require( 'electron' ).shell.openExternal;
 
 //
+// ─── WINDOW DRAG FIX ────────────────────────────────────────────────────────────
+//
+
+    document.addEventListener( 'dragover', event => event.preventDefault( ) )
+    document.addEventListener( 'drop', event => event.preventDefault( ) )
+
+//
 // ─── EVENTS ─────────────────────────────────────────────────────────────────────
 //
 
