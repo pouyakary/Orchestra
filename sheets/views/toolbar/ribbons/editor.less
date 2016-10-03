@@ -20,7 +20,7 @@
 //
 
     @console-color: #F5F5F5;
-    @console-width: 463px;
+    @editor-ribbon-sum-of-icon-widths: 467px;
     @console-height: 44px;
 
     #ribbon-console-view {
@@ -30,7 +30,7 @@
         border-radius: 3px;
         margin: 11px 5px 0 5px;
         padding: 3px 10px 0 10px;
-        width: calc( ~'100vw' - @console-width );
+        width: calc( ~'100vw' - @editor-ribbon-sum-of-icon-widths );
         height: @console-height;
         overflow: hidden;
     }
@@ -50,7 +50,7 @@
         //transition-duration: 0.5s;
         letter-spacing: 7px;
         font-size: 14px;
-        width: calc( ~'100vw' - @console-width - 20px );
+        width: calc( ~'100vw' - @editor-ribbon-sum-of-icon-widths - 20px );
         opacity: 0;
         top: -45px;
         left: -10px;
@@ -117,8 +117,8 @@
         background-image: url('ribbon-editor-compile.png');
     }
 
-    .ribbon-editor-options {
-        background-image: url('ribbon-editor-options.png');
+    .ribbon-editor-export-svg {
+        background-image: url('ribbon-editor-export-svg.png');
     }
 
     .ribbon-editor-help {
