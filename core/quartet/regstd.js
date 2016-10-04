@@ -12,8 +12,14 @@
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
 //
 
-    // regex-sequence.quartet
+    // Quartet: regex-sequence.quartet
     const sequenceRegEx = /^(?:\(.*\)|\[.*\])$/;
+
+    // Quartet: quartet-html-entities.quartet
+    const htmlSpecialEntities = /&(?:nbsp|#160|gt|lt);/g;
+
+    // Quartet: html-entities.quartet
+    const selectedBlockHTMl = /\<span class\="console\-highlight\-active\-block"\>(.*)\<\/span\>/g;
 
 //
 // ─── TO UNICODE ─────────────────────────────────────────────────────────────────
@@ -25,6 +31,17 @@
             result.push( getUnicodeCharacter( character ) );
         }
         return result.join('');
+    }
+
+//
+// ─── GET REGEX FROM HTML ────────────────────────────────────────────────────────
+//
+
+    function quartetGetWildcardFromQuartetEncodedHTML ( code ) {
+        return code.replace( selectedBlockHTMl  , ( val, matchOne ) => matchOne )
+                   .replace( /&nbsp;/g          , ' '                           )
+                   .replace( /&gt;/g            , '>'                           )
+                   .replace( /&lt;/g            , '<'                           );
     }
 
 //
@@ -75,6 +92,7 @@
                 case '|':
                 case ':':
                 case '-':
+                case '/':
                     result.push( `\\${ character }` );
                     break;
                 case ' ':
@@ -100,8 +118,7 @@
 //
 
     function quartetGetStringLength ( code ) {
-        // Quartet: quartet-html-entities.quartet
-        return code.replace( /&(?:nbsp|#160|gt|lt);/g, ' ' ).length;
+        return code.replace( htmlSpecialEntities, ' ' ).length;
     }
 
 //
