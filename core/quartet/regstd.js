@@ -99,8 +99,9 @@
 // ─── GET STRING LENGTH ──────────────────────────────────────────────────────────
 //
 
-    function quartetGetStringLength ( text ) {
-        return text.replace('&nbsp;', '').length;
+    function quartetGetStringLength ( code ) {
+        // Quartet: quartet-html-entities.quartet
+        return code.replace( /&(?:nbsp|#160|gt|lt);/g, ' ' ).length;
     }
 
 //
