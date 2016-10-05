@@ -16,6 +16,7 @@
 
     const electron = require( 'electron' );
     const { ipcMain, BrowserWindow, app } = require( 'electron' );
+    const extserver = require('./extserver.js');
 
 //
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
@@ -132,7 +133,10 @@
 // ─── ON READY ───────────────────────────────────────────────────────────────────
 //
 
-    app.on( 'ready' , createWindow );
+    app.on( 'ready' , ( ) => {
+        extserver.run( );
+        createWindow
+    });
 
 //
 // ─── ON OPEN HELP WINDOW ────────────────────────────────────────────────────────

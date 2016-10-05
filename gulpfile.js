@@ -104,6 +104,7 @@
         copyToBinaryFromDir( 'libs' );
         copyToBinaryFromDir( 'sounds' );
         copyToBinaryFromDir( 'windows' );
+        copyToBinaryFromDir( 'winserver' ); 
         copyFile(
             getLocalPath( 'package.json' ),
             getLocalPath( path.join( resultDirPath , 'package.json' ) )
