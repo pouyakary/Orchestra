@@ -51,17 +51,26 @@
 //
 
     /** Copy to binary from dir */
-    function copyToBinaryFromDir ( dir ) {
+    /** Copy to binary from dir */
+    function copyToBinaryFromDir ( dir, subfolder ) {
         fs.readdir( dir , ( err , files ) => {
             // if error
             if ( err ) {
                 console.log(`Could not get files from directory ${ dir }`);
             }
+
             // if right
             files.forEach( name => {
+                let dest;
+                if ( !( subfolder === undefined || subfolder === '' || subfolder === null ) ) {
+                    dest = path.join( resultDirPath , subfolder , name );
+                } else {
+                    dest = path.join( resultDirPath , name );
+                }
+
                 copyFile(
                     getLocalPath( path.join( dir , name ) ),
-                    getLocalPath( path.join( resultDirPath , name ) )
+                    getLocalPath( dest )
                 );
             });
         });
@@ -98,13 +107,22 @@
 
     /** Copies static resource files into the result directory */
     gulp.task( 'copyResourceFiles', callback => {
+
+        function copyNodeModules ( handle ) {
+            let address = path.join( 'node_modules', handle );
+            copyToBinaryFromDir( address, address );
+        }
+
         copyToBinaryFromDir( 'resources' );
         copyToBinaryFromDir( 'view' );
         copyToBinaryFromDir( 'core' );
         copyToBinaryFromDir( 'libs' );
         copyToBinaryFromDir( 'sounds' );
         copyToBinaryFromDir( 'windows' );
-        copyToBinaryFromDir( 'winserver' ); 
+        copyToBinaryFromDir( 'winserver' );
+
+        copyNodeModules('messenger');
+
         copyFile(
             getLocalPath( 'package.json' ),
             getLocalPath( path.join( resultDirPath , 'package.json' ) )

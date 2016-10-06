@@ -16,7 +16,7 @@
 
     const electron = require( 'electron' );
     const { ipcMain, BrowserWindow, app } = require( 'electron' );
-    const extserver = require('./extserver.js');
+    const messenger = require('messenger');
 
 //
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
@@ -65,6 +65,7 @@
 
         editorWindow.once('ready-to-show', ( ) => {
             editorWindow.show( );
+            editorWindow.focus( );
         });
 
         // editorWindow.openDevTools( );
@@ -134,8 +135,11 @@
 //
 
     app.on( 'ready' , ( ) => {
-        extserver.run( );
-        createWindow
+        console.log(`Orchestra, Version ${ orchestraVersion }-${ orchestraBuild }`);
+        console.log('Copyright 2016 - Kary Foundation, Inc.');
+
+        runExtensionServer( );
+        createWindow( );
     });
 
 //
@@ -198,5 +202,29 @@
             createWindow( );
         }
     });
+
+//
+// ─── EXTENSION SERVER ───────────────────────────────────────────────────────────
+//
+
+    function runExtensionServer ( ) {
+
+        //
+        // ─── CREATE SERVER ───────────────────────────────────────────────
+        //
+
+            const extensionServer = messenger.createListener( 5994 );
+
+        //
+        // ─── ON OPEN ORCHESTRA FOR A REGEX ───────────────────────────────
+        //
+
+            extensionServer.on( 'open', ( message, data ) => {
+                createWindow( );
+            });
+
+        // ─────────────────────────────────────────────────────────────────
+
+    }
 
 // ────────────────────────────────────────────────────────────────────────────────
