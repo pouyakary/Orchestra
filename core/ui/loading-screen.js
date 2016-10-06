@@ -14,6 +14,10 @@
 
     function CancelLoadingScreenAfterCompleteLoad ( ) {
         setTimeout(( ) => {
+            // doing stuff that we have to do after a full load:
+            loadFileIfNeeded( );
+
+            // fading animations.
             setTimeout(( ) => {
                 let loadingView = document.getElementById('loading-view');
                 loadingView.className = 'dead-loading-view';
@@ -23,5 +27,35 @@
             });
         });
     }
+
+//
+// ─── LOAD FILE IF NEEDED ────────────────────────────────────────────────────────
+//
+
+    function loadFileIfNeeded ( ) {
+        try {
+            const fileAddress = decodeURI( window.location.search.substring( 1 ) );
+            if ( fileAddress !== '' ) {
+                openFileWithPath( fileAddress );
+            }
+        } catch ( error ) {
+            alert( error );
+        }
+    }
+
+//
+// ─── GET PARAM ──────────────────────────────────────────────────────────────────
+//
+
+    function getParameterByName ( name ) {
+        let url = window.location.href;
+        name = name.replace( /[\[\]]/g, "\\$&" );
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
 
 // ────────────────────────────────────────────────────────────────────────────────

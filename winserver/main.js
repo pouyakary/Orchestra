@@ -17,6 +17,8 @@
     const electron = require( 'electron' );
     const { ipcMain, BrowserWindow, app } = require( 'electron' );
     const messenger = require('messenger');
+    const fs = require('fs');
+    const path = require('path');
 
 //
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
@@ -39,10 +41,23 @@
     let helpWindow;
 
 //
+// ─── HELPER TOOLS ───────────────────────────────────────────────────────────────
+//
+
+    function existsSync ( filename ) {
+        try {
+            fs.accessSync( filename );
+            return true;
+        } catch( ex ) {
+            return false;
+        }
+    }
+
+//
 // ─── GENERATE MAIN WINDOW ───────────────────────────────────────────────────────
 //
 
-    function createWindow ( ) {
+    function createWindow ( file ) {
         let editorWindow;
 
         const window_width = 1100;
@@ -53,14 +68,18 @@
             height: window_height,  minHeight: window_height - 100,
             backgroundColor: '#F7F7F7',
             frame: false,
-            //titleBarStyle: 'hidden-inset',
-            //fullscreen: false
+            fullscreen: false,
         });
 
         editorWindow.maximize( );
+
         windowCount++;
 
-        editorWindow.loadURL( `file://${ __dirname }/index.html` );
+        if ( file === undefined || file === null ) {
+            editorWindow.loadURL( `file://${ __dirname }/index.html` );
+        } else {
+            editorWindow.loadURL( `file://${ __dirname }/index.html?${ encodeURI( file ) }` );
+        }
 
 
         editorWindow.once('ready-to-show', ( ) => {
@@ -85,9 +104,10 @@
 
         helpWindow = new BrowserWindow({
             title: "Quartet's Block Reference",
-            width:  1050, minWidth: 1050, maxWidth: 1050,
+            width:  1050, minWidth: 1050,
             height: 600, minHeight: 200,
             backgroundColor: 'white',
+            fullscreen: false,
         });
 
         if ( arg === '' ) {
@@ -220,7 +240,17 @@
         //
 
             extensionServer.on( 'open', ( message, data ) => {
-                createWindow( );
+                if ( data !== null || data !== undefined ) {
+                    if ( existsSync( data ) ) {
+                        createWindow( data );
+                    } else {
+                        message.reply({
+                            'error': '404'
+                        });
+                    }
+                } else {
+                    createWindow( );
+                }
             });
 
         // ─────────────────────────────────────────────────────────────────
