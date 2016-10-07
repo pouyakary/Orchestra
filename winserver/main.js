@@ -244,9 +244,7 @@
                     if ( existsSync( data ) ) {
                         createWindow( data );
                     } else {
-                        message.reply({
-                            'error': '404'
-                        });
+                        message.reply('404');
                     }
                 } else {
                     createWindow( );

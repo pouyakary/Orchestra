@@ -115,7 +115,7 @@
 
         copyToBinaryFromDir( 'resources' );
         copyToBinaryFromDir( 'view' );
-        copyToBinaryFromDir( 'core' );
+        copyToBinaryFromDir( 'editor' );
         copyToBinaryFromDir( 'libs' );
         copyToBinaryFromDir( 'sounds' );
         copyToBinaryFromDir( 'windows' );
