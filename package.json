@@ -14,7 +14,10 @@
     "type": "git",
     "url": "https://github.com/karyfoundation/orchestra"
   },
-  "dependencies": { },
+  "dependencies": {
+    "express": "^4.14.0",
+    "socket.io": "^1.4.8"
+  },
   "devDependencies": {
     "electron-builder": "^5.30.0",
     "electron-packager": "^7.7.0",
