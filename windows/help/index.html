@@ -189,22 +189,24 @@
             <div class="row" id="ref-range">
                 <div class="column text">
                     <h2>Range</h2>
-                    <b>Range</b> block defines a character set from one character to anther. So any character between those 2 would be included in the set. The characters order is defined with their ASCII / Unicode key.
+                    <p>
+                        <b>Range</b> block defines a character set from one character to anther. So any character between those 2 would be included in the set. The characters order is defined with their ASCII / Unicode key.
+                    </p>
 
                     <h3>RegEx Specs</h3>
                     A <b>Range</b> block compiles to a wildcard alphabet in form of <code>[s-e]</code> in witch the `s` is the start ond `e` is the end.
                 </div>
                 <div class="column block">
-                    <img src="blocks/alphabet.svg">
+                    <img src="blocks/range.svg">
                 </div>
             </div>
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    The following option based Quartet works exactly the same as the Example 1. However using Alphabets you write less code and RegEx engines get to optimize your Quartets so much better.
+                    Imagine you wanna find all numbers from 4 to 8. This Quartet can find them. Wildcard compiled version of this Quartet is: <code>/[4-8]/</code>.
                 </div>
                 <div class="column block">
-                    <img src="blocks/ex-alphabet-2.svg">
+                    <img src="blocks/ex-range.svg">
                 </div>
             </div>
         </div>
