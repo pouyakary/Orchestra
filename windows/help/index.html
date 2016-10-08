@@ -92,7 +92,7 @@
             <div class="separator"></div>
             <div class="row" id="ref-free_form_regex">
                 <div class="column text">
-                    <h2>Unsafe Wildcard</h2>
+                    <h2>Unsafe Wildcard <span class="unsafe">Unsafe</span></h2>
                     <b>Unsafe Wildcard</b> is used to inject wildcard grammar into the final Quartet. Quartet targets JavaScript's RegEx implementation which is a very standard implementation by the way, However other languages have some extra RegEx goodies. In order for you to have those goodies inside of the Quartet, you may use this unsafe block and add whatever text you want to the Quartet at any position.
                 </div>
                 <div class="column block">
@@ -129,6 +129,171 @@
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-unicode-input.png" width="175">
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="block-group" id="input-blocks">
+            <h1>Character Sets</h1>
+
+            <!-- Alphabet -->
+            <div class="row" id="ref-alphabet">
+                <div class="column text">
+                    <h2>Alphabet</h2>
+                    <p>
+                        <b>Alphabet</b> block lets you define a basic character set. When a RegEx engine reaches a character set it checks if the character is a member of that character set. <b>Alphabet</b> has some predefined subsets that you can use to save some time:
+                        <ul>
+                            <li>
+                                <b>0-9</b>: Numerals. Includes: [ <code>0</code>, <code>1</code>, <code>2</code>, ..., <code>9</code> ]
+                            </li>
+                            <li><b>a-z</b>: Lowercase English letters from <code>a</code> to <code>z</code></li>
+                            <li><b>A-Z</b>: Uppercase English letters from <code>A</code> to <code>Z</code></li>
+                        </ul>
+                    </p>
+                    <p>
+                        However most of the times you wanna create a set of some custom characters. You can insert those characters into the <b>other</b> box of the alphabet.
+                    </p>
+                    <h3>RegEx Specs</h3>
+                    Alphabets compiles into wildcard via the <code>[ ]</code> grammar.
+                </div>
+                <div class="column block">
+                    <img src="blocks/alphabet.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example 1</h3>
+                    Imagine you wanna find the sentence ending marks: [ <code>?</code>, <code>!</code>, <code>.</code>, <code>;</code> ]. This Quartet can be useful. It compiles to <code>/[\.\!,;]/</code> in wildcard format.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-alphabet.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example 2</h3>
+                    The following option based Quartet works exactly the same as the Example 1. However using Alphabets you write less code and RegEx engines get to optimize your Quartets so much better.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-alphabet-2.svg">
+                </div>
+            </div>
+
+
+
+            <!-- Range -->
+            <div class="separator"></div>
+            <div class="row" id="ref-range">
+                <div class="column text">
+                    <h2>Range</h2>
+                    <p>
+                        <b>Range</b> block defines a character set from one character to anther. So any character between those 2 would be included in the set. The characters order is defined with their ASCII / Unicode key.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    A <b>Range</b> block compiles to a wildcard alphabet in form of <code>[s-e]</code> in witch the `s` is the start ond `e` is the end.
+                </div>
+                <div class="column block">
+                    <img src="blocks/range.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    Imagine you wanna find all numbers from 4 to 8. This Quartet can find them. Wildcard compiled version of this Quartet is: <code>/[4-8]/</code>.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-range.svg">
+                </div>
+            </div>
+
+
+
+            <!-- Anything But -->
+            <div class="separator"></div>
+            <div class="row" id="ref-anything_but">
+                <div class="column text">
+                    <h2>Anything But</h2>
+                    <p>
+                        <b>Anything But</b> block is the opposite of <b>Alphabet</b> block. It matches any character but the characters defined it it's set. For using it please read the documentation of <b>Alphabet</b> block.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    <b>Anything But</b> compiles to wildcard just like the way <b>Alphabet</b> compiles however it uses <code>[^</code> instead of <code>[</code> for it's starting to indicate the exclude point.
+                </div>
+                <div class="column block">
+                    <img src="blocks/anythingbut.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    This Quartet finds the sequences with no <code>Q</code> / <code>q</code> characters in them. This Quartet compiles to wildcard: <code>/^qQ/</code>.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-anythingbut.svg">
+                </div>
+            </div>
+
+
+
+            <!-- Sigma -->
+            <div class="separator"></div>
+            <div id="ref-sigma_range"></div>
+            <div id="ref-sigma_chars"></div>
+            <div id="ref-sigma_wildcard"></div>
+            <div class="row" id="ref-sigma">
+                <div class="column text">
+                    <h2>Sigma</h2>
+                    <p>
+                        Using <b>Alphabet</b> you can define many powerful sets, however in the <b>Alphabet</b> you can't define sets with wildcard escape sequences or custom ranges. Sigma let's you define advanced sets with all these parts. There are 3 blocks designed to be inside of <b>Sigma</b> and <b>Exclude Set</b>.
+                        <ul>
+                            <li>
+                                <b>Sigma Custom Range</b><br>
+                                With this block you can define ranges in your code that are not just <code>0-9</code>, <code>a-z</code> and <code>A-Z</code>. For more please read the documentation for <b>Range</b> block.<br><br>
+                            </li>
+                            <li>
+                                <b>Sigma Characters</b><br>
+                                This let's you add custom characters to the set. All characters are safe and are being encoded like the plain text.<br><br>
+                            </li>
+                            <li>
+                                <b>Sigma Wildcard Escapes <span class="unsafe">Unsafe</span></b><br>
+                                To insert very special characters of those that need to be inserted as escaped wildcard characters you can use this to include them in the set.
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="column block">
+                    <img src="blocks/sigma.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    Imagine we want to find an integer number with all digits but <code>5</code> and <code>6</code>. This Quartet compiles to <code>/[1-47-9]+/</code> and finds exactly that
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-sigma.svg">
+                </div>
+            </div>
+
+
+
+            <!-- Exclude Set -->
+            <div class="separator"></div>
+            <div class="row" id="ref-exclude">
+                <div class="column text">
+                    <h2>Exclude Set</h2>
+                    <p>
+                        The relationship between <b>Sigma</b> and the <b>Exclude Set</b> is exactly the same way with <b>Alphabet</b> and <b>Anything But</b>. So basically <b>Exclude Set</b> acts the opposite way <b>Sigma</b> works. It matches anything but the characters defined within it's set.
+                    </p>
+                </div>
+                <div class="column block">
+                    <img src="blocks/exclude.svg">
                 </div>
             </div>
         </div>

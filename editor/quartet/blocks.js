@@ -512,6 +512,7 @@
             this.setPreviousStatement(true, "String");
             this.setNextStatement(true, "String");
             this.setColour(260);
+            this.setHelpUrl('http://www.example.com/');
         }
     };
 
@@ -534,6 +535,7 @@
             this.setPreviousStatement(true, "SigmaType");
             this.setNextStatement(true, "SigmaType");
             this.setColour(230);
+            this.setHelpUrl('http://www.example.com/');
         }
     };
 
@@ -553,6 +555,7 @@
             this.setPreviousStatement(true, "SigmaType");
             this.setNextStatement(true, "SigmaType");
             this.setColour(230);
+            this.setHelpUrl('http://www.example.com/');
         }
     };
 
@@ -572,7 +575,6 @@
             this.setPreviousStatement(true, "SigmaType");
             this.setNextStatement(true, "SigmaType");
             this.setColour(230);
-            this.setTooltip('');
             this.setHelpUrl('http://www.example.com/');
         }
     };
