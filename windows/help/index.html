@@ -210,6 +210,34 @@
                     <img src="blocks/ex-range.svg">
                 </div>
             </div>
+
+
+
+            <!-- Anything But -->
+            <div class="separator"></div>
+            <div class="row" id="ref-anything_but">
+                <div class="column text">
+                    <h2>Anything But</h2>
+                    <p>
+                        <b>Anything But</b> block is the opposite of <b>Alphabet</b> block. It matches any character but the characters defined it it's set. For using it please read the documentation of <b>Alphabet</b> block.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    <b>Anything But</b> compiles to wildcard just like the way <b>Alphabet</b> compiles however it uses <code>[^</code> instead of <code>[</code> for it's starting to indicate the exclude point.
+                </div>
+                <div class="column block">
+                    <img src="blocks/anythingbut.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    This Quartet finds the sequences with no <code>Q</code> / <code>q</code> characters in them. This Quartet compiles to wildcard: <code>/^qQ/</code>.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-anythingbut.svg">
+                </div>
+            </div>
         </div>
 
 
