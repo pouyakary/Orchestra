@@ -118,6 +118,16 @@ code {
     border-radius: 3px;
 }
 
+.unsafe {
+    background-color: #C03207;
+    color: white;
+    text-transform: uppercase;
+    padding: 2px 5px 2px 6px;
+    border-radius: 3px;
+    letter-spacing: 2px;
+    font-size: 0.8em;
+}
+
 .row {
     display: flex;
     margin-bottom: 20px;

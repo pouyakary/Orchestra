@@ -92,7 +92,7 @@
             <div class="separator"></div>
             <div class="row" id="ref-free_form_regex">
                 <div class="column text">
-                    <h2>Unsafe Wildcard</h2>
+                    <h2>Unsafe Wildcard <span class="unsafe">Unsafe</span></h2>
                     <b>Unsafe Wildcard</b> is used to inject wildcard grammar into the final Quartet. Quartet targets JavaScript's RegEx implementation which is a very standard implementation by the way, However other languages have some extra RegEx goodies. In order for you to have those goodies inside of the Quartet, you may use this unsafe block and add whatever text you want to the Quartet at any position.
                 </div>
                 <div class="column block">
@@ -236,6 +236,48 @@
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-anythingbut.svg">
+                </div>
+            </div>
+
+
+
+            <!-- Sigma -->
+            <div class="separator"></div>
+            <div id="ref-sigma_range"></div>
+            <div id="ref-sigma_chars"></div>
+            <div id="ref-sigma_wildcard"></div>
+            <div class="row" id="ref-sigma">
+                <div class="column text">
+                    <h2>Sigma (Advanced Alphabet)</h2>
+                    <p>
+                        Using <b>Alphabet</b> you can define many powerful sets, however in the <b>Alphabet</b> you can't define sets with wildcard escape sequences or custom ranges. Sigma let's you define advanced sets with all these parts. There are 3 blocks designed to be inside of <b>Sigma</b> and <b>Exclude Set</b>.
+                        <ul>
+                            <li>
+                                <b>Sigma Custom Range</b><br>
+                                With this block you can define ranges in your code that are not just <code>0-9</code>, <code>a-z</code> and <code>A-Z</code>. For more please read the documentation for <b>Range</b> block.<br><br>
+                            </li>
+                            <li>
+                                <b>Sigma Characters</b><br>
+                                This let's you add custom characters to the set. All characters are safe and are being encoded like the plain text.<br><br>
+                            </li>
+                            <li>
+                                <b>Sigma Wildcard Escapes <span class="unsafe">Unsafe</span></b><br>
+                                To insert very special characters of those that need to be inserted as escaped wildcard characters you can use this to include them in the set.
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="column block">
+                    <img src="blocks/sigma.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    Imagine we want to find an integer number with all digits but <code>5</code> and <code>6</code>. This Quartet compiles to <code>/[1-47-9]+/</code> and finds exactly that
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-sigma.svg">
                 </div>
             </div>
         </div>
