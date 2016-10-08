@@ -137,6 +137,56 @@
 
 
 
+        <div class="block-group" id="input-blocks">
+            <h1>Character Sets</h1>
+
+            <div class="row" id="ref-alphabet">
+                <div class="column text">
+                    <h2>Alphabet</h2>
+                    <p>
+                        <b>Alphabet</b> block lets you define a basic character set. When a RegEx engine reaches a character set it checks if the character is a member of that character set. <b>Alphabet</b> has some predefined subsets that you can use to save some time:
+                        <ul>
+                            <li>
+                                <b>0-9</b>: Numerals. Includes: [ <code>0</code>, <code>1</code>, <code>2</code>, ..., <code>9</code> ]
+                            </li>
+                            <li><b>a-z</b>: Lowercase English letters from <code>a</code> to <code>z</code></li>
+                            <li><b>A-Z</b>: Uppercase English letters from <code>A</code> to <code>Z</code></li>
+                        </ul>
+                    </p>
+                    <p>
+                        However most of the times you wanna create a set of some custom characters. You can insert those characters into the <b>other</b> box of the alphabet.
+                    </p>
+                    <h3>RegEx Specs</h3>
+                    Alphabets compiles into wildcard via the <code>[ ]</code> grammar.
+                </div>
+                <div class="column block">
+                    <img src="blocks/alphabet.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example 1</h3>
+                    Imagine you wanna find the sentence ending marks: [ <code>?</code>, <code>!</code>, <code>.</code>, <code>;</code> ]. This Quartet can be useful. It compiles to <code>/[\.\!,;]/</code> in wildcard format.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-alphabet.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example 2</h3>
+                    The following option based Quartet works exactly the same as the Example 1. However using Alphabets you write less code and RegEx engines get to optimize your Quartets so much better.
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-alphabet-2.svg">
+                </div>
+            </div>
+        </div>
+
+
+
+
+
         <div class="block-group" id="control-blocks">
             <!-- Heading -->
             <h1>Control Structures</h1>
