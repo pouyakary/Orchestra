@@ -14,7 +14,7 @@ html {
 }
 
 body {
-    background-color: #FAFAFA;
+    /*background-color: #FAFAFA;*/
     font-size: 14px;
     padding: 0;
     margin: 0;
@@ -68,7 +68,7 @@ sidebar {
 
 .sidebar-separator-item {
     margin: 10px 0 10px 0;
-    border-bottom: 2px #eee solid;
+    border-bottom: 2px #f4f4f4 solid;
 }
 
 main {
@@ -136,7 +136,7 @@ code {
 
 .block {
     user-select: none;
-    background-color: #eee;
+    background-color: #f4f4f4;
     padding: 20px;
     border-radius: 7px;
     -webkit-user-select: none;
