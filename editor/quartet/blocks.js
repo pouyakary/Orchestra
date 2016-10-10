@@ -858,6 +858,46 @@
         return '\\D';
     };
 
+//
+// ─── WORD BOUNDARY ──────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['boundary'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Word Boundary");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    QuartetGenerator[ 'boundary' ] = function ( block ) {
+        return '\\b';
+    };
+
+//
+// ─── ANYTHING BUT WORD BOUNDARY ─────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['anything_but_boundary'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Anything but Word Boundary");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    QuartetGenerator[ 'anything_but_boundary' ] = function ( block ) {
+        return '\\B';
+    };
+
 // ────────────────────────────────────────────────────────────────────────────────
 
 
