@@ -127,6 +127,10 @@
             getLocalPath( 'package.json' ),
             getLocalPath( path.join( resultDirPath , 'package.json' ) )
         );
+
+        // adding commit count
+        shell(`git rev-list --all --count > ${resultDirPath}/about/commit-count.txt`);
+
         callback();
     });
 
