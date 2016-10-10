@@ -431,9 +431,9 @@
     Blockly.Blocks[ 'range' ] = {
         init: function() {
             this.appendDummyInput()
-                .appendField("Range")
+                .appendField("Range from")
                 .appendField(new Blockly.FieldTextInput("a"), "start")
-                .appendField("-")
+                .appendField("to")
                 .appendField(new Blockly.FieldTextInput("z"), "end");
             this.setInputsInline(false);
             this.setPreviousStatement(true, "String");

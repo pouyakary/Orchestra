@@ -16,7 +16,9 @@
 
     const electron = require( 'electron' );
     const { ipcMain, BrowserWindow, app } = require( 'electron' );
-    const extserver = require('./extserver.js');
+    const messenger = require('messenger');
+    const fs = require('fs');
+    const path = require('path');
 
 //
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
@@ -39,10 +41,23 @@
     let helpWindow;
 
 //
+// ─── HELPER TOOLS ───────────────────────────────────────────────────────────────
+//
+
+    function existsSync ( filename ) {
+        try {
+            fs.accessSync( filename );
+            return true;
+        } catch( ex ) {
+            return false;
+        }
+    }
+
+//
 // ─── GENERATE MAIN WINDOW ───────────────────────────────────────────────────────
 //
 
-    function createWindow ( ) {
+    function createWindow ( file ) {
         let editorWindow;
 
         const window_width = 1100;
@@ -53,18 +68,23 @@
             height: window_height,  minHeight: window_height - 100,
             backgroundColor: '#F7F7F7',
             frame: false,
-            //titleBarStyle: 'hidden-inset',
-            //fullscreen: false
+            fullscreen: false,
         });
 
         editorWindow.maximize( );
+
         windowCount++;
 
-        editorWindow.loadURL( `file://${ __dirname }/index.html` );
+        if ( file === undefined || file === null ) {
+            editorWindow.loadURL( `file://${ __dirname }/index.html` );
+        } else {
+            editorWindow.loadURL( `file://${ __dirname }/index.html?${ encodeURI( file ) }` );
+        }
 
 
         editorWindow.once('ready-to-show', ( ) => {
             editorWindow.show( );
+            editorWindow.focus( );
         });
 
         // editorWindow.openDevTools( );
@@ -84,9 +104,10 @@
 
         helpWindow = new BrowserWindow({
             title: "Quartet's Block Reference",
-            width:  1050, minWidth: 1050, maxWidth: 1050,
+            width:  1050, minWidth: 1050,
             height: 600, minHeight: 200,
             backgroundColor: 'white',
+            fullscreen: false,
         });
 
         if ( arg === '' ) {
@@ -110,7 +131,7 @@
         isAboutWindowOpen = true;
 
         let aboutWindow = new BrowserWindow({
-            title: ' ',
+            title: 'About Orchestra',
             width: 650, minWidth: 650, maxWidth: 650,
             height: 410, minHeight: 410, maxHeight: 410,
             backgroundColor: '#ECECEC',
@@ -134,8 +155,11 @@
 //
 
     app.on( 'ready' , ( ) => {
-        extserver.run( );
-        createWindow
+        console.log(`Orchestra, Version ${ orchestraVersion }-${ orchestraBuild }`);
+        console.log('Copyright 2016 - Kary Foundation, Inc.');
+
+        runExtensionServer( );
+        createWindow( );
     });
 
 //
@@ -198,5 +222,37 @@
             createWindow( );
         }
     });
+
+//
+// ─── EXTENSION SERVER ───────────────────────────────────────────────────────────
+//
+
+    function runExtensionServer ( ) {
+
+        //
+        // ─── CREATE SERVER ───────────────────────────────────────────────
+        //
+
+            const extensionServer = messenger.createListener( 5994 );
+
+        //
+        // ─── ON OPEN ORCHESTRA FOR A REGEX ───────────────────────────────
+        //
+
+            extensionServer.on( 'open', ( message, data ) => {
+                if ( data !== null || data !== undefined ) {
+                    if ( existsSync( data ) ) {
+                        createWindow( data );
+                    } else {
+                        message.reply('404');
+                    }
+                } else {
+                    createWindow( );
+                }
+            });
+
+        // ─────────────────────────────────────────────────────────────────
+
+    }
 
 // ────────────────────────────────────────────────────────────────────────────────

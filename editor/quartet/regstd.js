@@ -12,13 +12,13 @@
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
 //
 
-    // Quartet: regex-sequence.quartet
+    // ../../quartets/regex-sequence.quartet
     const sequenceRegEx = /^(?:\(.*\)|\[.*\])$/;
 
-    // Quartet: quartet-html-entities.quartet
+    // ../../quartets/quartet-html-entities.quartet
     const htmlSpecialEntities = /&(?:nbsp|#160|gt|lt);/g;
 
-    // Quartet: html-entities.quartet
+    // ../../quartets/html-entities.quartet
     const selectedBlockHTMl = /\<span class\="console\-highlight\-active\-block"\>(.*)\<\/span\>/g;
 
 //

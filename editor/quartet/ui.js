@@ -40,7 +40,7 @@
     function fetchLatestCompiledRegExp ( ) {
         let latestCompiledRegEx = getCurrentRegExpFromConsole( );
         if ( latestCompiledRegEx.length < 3 ) return '';
-        return latestCompiledRegEx.substring( 1, latestCompiledRegEx.length - 1 )
+        return latestCompiledRegEx.substring( 1, latestCompiledRegEx.length - 1 );
     }
 
 //
