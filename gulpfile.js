@@ -100,11 +100,11 @@
     gulp.task( 'copyResourceFiles', callback => {
         copyToBinaryFromDir( 'resources' );
         copyToBinaryFromDir( 'view' );
-        copyToBinaryFromDir( 'core' );
+        copyToBinaryFromDir( 'editor' );
         copyToBinaryFromDir( 'libs' );
         copyToBinaryFromDir( 'sounds' );
         copyToBinaryFromDir( 'windows' );
-        copyToBinaryFromDir( 'winserver' ); 
+        copyToBinaryFromDir( 'winserver' );
         copyFile(
             getLocalPath( 'package.json' ),
             getLocalPath( path.join( resultDirPath , 'package.json' ) )

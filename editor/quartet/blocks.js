@@ -758,6 +758,146 @@
         return quartetSequence( statements_match ) + '(?' + reverseSign + statements_lookahead + ')';
     };
 
+//
+// ─── WORD CHAR ──────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['word'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Word");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    QuartetGenerator[ 'word' ] = function ( block ) {
+        return '\\w';
+    };
+
+//
+// ─── ANYTHING BUT WORD ──────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['anything_but_word'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Anything but Word");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    QuartetGenerator[ 'anything_but_word' ] = function ( block ) {
+        return '\\W';
+    };
+
+//
+// ─── ANYTHING BUT SPACE ─────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['anything_but_whitespace'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Anything but Whitespace");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    QuartetGenerator[ 'anything_but_whitespace' ] = function ( block ) {
+        return '\\S';
+    };
+
+//
+// ─── DIGIT ──────────────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['digit'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Digit");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    QuartetGenerator[ 'digit' ] = function ( block ) {
+        return '\\d';
+    };
+
+//
+// ─── ANYTHING BUT DIGIT ─────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['anything_but_digit'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Anything but Digit");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    QuartetGenerator[ 'anything_but_digit' ] = function ( block ) {
+        return '\\D';
+    };
+
+//
+// ─── WORD BOUNDARY ──────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['boundary'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Word Boundary");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    QuartetGenerator[ 'boundary' ] = function ( block ) {
+        return '\\b';
+    };
+
+//
+// ─── ANYTHING BUT WORD BOUNDARY ─────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['anything_but_boundary'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Anything but Word Boundary");
+            this.setPreviousStatement(true, "String");
+            this.setNextStatement(true, "String");
+            this.setColour(20);
+            this.setTooltip('');
+            this.setHelpUrl('http://www.example.com/');
+        }
+    };
+
+    QuartetGenerator[ 'anything_but_boundary' ] = function ( block ) {
+        return '\\B';
+    };
+
 // ────────────────────────────────────────────────────────────────────────────────
 
 
