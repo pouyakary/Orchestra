@@ -13,6 +13,7 @@
 //
 
     const openExternal = require( 'electron' ).shell.openExternal;
+    const fs = require('fs');
 
 //
 // ─── WINDOW DRAG FIX ────────────────────────────────────────────────────────────
@@ -49,8 +50,14 @@
 
     function applyOnLoadSettings ( ) {
         document.getElementById( orchestraVersionSpanId ).innerText = getParameterByName('ov');
-        document.getElementById( orchestraBuildSpanId ).innerText = getParameterByName('ob');
         document.getElementById( quartetVersionSpanId ).innerText = getParameterByName('qv');
+
+        try {
+            fs.readFile( `${ __dirname }/commit-count.txt`, 'utf8', ( error, data ) => {
+                if ( error ) alert( error );
+                document.getElementById( orchestraBuildSpanId ).innerText = data.trim( );
+            });
+        } catch ( e ) { alert( e )};
     }
 
 //
