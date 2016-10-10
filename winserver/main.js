@@ -27,8 +27,6 @@
     const uniqueWindowIdKey = 'orchestra-unique-window-id';
 
     const orchestraVersion = '1.0';
-    const orchestraBuild = '170';
-
     const quartetVersion = '1.2';
 
 //
@@ -138,7 +136,7 @@
             //show: false
         });
 
-        aboutWindow.loadURL( `file://${ __dirname }/about/index.html?ov=${ orchestraVersion }&ob=${ orchestraBuild }&qv=${ quartetVersion }` );
+        aboutWindow.loadURL( `file://${ __dirname }/about/index.html?ov=${ orchestraVersion }&qv=${ quartetVersion }` );
 
         /*aboutWindow.once( 'ready-to-show', ( ) => {
             aboutWindow.show( )
