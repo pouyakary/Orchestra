@@ -24,7 +24,8 @@
     function concertoCompileRegExpToQuartetXML ( regX ) {
         let regexAST = parseRegEx( regX );
         let childrenXML = concertoMainGenerator( regexAST );
-        return concertoWrapMainXML( childrenXML );
+        let finalXML = concertoWrapMainXML( childrenXML );
+        return finalXML.replace( /\"/g, '\\"' );
     }
 
 //
@@ -44,7 +45,7 @@
 //
 
     function concertoWrapMainXML ( xml ) {
-        return `<xml xmlns="http://www.w3.org/1999/xhtml"><block type="compose" id="composer" deletable="false" x="40" y="40"><statement name="children">${ xml }</statement></block></xml>`;
+        return `<xml xmlns="http://www.w3.org/1999/xhtml"><block type="compose" id="composer" deletable="false" x="40" y="40"><statement name="blocks">${ xml }</statement></block></xml>`;
     }
 
 //
@@ -71,8 +72,26 @@
         });
 
         if ( node.repeat !== undefined ) {
-            if ( node.repeat.max == 1 && node.repeat.min == 0 ) {
-                return concertoComposeXMLforMaybeRepeat( encodeBlockXML );
+            let min = node.repeat.min;
+            let max = node.repeat.max;
+
+            if ( min === 0 && max === 1 ) {
+                return concertoStaticRepeatWithType( 'maybe', encodeBlockXML );
+
+            } else if ( min === 1 && max === Infinity ) {
+                return concertoStaticRepeatWithType( 'one_or_more', encodeBlockXML );
+
+            } else if ( min === 0 && max === Infinity ) {
+                return concertoStaticRepeatWithType( 'any_number_of', encodeBlockXML );
+
+            } else if ( min === max ) {
+                return concertoRepeatBlockWithCount( min, encodeBlockXML );
+
+            } else if ( min !== Infinity && max === Infinity ) {
+                return concertoAtLeastRepeat( min, encodeBlockXML );
+
+            } else {
+                return concertoComposeRepeatInRange( min, max, encodeBlockXML );
             }
         } else {
             return encodeBlockXML;
@@ -83,9 +102,69 @@
 // ─── COMPOSE MAYBE REPEAT ───────────────────────────────────────────────────────
 //
 
-    function concertoComposeXMLforMaybeRepeat ( blockXML ) {
+    function concertoStaticRepeatWithType ( repeatType, blockXML ) {
         return concertoGenerateBlockXMl({
-            type: 'maybe',
+            type: repeatType,
+            statements: [{
+                name: 'blocks',
+                blocks: [
+                    blockXML
+                ]
+            }]
+        });
+    }
+
+//
+// ─── COMPOSE REPEAT TIMES ───────────────────────────────────────────────────────
+//
+
+    function concertoRepeatBlockWithCount ( count, blockXML ) {
+        return concertoGenerateBlockXMl({
+            type: 'repeat',
+            fields: [{
+                key: 'count',
+                val: count
+            }],
+            statements: [{
+                name: 'blocks',
+                blocks: [
+                    blockXML
+                ]
+            }]
+        });
+    }
+
+//
+// ─── COMPOSE AT LEAST REPEAT ────────────────────────────────────────────────────
+//
+
+    function concertoAtLeastRepeat ( min, blockXML ) {
+        return concertoGenerateBlockXMl({
+            type: 'repeat_at_least',
+            fields: [{
+                key: 'count',
+                val: min
+            }],
+            statements: [{
+                name: 'blocks',
+                blocks: [
+                    blockXML
+                ]
+            }]
+        });
+    }
+
+//
+// ─── COMPOSE REPEAT IN RANGE ────────────────────────────────────────────────────
+//
+
+    function concertoComposeRepeatInRange ( min, max, blockXML ) {
+        return concertoGenerateBlockXMl({
+            type: 'repeat_in_range',
+            fields: [
+                { key: 'start', val: min },
+                { key: 'end',   val: max },
+            ],
             statements: [{
                 name: 'blocks',
                 blocks: [
