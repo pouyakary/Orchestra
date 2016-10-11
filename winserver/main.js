@@ -153,7 +153,7 @@
 //
 
     app.on( 'ready' , ( ) => {
-        console.log(`Orchestra, Version ${ orchestraVersion }-${ orchestraBuild }`);
+        console.log(`Orchestra, Version ${ orchestraVersion }`);
         console.log('Copyright 2016 - Kary Foundation, Inc.');
 
         runExtensionServer( );

@@ -30,7 +30,7 @@
     const { dialog } = require( 'electron' ).remote;
     const OrchestraWindow = require( 'electron' ).remote.getCurrentWindow( );
     const openExternal = require( 'electron' ).shell.openExternal;
-
+    const regulex = require('regulex');
 //
 // ─── NODE LOADS ─────────────────────────────────────────────────────────────────
 //

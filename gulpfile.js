@@ -42,7 +42,7 @@
     /** Run shell commands easy! */
     function shell ( command , callback ) {
         exec( command, err => {
-            if ( err ) return callback( err );
+            if ( err ) console.log( err );
         });
     }
 
@@ -122,6 +122,8 @@
         copyToBinaryFromDir( 'winserver' );
 
         copyNodeModules('messenger');
+        copyNodeModules('regulex');
+        copyNodeModules('amdefine');
 
         copyFile(
             getLocalPath( 'package.json' ),

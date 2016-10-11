@@ -3,5 +3,6 @@
 	"editor.wrappingColumn": 		0,
 	"editor.quickSuggestionsDelay": 0,
 	"editor.insertSpaces": 			true,
-	"alex.enable": true
+    "alex.enable": true,
+    "typescript.check.workspaceVersion": false
 }
