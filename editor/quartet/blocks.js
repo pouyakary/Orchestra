@@ -25,7 +25,7 @@
         init: function() {
             this.appendDummyInput()
                 .appendField("Quartet");
-            this.appendStatementInput("children")
+            this.appendStatementInput("blocks")
                 .setCheck("String");
             this.setInputsInline(false);
             this.setColour(120);
@@ -35,7 +35,7 @@
     };
 
     QuartetGenerator['compose'] = function(block) {
-        var statements_children = QuartetGenerator.statementToCode(block, 'children').trim( );
+        var statements_children = QuartetGenerator.statementToCode( block, 'blocks' ).trim( );
         return statements_children.trim( );
     };
 
@@ -153,7 +153,7 @@
         init: function() {
             this.appendDummyInput()
                 .appendField("One or more");
-            this.appendStatementInput("regex")
+            this.appendStatementInput("blocks")
                 .setCheck("String");
             this.setInputsInline(true);
             this.setPreviousStatement(true, "String");
@@ -165,7 +165,7 @@
     };
 
     QuartetGenerator[ 'one_or_more' ] = function ( block ) {
-        var statements_regex = QuartetGenerator.statementToCode( block, 'regex' ).trim( );
+        var statements_regex = QuartetGenerator.statementToCode( block, 'blocks' ).trim( );
         return quartetSequence( statements_regex ) + '+';
     };
 
@@ -177,7 +177,7 @@
         init: function() {
             this.appendDummyInput( )
                 .appendField("Any number of");
-            this.appendStatementInput("regex")
+            this.appendStatementInput("blocks")
                 .setCheck("String");
             this.setInputsInline(true);
             this.setPreviousStatement(true, "String");
@@ -189,7 +189,7 @@
     };
 
     QuartetGenerator['any_number_of'] = function(block) {
-        var statements_regex = QuartetGenerator.statementToCode( block, 'regex' ).trim( );
+        var statements_regex = QuartetGenerator.statementToCode( block, 'blocks' ).trim( );
         return quartetSequence( statements_regex ) + '*';
     };
 
@@ -223,7 +223,7 @@
         init: function() {
             this.appendDummyInput( )
                 .appendField("Maybe");
-            this.appendStatementInput("NAME")
+            this.appendStatementInput("blocks")
                 .setCheck("String");
             this.setInputsInline(true);
             this.setPreviousStatement(true, "String");
@@ -235,7 +235,7 @@
     };
 
     QuartetGenerator[ 'maybe' ] = function( block ) {
-        var statements_name = QuartetGenerator.statementToCode( block, 'NAME' ).trim();
+        var statements_name = QuartetGenerator.statementToCode( block, 'blocks' ).trim();
         return quartetSequence( statements_name ) + '?';
     };
 
@@ -248,7 +248,7 @@
         init: function() {
             this.appendDummyInput( )
                 .appendField("One of options");
-            this.appendStatementInput("Items")
+            this.appendStatementInput("blocks")
                 .setCheck("QuartetOption");
             this.setInputsInline(true);
             this.setPreviousStatement(true, "String");
@@ -263,7 +263,7 @@
         function cut ( text, start, end ) {
             return text.substring( 0, start ) + text.substring( end );
         }
-        var statements_items = QuartetGenerator.statementToCode(block, 'Items').trim( );
+        var statements_items = QuartetGenerator.statementToCode(block, 'blocks').trim( );
         if ( statements_items.startsWith('<') ) {
             if ( statements_items.length === 52 ) {
                 return '';
@@ -281,7 +281,7 @@
 
     Blockly.Blocks['option'] = {
         init: function() {
-            this.appendStatementInput("NAME")
+            this.appendStatementInput("blocks")
                 .setCheck(null)
                 .appendField("Option")
                 .setCheck("String");
@@ -295,7 +295,7 @@
     };
 
     QuartetGenerator['option'] = function ( block ) {
-        return '|' + QuartetGenerator.statementToCode(block, 'NAME').trim( );
+        return '|' + QuartetGenerator.statementToCode(block, 'blocks').trim( );
     };
 
 //
@@ -458,7 +458,7 @@
         init: function() {
             this.appendDummyInput( )
                 .appendField("Remember Match");
-            this.appendStatementInput("match")
+            this.appendStatementInput("blocks")
                 .setCheck("String");
             this.setInputsInline(false);
             this.setPreviousStatement(true, "String");
@@ -470,7 +470,7 @@
     };
 
     QuartetGenerator[ 'match' ] = function ( block ) {
-        var statements_match = QuartetGenerator.statementToCode(block, 'match').trim( );
+        var statements_match = QuartetGenerator.statementToCode(block, 'blocks').trim( );
         return '(' + statements_match + ')';
     };
 
@@ -482,7 +482,7 @@
         init: function() {
             this.appendDummyInput( )
                 .appendField("Sigma (Advanced Alphabet)");
-            this.appendStatementInput("sigma")
+            this.appendStatementInput("blocks")
                 .setCheck("SigmaType");
             this.setInputsInline(false);
             this.setPreviousStatement(true, "String");
@@ -494,7 +494,7 @@
     };
 
     QuartetGenerator[ 'sigma' ] = function ( block ) {
-        var statements_sequence = QuartetGenerator.statementToCode(block, 'sigma').trim( );
+        var statements_sequence = QuartetGenerator.statementToCode(block, 'blocks').trim( );
         return '[' + statements_sequence + ']';
     };
 
@@ -506,7 +506,7 @@
         init: function() {
             this.appendDummyInput( )
                 .appendField("Exclude Set (Advanced Anything But)");
-            this.appendStatementInput("sigma")
+            this.appendStatementInput("blocks")
                 .setCheck("SigmaType");
             this.setInputsInline(false);
             this.setPreviousStatement(true, "String");
@@ -517,7 +517,7 @@
     };
 
     QuartetGenerator[ 'exclude' ] = function ( block ) {
-        var statements_sequence = QuartetGenerator.statementToCode(block, 'sigma').trim( );
+        var statements_sequence = QuartetGenerator.statementToCode(block, 'blocks').trim( );
         return '[^' + statements_sequence + ']';
     };
 
@@ -654,7 +654,7 @@
                 .appendField("Repeat")
                 .appendField(new Blockly.FieldTextInput(""), "count")
                 .appendField("times");
-            this.appendStatementInput("code")
+            this.appendStatementInput("blocks")
                 .setCheck("String");
             this.setPreviousStatement(true, "String");
             this.setNextStatement(true, "String");
@@ -666,7 +666,7 @@
 
     QuartetGenerator['repeat'] = function ( block ) {
         var text_count = block.getFieldValue('count');
-        var statements_code = QuartetGenerator.statementToCode(block, 'code').trim( );
+        var statements_code = QuartetGenerator.statementToCode(block, 'blocks').trim( );
         return quartetSequence( statements_code ) + '{' + text_count + '}';
     }
 
@@ -680,7 +680,7 @@
                 .appendField("Repeat at least")
                 .appendField(new Blockly.FieldTextInput(""), "count")
                 .appendField("times");
-            this.appendStatementInput("code")
+            this.appendStatementInput("blocks")
                 .setCheck("String");
             this.setPreviousStatement(true, "String");
             this.setNextStatement(true, "String");
@@ -692,7 +692,7 @@
 
     QuartetGenerator['repeat_at_least'] = function ( block ) {
         var text_count = block.getFieldValue('count');
-        var statements_code = QuartetGenerator.statementToCode(block, 'code').trim( );
+        var statements_code = QuartetGenerator.statementToCode(block, 'blocks').trim( );
         return quartetSequence( statements_code ) + '{' + text_count + ',}';
     }
 
@@ -707,7 +707,7 @@
                 .appendField(new Blockly.FieldTextInput(""), "start")
                 .appendField("to")
                 .appendField(new Blockly.FieldTextInput(""), "end");
-            this.appendStatementInput("code")
+            this.appendStatementInput("blocks")
                 .setCheck("String");
             this.setPreviousStatement(true, "String");
             this.setNextStatement(true, "String");
