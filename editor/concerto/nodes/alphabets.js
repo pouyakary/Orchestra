@@ -19,19 +19,71 @@
 //
 
     module.exports = node => {
-        if ( node.raw.startsWith('[^') ) {
+        // if range is simple 'Alphabet' / 'Anything But' block
+        let simpleSet = true;
+        if ( node.ranges !== undefined ) {
+            for ( let range of node.ranges ) {
+                if ( !( range === 'az' || range === 'AZ' || range === '09' ) ) {
+                    simpleSet = false;
 
-        } else {
+        // Range Block
+        if ( node.chars === '' && node.ranges.length === 1 && node.exclude === undefined )
+            return composeRangeBlock( node );
 
-        }
+        // Alphabet Block
+        if ( simpleSet )
+            return composeForSimpleAlphabetOrAnythingBut( node );
+    }
+
+//
+// ─── COMPOSE RANGE BLOCK ────────────────────────────────────────────────────────
+//
+
+    function composeRangeBlock ( node ) {
+        return kit.compose({
+            type: 'range',
+            fields: [
+                { key: 'start', val: node.ranges[ 0 ][ 0 ] },
+                { key: 'end', val: node.ranges[ 0 ][ 1 ] }
+            ]
+        });
     }
 
 //
 // ─── COMPOSE FOR SIMPLE ALPHABET ────────────────────────────────────────────────
 //
 
-    function composeForSimpleAlphabet ( node ) {
+    function composeForSimpleAlphabetOrAnythingBut ( node ) {
+        // fill ranges fields
+        let sets = {
+            numbers: 'FALSE',
+            lowercase: 'FALSE',
+            uppercase: 'FALSE',
+        }
+        if ( node.ranges !== undefined )
+            for ( let range of node.ranges )
+                switch ( range ) {
+                    case '09':
+                        sets.numbers = 'TRUE';
+                        break;
+                    case 'az':
+                        sets.lowercase = 'TRUE';
+                        break;
+                    case 'AZ':
+                        sets.uppercase = 'TRUE';
+                        break;
+                }
 
+        // composing final stuff:
+        return kit.compose({
+            type: ( node.exclude )? 'anything_but': 'alphabet',
+            fields:[
+                { key: 'numbers'    , val: sets.numbers     },
+                { key: 'lowercase'  , val: sets.lowercase   },
+                { key: 'uppercase'  , val: sets.uppercase   },
+                { key: 'other'      , val: node.chars       },
+            ]
+        })
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
