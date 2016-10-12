@@ -25,23 +25,31 @@
 
             if ( min === 0 && max === 1 ) {
                 return concertoStaticRepeatWithType( 'maybe', blockXML );
+            }
 
-            } else if ( min === 1 && max === Infinity ) {
+            else if ( min === 1 && max === Infinity ) {
                 return concertoStaticRepeatWithType( 'one_or_more', blockXML );
+            }
 
-            } else if ( min === 0 && max === Infinity ) {
+            else if ( min === 0 && max === Infinity ) {
                 return concertoStaticRepeatWithType( 'any_number_of', blockXML );
+            }
 
-            } else if ( min === max ) {
+            else if ( min === max ) {
                 return concertoRepeatBlockWithCount( min, blockXML );
+            }
 
-            } else if ( min !== Infinity && max === Infinity ) {
+            else if ( min !== Infinity && max === Infinity ) {
                 return concertoAtLeastRepeat( min, blockXML );
+            }
 
-            } else {
+            else {
                 return concertoComposeRepeatInRange( min, max, blockXML );
             }
-        } else {
+
+        }
+
+        else {
             return blockXML;
         }
     }
