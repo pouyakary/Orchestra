@@ -53,10 +53,20 @@
 //
 
     function concertoPeakNodeCompiler ( node ) {
+        let blockXML;
+
+        // compose block
         switch ( node.type ) {
             case 'exact':
-                return concertoComposeXMLforExactNode( node );
+                blockXML = concertoComposeXMLforExactNode( node );
+                break;
         }
+
+        // apply repeat
+        blockXML = concertoApplyRepeatForNode( node, blockXML );
+
+        // done
+        return blockXML;
     }
 
 //
@@ -64,37 +74,43 @@
 //
 
     function concertoComposeXMLforExactNode ( node ) {
-        let encodeBlockXML = concertoGenerateBlockXMl({
+        return concertoGenerateBlockXMl({
             type: 'encode',
             fields: [
                 { key: 'text', val: node.chars }
             ]
         });
+    }
 
+//
+// ─── APPLY REPEAT ───────────────────────────────────────────────────────────────
+//
+
+    function concertoApplyRepeatForNode ( node , blockXML ) {
         if ( node.repeat !== undefined ) {
             let min = node.repeat.min;
             let max = node.repeat.max;
 
             if ( min === 0 && max === 1 ) {
-                return concertoStaticRepeatWithType( 'maybe', encodeBlockXML );
+                return concertoStaticRepeatWithType( 'maybe', blockXML );
 
             } else if ( min === 1 && max === Infinity ) {
-                return concertoStaticRepeatWithType( 'one_or_more', encodeBlockXML );
+                return concertoStaticRepeatWithType( 'one_or_more', blockXML );
 
             } else if ( min === 0 && max === Infinity ) {
-                return concertoStaticRepeatWithType( 'any_number_of', encodeBlockXML );
+                return concertoStaticRepeatWithType( 'any_number_of', blockXML );
 
             } else if ( min === max ) {
-                return concertoRepeatBlockWithCount( min, encodeBlockXML );
+                return concertoRepeatBlockWithCount( min, blockXML );
 
             } else if ( min !== Infinity && max === Infinity ) {
-                return concertoAtLeastRepeat( min, encodeBlockXML );
+                return concertoAtLeastRepeat( min, blockXML );
 
             } else {
-                return concertoComposeRepeatInRange( min, max, encodeBlockXML );
+                return concertoComposeRepeatInRange( min, max, blockXML );
             }
         } else {
-            return encodeBlockXML;
+            return blockXML;
         }
     }
 
