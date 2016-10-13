@@ -13,10 +13,10 @@
 //
 
     function updateWorkspaceWithNewXML ( xml ) {
-        loadXMLtoWorkspace( xml );
-        setupComposeBlock( );
-        setupEventListeners( );
-        applyAdditionalStyles( );
+        loadXMLtoWorkspace( xml )
+        setupComposeBlock( )
+        setupEventListeners( )
+        applyAdditionalStyles( )
     }
 
 //
@@ -24,9 +24,9 @@
 //
 
     function loadXMLtoWorkspace ( xml ) {
-        let blockyDOM = Blockly.Xml.textToDom( xml );
-        Blockly.mainWorkspace.clear( );
-        Blockly.Xml.domToWorkspace( Blockly.mainWorkspace , blockyDOM );
+        let blockyDOM = Blockly.Xml.textToDom( xml )
+        Blockly.mainWorkspace.clear( )
+        Blockly.Xml.domToWorkspace( Blockly.mainWorkspace , blockyDOM )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

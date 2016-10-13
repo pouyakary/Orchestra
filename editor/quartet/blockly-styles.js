@@ -43,8 +43,7 @@
                     value: 'white'
                 }
             ]
-        }
-    ];
+        }]
 
 //
 // ─── STYLER ─────────────────────────────────────────────────────────────────────
@@ -52,14 +51,11 @@
 
     function applyAdditionalStyles ( ) {
         blocklyAdditionalStyles.forEach( blockStyle => {
-            let elements = document.getElementsByClassName( blockStyle.class );
+            let elements = document.getElementsByClassName( blockStyle.class )
+
             for ( let index = 0; index < elements.length; index++ ) {
-                let element = elements[ index ];
+                let element = elements[ index ]
                 blockStyle.styles.forEach( style => {
-                    element.style[ style.key ] = style.value;
-                });
-            }
-        });
-    }
+                    element.style[ style.key ] = style.value })}})}
 
 // ────────────────────────────────────────────────────────────────────────────────

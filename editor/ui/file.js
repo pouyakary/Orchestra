@@ -13,8 +13,8 @@
 //
 
     function setFileDirty ( dirt ) {
-        currentFile.dirty = dirt;
-        updateConsoleTitle( );
+        currentFile.dirty = dirt
+        updateConsoleTitle( )
     }
 
 //
@@ -22,7 +22,7 @@
 //
 
     function getFileDirtStatus ( ) {
-        return ( currentFile.emptyNewFile )? false : currentFile.dirty;
+        return ( currentFile.emptyNewFile )? false : currentFile.dirty
     }
 
 //
@@ -31,7 +31,7 @@
 
     function getFileName ( ) {
         return ( currentFile.path === defaultEmptyPath )?
-            'Untitled.quartet' : path.basename( currentFile.path );
+            'Untitled.quartet' : path.basename( currentFile.path )
     }
 
 //
@@ -39,9 +39,9 @@
 //
 
     function loadFile ( fileJSONString ) {
-        const fileJSON = JSON.parse( fileJSONString );
+        const fileJSON = JSON.parse( fileJSONString )
         // setupWorkspaceWithNewFile( fileJSON.workspaceXML );
-        playgroundEditor.setValue( fileJSON.playgroundText );
+        playgroundEditor.setValue( fileJSON.playgroundText )
     }
 
 //
@@ -52,15 +52,14 @@
         return JSON.stringify({
             workspaceXML: serializeWorkspaceIntoXML( ),
             playgroundText: playgroundEditor.getValue( ),
-        });
-    }
+        })}
 
 //
 // ─── WORKSPACE TO XML ───────────────────────────────────────────────────────────
 //
 
     function serializeWorkspaceIntoXML ( ) {
-        return Blockly.Xml.domToText( Blockly.Xml.workspaceToDom( workspace ) );
+        return Blockly.Xml.domToText( Blockly.Xml.workspaceToDom( workspace ) )
     }
 
 //
@@ -69,18 +68,17 @@
 
     function saveFileWithInfo ( ) {
         // Going with the file path
-        const fileJSON = serializeFile( );
+        const fileJSON = serializeFile( )
 
         // save the file
         fs.writeFile( currentFile.path, fileJSON, err => {
             if ( err ) {
-                alert(`Could not save your file at "${ currentFile.path }"`);
-                currentFile = defaultFileObject;
-            } else {
-                setFileDirty( false );
+                alert(`Could not save your file at "${ currentFile.path }"`)
+                currentFile = defaultFileObject
             }
-        });
-    }
+
+            else setFileDirty( false )
+        })}
 
 //
 // ─── OPEN FILE ──────────────────────────────────────────────────────────────────
@@ -90,37 +88,35 @@
         // open the file
         fs.readFile( filePath, ( err, fileJSONString ) => {
             if ( err ) {
-                report('Error: Could not open the file.');
-                return;
-            };
+                report('Error: Could not open the file.')
+                return
+            }
 
             try {
-                let fileJSON = JSON.parse( fileJSONString );
+                let fileJSON = JSON.parse( fileJSONString )
                 if ( fileJSON.workspaceXML !== undefined && fileJSON.workspaceXML !== null ) {
-                    updateWorkspaceWithNewXML( fileJSON.workspaceXML );
-                    currentFile.path = filePath;
-                    setFileDirty( true );
+                    updateWorkspaceWithNewXML( fileJSON.workspaceXML )
+                    currentFile.path = filePath
+                    setFileDirty( true )
                 }
 
-                if ( fileJSON.playgroundText !== undefined && fileJSON.playgroundText !== '' ) {
-                    playgroundEditor.setValue( fileJSON.playgroundText );
-                }
+                if ( fileJSON.playgroundText !== undefined && fileJSON.playgroundText !== '' )
+                    playgroundEditor.setValue( fileJSON.playgroundText )
+
 
             } catch ( error ) {
-                report( `Could not load the file because of a broken file problem.${ error }` );
+                report( `Could not load the file because of a broken file problem.${ error }` )
             }
-        });
-    }
+        })}
 
 //
 // ─── EXPORT SVG IMAGE ───────────────────────────────────────────────────────────
 //
 
     function exportSVGImageTo ( filePath ) {
-        const fileSVGString = renderWorkspaceIntoSVG( );
+        const fileSVGString = renderWorkspaceIntoSVG( )
         fs.writeFile( filePath, fileSVGString, error => {
-            if ( error ) alert( 'File could not be saved. Please try again.' );
-        });
-    }
+            if ( error ) alert( 'File could not be saved. Please try again.' )
+        })}
 
 // ────────────────────────────────────────────────────────────────────────────────

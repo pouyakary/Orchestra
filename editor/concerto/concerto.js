@@ -12,8 +12,8 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    const kit       = require('./concerto/kit');
-    const nodes     = require('./concerto/nodes');
+    const kit       = require('./concerto/kit')
+    const nodes     = require('./concerto/nodes')
 
 //
 // ─── MAIN COMPILER ──────────────────────────────────────────────────────────────
@@ -22,11 +22,11 @@
     /** @param {string} regX
      *  @return {string} */
     function concertoCompileRegExpToQuartetXML ( regX ) {
-        let regexAST    = regulex.parse( regX );
-        let childrenXML = concertoMainGenerator( regexAST );
-        let finalXML    = concertoWrapMainXML( childrenXML );
+        let regexAST    = regulex.parse( regX )
+        let childrenXML = concertoMainGenerator( regexAST )
+        let finalXML    = concertoWrapMainXML( childrenXML )
 
-        return finalXML.replace( /\"/g, '\\"' );
+        return finalXML.replace( /\"/g, '\\"' )
     }
 
 //
@@ -34,11 +34,10 @@
 //
 
     function concertoMainGenerator ( ast ) {
-        let resultTags = [ ];
-        for ( let node of ast.tree ) {
-            resultTags.push( concertoPeakNodeCompiler( node ) );
-        }
-        return resultTags.join('');
+        let resultTags = [ ]
+        for ( let node of ast.tree )
+            resultTags.push( concertoPeakNodeCompiler( node ) )
+        return resultTags.join('')
     }
 
 //
@@ -46,7 +45,7 @@
 //
 
     function concertoWrapMainXML ( xml ) {
-        return `<xml xmlns="http://www.w3.org/1999/xhtml"><block type="compose" id="composer" deletable="false" x="40" y="40"><statement name="blocks">${ xml }</statement></block></xml>`;
+        return `<xml xmlns="http://www.w3.org/1999/xhtml"><block type="compose" id="composer" deletable="false" x="40" y="40"><statement name="blocks">${ xml }</statement></block></xml>`
     }
 
 //
@@ -54,24 +53,23 @@
 //
 
     function concertoPeakNodeCompiler ( node ) {
-        let blockXML;
+        let blockXML
 
         // compose block
         switch ( node.type ) {
             case 'exact':
-                blockXML = nodes.exact( node );
-                break;
-
+                blockXML = nodes.exact( node )
+                break
             case 'charset':
-                blockXML = nodes.charset( node );
-                break;
-        }
+                blockXML = nodes.charset( node )
+                break
+            }
 
         // apply repeat
-        blockXML = kit.repeat( node, blockXML );
+        blockXML = kit.repeat( node, blockXML )
 
         // done
-        return blockXML;
+        return blockXML
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

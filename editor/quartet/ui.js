@@ -16,21 +16,20 @@
 
         switch ( event.type ) {
             case Blockly.Events.MOVE:
-                return;
+                return
             case Blockly.Events.UI:
-                currentFile.emptyNewFile = false;
-                break;
+                currentFile.emptyNewFile = false
+                break
             default:
-                setFileDirty( true );
-        }
+                setFileDirty( true )
+            }
 
-        if ( event.type === Blockly.Events.UI && event.element === 'selected' ) {
-            quartetActiveBlockId = event.newValue || event.blockId;
-        }
+        if ( event.type === Blockly.Events.UI && event.element === 'selected' )
+            quartetActiveBlockId = event.newValue || event.blockId
 
-        let compiledRegex = QuartetGenerator.blockToCode( ComposeBlock );
+        let compiledRegex = QuartetGenerator.blockToCode( ComposeBlock )
 
-        setConsoleRegEx( `/${ compiledRegex }/` );
+        setConsoleRegEx( `/${ compiledRegex }/` )
     }
 
 //
@@ -38,9 +37,9 @@
 //
 
     function fetchLatestCompiledRegExp ( ) {
-        let latestCompiledRegEx = getCurrentRegExpFromConsole( );
-        if ( latestCompiledRegEx.length < 3 ) return '';
-        return latestCompiledRegEx.substring( 1, latestCompiledRegEx.length - 1 );
+        let latestCompiledRegEx = getCurrentRegExpFromConsole( )
+        if ( latestCompiledRegEx.length < 3 ) return ''
+        return latestCompiledRegEx.substring( 1, latestCompiledRegEx.length - 1 )
     }
 
 //
@@ -50,7 +49,7 @@
     function getCurrentRegExpFromConsole ( ) {
         return document.getElementById('ribbon-console-regexp')
             .innerText
-            .replace(/\u00A0/g, ' ');
+            .replace(/\u00A0/g, ' ')
     }
 
 //
@@ -58,7 +57,7 @@
 //
 
     function onCopyRegExp ( ) {
-        clipboard.writeText( getCurrentRegExpFromConsole( ) );
+        clipboard.writeText( getCurrentRegExpFromConsole( ) )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

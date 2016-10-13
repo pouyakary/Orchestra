@@ -13,12 +13,12 @@
 //
 
     function onChangeWindowToEditor ( ) {
-        CurrentActiveView = 'editor';
-        document.getElementById( EditorWindowScreenElement ).hidden = false;
-        document.getElementById( PlaygroundWindowScreenElement ).hidden = true;
-        document.getElementById( TabsPlaceholder ).className = 'editor-tab';
+        CurrentActiveView = 'editor'
+        document.getElementById( EditorWindowScreenElement ).hidden = false
+        document.getElementById( PlaygroundWindowScreenElement ).hidden = true
+        document.getElementById( TabsPlaceholder ).className = 'editor-tab'
 
-        Blockly.fireUiEvent( window, 'resize' );
+        Blockly.fireUiEvent( window, 'resize' )
     }
 
 //
@@ -26,13 +26,13 @@
 //
 
     function onChangeWindowToPlayground ( ) {
-        CurrentActiveView = 'playground';
-        document.getElementById( EditorWindowScreenElement ).hidden = true;
-        document.getElementById( PlaygroundWindowScreenElement ).hidden = false;
-        document.getElementById( TabsPlaceholder ).className = 'playground-tab';
+        CurrentActiveView = 'playground'
+        document.getElementById( EditorWindowScreenElement ).hidden = true
+        document.getElementById( PlaygroundWindowScreenElement ).hidden = false
+        document.getElementById( TabsPlaceholder ).className = 'playground-tab'
 
-        initMonacoEditor( );
-        playgroundEditor.layout( );
+        initMonacoEditor( )
+        playgroundEditor.layout( )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

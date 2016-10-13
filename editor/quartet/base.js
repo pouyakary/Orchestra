@@ -13,7 +13,7 @@
 //
 
     function setupWorkspaceWithNewFile ( ) {
-        setupWorkspace( );
+        setupWorkspace( )
     }
 
 //
@@ -21,16 +21,16 @@
 //
 
     function setupWorkspace ( ) {
-        const toolbox = document.getElementById( 'toolbox' );
+        const toolbox = document.getElementById( 'toolbox' )
 
         workspace = Blockly.inject( 'quartet-coding-view', {
             collapse: true,
             toolbox: toolbox,
             border: false,
             scrollbars: true,
-        });
+        })
 
-        Blockly.Xml.domToWorkspace( Blockly.Xml.textToDom( defaultFileXML ), workspace );
+        Blockly.Xml.domToWorkspace( Blockly.Xml.textToDom( defaultFileXML ), workspace )
     }
 
 //
@@ -38,9 +38,9 @@
 //
 
     function setupComposeBlock ( ) {
-        ComposeBlock = workspace.getAllBlocks( )[ 0 ];
-        workspace.getCanvas( ).setAttribute( 'id', composeBlockIDforSVGCanvas );
-        ComposeBlock.moveBy( 40, 40 );
+        ComposeBlock = workspace.getAllBlocks( )[ 0 ]
+        workspace.getCanvas( ).setAttribute( 'id', composeBlockIDforSVGCanvas )
+        ComposeBlock.moveBy( 40, 40 )
     }
 
 //
@@ -48,7 +48,7 @@
 //
 
     function setupEventListeners ( ) {
-        workspace.addChangeListener( quartetOnUIChange );
+        workspace.addChangeListener( quartetOnUIChange )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

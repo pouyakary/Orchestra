@@ -13,11 +13,11 @@
 //
 
     function initWindow ( ) {
-        setupWorkspace( );
-        onNewFile( );
-        initMainMenu( );
-        setMenuEnableFactor( true );
-        appendTrafficLightEvents( );
+        setupWorkspace( )
+        onNewFile( )
+        initMainMenu( )
+        setMenuEnableFactor( true )
+        appendTrafficLightEvents( )
     }
 
 //
@@ -25,7 +25,7 @@
 //
 
     function chooseRandom ( arr ) {
-        return arr[ Math.floor( Math.random( ) * arr.length ) ];
+        return arr[ Math.floor( Math.random( ) * arr.length ) ]
     }
 
 //
@@ -35,8 +35,7 @@
     function report ( text ) {
         new Notification( 'Orchestra', {
             body: text
-        });
-    }
+        })}
 
 //
 // ─── ON CLOSE ───────────────────────────────────────────────────────────────────
@@ -53,7 +52,7 @@
 
     function fireAppQuitRequest ( ) {
         if ( onBeforeWindowClose( 'Quit' ) )
-            ipcRenderer.send( 'app-quit' );
+            ipcRenderer.send( 'app-quit' )
     }
 
 //
@@ -67,15 +66,15 @@
                 title: "Orchestra",
                 message: 'You have changes that are not saved. Should we do something or pretend this conversation never happened?',
                 detail: "A Jedi always takes care of it's files. Be in the good side and may the Force be with you.",
-            });
-            if ( ans === 0 ) {
-                onSaveFile( );
-            } else if ( ans === 1 ) {
-                return false;
-            }
+            })
+
+            if ( ans === 0 )
+                onSaveFile( )
+            else if ( ans === 1 )
+                return false
         }
-        setMenuEnableFactor( false );
-        return true;
+        setMenuEnableFactor( false )
+        return true
     }
 
 //
@@ -83,7 +82,7 @@
 //
 
     function fireWindowMinimizeRequest ( ) {
-        OrchestraWindow.minimize( );
+        OrchestraWindow.minimize( )
     }
 
 //
@@ -91,11 +90,10 @@
 //
 
     function fireWindowMaximizeRequest ( ) {
-        if ( OrchestraWindow.isMaximized( ) ) {
-            OrchestraWindow.unmaximize( );
-        } else {
-            OrchestraWindow.maximize( );
-        }
+        if ( OrchestraWindow.isMaximized( ) )
+            OrchestraWindow.unmaximize( )
+        else
+            OrchestraWindow.maximize( )
     }
 
 //
@@ -103,9 +101,9 @@
 //
 
     function makeWindowButtonsBlur ( ) {
-        document.getElementById('window-button-close').className = 'window-buttons-blur-mode';
-        document.getElementById('window-button-minimize').className = 'window-buttons-blur-mode';
-        document.getElementById('window-button-maximize').className = 'window-buttons-blur-mode';
+        document.getElementById('window-button-close').className = 'window-buttons-blur-mode'
+        document.getElementById('window-button-minimize').className = 'window-buttons-blur-mode'
+        document.getElementById('window-button-maximize').className = 'window-buttons-blur-mode'
     }
 
 //
@@ -113,9 +111,9 @@
 //
 
     function makeWindowButtonsActive ( ) {
-        document.getElementById('window-button-close').className = 'window-button-close-active';
-        document.getElementById('window-button-minimize').className = 'window-button-minimize-active';
-        document.getElementById('window-button-maximize').className = 'window-button-maximize-active';
+        document.getElementById('window-button-close').className = 'window-button-close-active'
+        document.getElementById('window-button-minimize').className = 'window-button-minimize-active'
+        document.getElementById('window-button-maximize').className = 'window-button-maximize-active'
     }
 
 //
@@ -124,7 +122,7 @@
 
     window.onresize = ( ) => {
         if ( playgroundEditor !== undefined )
-            playgroundEditor.layout( );
+            playgroundEditor.layout( )
     }
 
 //
@@ -132,7 +130,7 @@
 //
 
     function openNewWindow ( ) {
-        ipcRenderer.send( 'open-new-window' );
+        ipcRenderer.send( 'open-new-window' )
     }
 
 //
@@ -140,7 +138,7 @@
 //
 
     function onOpenHelpPage ( ) {
-        ipcRenderer.send( 'open-help-page' );
+        ipcRenderer.send( 'open-help-page' )
     }
 
 //
@@ -148,7 +146,7 @@
 //
 
     function openHelpWindowForReference ( refID ) {
-        ipcRenderer.send( 'open-help-for-ref', refID );
+        ipcRenderer.send( 'open-help-for-ref', refID )
     }
 
 //
@@ -156,7 +154,7 @@
 //
 
     function openAboutPage ( ) {
-        ipcRenderer.send( 'open-about-page' );
+        ipcRenderer.send( 'open-about-page' )
     }
 
 //
@@ -164,18 +162,18 @@
 //
 
     OrchestraWindow.addListener( 'blur', ( ) => {
-        setMenuEnableFactor( false );
-        makeWindowButtonsBlur( );
-    });
+        setMenuEnableFactor( false )
+        makeWindowButtonsBlur( )
+    })
 
 //
 // ─── GAIN FOCUS ─────────────────────────────────────────────────────────────────
 //
 
     OrchestraWindow.addListener( 'focus', ( ) => {
-        setMenuEnableFactor( true );
-        makeWindowButtonsActive( );
-    });
+        setMenuEnableFactor( true )
+        makeWindowButtonsActive( )
+    })
 
 //
 // ─── MORE EVENTS ────────────────────────────────────────────────────────────────

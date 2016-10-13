@@ -12,33 +12,33 @@
 // ─── FILE SYSTEM ────────────────────────────────────────────────────────────────
 //
 
-    var currentFile = defaultFileObject;
+    var currentFile = defaultFileObject
 
 //
 // ─── APP MENU ───────────────────────────────────────────────────────────────────
 //
 
-    var OrchestraAppMenu;
+    var OrchestraAppMenu
 
 //
 // ─── TAB MANAGER ────────────────────────────────────────────────────────────────
 //
 
-    var CurrentActiveView = 'editor';
+    var CurrentActiveView = 'editor'
 
 //
 // ─── EDITOR ─────────────────────────────────────────────────────────────────────
 //
 
-    var QuartetGenerator;
-    var quartetActiveBlockId = '';
-    var workspace;
-    var ComposeBlock;
+    var QuartetGenerator
+    var quartetActiveBlockId = ''
+    var workspace
+    var ComposeBlock
 
 //
 // ─── PLAYGROUND ─────────────────────────────────────────────────────────────────
 //
 
-    var playgroundEditor;
+    var playgroundEditor
 
 // ────────────────────────────────────────────────────────────────────────────────

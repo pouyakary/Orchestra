@@ -13,15 +13,12 @@
 //
 
     function CancelLoadingScreenAfterCompleteLoad ( ) {
-        setTimeout(( ) => {
-            setTimeout(( ) => {
-                let loadingView = document.getElementById('loading-view');
-                loadingView.className = 'dead-loading-view';
-                setTimeout(( ) => {
+        setTimeout( ( ) => {
+            setTimeout( ( ) => {
+                let loadingView = document.getElementById('loading-view')
+                loadingView.className = 'dead-loading-view'
+                setTimeout( ( ) => {
                     loadingView.remove( );
-                }, 1000);
-            });
-        });
-    }
+                }, 1000 )})})}
 
 // ────────────────────────────────────────────────────────────────────────────────

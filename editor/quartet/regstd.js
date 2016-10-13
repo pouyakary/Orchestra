@@ -13,24 +13,23 @@
 //
 
     // ../../quartets/regex-sequence.quartet
-    const sequenceRegEx = /^(?:\(.*\)|\[.*\])$/;
+    const sequenceRegEx = /^(?:\(.*\)|\[.*\])$/
 
     // ../../quartets/quartet-html-entities.quartet
-    const htmlSpecialEntities = /&(?:nbsp|#160|gt|lt);/g;
+    const htmlSpecialEntities = /&(?:nbsp|#160|gt|lt);/g
 
     // ../../quartets/html-entities.quartet
-    const selectedBlockHTMl = /\<span class\="console\-highlight\-active\-block"\>(.*)\<\/span\>/g;
+    const selectedBlockHTMl = /\<span class\="console\-highlight\-active\-block"\>(.*)\<\/span\>/g
 
 //
 // ─── TO UNICODE ─────────────────────────────────────────────────────────────────
 //
 
     function quartetUnicodify ( text ) {
-        let result = [ ];
-        for ( let character of text ) {
-            result.push( getUnicodeCharacter( character ) );
-        }
-        return result.join('');
+        let result = [ ]
+        for ( let character of text )
+            result.push( getUnicodeCharacter( character ) )
+        return result.join('')
     }
 
 //
@@ -41,7 +40,7 @@
         return code.replace( selectedBlockHTMl  , ( val, matchOne ) => matchOne )
                    .replace( /&nbsp;/g          , ' '                           )
                    .replace( /&gt;/g            , '>'                           )
-                   .replace( /&lt;/g            , '<'                           );
+                   .replace( /&lt;/g            , '<'                           )
     }
 
 //
@@ -49,10 +48,10 @@
 //
 
     function getUnicodeCharacter ( character ) {
-        let num = character.charCodeAt( 0 ).toString( 16 ).toUpperCase( );
-        let size = 4 - num.length;
-        for ( let index = 0; index < size; index++ ) num = '0' + num;
-        return '\\u' + num;
+        let num = character.charCodeAt( 0 ).toString( 16 ).toUpperCase( )
+        let size = 4 - num.length
+        for ( let index = 0; index < size; index++ ) num = '0' + num
+        return '\\u' + num
     }
 
 //
@@ -60,8 +59,8 @@
 //
 
     function quartetSequence ( code ) {
-        if ( sequenceRegEx.test( code ) ) return code;
-        return ( quartetGetStringLength( code ) <= 1 )? code : '(?:' + code + ')';
+        if ( sequenceRegEx.test( code ) ) return code
+        return ( quartetGetStringLength( code ) <= 1 )? code : '(?:' + code + ')'
     }
 
 //
@@ -69,7 +68,7 @@
 //
 
     function quartetEncodeText ( code ) {
-        let result = [ ];
+        let result = [ ]
         for ( let character of code ) {
             switch ( character ) {
                 case '.':
@@ -93,16 +92,16 @@
                 case ':':
                 case '-':
                 case '/':
-                    result.push( `\\${ character }` );
-                    break;
+                    result.push( `\\${ character }` )
+                    break
                 case ' ':
-                    result.push( '&nbsp;');
-                    break;
+                    result.push( '&nbsp;')
+                    break
                 default:
-                    result.push( character );
+                    result.push( character )
             }
         }
-        return quartetEncodeHTML( result.join('') );
+        return quartetEncodeHTML( result.join('') )
     }
 
 //
@@ -110,7 +109,7 @@
 //
 
     function quartetSpaceEncode ( text ) {
-        return text.replace(/ /g, '&nbsp;');
+        return text.replace(/ /g, '&nbsp;')
     }
 
 //
@@ -118,7 +117,7 @@
 //
 
     function quartetGetStringLength ( code ) {
-        return code.replace( htmlSpecialEntities, ' ' ).length;
+        return code.replace( htmlSpecialEntities, ' ' ).length
     }
 
 //
@@ -126,7 +125,7 @@
 //
 
     function quartetSpaceDecode ( text ) {
-        return text.replace( /\\u0020/g, ' ' );
+        return text.replace( /\\u0020/g, ' ' )
     }
 
 //
@@ -134,8 +133,8 @@
 //
 
     function quartetAlphabet ( sigma ) {
-        if ( sigma.length === 0 ) return '';
-        return quartetEncodeHTML( ( sigma.length === 1 )? sigma[ 0 ] : '[' + sigma.join('') + ']' );
+        if ( sigma.length === 0 ) return ''
+        return quartetEncodeHTML( ( sigma.length === 1 )? sigma[ 0 ] : '[' + sigma.join('') + ']' )
     }
 
 //
@@ -146,11 +145,9 @@
         return text.replace( /<|>/, match => {
             switch ( match ) {
                 case '<':
-                    return '&lt;';
+                    return '&lt;'
                 case '>':
-                    return '&gt;';
-            }
-        });
-    }
+                    return '&gt;'
+                }})}
 
 // ────────────────────────────────────────────────────────────────────────────────

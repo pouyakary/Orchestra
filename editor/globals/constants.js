@@ -12,46 +12,46 @@
 // ─── FILE DEFAULTS ──────────────────────────────────────────────────────────────
 //
 
-    const defaultFileXML = '<xml><block type="compose" deletable="false"></block></xml>';
+    const defaultFileXML = '<xml><block type="compose" deletable="false"></block></xml>'
 
-    const defaultEmptyPath = 'Undefined';
+    const defaultEmptyPath = 'Undefined'
 
     const defaultFileObject = {
         path: defaultEmptyPath,
         dirty: true,
         emptyNewFile: true,
-    };
+    }
 
 //
 // ─── ELECTRON LOADS ─────────────────────────────────────────────────────────────
 //
 
-    const { ipcRenderer, clipboard } = require( 'electron' );
-    const { dialog } = require( 'electron' ).remote;
-    const OrchestraWindow = require( 'electron' ).remote.getCurrentWindow( );
-    const openExternal = require( 'electron' ).shell.openExternal;
-    const regulex = require('regulex');
+    const { ipcRenderer, clipboard } = require( 'electron' )
+    const { dialog } = require( 'electron' ).remote
+    const OrchestraWindow = require( 'electron' ).remote.getCurrentWindow( )
+    const openExternal = require( 'electron' ).shell.openExternal
+    const regulex = require('regulex')
 //
 // ─── NODE LOADS ─────────────────────────────────────────────────────────────────
 //
 
-    const path = require( 'path' );
-	const fs   = require( 'fs' );
+    const path = require( 'path' )
+	const fs   = require( 'fs' )
 
 //
 // ─── IDS ────────────────────────────────────────────────────────────────────────
 //
 
-    const EditorWindowScreenElement = 'EditorView';
-    const PlaygroundWindowScreenElement = 'PlaygroundView';
-    const TabsPlaceholder = 'header-tabs';
-    const playgroundEditorID = 'playground-editor';
-    const composeBlockIDforSVGCanvas = 'TheComposeBlockSVGCanvas';
+    const EditorWindowScreenElement = 'EditorView'
+    const PlaygroundWindowScreenElement = 'PlaygroundView'
+    const TabsPlaceholder = 'header-tabs'
+    const playgroundEditorID = 'playground-editor'
+    const composeBlockIDforSVGCanvas = 'TheComposeBlockSVGCanvas'
 
 //
 // ─── SPECIAL CHARS ──────────────────────────────────────────────────────────────
 //
 
-    const __SPACE_UNICODE_STRING__ = "\\u0020";
+    const __SPACE_UNICODE_STRING__ = "\\u0020"
 
 // ────────────────────────────────────────────────────────────────────────────────

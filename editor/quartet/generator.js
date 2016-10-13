@@ -12,7 +12,7 @@
 // ─── INIT ───────────────────────────────────────────────────────────────────────
 //
 
-    QuartetGenerator = new Blockly.Generator('Quartet');
+    QuartetGenerator = new Blockly.Generator('Quartet')
 
 //
 // ─── GENERATOR INIT ─────────────────────────────────────────────────────────────
@@ -27,7 +27,7 @@
 //
 
     QuartetGenerator.finish = code => {
-        return code.trim( );
+        return code.trim( )
     };
 
 //
@@ -35,7 +35,7 @@
 //
 
     QuartetGenerator.scrubNakedValue = line => {
-        return line.trim( );
+        return line.trim( )
     };
 
 //
@@ -43,7 +43,7 @@
 //
 
     QuartetGenerator.quote_ = text => {
-        return text.trim( );
+        return text.trim( )
     };
 
 //
@@ -51,12 +51,12 @@
 //
 
     QuartetGenerator.scrub_ = ( block, code ) => {
-        if ( block.id === quartetActiveBlockId ) {
-            code = `<span class="console-highlight-active-block">${ code }</span>`;
-        }
-        let nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-        let nextCode = QuartetGenerator.blockToCode( nextBlock );
-        return code.trim( ) + nextCode.trim( );
-    };
+        if ( block.id === quartetActiveBlockId )
+            code = `<span class="console-highlight-active-block">${ code }</span>`
+
+        let nextBlock = block.nextConnection && block.nextConnection.targetBlock( )
+        let nextCode = QuartetGenerator.blockToCode( nextBlock )
+        return code.trim( ) + nextCode.trim( )
+    }
 
 // ────────────────────────────────────────────────────────────────────────────────

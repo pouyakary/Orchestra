@@ -13,7 +13,7 @@
 //
 
     function setConsoleRegEx ( html ) {
-        document.getElementById( 'ribbon-console-regexp' ).innerHTML = html;
+        document.getElementById( 'ribbon-console-regexp' ).innerHTML = html
     }
 
 //
@@ -21,11 +21,11 @@
 //
 
     function updateConsoleTitle ( ) {
-        let title = getFileName( );
+        let title = getFileName( )
         let dirtStatus = ( getFileDirtStatus( ) )?
-            ' &bullet; Not Saved' : '';
-        document.title = title;
-        setConsoleTitle(`${ title }${ dirtStatus }`);
+            ' &bullet; Not Saved' : ''
+        document.title = title
+        setConsoleTitle(`${ title }${ dirtStatus }`)
     }
 
 //
@@ -33,7 +33,7 @@
 //
 
     function setConsoleTitle ( title ) {
-        document.getElementById( 'ribbon-console-title' ).innerHTML = title;
+        document.getElementById( 'ribbon-console-title' ).innerHTML = title
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

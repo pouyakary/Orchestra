@@ -14,8 +14,8 @@
 
     function onNewFile ( force = false ) {
         if ( !( checkForSavingChanges( ) || force ) ) return;
-        currentFile = defaultFileObject;
-        updateWorkspaceWithNewXML( defaultFileXML );
+        currentFile = defaultFileObject
+        updateWorkspaceWithNewXML( defaultFileXML )
     }
 
 //
@@ -32,11 +32,12 @@
                 name: 'Quartet Language',
                 extensions: [ 'quartet' ]
             }]
-        });
+        })
+
         if ( filePath === undefined ) return;
 
         // done let's load.
-        openFileWithPath( filePath[ 0 ] );
+        openFileWithPath( filePath[ 0 ] )
     }
 
 //
@@ -44,9 +45,8 @@
 //
 
     function onSaveFile ( force = false ) {
-        if ( checkPathAndAskForPathIfNeeded( force ) ) {
-            saveFileWithInfo( );
-        }
+        if ( checkPathAndAskForPathIfNeeded( force ) )
+            saveFileWithInfo( )
     }
 
 //
@@ -54,7 +54,7 @@
 //
 
     function onSaveFileAs ( ) {
-        onSaveFile( true );
+        onSaveFile( true )
     }
 
 //
@@ -67,15 +67,14 @@
                 filters: [{
                     name: 'SVG',
                     extensions: [ 'svg' ],
-                }]
-            });
+                }]})
 
-            if ( filePath !== undefined ) {
-                exportSVGImageTo( filePath );
-            }
-        } else {
-            alert("Your workspace contains blocks in top level other than Quartet Compose Block. Please clean up your workspace and try again.");
+            if ( filePath !== undefined )
+                exportSVGImageTo( filePath )
+
         }
+
+        else alert("Your workspace contains blocks in top level other than Quartet Compose Block. Please clean up your workspace and try again.")
     }
 
 //
@@ -83,7 +82,7 @@
 //
 
     function getWindowForDialogSheets ( ) {
-        return ( OrchestraWindow.isMaximized( ) )? OrchestraWindow : null;
+        return ( OrchestraWindow.isMaximized( ) )? OrchestraWindow : null
     }
 
 //
@@ -96,18 +95,17 @@
                 filters: [{
                     name: 'Quartet',
                     extensions: [ 'quartet' ],
-                }]
-            });
+                }]})
 
             if ( newPath !== undefined ) {
-                currentFile.path = newPath;
-                return true;
+                currentFile.path = newPath
+                return true
             } else {
-                currentFile = defaultFileObject;
-                return false;
+                currentFile = defaultFileObject
+                return false
             }
         }
-        return true;
+        return true
     }
 
 //
@@ -121,16 +119,15 @@
                 title: "Orchestra",
                 message: "Don't let your saves be lost",
                 detail: "If you don't save then everything since your last save will be lost. You're a developer you know that."
-            });
+            })
 
-            if ( ans === 0 ) {
-                onSaveFile( );
-            } else if ( ans === 1 ) {
-                return false;
-            }
+            if ( ans === 0 )
+                onSaveFile( )
+            else if ( ans === 1 )
+                return false
         }
 
-        return true;
+        return true
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

@@ -12,7 +12,7 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    const kit = require('./../kit');
+    const kit = require('./../kit')
 
 //
 // ─── EXPORT ─────────────────────────────────────────────────────────────────────
@@ -20,19 +20,20 @@
 
     module.exports = node => {
         // if range is simple 'Alphabet' / 'Anything But' block
-        let simpleSet = true;
-        if ( node.ranges !== undefined ) {
-            for ( let range of node.ranges ) {
-                if ( !( range === 'az' || range === 'AZ' || range === '09' ) ) {
-                    simpleSet = false;
+        let simpleSet = true
+        if ( node.ranges !== undefined )
+            for ( let range of node.ranges )
+                if ( !( range === 'az' || range === 'AZ' || range === '09' ) )
+                    simpleSet = false
 
         // Range Block
         if ( node.chars === '' && node.ranges.length === 1 && node.exclude === undefined )
-            return composeRangeBlock( node );
+            return composeRangeBlock( node )
 
         // Alphabet Block
         if ( simpleSet )
-            return composeForSimpleAlphabetOrAnythingBut( node );
+            return composeForSimpleSets( node )
+
     }
 
 //
@@ -45,15 +46,13 @@
             fields: [
                 { key: 'start', val: node.ranges[ 0 ][ 0 ] },
                 { key: 'end', val: node.ranges[ 0 ][ 1 ] }
-            ]
-        });
-    }
+            ]})}
 
 //
 // ─── COMPOSE FOR SIMPLE ALPHABET ────────────────────────────────────────────────
 //
 
-    function composeForSimpleAlphabetOrAnythingBut ( node ) {
+    function composeForSimpleSets ( node ) {
         // fill ranges fields
         let sets = {
             numbers: 'FALSE',
@@ -64,15 +63,15 @@
             for ( let range of node.ranges )
                 switch ( range ) {
                     case '09':
-                        sets.numbers = 'TRUE';
-                        break;
+                        sets.numbers = 'TRUE'
+                        break
                     case 'az':
-                        sets.lowercase = 'TRUE';
-                        break;
+                        sets.lowercase = 'TRUE'
+                        break
                     case 'AZ':
-                        sets.uppercase = 'TRUE';
-                        break;
-                }
+                        sets.uppercase = 'TRUE'
+                        break
+                    }
 
         // composing final stuff:
         return kit.compose({
@@ -82,9 +81,21 @@
                 { key: 'lowercase'  , val: sets.lowercase   },
                 { key: 'uppercase'  , val: sets.uppercase   },
                 { key: 'other'      , val: node.chars       },
-            ]
-        })
-    }
+            ]})}
+
+//
+// ─── COMPOSE ADVANCE SETS ───────────────────────────────────────────────────────
+//
+
+    function composeForAdvanceSets ( node ) {
+        let blocks = [ ]
+        // adding ranges
+        for ( let range in node.ranges )
+            blocks.push( kit.compose({
+                type: 'sigma_range',
+                fields: [
+                    { key: 'start', val: node.ranges[ 0 ][ 0 ] },
+                    { key: 'end', val: node.ranges[ 0 ][ 1 ] }
+                ]}))}
 
 // ────────────────────────────────────────────────────────────────────────────────
-

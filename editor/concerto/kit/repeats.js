@@ -12,46 +12,35 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    const compose = require('./toxml.js');
+    const compose = require('./toxml.js')
 
 //
 // ─── APPLY REPEAT ───────────────────────────────────────────────────────────────
 //
 
     module.exports = ( node, blockXML ) => {
-        if ( node.repeat !== undefined ) {
-            let min = node.repeat.min;
-            let max = node.repeat.max;
+        if ( node.repeat === undefined ) return blockXML;
 
-            if ( min === 0 && max === 1 ) {
-                return concertoStaticRepeatWithType( 'maybe', blockXML );
-            }
+        let min = node.repeat.min
+        let max = node.repeat.max
 
-            else if ( min === 1 && max === Infinity ) {
-                return concertoStaticRepeatWithType( 'one_or_more', blockXML );
-            }
+        if ( min === 0 && max === 1 )
+            return concertoStaticRepeatWithType( 'maybe', blockXML )
 
-            else if ( min === 0 && max === Infinity ) {
-                return concertoStaticRepeatWithType( 'any_number_of', blockXML );
-            }
+        else if ( min === 1 && max === Infinity )
+            return concertoStaticRepeatWithType( 'one_or_more', blockXML )
 
-            else if ( min === max ) {
-                return concertoRepeatBlockWithCount( min, blockXML );
-            }
+        else if ( min === 0 && max === Infinity )
+            return concertoStaticRepeatWithType( 'any_number_of', blockXML )
 
-            else if ( min !== Infinity && max === Infinity ) {
-                return concertoAtLeastRepeat( min, blockXML );
-            }
+        else if ( min === max )
+            return concertoRepeatBlockWithCount( min, blockXML )
 
-            else {
-                return concertoComposeRepeatInRange( min, max, blockXML );
-            }
+        else if ( min !== Infinity && max === Infinity )
+            return concertoAtLeastRepeat( min, blockXML )
 
-        }
-
-        else {
-            return blockXML;
-        }
+        else
+            return concertoComposeRepeatInRange( min, max, blockXML );
     }
 
 //
@@ -66,9 +55,7 @@
                 blocks: [
                     blockXML
                 ]
-            }]
-        });
-    }
+            }]})}
 
 //
 // ─── COMPOSE REPEAT TIMES ───────────────────────────────────────────────────────
@@ -86,9 +73,7 @@
                 blocks: [
                     blockXML
                 ]
-            }]
-        });
-    }
+            }]})}
 
 //
 // ─── COMPOSE AT LEAST REPEAT ────────────────────────────────────────────────────
@@ -106,9 +91,7 @@
                 blocks: [
                     blockXML
                 ]
-            }]
-        });
-    }
+            }]})}
 
 //
 // ─── COMPOSE REPEAT IN RANGE ────────────────────────────────────────────────────
@@ -126,8 +109,6 @@
                 blocks: [
                     blockXML
                 ]
-            }]
-        });
-    }
+            }]})}
 
 // ────────────────────────────────────────────────────────────────────────────────

@@ -188,8 +188,8 @@
     }
 
     if ( process.platform == 'darwin' ) {
-        var name = require( 'electron' ).remote.app.getName( );
-        var menuIndex = MainMenu.length - 1;
+        var name = require( 'electron' ).remote.app.getName( )
+        var menuIndex = MainMenu.length - 1
         MainMenu.unshift(
             {
                 label: name,
@@ -230,9 +230,9 @@
                     },
                 ]
             }
-        );
+        )
     } else {
-        MainMenu[ menuIndex ].submenu.push( AboutPageButton );
+        MainMenu[ menuIndex ].submenu.push( AboutPageButton )
     }
 
 //
@@ -240,14 +240,14 @@
 //
 
     function initMainMenu ( ) {
-        const remote = require('electron').remote;
-        const Menu = remote.Menu;
-        const MenuItem = remote.MenuItem;
+        const remote = require('electron').remote
+        const Menu = remote.Menu
+        const MenuItem = remote.MenuItem
 
-        OrchestraAppMenu = new Menu();
+        OrchestraAppMenu = new Menu( )
 
-        OrchestraAppMenu = Menu.buildFromTemplate( MainMenu );
-        Menu.setApplicationMenu( OrchestraAppMenu );
+        OrchestraAppMenu = Menu.buildFromTemplate( MainMenu )
+        Menu.setApplicationMenu( OrchestraAppMenu )
     }
 
 //
@@ -256,10 +256,9 @@
 
     function setMenuEnableFactor ( control ) {
         for ( let menuIndex = 0; menuIndex < OrchestraAppMenu.items.length; menuIndex++ ) {
-            let submenu = OrchestraAppMenu.items[ menuIndex ].submenu.items;
-            for ( let submenuIndex = 0; submenuIndex < submenu.length; submenuIndex++ ) {
+            let submenu = OrchestraAppMenu.items[ menuIndex ].submenu.items
+            for ( let submenuIndex = 0; submenuIndex < submenu.length; submenuIndex++ )
                 submenu[ submenuIndex ].enabled = control;
-            }
         }
     }
 
