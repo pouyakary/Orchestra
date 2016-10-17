@@ -19,6 +19,7 @@
                 loadingView.className = 'dead-loading-view'
                 setTimeout( ( ) => {
                     loadingView.remove( );
+                    console.clear( );
                 }, 1000 )})})}
 
 // ────────────────────────────────────────────────────────────────────────────────
