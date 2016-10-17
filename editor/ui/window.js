@@ -33,9 +33,16 @@
 //
 
     function report ( text ) {
-        new Notification( 'Orchestra', {
-            body: text
-        })}
+        console.error( text )
+        let notification = new Notification( 'Orchestra', {
+            body: text,
+            sticky: true
+        })
+        notification.onclick = ( ) => {
+            OrchestraWindow.openDevTools( )
+            notification = null
+        }
+    }
 
 //
 // ─── ON CLOSE ───────────────────────────────────────────────────────────────────
