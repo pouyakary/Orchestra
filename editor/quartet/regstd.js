@@ -98,7 +98,16 @@
                     result.push( '&nbsp;')
                     break
                 default:
-                    result.push( character )
+                    let charCode = character.charCodeAt( 0 )
+
+                    // we add basic alphabet as basic alphabet they are safe ASCII
+                    // and extended ASCII.
+                    if ( 32 < charCode && charCode < 255 )
+                        result.push( character )
+
+                    // for codes that don't have a safe ASCII representation we
+                    // would encode them to safe unicode escape sequences.
+                    else result.push( getUnicodeCharacter( character ) )
             }
         }
         return quartetEncodeHTML( result.join('') )
@@ -134,7 +143,9 @@
 
     function quartetAlphabet ( sigma ) {
         if ( sigma.length === 0 ) return ''
-        return quartetEncodeHTML( ( sigma.length === 1 )? sigma[ 0 ] : '[' + sigma.join('') + ']' )
+        return quartetEncodeHTML(
+            ( sigma.length === 1 )? sigma[ 0 ] : '[' + sigma.join('') + ']'
+        )
     }
 
 //
