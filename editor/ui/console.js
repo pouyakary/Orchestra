@@ -22,8 +22,7 @@
 
     function updateConsoleTitle ( ) {
         let title = getFileName( )
-        let dirtStatus = ( getFileDirtStatus( ) )?
-            ' &bullet; Not Saved' : ''
+        let dirtStatus = ( getFileDirtStatus( ) )? ' &bullet; Not Saved' : ''
         document.title = title
         setConsoleTitle(`${ title }${ dirtStatus }`)
     }
