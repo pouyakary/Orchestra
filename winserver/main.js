@@ -8,35 +8,35 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 //
 
-'use strict';
+'use strict'
 
 //
 // ─── DEFS ───────────────────────────────────────────────────────────────────────
 //
 
-    const electron = require( 'electron' );
-    const { ipcMain, BrowserWindow, app } = require( 'electron' );
-    const messenger = require('messenger');
-    const fs = require('fs');
-    const path = require('path');
+    const electron                          = require( 'electron' )
+    const { ipcMain, BrowserWindow, app }   = require( 'electron' )
+    const messenger                         = require('messenger')
+    const fs                                = require('fs')
+    const path                              = require('path')
 
 //
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
 //
 
-    const uniqueWindowIdKey = 'orchestra-unique-window-id';
+    const uniqueWindowIdKey = 'orchestra-unique-window-id'
 
-    const orchestraVersion = '1.0';
-    const quartetVersion = '1.2';
+    const orchestraVersion = '1.0'
+    const quartetVersion = '1.2'
 
 //
 // ─── STORAGE ────────────────────────────────────────────────────────────────────
 //
 
-    let windowCount = 0;
-    let isHelpWindowOpen = false;
-    let isAboutWindowOpen = false;
-    let helpWindow;
+    let windowCount = 0
+    let isHelpWindowOpen = false
+    let isAboutWindowOpen = false
+    let helpWindow
 
 //
 // ─── HELPER TOOLS ───────────────────────────────────────────────────────────────
@@ -44,10 +44,10 @@
 
     function existsSync ( filename ) {
         try {
-            fs.accessSync( filename );
-            return true;
+            fs.accessSync( filename )
+            return true
         } catch( ex ) {
-            return false;
+            return false
         }
     }
 
@@ -56,10 +56,10 @@
 //
 
     function createWindow ( file ) {
-        let editorWindow;
+        let editorWindow
 
-        const window_width = 1100;
-        const window_height = 640;
+        const window_width = 1100
+        const window_height = 640
         editorWindow = new BrowserWindow({
             show: false,
             width:  window_width,   minWidth: window_width - 150,
@@ -67,29 +67,29 @@
             backgroundColor: '#F7F7F7',
             frame: false,
             fullscreen: false,
-        });
+        })
 
-        editorWindow.maximize( );
+        editorWindow.maximize( )
 
-        windowCount++;
+        windowCount++
 
         if ( file === undefined || file === null ) {
-            editorWindow.loadURL( `file://${ __dirname }/index.html` );
+            editorWindow.loadURL( `file://${ __dirname }/index.html` )
         } else {
-            editorWindow.loadURL( `file://${ __dirname }/index.html?${ encodeURI( file ) }` );
+            editorWindow.loadURL( `file://${ __dirname }/index.html?${ encodeURI( file ) }` )
         }
 
 
         editorWindow.once('ready-to-show', ( ) => {
-            editorWindow.show( );
-            editorWindow.focus( );
+            editorWindow.show( )
+            editorWindow.focus( )
         });
 
         // editorWindow.openDevTools( );
 
         editorWindow.on( 'closed' , ( ) => {
-            windowCount--;
-        });
+            windowCount--
+        })
     }
 
 //
@@ -97,8 +97,8 @@
 //
 
     function openHelpWindow ( arg = '' ) {
-        if ( isHelpWindowOpen ) return;
-        isHelpWindowOpen = true;
+        if ( isHelpWindowOpen ) return
+        isHelpWindowOpen = true
 
         helpWindow = new BrowserWindow({
             title: "Quartet's Block Reference",
@@ -106,18 +106,18 @@
             height: 600, minHeight: 200,
             backgroundColor: 'white',
             fullscreen: false,
-        });
+        })
 
         if ( arg === '' ) {
-            helpWindow.loadURL( `file://${ __dirname }/help/index.html?none` );
+            helpWindow.loadURL( `file://${ __dirname }/help/index.html?none` )
         } else {
-            helpWindow.loadURL( `file://${ __dirname }/help/index.html?ref-${ arg }` );
+            helpWindow.loadURL( `file://${ __dirname }/help/index.html?ref-${ arg }` )
         }
 
         helpWindow.on( 'closed' , ( ) => {
-            isHelpWindowOpen = false;
-            helpWindow = null;
-        });
+            isHelpWindowOpen = false
+            helpWindow = null
+        })
     }
 
 //
@@ -125,8 +125,8 @@
 //
 
     function openAboutWindow ( ) {
-        if ( isAboutWindowOpen ) return;
-        isAboutWindowOpen = true;
+        if ( isAboutWindowOpen ) return
+        isAboutWindowOpen = true
 
         let aboutWindow = new BrowserWindow({
             title: 'About Orchestra',
@@ -134,18 +134,18 @@
             height: 410, minHeight: 410, maxHeight: 410,
             backgroundColor: '#ECECEC',
             //show: false
-        });
+        })
 
-        aboutWindow.loadURL( `file://${ __dirname }/about/index.html?ov=${ orchestraVersion }&qv=${ quartetVersion }` );
+        aboutWindow.loadURL( `file://${ __dirname }/about/index.html?ov=${ orchestraVersion }&qv=${ quartetVersion }` )
 
         /*aboutWindow.once( 'ready-to-show', ( ) => {
             aboutWindow.show( )
         });*/
 
         aboutWindow.on( 'closed' , ( ) => {
-            isAboutWindowOpen = false;
-            aboutWindow = null;
-        });
+            isAboutWindowOpen = false
+            aboutWindow = null
+        })
     }
 
 //
@@ -153,18 +153,18 @@
 //
 
     app.on( 'ready' , ( ) => {
-        console.log(`Orchestra, Version ${ orchestraVersion }`);
-        console.log('Copyright 2016 - Kary Foundation, Inc.');
+        console.log(`Orchestra, Version ${ orchestraVersion }`)
+        console.log('Copyright 2016 - Kary Foundation, Inc.')
 
-        runExtensionServer( );
-        createWindow( );
-    });
+        runExtensionServer( )
+        createWindow( )
+    })
 
 //
 // ─── ON OPEN HELP WINDOW ────────────────────────────────────────────────────────
 //
 
-    ipcMain.on ( 'open-help-page', ( event, arg ) => openHelpWindow ( ));
+    ipcMain.on ( 'open-help-page', ( event, arg ) => openHelpWindow ( ))
 
 //
 // ─── OPEN HELP FOR REFERENCE ────────────────────────────────────────────────────
@@ -172,10 +172,10 @@
 
     ipcMain.on ( 'open-help-for-ref', ( event, arg ) => {
         if ( isHelpWindowOpen ) {
-            helpWindow.focus( );
-            helpWindow.webContents.send( 'help-window-open-ref', `ref-${ arg }` );
+            helpWindow.focus( )
+            helpWindow.webContents.send( 'help-window-open-ref', `ref-${ arg }` )
         } else {
-            openHelpWindow( arg );
+            openHelpWindow( arg )
         }
     })
 
@@ -183,19 +183,19 @@
 // ─── ON WINDOW ASKS ─────────────────────────────────────────────────────────────
 //
 
-    ipcMain.on( 'open-new-window', ( event, arg ) => createWindow( ) );
+    ipcMain.on( 'open-new-window', ( event, arg ) => createWindow( ) )
 
 //
 // ─── OPEN ABOUT PAGE ────────────────────────────────────────────────────────────
 //
 
-    ipcMain.on( 'open-about-page', ( event, arg ) => openAboutWindow( ) );
+    ipcMain.on( 'open-about-page', ( event, arg ) => openAboutWindow( ) )
 
 //
 // ─── ON APP QUIT REQUEST ────────────────────────────────────────────────────────
 //
 
-    ipcMain.on( 'app-quit', ( event, arg ) => app.quit( ) );
+    ipcMain.on( 'app-quit', ( event, arg ) => app.quit( ) )
 
 //
 // ─── QUIT APP ON WINDOWS CLOSE ──────────────────────────────────────────────────
@@ -205,9 +205,9 @@
         // On macOS it is common for applications and their menu bar
         // to stay active until the user quits explicitly with Cmd + Q
         if ( process.platform !== 'darwin' ) {
-            app.quit( );
-        };
-    });
+            app.quit( )
+        }
+    })
 
 //
 // ─── ON ACTIVE ──────────────────────────────────────────────────────────────────
@@ -217,7 +217,7 @@
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
         if ( windowCount === 0 ) {
-            createWindow( );
+            createWindow( )
         }
     });
 
@@ -231,7 +231,7 @@
         // ─── CREATE SERVER ───────────────────────────────────────────────
         //
 
-            const extensionServer = messenger.createListener( 5994 );
+            const extensionServer = messenger.createListener( 5994 )
 
         //
         // ─── ON OPEN ORCHESTRA FOR A REGEX ───────────────────────────────
@@ -240,14 +240,14 @@
             extensionServer.on( 'open', ( message, data ) => {
                 if ( data !== null || data !== undefined ) {
                     if ( existsSync( data ) ) {
-                        createWindow( data );
+                        createWindow( data )
                     } else {
-                        message.reply('404');
+                        message.reply('404')
                     }
                 } else {
-                    createWindow( );
+                    createWindow( )
                 }
-            });
+            })
 
         // ─────────────────────────────────────────────────────────────────
 
