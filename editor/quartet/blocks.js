@@ -529,9 +529,9 @@
         init: function() {
             this.appendDummyInput()
                 .appendField("Sigma Range from")
-                .appendField(new Blockly.FieldTextInput("a"), "starting-point")
+                .appendField(new Blockly.FieldTextInput("a"), "start")
                 .appendField("to")
-                .appendField(new Blockly.FieldTextInput("z"), "end-point");
+                .appendField(new Blockly.FieldTextInput("z"), "end");
             this.setPreviousStatement(true, "SigmaType");
             this.setNextStatement(true, "SigmaType");
             this.setColour(230);
@@ -540,7 +540,7 @@
     };
 
     QuartetGenerator[ 'sigma_range' ] = function ( block ) {
-        return block.getFieldValue('starting-point') + '-' + block.getFieldValue('end-point');
+        return block.getFieldValue('start') + '-' + block.getFieldValue('end');
     };
 
 //
@@ -551,7 +551,7 @@
         init: function() {
             this.appendDummyInput()
                 .appendField("Sigma Characters")
-                .appendField(new Blockly.FieldTextInput(""), "chars");
+                .appendField(new Blockly.FieldTextInput(""), "text");
             this.setPreviousStatement(true, "SigmaType");
             this.setNextStatement(true, "SigmaType");
             this.setColour(230);
@@ -560,7 +560,7 @@
     };
 
     QuartetGenerator[ 'sigma_chars' ] = function ( block ) {
-        return quartetEncodeText( block.getFieldValue( 'chars' ) );
+        return quartetEncodeText( block.getFieldValue( 'text' ) );
     };
 
 //
