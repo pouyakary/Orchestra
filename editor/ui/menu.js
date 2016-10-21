@@ -160,7 +160,7 @@
                         type: 'separator'
                     },
                     {
-                        label: "Kary Foundtation's Website",
+                        label: "Kary Foundation's Website",
                         click: ( ) => openExternal('https://www.karyfoundation.org/')
                     },
                     {
