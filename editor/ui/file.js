@@ -14,6 +14,7 @@
 
     function setFileDirty ( dirt ) {
         currentFile.dirty = dirt
+        OrchestraWindow.setDocumentEdited( dirt )
         updateConsoleTitle( )
     }
 

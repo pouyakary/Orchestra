@@ -25,6 +25,7 @@
         let dirtStatus = ( getFileDirtStatus( ) )? ' &bullet; Not Saved' : ''
         document.title = title
         setConsoleTitle(`${ title }${ dirtStatus }`)
+        OrchestraWindow.setRepresentedFilename( title )
     }
 
 //

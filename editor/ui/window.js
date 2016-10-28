@@ -171,6 +171,7 @@
     OrchestraWindow.addListener( 'blur', ( ) => {
         setMenuEnableFactor( false )
         makeWindowButtonsBlur( )
+        OrchestraWindow.blurWebView( )
     })
 
 //
@@ -180,6 +181,7 @@
     OrchestraWindow.addListener( 'focus', ( ) => {
         setMenuEnableFactor( true )
         makeWindowButtonsActive( )
+        OrchestraWindow.focusOnWebView( )
     })
 
 //
