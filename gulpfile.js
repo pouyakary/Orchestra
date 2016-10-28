@@ -13,7 +13,6 @@
 //
 
     var gulp        = require('gulp');
-    var electron    = require('gulp-electron');
     var packageJson = require('./package.json');
     var exec        = require('child_process').exec;
     var util        = require('util');
@@ -50,7 +49,6 @@
 // ─── COPY DIR FILES ─────────────────────────────────────────────────────────────
 //
 
-    /** Copy to binary from dir */
     /** Copy to binary from dir */
     function copyToBinaryFromDir ( dir, subfolder ) {
         fs.readdir( dir , ( err , files ) => {
