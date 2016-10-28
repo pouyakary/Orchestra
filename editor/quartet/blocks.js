@@ -732,15 +732,19 @@
     Blockly.Blocks['lookahead'] = {
         init: function() {
             this.appendDummyInput()
-                .appendField("Accept (")
-                .appendField(new Blockly.FieldCheckbox("FALSE"), "reverse")
-                .appendField(" Don't Accept )");
-            this.appendStatementInput("match")
+                .appendField("Accept ");
+            this.appendStatementInput("blocks")
                 .setCheck("String");
             this.appendDummyInput()
-                .appendField("If lookahead was");
+                .appendField("If it was")
+                .appendField(new Blockly.FieldDropdown([
+                    [ "followed", "positive" ],
+                    [ "not followed", "negative" ]
+                ]), "status")
+                .appendField("by");
             this.appendStatementInput("lookahead")
                 .setCheck("String");
+            this.setInputsInline(false);
             this.setPreviousStatement(true, "String");
             this.setNextStatement(true, "String");
             this.setColour(210);
@@ -750,11 +754,11 @@
     };
 
     QuartetGenerator['lookahead'] = function(block) {
-        var checkbox_reverse = block.getFieldValue('reverse') == 'TRUE';
-        var statements_match = QuartetGenerator.statementToCode(block, 'match').trim( );
+        var status = block.getFieldValue('status') === 'negative';
+        var statements_match = QuartetGenerator.statementToCode(block, 'blocks').trim( );
         var statements_lookahead = QuartetGenerator.statementToCode(block, 'lookahead').trim( );
 
-        var reverseSign = (checkbox_reverse)? '!': '=';
+        var reverseSign = (status)? '!': '=';
         return quartetSequence( statements_match ) + '(?' + reverseSign + statements_lookahead + ')';
     };
 
