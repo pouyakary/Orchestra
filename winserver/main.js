@@ -79,6 +79,7 @@
             editorWindow.loadURL( `file://${ __dirname }/index.html?${ encodeURI( file ) }` )
         }
 
+        editorWindow.setMenuBarVisibility( false )
 
         editorWindow.once('ready-to-show', ( ) => {
             editorWindow.show( )
