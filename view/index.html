@@ -44,6 +44,7 @@
         <script src="ui/trafficlights.js" async></script>
         <script src="ui/console.js" async></script>
         <script src="ui/menu.js" async></script>
+        <script src="ui/import-regexp.js" async></script>
 	</head>
 
 	<body>
@@ -93,7 +94,7 @@
 					<div class="ribbon-icon ribbon-general-save-file" onclick="onSaveFile( )">Save</div>
 
 					<div class="ribbon-separator"></div>
-                    <div class="ribbon-icon ribbon-editor-compile" onclick="onOpenImportRegExDialog( );">Import RegEx</div>
+                    <div class="ribbon-icon ribbon-editor-compile" onclick="onOpenOrCloseImportRegExpDialog( );">Import RegEx</div>
 
                     <div class="ribbon-separator"></div>
                     <div id="ribbon-console-view">
@@ -117,11 +118,17 @@
 					<div style="clear: both;"></div>
 
                     <!-- Dialog for the RegExp Importer -->
-                    <div class="dialog" id="regexp-importer">
+                    <div class="dialog" id="regexp-importer" hidden="true">
                         <h1>Import RegExp</h1>
                         <p>This tool compiles your existing RegExp codes into optimized Quartet Language. Paste or type your RegExp and import!</p>
-                        <input type="text" id="import-regexp-input" placeholder="Your RegExp Goes Here">
-                        <button>Import</button>
+                        <input id="regexp-importer-input"
+                               type="text"
+                               placeholder="Your RegExp Goes Here"
+                               onkeyup="onCheckRegExpForImporter( )"
+                               onchange="onCheckRegExpForImporter( )">
+                        <button disabled="true"
+                                id="regexp-importer-button"
+                                onclick="onImportRegExp( )"></button>
                         <div style="clear: both;"></div>
                     </div>
 				</div>
