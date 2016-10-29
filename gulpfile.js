@@ -12,27 +12,27 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    var gulp        = require('gulp');
-    var packageJson = require('./package.json');
-    var exec        = require('child_process').exec;
-    var util        = require('util');
-    var path        = require('path');
-    var fs          = require('fs-extra');
-    var ugly        = require('gulp-uglify');
-    var less        = require('less');
-    var mv          = require('mv');
+    var gulp        = require('gulp')
+    var packageJson = require('./package.json')
+    var exec        = require('child_process').exec
+    var util        = require('util')
+    var path        = require('path')
+    var fs          = require('fs-extra')
+    var ugly        = require('gulp-uglify')
+    var less        = require('less')
+    var mv          = require('mv')
 
 //
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
 //
 
-    const version = "v1.0";
+    const version = "v1.0"
 
 //
 // ─── CONSTS ─────────────────────────────────────────────────────────────────────
 //
 
-    const resultDirPath = '_compiled';
+    const resultDirPath = '_compiled'
 
 //
 // ─── TOOLS ──────────────────────────────────────────────────────────────────────
@@ -41,8 +41,8 @@
     /** Run shell commands easy! */
     function shell ( command , callback ) {
         exec( command, err => {
-            if ( err ) console.log( err );
-        });
+            if ( err ) console.log( err )
+        })
     }
 
 //
@@ -53,26 +53,22 @@
     function copyToBinaryFromDir ( dir, subfolder ) {
         fs.readdir( dir , ( err , files ) => {
             // if error
-            if ( err ) {
-                console.log(`Could not get files from directory ${ dir }`);
-            }
+            if ( err )
+                console.log(`Could not get files from directory ${ dir }`)
 
             // if right
             files.forEach( name => {
                 let dest;
-                if ( !( subfolder === undefined || subfolder === '' || subfolder === null ) ) {
-                    dest = path.join( resultDirPath , subfolder , name );
-                } else {
-                    dest = path.join( resultDirPath , name );
-                }
+                if ( !( subfolder === undefined || subfolder === '' || subfolder === null ) )
+                    dest = path.join( resultDirPath , subfolder , name )
+                else
+                    dest = path.join( resultDirPath , name )
 
-                copyFile(
-                    getLocalPath( path.join( dir , name ) ),
-                    getLocalPath( dest )
-                );
-            });
-        });
-    }
+                if ( !( name.endsWith('.map') || name.endsWith('.d.ts') ) )
+                    copyFile(
+                        getLocalPath( path.join( dir , name ) ),
+                        getLocalPath( dest )
+                    )})})}
 
 //
 // ─── COPY SINGLE FILE ───────────────────────────────────────────────────────────
@@ -85,9 +81,9 @@
         }
         fs.copy( A, B, err => {
             if ( err ) {
-                console.log(`Could not copy file ${ A }`);
+                console.log(`Could not copy file ${ A }`)
             }
-        });
+        })
     }
 
 //
@@ -96,7 +92,7 @@
 
     /** Get Local Path in the current directory */
     function getLocalPath ( address ) {
-        return path.join( __dirname , address );
+        return path.join( __dirname , address )
     }
 
 //
@@ -107,32 +103,33 @@
     gulp.task( 'copyResourceFiles', callback => {
 
         function copyNodeModules ( handle ) {
-            let address = path.join( 'node_modules', handle );
-            copyToBinaryFromDir( address, address );
+            let address = path.join( 'node_modules', handle )
+            copyToBinaryFromDir( address, address )
         }
 
-        copyToBinaryFromDir( 'resources' );
-        copyToBinaryFromDir( 'view' );
-        copyToBinaryFromDir( 'editor' );
-        copyToBinaryFromDir( 'libs' );
-        copyToBinaryFromDir( 'sounds' );
-        copyToBinaryFromDir( 'windows' );
-        copyToBinaryFromDir( 'winserver' );
+        copyToBinaryFromDir( 'resources' )
+        copyToBinaryFromDir( 'view' )
+        copyToBinaryFromDir( 'editor' )
+        copyToBinaryFromDir( 'libs' )
+        copyToBinaryFromDir( 'sounds' )
+        copyToBinaryFromDir( 'windows' )
+        copyToBinaryFromDir( 'winserver' )
 
-        copyNodeModules('messenger');
-        copyNodeModules('regulex');
-        copyNodeModules('amdefine');
+        copyNodeModules('concerto-compiler')
+        copyNodeModules('messenger')
+        copyNodeModules('regulex')
+        copyNodeModules('amdefine')
 
         copyFile(
             getLocalPath( 'package.json' ),
             getLocalPath( path.join( resultDirPath , 'package.json' ) )
-        );
+        )
 
         // adding commit count
-        shell(`git rev-list --all --count > ${resultDirPath}/about/commit-count.txt`);
+        shell(`git rev-list --all --count > ${resultDirPath}/about/commit-count.txt`)
 
-        callback();
-    });
+        callback()
+    })
 
 //
 // ─── SHEETS ─────────────────────────────────────────────────────────────────────
@@ -142,36 +139,36 @@
     gulp.task( 'sheets', callback => {
         try {
             let lessSourceCode = fs.readFileSync(
-                path.join( __dirname, 'sheets', 'ui.less' ), 'utf8' );
+                path.join( __dirname, 'sheets', 'ui.less' ), 'utf8' )
 
             less.render( lessSourceCode, ( err, output ) => {
                 if ( err ) {
-                    console.log(`Less failure: ${ err }`); return;
+                    console.log(`Less failure: ${ err }`); return
                 }
                 fs.writeFile(
                     path.join( __dirname, '_compiled/style.css' ),
                     output.css,
                     error => {
                         if ( error ) {
-                            console.log('could not store the less file');
+                            console.log('could not store the less file')
                         } else {
-                            callback();
+                            callback()
                         }
                     }
-                );
-            });
+                )
+            })
         } catch ( err ) {
-            console.log('Compiling less failed ' + err );
+            console.log('Compiling less failed ' + err )
         }
-    });
+    })
 
 //
 // ─── ELECTRON PACKER ────────────────────────────────────────────────────────────
 //
 
     gulp.task( 'electron', ['copyResourceFiles', 'sheets'], ( ) => {
-        shell('electron-packager _compiled "Orchestra" --platform=darwin --arch=x64 --overwrite=true --app-copyrigh="Copyright 2016 by Kary Foundation, Inc." --app-version="Summer Builds 2016" --icon=./designs/icon/icns/electron.icns --name="Orchestra" --out=_release');
-    });
+        shell('electron-packager _compiled "Orchestra" --platform=darwin --arch=x64 --overwrite=true --app-copyrigh="Copyright 2016 by Kary Foundation, Inc." --app-version="Summer Builds 2016" --icon=./designs/icon/icns/electron.icns --name="Orchestra" --out=_release')
+    })
 
 //
 // ─── AFTER PACK ─────────────────────────────────────────────────────────────────
@@ -179,13 +176,13 @@
 
     gulp.task( 'after-pack', [ 'electron' ], ( ) => {
 
-    });
+    })
 
 //
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
 //
 
     /** Where everything starts */
-    gulp.task( 'default', [ 'after-pack' ]);
+    gulp.task( 'default', [ 'after-pack' ])
 
 // ────────────────────────────────────────────────────────────────────────────────

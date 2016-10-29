@@ -31,6 +31,7 @@
     const OrchestraWindow = require( 'electron' ).remote.getCurrentWindow( )
     const openExternal = require( 'electron' ).shell.openExternal
     const regulex = require('regulex')
+    const concerto = require('concerto-compiler')
 //
 // ─── NODE LOADS ─────────────────────────────────────────────────────────────────
 //
