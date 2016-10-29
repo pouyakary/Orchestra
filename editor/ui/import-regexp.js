@@ -49,15 +49,16 @@
 
     function setRegExpImportButtonStatus ( enable ) {
         let button = document.getElementById('regexp-importer-button')
+        let input = document.getElementById('regexp-importer-input')
         if ( enable ) {
-            button.disabled = false
-            button.innerText = 'Import'
-            button.style.backgroundColor = '#48C200'
+            // input.style.color = 'black'
+            input.className = 'input-with-button'
+            button.className = 'enabled-button'
             return true
         } else {
-            button.disabled = true
-            button.innerText = 'Syntax Error'
-            button.style.backgroundColor = '#BA0202'
+            // input.style.color = 'red'
+            input.className = 'full-input'
+            button.className = 'disabled-button'
             return false
         }
     }

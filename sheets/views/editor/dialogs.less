@@ -23,6 +23,40 @@
         left: 185px;
     }
 
+    .regexp-importer-input-box {
+        border-radius: 100px;
+        height: 37px;
+        max-height: 37px;
+        min-height: 37px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    @transition-duration: 0.4s;
+
+    .full-input {
+        width: 370px;
+        transition-duration: @transition-duration;
+    }
+
+    .input-with-button {
+        width: 235px;
+        transition-duration: @transition-duration;
+        border-top-right-radius: 100px;
+        border-bottom-right-radius: 100px;
+        margin-right: 10px;
+    }
+
+    .disabled-button {
+        width: 0px;
+        transition-duration: @transition-duration;
+    }
+
+    .enabled-button {
+        width: 80px;
+        transition-duration: @transition-duration;
+    }
+
 //
 // ─── MAIN BOX ───────────────────────────────────────────────────────────────────
 //
@@ -43,41 +77,44 @@
 // ─── DIALOG INPUT ───────────────────────────────────────────────────────────────
 //
 
-    .dialog > input {
+    #regexp-importer-input {
+        background-color: @kary-light-background;
         float: left;
         border: none;
-        background-color: @kary-light-background;
         font-size: 1.2rem;
         vertical-align: middle;
         font-family: @source-code-pro-typeface;
         border-top-left-radius: 100px;
         border-bottom-left-radius: 100px;
+        max-width: 370px;
         min-height: 37px;
         padding: 0 15px 0 15px;
         margin: 0;
-        width: ~'calc( 100% - 110px )';
     }
 
 //
 // ─── DIALOG BUTTON ──────────────────────────────────────────────────────────────
 //
 
-    .dialog > button {
+    #regexp-importer-button {
         float: left;
-        background-color: #BA0202;
+        border-radius: 100px;
         border: none;
-        //padding: 4px 10px 5px 10px;
         vertical-align: middle;
-        color: white;
+        color: @kary-light-background;
         font-size: 0.8rem;
         border-top-right-radius: 100px;
         border-bottom-right-radius: 100px;
         min-height: 37px;
         margin: 0;
         text-align: center;
-        width: 80px;
         text-transform: uppercase;
         letter-spacing: 2px;
+        margin-left: 10px;
+    }
+
+    #regexp-importer-button:hover {
+        background-color: #449F10;
     }
 
 //
