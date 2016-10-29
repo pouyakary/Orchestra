@@ -9,12 +9,40 @@
 //
 
 //
+// ─── MAKE HIDDEN EFFECT ─────────────────────────────────────────────────────────
+//
+
+    function checkToSeeIfRegExpImporterNeedsToBeDisabledOnOutClick ( event ) {
+        function isChildOf( child, parent ) {
+            if ( child.parentNode === parent ) {
+                return true;
+            } else if ( child.parentNode === null ) {
+                return false;
+            } else {
+                return isChildOf( child.parentNode, parent );
+            }
+        }
+
+        let dialog = document.getElementById('regexp-importer')
+        if ( !( event.target === document.getElementById('import-regexp-ribbon-button' ) ||
+                isChildOf( event.target, dialog ) ) ) {
+            dialog.hidden = true
+        }
+    }
+
+//
 // ─── EXPORTER ───────────────────────────────────────────────────────────────────
 //
 
     function onOpenOrCloseImportRegExpDialog ( ) {
         let dialog = document.getElementById('regexp-importer')
         dialog.hidden = !dialog.hidden
+
+        if ( !dialog.hidden )
+            document.onclick = checkToSeeIfRegExpImporterNeedsToBeDisabledOnOutClick
+        else
+            document.onclick = null
+
         document.getElementById('regexp-importer-input').value = ''
         onCheckRegExpForImporter( )
     }
@@ -48,17 +76,15 @@
     }
 
     function setRegExpImportButtonStatus ( enable ) {
-        let button = document.getElementById('regexp-importer-button')
-        let input = document.getElementById('regexp-importer-input')
+        let button  = document.getElementById('regexp-importer-button')
+        let input   = document.getElementById('regexp-importer-input')
         if ( enable ) {
-            // input.style.color = 'black'
-            input.className = 'input-with-button'
-            button.className = 'enabled-button'
+            input.className     = 'input-with-button'
+            button.className    = 'enabled-button'
             return true
         } else {
-            // input.style.color = 'red'
-            input.className = 'full-input'
-            button.className = 'disabled-button'
+            input.className     = 'full-input'
+            button.className    = 'disabled-button'
             return false
         }
     }
