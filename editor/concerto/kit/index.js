@@ -15,6 +15,7 @@
     module.exports = {
         compose: require('./toxml.js'),
         repeat: require('./repeats.js'),
+        generate: require('./recarr.js'),
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
