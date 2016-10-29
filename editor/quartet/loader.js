@@ -26,7 +26,7 @@
     function loadXMLtoWorkspace ( xml ) {
         let blockyDOM = Blockly.Xml.textToDom( xml )
         Blockly.mainWorkspace.clear( )
-        Blockly.Xml.domToWorkspace( Blockly.mainWorkspace , blockyDOM )
+        Blockly.Xml.domToWorkspace( blockyDOM, Blockly.mainWorkspace )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
