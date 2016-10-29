@@ -93,7 +93,7 @@
 					<div class="ribbon-icon ribbon-general-save-file" onclick="onSaveFile( )">Save</div>
 
 					<div class="ribbon-separator"></div>
-                    <div class="ribbon-icon ribbon-editor-compile" onclick="onPerformTestDrive( );">Test Drive</div>
+                    <div class="ribbon-icon ribbon-editor-compile" onclick="onOpenImportRegExDialog( );">Import RegEx</div>
 
                     <div class="ribbon-separator"></div>
                     <div id="ribbon-console-view">
@@ -115,6 +115,15 @@
                     <div class="ribbon-icon ribbon-editor-help" onclick="onOpenHelpPage( );">Reference</div>
 
 					<div style="clear: both;"></div>
+
+                    <!-- Dialog for the RegExp Importer -->
+                    <div class="dialog" id="regexp-importer">
+                        <h1>Import RegExp</h1>
+                        <p>This tool compiles your existing RegExp codes into optimized Quartet Language. Paste or type your RegExp and import!</p>
+                        <input type="text" id="import-regexp-input" placeholder="Your RegExp Goes Here">
+                        <button>Import</button>
+                        <div style="clear: both;"></div>
+                    </div>
 				</div>
 
 				<!-- View -->

@@ -1,0 +1,106 @@
+
+//
+// Copyright 2016 Kary Foundation, Inc.
+//   Author: Pouya Kary <k@karyfoundation.org>
+//
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//
+
+//
+// ─── IMPORTS ────────────────────────────────────────────────────────────────────
+//
+
+    @import '../../libs/kary-scheme';
+    @import '../../globals';
+
+//
+// ─── DIALOGS ────────────────────────────────────────────────────────────────────
+//
+
+    #regexp-importer {
+        left: 185px;
+    }
+
+//
+// ─── MAIN BOX ───────────────────────────────────────────────────────────────────
+//
+
+    .dialog {
+        position: fixed;
+        top: 110px;
+        width: 370px;
+        height: 152px;
+        background-image: url('dialog-back.svg');
+        padding: 20px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+//
+// ─── DIALOG INPUT ───────────────────────────────────────────────────────────────
+//
+
+    .dialog > input {
+        float: left;
+        border: none;
+        background-color: @kary-light-background;
+        font-size: 1.2rem;
+        vertical-align: middle;
+        font-family: @source-code-pro-typeface;
+        border-top-left-radius: 100px;
+        border-bottom-left-radius: 100px;
+        min-height: 37px;
+        padding: 0 15px 0 15px;
+        margin: 0;
+        width: ~'calc( 100% - 110px )';
+    }
+
+//
+// ─── DIALOG BUTTON ──────────────────────────────────────────────────────────────
+//
+
+    .dialog > button {
+        float: left;
+        background-color: #48C200;
+        border: none;
+        //padding: 4px 10px 5px 10px;
+        vertical-align: middle;
+        color: white;
+        font-size: 1.1rem;
+        border-top-right-radius: 100px;
+        border-bottom-right-radius: 100px;
+        min-height: 37px;
+        margin: 0;
+        text-align: center;
+        width: 80px;
+    }
+
+    .dialog > button:hover {
+        background-color: #3D971B;
+    }
+
+//
+// ─── DIALOG HEADER ──────────────────────────────────────────────────────────────
+//
+
+    .dialog > h1 {
+        color: @kary-light-blue;
+        margin: 15px 0 4px 5px;
+        font-size: 1.6rem;
+    }
+
+//
+// ─── DIALOG TEXT ────────────────────────────────────────────────────────────────
+//
+
+    .dialog > p {
+        color: @kary-light-foreground;
+        line-height: 1.4;
+        padding: 0;
+        margin: 4px 0 10px 5px;
+        font-size: 1.2rem;
+    }
+
+// ────────────────────────────────────────────────────────────────────────────────
