@@ -106,12 +106,16 @@
         let button  = document.getElementById('regexp-importer-button')
         let input   = document.getElementById('regexp-importer-input')
         if ( enable ) {
+            setTimeout( ( ) => {
+                button.className    = 'enabled-button'
+            }, 300)
             input.className     = 'input-with-button'
-            button.className    = 'enabled-button'
             return true
         } else {
-            input.className     = 'full-input'
-            button.className    = 'disabled-button'
+            setTimeout( ( ) => {
+                input.className  = 'full-input'
+            }, 200)
+            button.className = 'disabled-button'
             return false
         }
     }
