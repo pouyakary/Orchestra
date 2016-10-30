@@ -111,7 +111,6 @@
         copyToBinaryFromDir( 'view' )
         copyToBinaryFromDir( 'editor' )
         copyToBinaryFromDir( 'libs' )
-        copyToBinaryFromDir( 'sounds' )
         copyToBinaryFromDir( 'windows' )
         copyToBinaryFromDir( 'winserver' )
 
