@@ -470,8 +470,11 @@
     };
 
     QuartetGenerator[ 'match' ] = function ( block ) {
-        var statements_match = QuartetGenerator.statementToCode(block, 'blocks').trim( );
-        return '(' + statements_match + ')';
+        let statements_match = QuartetGenerator.statementToCode(block, 'blocks').trim( );
+        if ( /^\(\?\:.*\)$/.test( statements_match ) )
+            return `(${ statements_match.substring( 3 , statements_match.length - 1 ) })`
+        else
+            return '(' + statements_match + ')';
     };
 
 //
