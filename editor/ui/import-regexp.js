@@ -61,11 +61,17 @@
     }
 
     function showImportRegExpDialog ( ) {
-        document.getElementById('regexp-importer').className = 'show-dialog'
+        let dialog = document.getElementById('regexp-importer')
+        dialog.hidden = false
+        dialog.className = 'show-dialog'
     }
 
     function hideImportRegExpDialog ( ) {
-        document.getElementById('regexp-importer').className = 'hide-dialog'
+        let dialog = document.getElementById('regexp-importer')
+        dialog.className = 'hide-dialog'
+        setTimeout( ( ) => {
+            dialog.hidden = true
+        }, 300 )
     }
 
 //
