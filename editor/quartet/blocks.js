@@ -200,7 +200,7 @@
     Blockly.Blocks[ 'any' ] = {
         init: function( ) {
             this.appendDummyInput()
-                .appendField("Any Character!");
+                .appendField("Any character but new line");
             this.setInputsInline(true);
             this.setPreviousStatement(true, "String");
             this.setNextStatement(true, "String");
