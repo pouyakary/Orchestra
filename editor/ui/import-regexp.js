@@ -26,7 +26,7 @@
         let dialog = document.getElementById('regexp-importer')
         if ( !( event.target === document.getElementById('import-regexp-ribbon-button' ) ||
                 isChildOf( event.target, dialog ) ) ) {
-            dialog.hidden = true
+            hideImportRegExpDialog( )
         }
     }
 
@@ -46,7 +46,10 @@
 
     function onOpenOrCloseImportRegExpDialog ( ) {
         let dialog = document.getElementById('regexp-importer')
-        dialog.hidden = !dialog.hidden
+        if ( dialog.className === 'hide-dialog')
+            showImportRegExpDialog( )
+        else
+            hideImportRegExpDialog( )
 
         if ( !dialog.hidden )
             document.onclick = checkToSeeIfRegExpImporterNeedsToBeDisabledOnOutClick
@@ -55,6 +58,14 @@
 
         document.getElementById('regexp-importer-input').value = ''
         onCheckRegExpForImporter( )
+    }
+
+    function showImportRegExpDialog ( ) {
+        document.getElementById('regexp-importer').className = 'show-dialog'
+    }
+
+    function hideImportRegExpDialog ( ) {
+        document.getElementById('regexp-importer').className = 'hide-dialog'
     }
 
 //

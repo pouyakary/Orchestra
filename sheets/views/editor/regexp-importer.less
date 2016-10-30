@@ -16,6 +16,21 @@
     @import '../../globals';
 
 //
+// ─── SHOW ANIMATION ─────────────────────────────────────────────────────────────
+//
+
+    @keyframes show-dialog {
+        from {
+            opacity: 0;
+            top: 90px;
+        }
+        to {
+            opacity: 100%;
+            top: 110px;
+        }
+    }
+
+//
 // ─── DIALOGS ────────────────────────────────────────────────────────────────────
 //
 
@@ -61,7 +76,16 @@
 // ─── MAIN BOX ───────────────────────────────────────────────────────────────────
 //
 
-    .dialog {
+    .hide-dialog {
+        opacity: 0;
+        transition-duration: 0.3s;
+    }
+
+    .show-dialog {
+        animation: show-dialog 0.4s;
+    }
+
+    #regexp-importer {
         user-select: none;
         position: fixed;
         top: 110px;
@@ -69,8 +93,7 @@
         height: 152px;
         background-image: url('dialog-back.svg');
         padding: 20px;
-        overflow-y: scroll;
-        overflow-x: hidden;
+        overflow: hidden;
     }
 
 //
@@ -121,7 +144,7 @@
 // ─── DIALOG HEADER ──────────────────────────────────────────────────────────────
 //
 
-    .dialog > h1 {
+    #regexp-importer > h1 {
         color: @kary-light-blue;
         margin: 15px 0 6px 5px;
         font-size: 1.6rem;
@@ -131,7 +154,7 @@
 // ─── DIALOG TEXT ────────────────────────────────────────────────────────────────
 //
 
-    .dialog > p {
+    #regexp-importer > p {
         color: @kary-light-foreground;
         line-height: 1.4;
         padding: 0;
