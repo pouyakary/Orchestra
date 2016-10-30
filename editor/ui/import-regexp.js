@@ -31,6 +31,16 @@
     }
 
 //
+// ─── REGEX IMPORTER KEYPRESS ────────────────────────────────────────────────────
+//
+
+    function onRegExImporterOnKeypress ( event ) {
+        if ( event.keyCode === 13 )
+            onImportRegExp( )
+        onCheckRegExpForImporter( )
+    }
+
+//
 // ─── EXPORTER ───────────────────────────────────────────────────────────────────
 //
 

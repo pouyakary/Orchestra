@@ -127,8 +127,8 @@
                             <input id="regexp-importer-input"
                                 type="text"
                                 placeholder="Your RegExp Goes Here"
-                                onkeyup="onCheckRegExpForImporter( )"
-                                onchange="onCheckRegExpForImporter( )">
+                                onkeyup="onRegExImporterOnKeypress( event )"
+                                onchange="onRegExImporterOnKeypress( event )">
                             <button id="regexp-importer-button"
                                     onclick="onImportRegExp( )">import</button>
                         </div>
