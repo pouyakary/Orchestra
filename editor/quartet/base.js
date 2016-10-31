@@ -24,13 +24,13 @@
         const toolbox = document.getElementById( 'toolbox' )
 
         workspace = Blockly.inject( 'quartet-coding-view', {
-            collapse: true,
+            collapse: false,
             toolbox: toolbox,
             border: false,
             scrollbars: true,
             trashcan: true,
             media: './blockly-core/media/',
-            css: false
+            css: false,
         })
 
         Blockly.Xml.domToWorkspace( Blockly.Xml.textToDom( defaultFileXML ), workspace )
