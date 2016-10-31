@@ -30,15 +30,6 @@
         }
     }
 
-    @keyframes show-button {
-        from {
-            width: 0;
-        }
-        to {
-            width: 80px;
-        }
-    }
-
 //
 // ─── DIALOGS ────────────────────────────────────────────────────────────────────
 //
@@ -52,7 +43,7 @@
         height: 37px;
         max-height: 37px;
         min-height: 37px;
-        width: 370px;
+        width: 100%;
         overflow: hidden;
     }
 
@@ -64,7 +55,7 @@
     }
 
     .input-with-button {
-        width: 250px;
+        width: 235px;
         transition-duration: @transition-duration;
         border-top-right-radius: 100px;
         border-bottom-right-radius: 100px;
@@ -72,13 +63,13 @@
     }
 
     .disabled-button {
-        opacity: 0;
+        width: 0px;
         transition-duration: @transition-duration;
     }
 
     .enabled-button {
-        opacity: 100%;
-        transition-duration: 0.5s;
+        width: 80px;
+        transition-duration: @transition-duration;
     }
 
 //
@@ -129,7 +120,6 @@
 //
 
     #regexp-importer-button {
-        width: 80px;
         float: left;
         border-radius: 100px;
         border: none;
