@@ -28,6 +28,9 @@
             toolbox: toolbox,
             border: false,
             scrollbars: true,
+            trashcan: true,
+            media: './blockly-core/media/',
+            css: false
         })
 
         Blockly.Xml.domToWorkspace( Blockly.Xml.textToDom( defaultFileXML ), workspace )
