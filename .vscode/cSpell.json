@@ -72,14 +72,10 @@
         "onkeypress",
         "onkeyup",
         "outclick",
-<<<<<<< HEAD
         "onoutclick",
         "EEEEEE",
         "goog",
         "scrollbars"
-=======
-        "onoutclick"
->>>>>>> parent of 1a25fd6... new release of orchestrea-blockly
     ],
     // flagWords - list of words to be always considered incorrect
     // This is useful for offensive words and common spelling errors.

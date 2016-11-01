@@ -31,7 +31,8 @@
             filters: [{
                 name: 'Quartet Language',
                 extensions: [ 'quartet' ]
-            }]})
+            }]
+        })
 
         if ( filePath === undefined ) return;
 
