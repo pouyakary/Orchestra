@@ -3,8 +3,8 @@
 // by Austin Cory Bart.
 
 function renderWorkspaceIntoSVG ( ) {
-    aleph = workspace.getParentSvg( ).cloneNode( true );
-    let composeCanvas = document.getElementById( composeBlockIDforSVGCanvas );
+    aleph = orchestra.storage.workspace.getParentSvg( ).cloneNode( true );
+    let composeCanvas = document.getElementById( orchestra.constants.composeBlockIDforSVGCanvas );
 
     // sizing
     let bbox = composeCanvas.getBBox( );

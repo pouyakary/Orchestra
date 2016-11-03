@@ -42,6 +42,7 @@
     function shell ( command , callback ) {
         exec( command, err => {
             if ( err ) console.log( err )
+            callback( )
         })
     }
 
@@ -96,6 +97,14 @@
     }
 
 //
+// ─── COMPILE CORE ───────────────────────────────────────────────────────────────
+//
+
+    gulp.task( 'compileCore', callback => {
+        shell( 'tsc' , callback )
+    })
+
+//
 // ─── COPY FILES ─────────────────────────────────────────────────────────────────
 //
 
@@ -109,10 +118,10 @@
 
         copyToBinaryFromDir( 'resources' )
         copyToBinaryFromDir( 'view' )
-        copyToBinaryFromDir( 'editor' )
         copyToBinaryFromDir( 'libs' )
         copyToBinaryFromDir( 'windows' )
         copyToBinaryFromDir( 'winserver' )
+        copyToBinaryFromDir( 'core/javascript' )
 
         copyNodeModules('concerto-compiler')
         copyNodeModules('messenger')
@@ -125,9 +134,7 @@
         )
 
         // adding commit count
-        shell(`git rev-list --all --count > ${resultDirPath}/about/commit-count.txt`)
-
-        callback()
+        shell(`git rev-list --all --count > ${resultDirPath}/about/commit-count.txt`, callback )
     })
 
 //
@@ -152,10 +159,8 @@
                             console.log('could not store the less file')
                         } else {
                             callback()
-                        }
-                    }
-                )
-            })
+                            }})})
+
         } catch ( err ) {
             console.log('Compiling less failed ' + err )
         }
@@ -165,16 +170,16 @@
 // ─── ELECTRON PACKER ────────────────────────────────────────────────────────────
 //
 
-    gulp.task( 'electron', ['copyResourceFiles', 'sheets'], ( ) => {
-        shell('electron-packager _compiled "Orchestra" --platform=darwin --arch=x64 --overwrite=true --app-copyright="Copyright 2016 by Kary Foundation, Inc." --app-version="Summer Builds 2016" --icon=./designs/icon/icns/electron.icns --name="Orchestra" --out=_release')
+    gulp.task( 'electron', ['copyResourceFiles', 'sheets', 'compileCore'], callback => {
+        shell( 'electron-packager _compiled "Orchestra" --platform=darwin --arch=x64 --overwrite=true --app-copyright="Copyright 2016 by Kary Foundation, Inc." --app-version="Builds 2016" --icon=./designs/icon/icns/electron.icns --name="Orchestra" --out=_release', callback )
     })
 
 //
 // ─── AFTER PACK ─────────────────────────────────────────────────────────────────
 //
 
-    gulp.task( 'after-pack', [ 'electron' ], ( ) => {
-
+    gulp.task( 'after-pack', [ 'electron' ], callback => {
+        callback( )
     })
 
 //

@@ -76,7 +76,13 @@
         "EEEEEE",
         "goog",
         "scrollbars",
-        "onoutclick"
+        "javascripts",
+        "onmouseover",
+        "onmouseleave",
+        "SVGA",
+        "regulex's",
+        "Unicodify",
+        "genkit"
     ],
     // flagWords - list of words to be always considered incorrect
     // This is useful for offensive words and common spelling errors.

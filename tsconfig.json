@@ -1,8 +1,61 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es5",
+        "module": "amd",
+        "target": "es6",
         "noImplicitAny": false,
-        "sourceMap": false
-    }
+        "sourceMap": true,
+        "removeComments": true,
+        "outFile": "_compiled/editor-core.js",
+        "sourceRoot": "core"
+    },
+    "files": [
+        "core/typescript/concerto/index.ts",
+        "core/typescript/concerto/blueprints/blocks.ts",
+        "core/typescript/concerto/blueprints/recarr.ts",
+        "core/typescript/concerto/blueprints/regulex.d.ts",
+        "core/typescript/concerto/compilers/level0.ts",
+        "core/typescript/concerto/compilers/level1.ts",
+        "core/typescript/concerto/compilers/level2.ts",
+        "core/typescript/concerto/compilers/level3.ts",
+        "core/typescript/concerto/generators/genkit.ts",
+        "core/typescript/concerto/generators/nodes/assert.ts",
+        "core/typescript/concerto/generators/nodes/charset.ts",
+        "core/typescript/concerto/generators/nodes/choice.ts",
+        "core/typescript/concerto/generators/nodes/dot.ts",
+        "core/typescript/concerto/generators/nodes/exact.ts",
+        "core/typescript/concerto/generators/nodes/group.ts",
+        "core/typescript/concerto/generators/nodes/lookahead.ts",
+        "core/typescript/concerto/generators/nodes/repeats.ts",
+
+        "core/typescript/globals/constants.ts",
+        "core/typescript/globals/includes.ts",
+        "core/typescript/globals/storage.ts",
+
+        "core/typescript/quartet/base.ts",
+        "core/typescript/quartet/blockly-styles.ts",
+        "core/typescript/quartet/blocks.ts",
+        "core/typescript/quartet/generator.ts",
+        "core/typescript/quartet/loader.ts",
+        "core/typescript/quartet/regstd.ts",
+        "core/typescript/quartet/ui.ts",
+
+        "core/typescript/typings/electron-prebuilt.d.ts",
+        "core/typescript/typings/github-electron.d.ts",
+        "core/typescript/typings/monaco.d.ts",
+        "core/typescript/typings/node.d.ts",
+
+        "core/typescript/ui/console.ts",
+        "core/typescript/ui/dialogs.ts",
+        "core/typescript/ui/events.ts",
+        "core/typescript/ui/file.ts",
+        "core/typescript/ui/import-regexp.ts",
+        "core/typescript/ui/loading-screen.ts",
+        "core/typescript/ui/menu.ts",
+        "core/typescript/ui/screen-controller.ts",
+        "core/typescript/ui/trafficlights.ts",
+        "core/typescript/ui/window.ts",
+
+        "core/typescript/wrappers/blockly.d.ts",
+        "core/typescript/wrappers/externals.ts"
+    ]
 }

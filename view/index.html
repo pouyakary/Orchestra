@@ -15,36 +15,18 @@
 		<!-- Main Style Sheets -->
 		<link rel="stylesheet" href="style.css">
 
-        <!-- Global Storage -->
-        <script src="globals/constants.js"></script>
-        <script src="globals/storage.js"></script>
+        <!-- System JS -->
+        <script src="system/system.js"></script>
 
 		<!-- Blockly Core -->
         <script src="blockly-core/blockly_compressed.js"></script>
         <script src="blockly-core/en.js"></script>
 
+        <!-- Editor Core -->
+        <script src="editor-core.js"></script>
+
         <!-- Blockly Render -->
-        <script src="blockly-render/exporter.js" async></script>
-
-        <!-- Quartet Core -->
-        <script src="quartet/regstd.js" async></script>
-        <script src="quartet/generator.js"></script>
-        <script src="quartet/blocks.js"></script>
-        <script src="quartet/blockly-styles.js"></script>
-        <script src="quartet/base.js"></script>
-        <script src="quartet/ui.js"></script>
-        <script src="quartet/loader.js"></script>
-
-        <!-- UI -->
-        <script src="ui/loading-screen.js"></script>
-        <script src="ui/screen-controller.js" async></script>
-        <script src="ui/file.js" async></script>
-        <script src="ui/dialogs.js" async></script>
-        <script src="ui/window.js"></script>
-        <script src="ui/trafficlights.js" async></script>
-        <script src="ui/console.js" async></script>
-        <script src="ui/menu.js" async></script>
-        <script src="ui/import-regexp.js" async></script>
+        <script src="blockly-render/exporter.js"></script>
 	</head>
 
 	<body>
@@ -57,15 +39,15 @@
             <div id="window-buttons">
                 <div id="window-button-close"
                      class="window-button-close-active"
-                     onclick="fireWindowCloseRequest( )">
+                     onclick="orchestra.ui.fireWindowCloseRequest( )">
                 </div>
                 <div id="window-button-minimize"
                      class="window-button-minimize-active"
-                     onclick="fireWindowMinimizeRequest( )">
+                     onclick="orchestra.ui.fireWindowMinimizeRequest( )">
                 </div>
                 <div id="window-button-maximize"
                      class="window-button-maximize-active"
-                     onclick="fireWindowMaximizeRequest( )">
+                     onclick="orchestra.ui.fireWindowMaximizeRequest( )">
                 </div>
             </div>
 
@@ -74,11 +56,11 @@
 
 			<!-- Invisible Buttons -->
 			<div id="editor-tab-invisible" class="invisible-tab"
-				 onclick="onChangeWindowToEditor( );">
+				 onclick="orchestra.ui.onChangeWindowToEditor( );">
 			</div>
 
 			<div id="playground-tab-invisible" class="invisible-tab"
-				 onclick="onChangeWindowToPlayground( );">
+				 onclick="orchestra.ui.onChangeWindowToPlayground( );">
 			</div>
 
 			<div style="clear: both;"></div>
@@ -89,20 +71,24 @@
 			<!-- EDITOR -->
 			<div id="graph-and-ribbon-half">
 				<div class="ribbon unselectable">
-					<div class="ribbon-icon ribbon-general-new-file" onclick="onNewFile( )">New</div>
-					<div class="ribbon-icon ribbon-general-open-file" onclick="onOpenFile( )">Open</div>
-					<div class="ribbon-icon ribbon-general-save-file" onclick="onSaveFile( )">Save</div>
+					<div class="ribbon-icon ribbon-general-new-file"
+                         onclick="orchestra.ui.dialogs.onNewFile( )">New</div>
+					<div class="ribbon-icon ribbon-general-open-file"
+                         onclick="orchestra.ui.dialogs.onOpenFile( )">Open</div>
+					<div class="ribbon-icon ribbon-general-save-file"
+                         onclick="orchestra.ui.dialogs.onSaveFile( )">Save</div>
 
 					<div class="ribbon-separator"></div>
                     <div class="ribbon-icon ribbon-editor-regexp-importer"
-                         onclick="onOpenOrCloseImportRegExpDialog( )"
+                         onclick="orchestra.ui.regexpImporter.onOpenOrCloseImportRegExpDialog( )"
                          id="import-regexp-ribbon-button">Import RegExp</div>
 
                     <div class="ribbon-separator"></div>
                     <div id="ribbon-console-view">
                         <div id="ribbon-console-title"></div>
                         <div id="ribbon-console-regexp"></div>
-                        <button id="ribbon-console-copy-hover-button" onclick="onCopyRegExp( );">
+                        <button id="ribbon-console-copy-hover-button"
+                                onclick="orchestra.ui.consoleView.onCopyRegExp( );">
                             <div>
                                 <img src="console-copy-icon.svg" id="console-copy-icon">
                                 <div id="console-copy-text">Copy</div>
@@ -112,10 +98,12 @@
                     </div>
 
                     <div class="ribbon-separator"></div>
-                    <div class="ribbon-icon ribbon-editor-export-svg" onclick="onExportWorkspaceToSVG( );">Export SVG</div>
+                    <div class="ribbon-icon ribbon-editor-export-svg"
+                         onclick="orchestra.ui.dialogs.onExportWorkspaceToSVG( );">Export SVG</div>
 
                     <div class="ribbon-separator"></div>
-                    <div class="ribbon-icon ribbon-editor-help" onclick="onOpenHelpPage( );">Reference</div>
+                    <div class="ribbon-icon ribbon-editor-help"
+                         onclick="orchestra.ui.onOpenHelpPage( );">Reference</div>
 
 					<div style="clear: both;"></div>
 
@@ -127,10 +115,10 @@
                             <input id="regexp-importer-input"
                                 type="text"
                                 placeholder="Your RegExp Goes Here"
-                                onkeyup="onRegExImporterOnKeypress( event )"
-                                onchange="onRegExImporterOnKeypress( event )">
+                                onkeyup="orchestra.ui.regexpImporter.onRegExImporterOnKeypress( event )"
+                                onchange="orchestra.ui.regexpImporter.onRegExImporterOnKeypress( event )">
                             <button id="regexp-importer-button"
-                                    onclick="onImportRegExp( )">import</button>
+                                    onclick="orchestra.ui.regexpImporter.onImportRegExp( )">import</button>
                         </div>
                         <div style="clear: both;"></div>
                     </div>
@@ -196,17 +184,17 @@
 
 		<!-- Init Page -->
         <script>
-            initWindow( );
+            orchestra.ui.initWindow( );
         </script>
 
         <script src="vs/loader.js"></script>
-		<script src="ui/playground.js"></script>
+		<script src="playground.js"></script>
 		<script>
             initMonacoEditor( );
             function openHelpWindowForReference ( refID ) {
                 ipcRenderer.send( 'open-help-for-ref', refID );
             }
-			CancelLoadingScreenAfterCompleteLoad( );
+			orchestra.ui.start.cancelLoadingScreenAfterCompleteLoad( );
 		</script>
 	</body>
 </html>
