@@ -28,7 +28,7 @@
             toolbox: toolbox,
             border: false,
             scrollbars: true,
-            trashcan: true,
+            // trashcan: true,
             media: './blockly-core/media/',
             // css: false,
         })
