@@ -61,7 +61,7 @@
             <div class="row" id="ref-encode">
                 <div class="column text">
                     <h2>Plain Text</h2>
-                    <b>Plain Text</b> block is to insert plain text. It encodes the special characters and places the entire text into a sequence group ( <code>(?: )</code> in wildcard format) hence the entire text is being treated safely as one group.
+                    <b>Plain Text</b> block is to insert plain text. It encodes the special characters that are RegEx syntax as well as encoding any character that is not basic english alphabet into Unicode escapes and places the entire text into a sequence group ( <code>(?: )</code> in wildcard format) if needed. hence the entire text is being treated safely as one group.
                 </div>
                 <div class="column block">
                     <img src="blocks/text.svg">
@@ -70,19 +70,10 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example 1</h3>
-                    The following code compiles to <code>/Hello World\!/</code>
+                    The following code compiles to <code>/hello world\! How are you\? \uD83D/</code>
                 </div>
                 <div class="column block">
-                    <img src="blocks/ex-text.svg">
-                </div>
-            </div>
-            <div class="row">
-                <div class="column text">
-                    <h3>Example 2</h3>
-                    The following Quartet compiles to <code>/(?:Hello World\!)*/</code>.
-                </div>
-                <div class="column block">
-                    <img src="blocks/ex-text-2.svg">
+                    <img src="blocks/ex-plaintext.png" width="303">
                 </div>
             </div>
 
