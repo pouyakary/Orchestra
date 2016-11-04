@@ -27,9 +27,10 @@ sidebar {
     top: 0;
     width: 180px;
     padding: 30px 15px 100px 15px;
-    height: calc( 100vh - 80px );
+    height: calc( 100vh - 130px );
     overflow-y: scroll;
     /* border-right: 3px #B36D00 solid; */
+    float: left;
 }
 
 .sidebar-section-item {
@@ -71,10 +72,19 @@ sidebar {
     border-bottom: 2px #f4f4f4 solid;
 }
 
-main {
-    max-width: 750px;
-    margin-left: 240px;
+#content {
+    float: right;
+    /*max-width: 750px;
+    margin-left: 240px;*/
+    width: calc( 100vw - 210px );
+    height: calc( 100vh - 150px );
+    overflow-y: scroll;
     padding-bottom: 150px;
+}
+
+.block-group {
+    max-width: 750px;
+    margin: auto;
 }
 
 h2 {
