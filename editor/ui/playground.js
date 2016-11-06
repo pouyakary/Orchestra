@@ -74,6 +74,26 @@
     }
 
 //
+// ─── OPEN FILE ON PLAYGROUND ────────────────────────────────────────────────────
+//
+
+    function onOpenFileOnPlayground ( ) {
+        // get file path
+        let filePath = dialog.showOpenDialog( getWindowForDialogSheets( ), {
+            properties: [ 'openFile' ]
+        })
+
+        if ( filePath === undefined || filePath.length === 0 ) return;
+
+        fs.readFile( filePath[ 0 ].toString( ) , ( err, fileData ) => {
+            if ( err === true ) {
+                return;
+            }
+            playgroundEditor.setValue( fileData.toString( ) )
+        })
+    }
+
+//
 // ─── ON RUN TEST DRIVE ──────────────────────────────────────────────────────────
 //
 
