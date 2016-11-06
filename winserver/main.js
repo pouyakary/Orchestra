@@ -71,20 +71,21 @@
 
         editorWindow.maximize( )
 
+        editorWindow.openDevTools( )
+
         windowCount++
 
-        if ( file === undefined || file === null ) {
+        if ( file === undefined | null )
             editorWindow.loadURL( `file://${ __dirname }/index.html` )
-        } else {
+        else
             editorWindow.loadURL( `file://${ __dirname }/index.html?${ encodeURI( file ) }` )
-        }
 
         editorWindow.setMenuBarVisibility( false )
 
         editorWindow.once('ready-to-show', ( ) => {
             editorWindow.show( )
             editorWindow.focus( )
-        });
+        })
 
         // editorWindow.openDevTools( );
 
@@ -154,11 +155,19 @@
 //
 
     const mustQuit = app.makeSingleInstance(( argv, workingDir ) => {
-        createWindow( );
+        createWindow( )
     })
 
-    if ( mustQuit )
-        app.quit( );
+    if ( mustQuit ) app.quit( )
+
+//
+// ─── ON OPEN FILE EVENT ─────────────────────────────────────────────────────────
+//
+
+    app.on( 'open-file', ( event, filePath ) => {
+        event.preventDefault( )
+        createWindow( filePath )
+    })
 
 //
 // ─── ON READY ───────────────────────────────────────────────────────────────────
