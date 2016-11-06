@@ -15,9 +15,20 @@
     function initWindow ( ) {
         setupWorkspace( )
         onNewFile( )
+        handleWindowArgs( )
         initMainMenu( )
         setMenuEnableFactor( true )
         appendTrafficLightEvents( )
+    }
+
+//
+// ─── HANDLE WINDOW ARGS ─────────────────────────────────────────────────────────
+//
+
+    function handleWindowArgs ( ) {
+        let filePath = decodeURI( window.location.search.substring( 1 ) )
+        if ( filePath !== '' )
+            openFileWithPath( filePath )
     }
 
 //
