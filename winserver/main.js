@@ -150,6 +150,17 @@
     }
 
 //
+// ─── SINGE INSTANCE APP ─────────────────────────────────────────────────────────
+//
+
+    const mustQuit = app.makeSingleInstance(( argv, workingDir ) => {
+        createWindow( );
+    })
+
+    if ( mustQuit )
+        app.quit( );
+
+//
 // ─── ON READY ───────────────────────────────────────────────────────────────────
 //
 
