@@ -161,15 +161,6 @@
     if ( mustQuit ) app.quit( )
 
 //
-// ─── ON OPEN FILE EVENT ─────────────────────────────────────────────────────────
-//
-
-    app.on( 'open-file', ( event, filePath ) => {
-        event.preventDefault( )
-        createWindow( filePath )
-    })
-
-//
 // ─── ON READY ───────────────────────────────────────────────────────────────────
 //
 
@@ -179,6 +170,15 @@
 
         runExtensionServer( )
         createWindow( )
+    })
+
+//
+// ─── ON OPEN FILE EVENT ─────────────────────────────────────────────────────────
+//
+
+    app.on( 'open-file', ( event, filePath ) => {
+        event.preventDefault( )
+        createWindow( filePath )
     })
 
 //
