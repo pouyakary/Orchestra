@@ -15,7 +15,7 @@
     "url": "https://github.com/karyfoundation/orchestra"
   },
   "dependencies": {
-    "concerto-compiler": "1.0.0",
+    "concerto-compiler": "1.0.5",
     "messenger": "0.0.9",
     "regulex": "0.0.2"
   },
