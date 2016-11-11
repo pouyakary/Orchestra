@@ -79,11 +79,18 @@
 //
 
     function onImportRegExp ( ) {
-        let input = document.getElementById('regexp-importer-input').value
-        let quartetXML = compileRegExToQuartetXML( input )
+        importRegExp( document.getElementById('regexp-importer-input').value )
+        onOpenOrCloseImportRegExpDialog( )
+    }
+
+//
+// ─── REGEX IMPORTER ─────────────────────────────────────────────────────────────
+//
+
+    function importRegExp ( regX ) {
+        let quartetXML = compileRegExToQuartetXML( regX )
         updateWorkspaceWithNewXML( quartetXML )
         setFileDirty( true )
-        onOpenOrCloseImportRegExpDialog( )
     }
 
 //
