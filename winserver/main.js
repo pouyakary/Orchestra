@@ -55,8 +55,12 @@
 // ─── GENERATE MAIN WINDOW ───────────────────────────────────────────────────────
 //
 
-    function createWindow ( file ) {
+    function createWindow ( args ) {
+
+        console.log( args )
+
         let editorWindow
+        windowCount++
 
         const window_width = 1100
         const window_height = 640
@@ -70,17 +74,26 @@
         })
 
         editorWindow.maximize( )
-
         editorWindow.openDevTools( )
-
-        windowCount++
-
-        if ( file === undefined | null )
-            editorWindow.loadURL( `file://${ __dirname }/index.html` )
-        else
-            editorWindow.loadURL( `file://${ __dirname }/index.html?${ encodeURI( file ) }` )
-
         editorWindow.setMenuBarVisibility( false )
+
+
+        if ( args.mode === 'file' )
+            editorWindow.loadURL( `file://${ __dirname }/index.html?${
+                encodeURI(JSON.stringify({
+                    file: args.file
+                }))}`)
+
+        else if ( args.mode === 'parse' )
+            editorWindow.loadURL( `file://${ __dirname }/index.html?${
+                encodeURI(JSON.stringify({
+                    regexp: args.regexp
+                }))}`)
+
+        else
+            editorWindow.loadURL( `file://${ __dirname }/index.html` )
+
+
 
         editorWindow.once('ready-to-show', ( ) => {
             editorWindow.show( )
@@ -155,7 +168,7 @@
 //
 
     const mustQuit = app.makeSingleInstance(( argv, workingDir ) => {
-        createWindow( )
+        createWindow( parseArgs( argv ) )
     })
 
     if ( mustQuit ) app.quit( )
@@ -169,7 +182,7 @@
         console.log('Copyright 2016 - Kary Foundation, Inc.')
 
         runExtensionServer( )
-        createWindow( )
+        createWindow( parseArgs( process.argv ) )
     })
 
 //
@@ -178,7 +191,7 @@
 
     app.on( 'open-file', ( event, filePath ) => {
         event.preventDefault( )
-        createWindow( filePath )
+        createWindow({ mode: 'file', file: filePath })
     })
 
 //
@@ -243,6 +256,26 @@
     });
 
 //
+// ─── PARSE ARGS ─────────────────────────────────────────────────────────────────
+//
+
+    function parseArgs ( args ) {
+        if ( args.length === 2 )
+            if ( args[ 1 ].endsWith( '.quartet' ) )
+                return {
+                    mode: 'file',
+                    file: args[ 1 ]
+                }
+        if ( args.length === 3 )
+            if ( args[ 1 ] === 'parse' )
+                return {
+                    mode: 'parse',
+                    regexp: args[ 2 ]
+                }
+        return { mode: 'start' }
+    }
+
+//
 // ─── EXTENSION SERVER ───────────────────────────────────────────────────────────
 //
 
@@ -258,15 +291,15 @@
         // ─── ON OPEN ORCHESTRA FOR A REGEX ───────────────────────────────
         //
 
-            extensionServer.on( 'open', ( message, data ) => {
-                if ( data !== null || data !== undefined ) {
-                    if ( existsSync( data ) ) {
-                        createWindow( data )
+            extensionServer.on( 'open', ( message, regX ) => {
+                if ( regX !== null || regX !== undefined ) {
+                    if ( existsSync( regX ) ) {
+                        createWindow({ mode: 'parse', regexp: regX })
                     } else {
                         message.reply('404')
                     }
                 } else {
-                    createWindow( )
+                    createWindow()
                 }
             })
 

@@ -26,9 +26,11 @@
 //
 
     function handleWindowArgs ( ) {
-        let filePath = decodeURI( window.location.search.substring( 1 ) )
-        if ( filePath !== '' )
-            openFileWithPath( filePath )
+        let options = JSON.parse( decodeURI( window.location.search.substring( 1 ) ) )
+        if ( options.file !== undefined | null | '' )
+            openFileWithPath( options.file )
+        else if ( options.regexp !== undefined | null | '' )
+            importRegExp( options.regexp )
     }
 
 //
