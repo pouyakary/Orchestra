@@ -91,7 +91,7 @@
                 }))}`)
 
         else
-            editorWindow.loadURL( `file://${ __dirname }/index.html` )
+            editorWindow.loadURL( `file://${ __dirname }/index.html?{}` )
 
 
 
