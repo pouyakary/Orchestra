@@ -14,6 +14,7 @@
 
     const openExternal = require( 'electron' ).shell.openExternal;
     const fs = require('fs');
+    const appName = require( 'electron' ).remote.app.getName( )
 
 //
 // ─── WINDOW DRAG FIX ────────────────────────────────────────────────────────────
@@ -49,8 +50,13 @@
 //
 
     function applyOnLoadSettings ( ) {
+        document.getElementById( 'app-name' ).innerText = appName;
         document.getElementById( orchestraVersionSpanId ).innerText = getParameterByName('ov');
         document.getElementById( quartetVersionSpanId ).innerText = getParameterByName('qv');
+
+        if ( appName === 'Orchestra Nightly' ) {
+            document.getElementById( 'icon' ).style.backgroundImage = 'url("./icon-nightly.png")';
+        }
 
         try {
             fs.readFile( `${ __dirname }/commit-count.txt`, 'utf8', ( error, data ) => {
