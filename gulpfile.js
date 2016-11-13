@@ -166,7 +166,7 @@
 //
 
     gulp.task( 'electron', ['copyResourceFiles', 'sheets'], ( ) => {
-        shell('electron-packager _compiled "Orchestra" --platform=darwin --arch=x64 --overwrite=true --app-copyright="Copyright 2016 by Kary Foundation, Inc." --app-version="Summer Builds 2016" --icon=./designs/icon/icns/electron.icns --name="Orchestra" --out=_release')
+        shell(`electron-packager _compiled "${ packageJson.productName }" --platform=darwin --arch=x64 --overwrite=true --app-copyright="Copyright 2016 by Kary Foundation, Inc." --app-version="${ packageJson.version }" --icon=./designs/icon/icns/electron.icns --name="${ packageJson.productName }" --out=_release`)
     })
 
 //
