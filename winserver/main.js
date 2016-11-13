@@ -55,7 +55,7 @@
 // ─── GENERATE MAIN WINDOW ───────────────────────────────────────────────────────
 //
 
-    function createWindow ( args ) {
+    function createWindow ( args = { mode: 'start' } ) {
 
         console.log( args )
 
@@ -74,8 +74,8 @@
         })
 
         editorWindow.maximize( )
-        editorWindow.openDevTools( )
         editorWindow.setMenuBarVisibility( false )
+        //editorWindow.openDevTools( )
 
 
         if ( args.mode === 'file' )
