@@ -31,7 +31,7 @@
 
     if [ "$(uname)" == 'Darwin' ]
         then
-            "_release/Orchestra-darwin-x64/Orchestra.app/Contents/MacOS/Orchestra"
+            "_release/Orchestra Nightly-darwin-x64/Orchestra Nightly.app/Contents/MacOS/Orchestra Nightly"
         fi
 
 # ────────────────────────────────────────────────────────────────────────────────
