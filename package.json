@@ -1,6 +1,6 @@
 {
   "name": "orchestra",
-  "productName": "Orchestra",
+  "productName": "Orchestra Nightly",
   "author": "Kary Foundation",
   "main": "main.js",
   "description": "RegEx done right",
@@ -8,7 +8,10 @@
   "license": "Apache-2.0",
   "version": "0.1.0",
   "scripts": {
-    "start": "electron ./_compiled/main.js --enable-logging"
+    "build": "gulp",
+    "run-mac": "_release/Orchestra-darwin-x64/Orchestra.app/Contents/MacOS/Orchestra",
+    "run-mac-nightly": "/Users/pmk/OneDrive/Codes/Orchestra/_release/Orchestra\\ Nightly-darwin-x64/Orchestra\\ Nightly.app/Contents/MacOS/Orchestra\\ Nightly",
+    "electron": "electron ./_compiled/main.js --enable-logging"
   },
   "repository": {
     "type": "git",
