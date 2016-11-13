@@ -166,7 +166,11 @@
 //
 
     gulp.task( 'electron', ['copyResourceFiles', 'sheets'], ( ) => {
-        shell(`electron-packager _compiled "${ packageJson.productName }" --platform=darwin --arch=x64 --overwrite=true --app-copyright="Copyright 2016 by Kary Foundation, Inc." --app-version="${ packageJson.version }" --icon=./designs/icon/icns/electron.icns --name="${ packageJson.productName }" --out=_release`)
+
+        let iconFile = ( packageJson.productName !== 'Orchestra Nightly' )?
+            './designs/icon/icns/icon.icns' : './designs/icon-nightly/icns/icon.icns';
+
+        shell(`electron-packager _compiled "${ packageJson.productName }" --platform=darwin --arch=x64 --overwrite=true --app-copyright="Copyright 2016 by Kary Foundation, Inc." --app-version="${ packageJson.version }" --icon=${ iconFile } --name="${ packageJson.productName }" --out=_release`)
     })
 
 //
