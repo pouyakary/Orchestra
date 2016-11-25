@@ -71,7 +71,6 @@
 
             if ( filePath !== undefined )
                 exportSVGImageTo( filePath )
-
         }
 
         else alert("Your workspace contains blocks in top level other than Quartet Compose Block. Please clean up your workspace and try again.")

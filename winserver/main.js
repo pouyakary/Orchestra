@@ -16,9 +16,9 @@
 
     const electron                          = require( 'electron' )
     const { ipcMain, BrowserWindow, app }   = require( 'electron' )
-    const messenger                         = require('messenger')
-    const fs                                = require('fs')
-    const path                              = require('path')
+    const messenger                         = require( 'messenger' )
+    const fs                                = require( 'fs' )
+    const path                              = require( 'path' )
 
 //
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
@@ -46,7 +46,7 @@
         try {
             fs.accessSync( filename )
             return true
-        } catch( ex ) {
+        } catch ( ex ) {
             return false
         }
     }
@@ -95,7 +95,7 @@
 
 
 
-        editorWindow.once('ready-to-show', ( ) => {
+        editorWindow.once( 'ready-to-show', ( ) => {
             editorWindow.show( )
             editorWindow.focus( )
         })
@@ -123,11 +123,12 @@
             fullscreen: false,
         })
 
-        if ( arg === '' ) {
+        helpWindow.openDevTools( )
+
+        if ( arg === '' )
             helpWindow.loadURL( `file://${ __dirname }/help/index.html?none` )
-        } else {
+        else
             helpWindow.loadURL( `file://${ __dirname }/help/index.html?ref-${ arg }` )
-        }
 
         helpWindow.on( 'closed' , ( ) => {
             isHelpWindowOpen = false
@@ -181,7 +182,7 @@
         console.log(`Orchestra, Version ${ orchestraVersion }`)
         console.log('Copyright 2016 - Kary Foundation, Inc.')
 
-        runExtensionServer( )
+        // runExtensionServer( )
         createWindow( parseArgs( process.argv ) )
     })
 
@@ -208,9 +209,8 @@
         if ( isHelpWindowOpen ) {
             helpWindow.focus( )
             helpWindow.webContents.send( 'help-window-open-ref', `ref-${ arg }` )
-        } else {
+        } else
             openHelpWindow( arg )
-        }
     })
 
 //
@@ -238,9 +238,8 @@
     app.on( 'window-all-closed', ( e, win ) => {
         // On macOS it is common for applications and their menu bar
         // to stay active until the user quits explicitly with Cmd + Q
-        if ( process.platform !== 'darwin' ) {
+        if ( process.platform !== 'darwin' )
             app.quit( )
-        }
     })
 
 //
@@ -250,9 +249,8 @@
     app.on( 'activate', ( ) => {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
-        if ( windowCount === 0 ) {
+        if ( windowCount === 0 )
             createWindow( )
-        }
     });
 
 //
@@ -292,15 +290,13 @@
         //
 
             extensionServer.on( 'open', ( message, regX ) => {
-                if ( regX !== null || regX !== undefined ) {
-                    if ( existsSync( regX ) ) {
+                if ( regX !== null || regX !== undefined )
+                    if ( existsSync( regX ) )
                         createWindow({ mode: 'parse', regexp: regX })
-                    } else {
-                        message.reply('404')
-                    }
-                } else {
-                    createWindow()
-                }
+                    else
+                        message.reply( '404' )
+                else
+                    createWindow( )
             })
 
         // ─────────────────────────────────────────────────────────────────

@@ -81,7 +81,7 @@ const jumper = () => {
     }
 
     // if it exists, fire the callback
-    if(typeof callback === 'function') {
+    if ( typeof callback === 'function' ) {
       callback()
     }
 
