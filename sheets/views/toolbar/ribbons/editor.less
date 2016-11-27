@@ -12,14 +12,13 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    @import '../../../libs/kary-scheme';
     @import '../../../globals';
 
 //
 // ─── CONSOLE VIEW ───────────────────────────────────────────────────────────────
 //
 
-    @console-color: #F5F5F5;
+    @console-color: var( --console-color );
     @editor-ribbon-sum-of-icon-widths: 490px;
     @console-height: 44px;
 
@@ -40,7 +39,7 @@
 //
 
     #ribbon-console-copy-hover-button {
-        background-color: rgba( 245, 245, 245, 0.9 );
+        background-color: var( --console-hover-color );
         position: relative;
         padding-top: 13px;
         padding-bottom: 30px;
@@ -77,11 +76,11 @@
 
     #ribbon-console-copy-hover-button:active {
         //transition-duration: 0;
-        background-color: #eee;
+        background-color: var( --color-5 );
     }
 
     .console-highlight-active-block {
-        color: @kary-light-magenta;
+        color: var( --kary-magenta );
     }
 
 //
@@ -91,7 +90,7 @@
 
     #ribbon-console-title {
         font-family: @source-code-pro-typeface;
-        color: #CACACA;
+        color: var( --console-color );
         font-size: 9px;
         text-transform: uppercase;
         letter-spacing: 2px;
@@ -107,7 +106,7 @@
         font-size: 18px;
         letter-spacing: 2px;
         text-align: center;
-        color: #2A75C0;
+        color: var( --kary-blue );
         overflow: hidden;
         max-height: 29px;
         max-width: calc( ~'100vw' - @editor-ribbon-sum-of-icon-widths - 140px );

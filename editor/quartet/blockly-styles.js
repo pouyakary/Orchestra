@@ -18,7 +18,7 @@
             styles: [
                 {
                     key: 'fill',
-                    value: '#F7F7F7'
+                    value: 'var( --kary-background )'
                 },
                 {
                     key: 'stroke',
@@ -31,7 +31,7 @@
             styles: [
                 {
                     key: 'fill',
-                    value: '#EEEEEE'
+                    value: 'var( --color-5 )'
                 }
             ]
         },
@@ -40,7 +40,7 @@
             styles: [
                 {
                     key: 'fill',
-                    value: 'white'
+                    value: 'var( --color-2 )'
                 }
             ]
         }]

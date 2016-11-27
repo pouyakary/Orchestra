@@ -12,7 +12,6 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    @import '../../libs/kary-scheme';
     @import '../../globals';
 
 //
@@ -29,20 +28,20 @@
 //
 
     .monaco-editor {
-        color: @kary-light-blue;
+        color: var( --playground-text );
     }
 
     .monaco-editor .token.match {
-        background-color: #D6EEFF;
-        color: @kary-light-blue;
+        background-color: var( --playground-match );
+        color: var( --playground-text );
     }
 
     .monaco-editor-background {
-        background-color: #F7F7F7;
+        background-color: var( --kary-background );
     }
 
     .monaco-editor.vs .line-numbers {
-        color: @kary-light-blue;
+        color: var( --playground-text );
     }
 
 //
@@ -50,7 +49,7 @@
 //
 
     .playground-match {
-        background-color: #eee;
+        background-color: var( --color-5 );
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
