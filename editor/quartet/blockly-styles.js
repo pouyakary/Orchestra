@@ -40,7 +40,7 @@
             styles: [
                 {
                     key: 'fill',
-                    value: 'var( --color-2 )'
+                    value: 'transparent'
                 }
             ]
         }]
@@ -52,7 +52,6 @@
     function applyAdditionalStyles ( ) {
         blocklyAdditionalStyles.forEach( blockStyle => {
             let elements = document.getElementsByClassName( blockStyle.class )
-
             for ( let index = 0; index < elements.length; index++ ) {
                 let element = elements[ index ]
                 blockStyle.styles.forEach( style => {
