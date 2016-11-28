@@ -34,6 +34,14 @@
     }
 
 //
+// ─── CHANGE COLOR MODE ──────────────────────────────────────────────────────────
+//
+
+    function changeColorMode ( ) {
+        document.body.className = ( document.body.className === 'dark' )? '' : 'dark';
+    }
+
+//
 // ─── CHOOSE RANDOMLY FROM ARRAY ─────────────────────────────────────────────────
 //
 
