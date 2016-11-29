@@ -295,11 +295,19 @@
     }
 
 //
+// ─── GET VIEW MENU ITEMS ────────────────────────────────────────────────────────
+//
+
+    function getViewMenuItems ( ) {
+        return OrchestraAppMenu.items[ OrchestraAppMenu.items.length - 3 ]
+    }
+
+//
 // ─── SET COLOR MODE ACTIVATION ──────────────────────────────────────────────────
 //
 
     function setViewColorModeMenuActivation ( state ) {
-        OrchestraAppMenu.items[ OrchestraAppMenu.items.length - 3 ].submenu.items[ 0 ].checked = state
+        getViewMenuItems( ).submenu.items[ 0 ].checked = state
     }
 
 //
@@ -308,7 +316,7 @@
 
     function setActiveTabInMenu ( ) {
         let index = ( CurrentActiveView === 'editor' )? 2 : 3
-        OrchestraAppMenu.items[ OrchestraAppMenu.items.length - 3 ].submenu.items[ index ].checked = true
+        getViewMenuItems( ).submenu.items[ index ].checked = true
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
