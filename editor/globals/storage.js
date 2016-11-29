@@ -19,6 +19,7 @@
 //
 
     var OrchestraAppMenu
+    var ViewMenuThemeMode
 
 //
 // ─── TAB MANAGER ────────────────────────────────────────────────────────────────

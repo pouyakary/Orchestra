@@ -9,6 +9,16 @@
 //
 
 //
+// ─── FIRST INITS ────────────────────────────────────────────────────────────────
+//
+
+    ViewMenuThemeMode = {
+        label: 'Night Mode',
+        click: changeColorMode,
+        type: 'checkbox'
+    }
+
+//
 // ─── MENU ───────────────────────────────────────────────────────────────────────
 //
 
@@ -113,9 +123,19 @@
             {
                 label: 'View',
                 submenu: [
+                    ViewMenuThemeMode,
                     {
-                        label: 'Toggle Night Mode',
-                        click: changeColorMode
+                        type: 'separator'
+                    },
+                    {
+                        label: 'Editor',
+                        click: onChangeWindowToEditor,
+                        type: 'radio'
+                    },
+                    {
+                        label: 'Playground',
+                        click: onChangeWindowToPlayground,
+                        type: 'radio'
                     }
                 ]
             },
@@ -258,8 +278,6 @@
         const Menu = remote.Menu
         const MenuItem = remote.MenuItem
 
-        OrchestraAppMenu = new Menu( )
-
         OrchestraAppMenu = Menu.buildFromTemplate( MainMenu )
         Menu.setApplicationMenu( OrchestraAppMenu )
     }
@@ -274,6 +292,23 @@
             for ( let submenuIndex = 0; submenuIndex < submenu.length; submenuIndex++ )
                 submenu[ submenuIndex ].enabled = control;
         }
+    }
+
+//
+// ─── SET COLOR MODE ACTIVATION ──────────────────────────────────────────────────
+//
+
+    function setViewColorModeMenuActivation ( state ) {
+        OrchestraAppMenu.items[ OrchestraAppMenu.items.length - 3 ].submenu.items[ 0 ].checked = state
+    }
+
+//
+// ─── SET ACTIVE TAB ─────────────────────────────────────────────────────────────
+//
+
+    function setActiveTabInMenu ( ) {
+        let index = ( CurrentActiveView === 'editor' )? 2 : 3
+        OrchestraAppMenu.items[ OrchestraAppMenu.items.length - 3 ].submenu.items[ index ].checked = true
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

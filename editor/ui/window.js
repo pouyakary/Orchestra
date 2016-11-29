@@ -38,7 +38,13 @@
 //
 
     function changeColorMode ( ) {
-        document.body.className = ( document.body.className === 'dark' )? '' : 'dark';
+        if ( document.body.className === 'dark' ) {
+            setViewColorModeMenuActivation( false )
+            document.body.className = ''
+        } else {
+            setViewColorModeMenuActivation( true )
+            document.body.className = 'dark'
+        }
     }
 
 //
