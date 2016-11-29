@@ -146,6 +146,9 @@
             width: 650, minWidth: 650, maxWidth: 650,
             height: 410, minHeight: 410, maxHeight: 410,
             backgroundColor: '#ECECEC',
+            minimizable: false,
+            maximizable: false,
+            resizable: false
             //show: false
         })
 
