@@ -56,9 +56,6 @@
 //
 
     function createWindow ( args = { mode: 'start' } ) {
-
-        console.log( args )
-
         let editorWindow
         windowCount++
 
