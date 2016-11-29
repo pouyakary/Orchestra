@@ -21,14 +21,19 @@
     #playground-editor {
         width: 100vw;
         height: calc( ~'100vh - 39px ' - @ribbon-height );
+        color: var( --playground-text );
     }
 
 //
 // ─── MONACO STYLES ──────────────────────────────────────────────────────────────
 //
 
-    .monaco-editor {
-        color: var( --playground-text );
+    .monaco-editor.vs,
+    .lines-content,
+    .viwe-lines,
+    .view-line,
+    .token {
+        color: var( --kary-foreground );
     }
 
     .monaco-editor .token.match {
@@ -36,12 +41,25 @@
         color: var( --playground-text );
     }
 
-    .monaco-editor-background {
+    .monaco-editor, .monaco-editor-background {
         background-color: var( --kary-background );
+    }
+
+    .monaco-editor .cursor {
+        background: var( --kary-blue ) !important;
+    }
+
+    .monaco-editor .current-line {
+        background: var( --color-5 );
+        border: none;
     }
 
     .monaco-editor.vs .line-numbers {
         color: var( --playground-text );
+    }
+
+    .monaco-editor .lines-decorations {
+        background-color: transparent;
     }
 
 //

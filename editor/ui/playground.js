@@ -53,11 +53,11 @@
 
                 } catch ( error ) {
 
-                };
+                }
 
             monaco.languages.setMonarchTokensProvider( MatchLanguageName, {
                 tokenizer: tokenizer
-            });
+            })
 
             playgroundEditor = monaco.editor.create(
                 document.getElementById( playgroundEditorID ), {

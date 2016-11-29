@@ -114,7 +114,7 @@
                 label: 'View',
                 submenu: [
                     {
-                        label: 'Change color mode',
+                        label: 'Toggle Night Mode',
                         click: changeColorMode
                     }
                 ]
