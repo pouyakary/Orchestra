@@ -9,16 +9,6 @@
 //
 
 //
-// ─── FIRST INITS ────────────────────────────────────────────────────────────────
-//
-
-    ViewMenuThemeMode = {
-        label: 'Night Mode',
-        click: changeColorMode,
-        type: 'checkbox'
-    }
-
-//
 // ─── MENU ───────────────────────────────────────────────────────────────────────
 //
 
@@ -85,11 +75,12 @@
                         accelerator: 'CmdOrCtrl+Z',
                         role: 'undo'
                     },
+                    /*
                     {
                         label: 'Redo',
                         accelerator: 'Shift+CmdOrCtrl+Z',
                         role: 'redo'
-                    },
+                    },*/
                     {
                         type: 'separator'
                     },
@@ -123,17 +114,24 @@
             {
                 label: 'View',
                 submenu: [
-                    ViewMenuThemeMode,
+                    {
+                        label: 'Night Mode',
+                        accelerator: 'Shift+CmdOrCtrl+N',
+                        click: changeColorMode,
+                        type: 'checkbox'
+                    },
                     {
                         type: 'separator'
                     },
                     {
                         label: 'Editor',
+                        accelerator: 'CmdOrCtrl+E',
                         click: onChangeWindowToEditor,
                         type: 'radio'
                     },
                     {
                         label: 'Playground',
+                        accelerator: 'CmdOrCtrl+P',
                         click: onChangeWindowToPlayground,
                         type: 'radio'
                     }
