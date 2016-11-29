@@ -104,12 +104,17 @@
         overflow: hidden;
     }
 
+    .dark > #EditorView > #graph-and-ribbon-half > .ribbon > #regexp-importer {
+        background-image: url('dark-dialog-back.svg');
+    }
+
 //
 // ─── DIALOG INPUT ───────────────────────────────────────────────────────────────
 //
 
     #regexp-importer-input {
         background-color: var( --kary-background );
+        color: var( --kary-foreground );
         float: left;
         border: none;
         font-size: 1.2rem;
