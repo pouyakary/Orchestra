@@ -1,8 +1,8 @@
 {
     "version": "0.1.0",
-    "command": "bash",
+    "command": "npm",
     "isShellCommand": false,
-    "args": [ "build.sh" ],
+    "args": [ "run", "debug" ],
     "showOutput": "never",
     "echoCommand": false
 }

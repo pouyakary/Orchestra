@@ -15,6 +15,7 @@
     var gulp        = require('gulp')
     var packageJson = require('./package.json')
     var exec        = require('child_process').exec
+    var argv        = require('yargs').argv;
     var util        = require('util')
     var path        = require('path')
     var fs          = require('fs-extra')
@@ -166,11 +167,17 @@
 //
 
     gulp.task( 'electron', ['copyResourceFiles', 'sheets'], ( ) => {
+        if ( argv.pack ) {
+            console.log('packing...');
+            let iconFile = ( packageJson.productName !== 'Orchestra Nightly' )?
+                './designs/icon/icns/icon.icns' : './designs/icon-nightly/icns/icon.icns';
 
-        let iconFile = ( packageJson.productName !== 'Orchestra Nightly' )?
-            './designs/icon/icns/icon.icns' : './designs/icon-nightly/icns/icon.icns';
+            shell(`electron-packager _compiled "${ packageJson.productName }" --platform=darwin --arch=x64 --overwrite=true --app-copyright="Copyright 2016 by Kary Foundation, Inc." --app-version="${ packageJson.version }" --icon=${ iconFile } --name="${ packageJson.productName }" --out=_release`)
+        }
 
-        shell(`electron-packager _compiled "${ packageJson.productName }" --platform=darwin --arch=x64 --overwrite=true --app-copyright="Copyright 2016 by Kary Foundation, Inc." --app-version="${ packageJson.version }" --icon=${ iconFile } --name="${ packageJson.productName }" --out=_release`)
+        if ( argv.debug ) {
+            shell('npm run electron')
+        }
     })
 
 //

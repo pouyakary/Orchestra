@@ -8,9 +8,8 @@
   "license": "Apache-2.0",
   "version": "0.1.0",
   "scripts": {
-    "build": "gulp",
-    "run-mac": "_release/Orchestra-darwin-x64/Orchestra.app/Contents/MacOS/Orchestra",
-    "run-mac-nightly": "/Users/pmk/OneDrive/Codes/Orchestra/_release/Orchestra\\ Nightly-darwin-x64/Orchestra\\ Nightly.app/Contents/MacOS/Orchestra\\ Nightly",
+    "build": "gulp --pack",
+    "debug": "gulp --debug",
     "electron": "electron ./_compiled/main.js --enable-logging"
   },
   "repository": {
@@ -32,6 +31,7 @@
     "gulp-uglify": "1.5.3",
     "less": "2.7.1",
     "mv": "^2.1.1",
-    "sloc": "0.1.10"
+    "sloc": "0.1.10",
+    "yargs": "^6.4.0"
   }
 }
