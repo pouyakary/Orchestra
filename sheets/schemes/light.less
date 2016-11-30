@@ -14,42 +14,44 @@
 //
 
     :root {
+        --theme:                  'light';
 
-        --theme:                 'light';
+        --kary-orange:            #B36D00;
+        --kary-red:               #C03207;
+        --kary-magenta:           #9F0D97;
+        --kary-blue:              #2A75C0;
+        --kary-green:             #317410;
 
-        --kary-orange:           #B36D00;
-        --kary-red:              #C03207;
-        --kary-magenta:          #9F0D97;
-        --kary-blue:             #2A75C0;
-        --kary-green:            #317410;
+        --kary-foreground:        #141414;
+        --kary-comment:           #BBB7B5;
+        --kary-background:        #F7F7F7;
 
-        --kary-foreground:       #141414;
-        --kary-comment:          #BBB7B5;
-        --kary-background:       #F7F7F7;
+        --kary-selection:         #C2E8F4;
+        --kary-highlights:        #ECECEC;
 
-        --kary-selection:        #C2E8F4;
-        --kary-highlights:       #ECECEC;
+        --color-1:                var( --kary-background );
+        --color-2:                white;
+        --color-3:                var( --kary-foreground );
+        --color-4:                var( --kary-blue );
+        --color-5:                #EEEEEE;
 
-        --color-1:               var( --kary-background );
-        --color-2:               white;
-        --color-3:               var( --kary-foreground );
-        --color-4:               var( --kary-blue );
-        --color-5:               #EEEEEE;
+        --acent-color:            var( --kary-magenta );
 
-        --acent-color:           var( --kary-magenta );
+        --ribbon-border-bottom:   #f5f5f5;
+        --ribbon-hover-border:    #ccc;
+        --ribbon-separator:       var( --color-5 );
 
-        --ribbon-border-bottom:  #f5f5f5;
-        --ribbon-hover-border:   #ccc;
-        --ribbon-separator:      var( --color-5 );
+        --console-color:          #F5F5F5;
+        --console-hover-color:    rgba( 245, 245, 245, 0.9 );
+        --console-title:          #CACACA;
+        --console-regexp:         var( --kary-blue );
+        --console-copy-text:      var( --kary-foreground );
 
-        --console-color:         #F5F5F5;
-        --console-hover-color:   rgba( 245, 245, 245, 0.9 );
-        --console-title:         #CACACA;
-        --console-regexp:        var( --kary-blue );
-        --console-copy-text:     var( --kary-foreground );
-
-        --playground-text:       var( --kary-blue );
-        --playground-match:      #D6EEFF;
+        --playground-text:        var( --kary-blue );
+        --playground-match-text:  var( --kary-foreground );
+        --playground-match-back:  #D6EEFF;
+        --playground-caret:       var( --kary-blue );
+        --playground-line-nums:   var( --kary-blue );
 
         --toolbar-tab-editor:     ~'url("toolbar-tabs-editor.png")';
         --toolbar-tab-playground: ~'url("toolbar-tabs-playground.png")';
