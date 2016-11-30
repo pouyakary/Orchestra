@@ -95,6 +95,11 @@
                         role: 'copy'
                     },
                     {
+                        label: 'Copy Compiled RegExp',
+                        accelerator: 'Shift+CmdOrCtrl+C',
+                        click: onCopyRegExp
+                    },
+                    {
                         label: 'Paste',
                         accelerator: 'CmdOrCtrl+V',
                         role: 'paste'
