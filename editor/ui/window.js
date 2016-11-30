@@ -38,12 +38,27 @@
 //
 
     function changeColorMode ( ) {
-        if ( document.body.className === 'dark' ) {
+        if ( WindowTheme === 'dark' )
+            setWindowColorMode( 'light' )
+        else
+            setWindowColorMode( 'dark' )
+    }
+
+//
+// ─── SET WINDOW COLOR MODE ──────────────────────────────────────────────────────
+//
+
+    function setWindowColorMode ( mode ) {
+        if ( mode === 'light' ) {
+            WindowTheme = 'light'
             setViewColorModeMenuActivation( false )
             document.body.className = ''
+            playgroundEditor.updateOptions({ 'theme': 'vs' })
         } else {
+            WindowTheme = 'dark'
             setViewColorModeMenuActivation( true )
             document.body.className = 'dark'
+            playgroundEditor.updateOptions({ 'theme': 'vs-dark' })
         }
     }
 

@@ -68,6 +68,7 @@
                     lineHeight: 24,
                     renderWhitespace: true,
                     insertSpaces: false,
+                    theme: ( WindowTheme === 'dark' )? 'vs-dark' : 'vs'
                 }
             )
         })
