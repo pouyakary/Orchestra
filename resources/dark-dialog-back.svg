@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="410px" height="192px" viewBox="0 0 410 192" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40 (33762) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M5,23.8677796 C5,21.1094223 7.24406437,18.8733319 10.0048794,18.8733319 L20.7797214,18.8733319 C23.54384,18.8733319 27.2963232,17.2289387 29.1742269,15.1862275 L36.7748731,6.91853765 C38.6469119,4.88220609 41.6221033,4.93516688 43.4210402,7.03787033 L50.2901533,15.0668948 C52.0886913,17.169132 55.791006,18.8733319 58.5486562,18.8733319 L399.998038,18.8733319 C402.760545,18.8733319 405,21.1116512 405,23.8677796 L405,180.005552 C405,182.76391 402.762757,185 399.996872,185 L10.0031285,185 C7.23997692,185 5,182.761681 5,180.005552 L5,23.8677796 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="400" height="180" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-Copy" stroke="#4A4A4A" stroke-width="2" fill="#292929">
+            <use id="Rectangle" mask="url(#mask-2)" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>

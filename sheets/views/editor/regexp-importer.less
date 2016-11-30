@@ -12,7 +12,6 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    @import '../../libs/kary-scheme';
     @import '../../globals';
 
 //
@@ -105,12 +104,17 @@
         overflow: hidden;
     }
 
+    .dark > #EditorView > #graph-and-ribbon-half > .ribbon > #regexp-importer {
+        background-image: url('dark-dialog-back.svg');
+    }
+
 //
 // ─── DIALOG INPUT ───────────────────────────────────────────────────────────────
 //
 
     #regexp-importer-input {
-        background-color: @kary-light-background;
+        background-color: var( --kary-background );
+        color: var( --kary-foreground );
         float: left;
         border: none;
         font-size: 1.2rem;
@@ -134,7 +138,7 @@
         border-radius: 100px;
         border: none;
         vertical-align: middle;
-        color: @kary-light-background;
+        color: var( --kary-background );
         font-size: 0.8rem;
         border-top-right-radius: 100px;
         border-bottom-right-radius: 100px;
@@ -147,7 +151,7 @@
     }
 
     #regexp-importer-button:hover {
-        background-color: #449F10;
+        background-color: var( --kary-green );
     }
 
 //
@@ -155,7 +159,7 @@
 //
 
     #regexp-importer > h1 {
-        color: @kary-light-blue;
+        color: var( --kary-blue );
         margin: 15px 0 6px 5px;
         font-size: 1.6rem;
     }
@@ -165,7 +169,7 @@
 //
 
     #regexp-importer > p {
-        color: @kary-light-foreground;
+        color: var( --kary-foreground );
         line-height: 1.4;
         padding: 0;
         margin: 4px 0 10px 5px;

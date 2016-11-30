@@ -34,6 +34,35 @@
     }
 
 //
+// ─── CHANGE COLOR MODE ──────────────────────────────────────────────────────────
+//
+
+    function changeColorMode ( ) {
+        if ( WindowTheme === 'dark' )
+            setWindowColorMode( 'light' )
+        else
+            setWindowColorMode( 'dark' )
+    }
+
+//
+// ─── SET WINDOW COLOR MODE ──────────────────────────────────────────────────────
+//
+
+    function setWindowColorMode ( mode ) {
+        if ( mode === 'light' ) {
+            WindowTheme = 'light'
+            setViewColorModeMenuActivation( false )
+            document.body.className = ''
+        } else {
+            WindowTheme = 'dark'
+            setViewColorModeMenuActivation( true )
+            document.body.className = 'dark'
+        }
+
+        changePlaygroundThemeTo( mode )
+    }
+
+//
 // ─── CHOOSE RANDOMLY FROM ARRAY ─────────────────────────────────────────────────
 //
 

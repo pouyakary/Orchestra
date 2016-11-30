@@ -75,11 +75,12 @@
                         accelerator: 'CmdOrCtrl+Z',
                         role: 'undo'
                     },
+                    /*
                     {
                         label: 'Redo',
                         accelerator: 'Shift+CmdOrCtrl+Z',
                         role: 'redo'
-                    },
+                    },*/
                     {
                         type: 'separator'
                     },
@@ -102,6 +103,37 @@
                         label: 'Select All',
                         accelerator: 'CmdOrCtrl+A',
                         role: 'selectall'
+                    }
+                ]
+            },
+
+        //
+        // ─── VIEW MENU ───────────────────────────────────────────────────
+        //
+
+            {
+                label: 'View',
+                submenu: [
+                    {
+                        label: 'Night Mode',
+                        accelerator: 'Shift+CmdOrCtrl+N',
+                        click: changeColorMode,
+                        type: 'checkbox'
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: 'Editor',
+                        accelerator: 'CmdOrCtrl+E',
+                        click: onChangeWindowToEditor,
+                        type: 'radio'
+                    },
+                    {
+                        label: 'Playground',
+                        accelerator: 'CmdOrCtrl+P',
+                        click: onChangeWindowToPlayground,
+                        type: 'radio'
                     }
                 ]
             },
@@ -244,8 +276,6 @@
         const Menu = remote.Menu
         const MenuItem = remote.MenuItem
 
-        OrchestraAppMenu = new Menu( )
-
         OrchestraAppMenu = Menu.buildFromTemplate( MainMenu )
         Menu.setApplicationMenu( OrchestraAppMenu )
     }
@@ -260,6 +290,31 @@
             for ( let submenuIndex = 0; submenuIndex < submenu.length; submenuIndex++ )
                 submenu[ submenuIndex ].enabled = control;
         }
+    }
+
+//
+// ─── GET VIEW MENU ITEMS ────────────────────────────────────────────────────────
+//
+
+    function getViewMenuItems ( ) {
+        return OrchestraAppMenu.items[ OrchestraAppMenu.items.length - 3 ]
+    }
+
+//
+// ─── SET COLOR MODE ACTIVATION ──────────────────────────────────────────────────
+//
+
+    function setViewColorModeMenuActivation ( state ) {
+        getViewMenuItems( ).submenu.items[ 0 ].checked = state
+    }
+
+//
+// ─── SET ACTIVE TAB ─────────────────────────────────────────────────────────────
+//
+
+    function setActiveTabInMenu ( ) {
+        let index = ( CurrentActiveView === 'editor' )? 2 : 3
+        getViewMenuItems( ).submenu.items[ index ].checked = true
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

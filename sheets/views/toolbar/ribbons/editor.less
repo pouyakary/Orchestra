@@ -12,14 +12,13 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    @import '../../../libs/kary-scheme';
     @import '../../../globals';
 
 //
 // ─── CONSOLE VIEW ───────────────────────────────────────────────────────────────
 //
 
-    @console-color: #F5F5F5;
+    @console-color: var( --console-color );
     @editor-ribbon-sum-of-icon-widths: 490px;
     @console-height: 44px;
 
@@ -40,7 +39,7 @@
 //
 
     #ribbon-console-copy-hover-button {
-        background-color: rgba( 245, 245, 245, 0.9 );
+        background-color: var( --console-hover-color );
         position: relative;
         padding-top: 13px;
         padding-bottom: 30px;
@@ -61,13 +60,23 @@
 
     #console-copy-icon {
         width: 20px;
+        height: 18px;
         float: left;
-        padding-left: ~'calc( 50% - 50px )';
+        margin-left: ~'calc( 50% - 50px )';
+        background-position: left;
+        background-size: contain;
+        background-image: url('console-copy-icon.svg');
+        background-repeat: no-repeat;
+    }
+
+    .dark > .tab-view > #graph-and-ribbon-half > .ribbon > #ribbon-console-view > #ribbon-console-copy-hover-button > div > #console-copy-icon {
+        background-image: url('dark-console-copy-icon.svg');
     }
 
     #console-copy-text {
         padding-left: 10px;
         float: left;
+        color: var( --console-copy-text );
     }
 
     #ribbon-console-copy-hover-button:hover {
@@ -77,11 +86,11 @@
 
     #ribbon-console-copy-hover-button:active {
         //transition-duration: 0;
-        background-color: #eee;
+        background-color: var( --color-5 );
     }
 
     .console-highlight-active-block {
-        color: @kary-light-magenta;
+        color: var( --kary-magenta );
     }
 
 //
@@ -91,7 +100,7 @@
 
     #ribbon-console-title {
         font-family: @source-code-pro-typeface;
-        color: #CACACA;
+        color: var( --console-title );
         font-size: 9px;
         text-transform: uppercase;
         letter-spacing: 2px;
@@ -107,7 +116,7 @@
         font-size: 18px;
         letter-spacing: 2px;
         text-align: center;
-        color: #2A75C0;
+        color: var( --console-regexp );
         overflow: hidden;
         max-height: 29px;
         max-width: calc( ~'100vw' - @editor-ribbon-sum-of-icon-widths - 140px );
@@ -121,12 +130,28 @@
         background-image: url('ribbon-editor-regexp-importer.png');
     }
 
+    .dark > .tab-view > #graph-and-ribbon-half > .ribbon > .ribbon-editor-regexp-importer {
+        background-image: url('dark-ribbon-editor-regexp-importer.png');
+    }
+
+
+
     .ribbon-editor-export-svg {
         background-image: url('ribbon-editor-export-svg.png');
     }
 
+    .dark > .tab-view > #graph-and-ribbon-half > .ribbon > .ribbon-editor-export-svg {
+        background-image: url('dark-ribbon-editor-export-svg.png');
+    }
+
+
+
     .ribbon-editor-help {
         background-image: url('ribbon-editor-help.png');
+    }
+
+    .dark > .tab-view > #graph-and-ribbon-half > .ribbon > .ribbon-editor-help {
+        background-image: url('dark-ribbon-editor-help.png');
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

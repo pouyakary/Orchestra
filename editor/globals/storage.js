@@ -15,10 +15,17 @@
     var currentFile = defaultFileObject
 
 //
+// ─── WINDOW STATUS ──────────────────────────────────────────────────────────────
+//
+
+    var WindowTheme = 'light'
+
+//
 // ─── APP MENU ───────────────────────────────────────────────────────────────────
 //
 
     var OrchestraAppMenu
+    var ViewMenuThemeMode
 
 //
 // ─── TAB MANAGER ────────────────────────────────────────────────────────────────

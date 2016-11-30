@@ -53,11 +53,11 @@
 
                 } catch ( error ) {
 
-                };
+                }
 
             monaco.languages.setMonarchTokensProvider( MatchLanguageName, {
                 tokenizer: tokenizer
-            });
+            })
 
             playgroundEditor = monaco.editor.create(
                 document.getElementById( playgroundEditorID ), {
@@ -68,6 +68,7 @@
                     lineHeight: 24,
                     renderWhitespace: true,
                     insertSpaces: false,
+                    theme: ( WindowTheme === 'dark' )? 'vs-dark' : 'vs'
                 }
             )
         })
@@ -99,6 +100,16 @@
 
     function onPerformTestDrive ( ) {
         onChangeWindowToPlayground( )
+    }
+
+//
+// ─── SET PLAYGROUND COLOR ───────────────────────────────────────────────────────
+//
+
+    function changePlaygroundThemeTo ( mode ) {
+        playgroundEditor.updateOptions({
+            'theme': ( mode === 'dark' )? 'vs-dark' : 'vs'
+        })
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

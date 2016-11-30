@@ -18,7 +18,7 @@
             styles: [
                 {
                     key: 'fill',
-                    value: '#F7F7F7'
+                    value: 'var( --kary-background )'
                 },
                 {
                     key: 'stroke',
@@ -31,7 +31,7 @@
             styles: [
                 {
                     key: 'fill',
-                    value: '#EEEEEE'
+                    value: 'var( --color-5 )'
                 }
             ]
         },
@@ -40,10 +40,20 @@
             styles: [
                 {
                     key: 'fill',
-                    value: 'white'
+                    value: 'transparent'
                 }
             ]
-        }]
+        },
+        {
+            class: 'blocklyScrollbarKnob',
+            styles: [
+                {
+                    key: 'fill',
+                    value: 'var( --blockly-scrollbar-knob )'
+                }
+            ]
+        }
+    ]
 
 //
 // ─── STYLER ─────────────────────────────────────────────────────────────────────
@@ -52,7 +62,6 @@
     function applyAdditionalStyles ( ) {
         blocklyAdditionalStyles.forEach( blockStyle => {
             let elements = document.getElementsByClassName( blockStyle.class )
-
             for ( let index = 0; index < elements.length; index++ ) {
                 let element = elements[ index ]
                 blockStyle.styles.forEach( style => {
