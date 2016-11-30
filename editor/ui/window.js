@@ -53,13 +53,13 @@
             WindowTheme = 'light'
             setViewColorModeMenuActivation( false )
             document.body.className = ''
-            playgroundEditor.updateOptions({ 'theme': 'vs' })
         } else {
             WindowTheme = 'dark'
             setViewColorModeMenuActivation( true )
             document.body.className = 'dark'
-            playgroundEditor.updateOptions({ 'theme': 'vs-dark' })
         }
+
+        changePlaygroundThemeTo( mode )
     }
 
 //

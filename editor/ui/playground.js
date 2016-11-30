@@ -102,4 +102,14 @@
         onChangeWindowToPlayground( )
     }
 
+//
+// ─── SET PLAYGROUND COLOR ───────────────────────────────────────────────────────
+//
+
+    function changePlaygroundThemeTo ( mode ) {
+        playgroundEditor.updateOptions({
+            'theme': ( mode === 'dark' )? 'vs-dark' : 'vs'
+        })
+    }
+
 // ────────────────────────────────────────────────────────────────────────────────
