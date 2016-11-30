@@ -43,7 +43,17 @@
                     value: 'transparent'
                 }
             ]
-        }]
+        },
+        {
+            class: 'blocklyScrollbarKnob',
+            styles: [
+                {
+                    key: 'fill',
+                    value: 'var( --blockly-scrollbar-knob )'
+                }
+            ]
+        }
+    ]
 
 //
 // ─── STYLER ─────────────────────────────────────────────────────────────────────

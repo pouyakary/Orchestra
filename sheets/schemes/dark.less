@@ -14,44 +14,89 @@
 //
 
     .dark {
-        --theme:                  'dark';
 
-        --kary-orange:            #B48337;
-        --kary-red:               #D17051;
-        --kary-magenta:           #A47097;
-        --kary-blue:              #668BB7;
-        --kary-green:             #7DA76F;
+        //
+        // ─── COLORS ──────────────────────────────────────────────────────
+        //
 
-        --kary-foreground:        #C1C1C1;
-        --kary-comment:           #5D5D5D;
-        --kary-background:        #1E1E1E;
+            @kary-orange:                   #B48337;
+            @kary-red:                      #D17051;
+            @kary-magenta:                  #A47097;
+            @kary-blue:                     #668BB7;
+            @kary-green:                    #7DA76F;
 
-        --kary-selcetion:         #1B424E;
-        --kary-highlights:        #1B1B1B;
+            @kary-foreground:               #C1C1C1;
+            @kary-comment:                  #5D5D5D;
+            @kary-background:               #1E1E1E;
 
-        --color-1:                var( --kary-background );
-        --color-2:                #1A1A1A;
-        --color-3:                var( --kary-foreground );
-        --color-4:                var( --kary-blue );
-        --color-5:                #242424;
+            @kary-selcetion:                #1B424E;
+            @kary-highlights:               #1B1B1B;
 
-        --acent-color:            #3C8412;
+            // other colors
+            @blue-1:                        #97CFFF;
 
-        --ribbon-border-bottom:   #2B2B2B;
-        --ribbon-hover-border:    var( --kary-orange );
-        --ribbon-separator:       #444444;
+        //
+        // ─── EXPORTS ─────────────────────────────────────────────────────
+        //
 
-        --console-color:          #2E4564;
-        --console-hover-color:    rgba( 58, 81, 111, 0.9 );
-        --console-title:          #ccc;
-        --console-regexp:         #97CFFF;
-        --console-copy-text:      var( --console-regexp );
+            --kary-orange:                  @kary-orange;
+            --kary-red:                     @kary-red;
+            --kary-magenta:                 @kary-magenta;
+            --kary-blue:                    @kary-blue;
+            --kary-green:                   @kary-green;
 
-        --playground-text:        var( --kary-foreground );
-        --playground-match-text:  var( --console-regexp );
-        --playground-match-back:  var( --console-color );
-        --playground-caret:       var( --kary-orange );
-        --playground-line-nums:   var( --kary-orange );
+            --kary-foreground:              @kary-foreground;
+            --kary-comment:                 @kary-comment;
+            --kary-background:              @kary-background;
+
+            --kary-selcetion:               @kary-selcetion;
+            --kary-highlights:              @kary-highlights;
+
+            --color-1:                      @kary-background;
+            --color-2:                      #1A1A1A;
+            --color-3:                      @kary-foreground;
+            --color-4:                      @kary-blue;
+            --color-5:                      #242424;
+
+            --acent-color:                  #3C8412;
+
+        //
+        // ─── RIBBON ──────────────────────────────────────────────────────
+        //
+
+            --ribbon-border-bottom:         #2B2B2B;
+            --ribbon-hover-border:          @kary-orange;
+            --ribbon-separator:             #444444;
+
+        //
+        // ─── CONSOLE ─────────────────────────────────────────────────────
+        //
+
+
+            --console-color:                #2E4564;
+            --console-hover-color:          rgba( 58, 81, 111, 0.9 );
+            --console-title:                #5E90CF;
+            --console-regexp:               @blue-1;
+            --console-copy-text:            @blue-1;
+
+        //
+        // ─── BLOCKLY ─────────────────────────────────────────────────────
+        //
+
+            --blockly-scrollbar-knob:       #425B3B;
+
+        //
+        // ─── PLAYGROUND ──────────────────────────────────────────────────
+        //
+
+            --playground-text:              @kary-foreground;
+            --playground-match-text:        @blue-1;
+            --playground-match-back:        var( --console-color );
+            --playground-caret:             @kary-orange;
+            --playground-line-nums:         @kary-orange;
+
+        // ─────────────────────────────────────────────────────────────────
+
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
