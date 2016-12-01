@@ -37,6 +37,7 @@
     let isHelpWindowOpen = false
     let isAboutWindowOpen = false
     let helpWindow
+    let windowThemeStatus = 'dark'
 
 //
 // ─── HELPER TOOLS ───────────────────────────────────────────────────────────────
@@ -72,25 +73,25 @@
 
         editorWindow.maximize( )
         editorWindow.setMenuBarVisibility( false )
-        //editorWindow.openDevTools( )
+        editorWindow.openDevTools( )
 
+
+        // settings up window options
+        let windowOptions = {
+            theme: windowThemeStatus,
+        }
 
         if ( args.mode === 'file' )
-            editorWindow.loadURL( `file://${ __dirname }/index.html?${
-                encodeURI(JSON.stringify({
-                    file: args.file
-                }))}`)
+            windowOptions.file = args.file
 
-        else if ( args.mode === 'parse' )
-            editorWindow.loadURL( `file://${ __dirname }/index.html?${
-                encodeURI(JSON.stringify({
-                    regexp: args.regexp
-                }))}`)
-
-        else
-            editorWindow.loadURL( `file://${ __dirname }/index.html?{}` )
+        if ( args.mode === 'parse' )
+            windowOptions.regexp = args.regexp
 
 
+        // loading the window
+        editorWindow.loadURL( `file://${ __dirname }/index.html?${
+            encodeURI( JSON.stringify( windowOptions ) )
+        }`)
 
         editorWindow.once( 'ready-to-show', ( ) => {
             editorWindow.show( )
@@ -152,7 +153,12 @@
             //show: false
         })
 
-        aboutWindow.loadURL( `file://${ __dirname }/about/index.html?ov=${ orchestraVersion }&qv=${ quartetVersion }` )
+        aboutWindow.loadURL( `file://${ __dirname }/about/index.html?${
+            encodeURI( JSON.stringify({
+                theme: windowThemeStatus,
+                orchestraVersion: orchestraVersion,
+                quartetVersion: quartetVersion
+            }))}`)
 
         /*aboutWindow.once( 'ready-to-show', ( ) => {
             aboutWindow.show( )

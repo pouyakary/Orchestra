@@ -15,8 +15,8 @@
     function initWindow ( ) {
         setupWorkspace( )
         onNewFile( )
-        handleWindowArgs( )
         initMainMenu( )
+        handleWindowArgs( )
         setMenuEnableFactor( true )
         appendTrafficLightEvents( )
     }
@@ -27,9 +27,13 @@
 
     function handleWindowArgs ( ) {
         let options = JSON.parse( decodeURI( window.location.search.substring( 1 ) ) )
-        if ( options.file !== undefined | null | '' )
+
+        setWindowColorMode( options.theme )
+
+        // loading the file
+        if ( options.file )
             openFileWithPath( options.file )
-        else if ( options.regexp !== undefined | null | '' )
+        else if ( options.regexp )
             importRegExp( options.regexp )
     }
 
