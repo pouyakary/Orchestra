@@ -67,3 +67,25 @@ li {
     top: 30px;
     left: 25px;
 }
+
+/** dark theme */
+
+.dark > #main-background {
+    background-color: black;
+}
+
+.dark > #main-background > #main-text > h1 {
+    color: #7DA76F;
+}
+
+.dark > #main-background > #main-text > h2 {
+    color: #A47097;
+}
+
+.dark > #main-background > #main-text {
+    color: #ccc;
+}
+
+.dark > #main-background > #main-text > p > a {
+    color: #668BB7;
+}
