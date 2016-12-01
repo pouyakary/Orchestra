@@ -160,7 +160,14 @@
                         click: fireWindowJustMaximizeMinimizeRequest
                     },
                     {
-                        role: 'togglefullscreen'
+                        role: 'togglefullscreen',
+                        click: fireWindowFullScreenRequest
+                    },
+                    {
+                        label: 'Lock Position and Size',
+                        accelerator: 'Shift+CmdOrCtrl+L',
+                        type: 'checkbox',
+                        click: onLockScreenPosition
                     },
                     {
                         role: 'close'
@@ -297,9 +304,11 @@
 
     function setMenuEnableFactor ( control ) {
         for ( let menuIndex = 0; menuIndex < OrchestraAppMenu.items.length; menuIndex++ ) {
-            let submenu = OrchestraAppMenu.items[ menuIndex ].submenu.items
+            let submenu = OrchestraAppMenu.items[ menuIndex ]
+                                          .submenu
+                                          .items
             for ( let submenuIndex = 0; submenuIndex < submenu.length; submenuIndex++ )
-                submenu[ submenuIndex ].enabled = control;
+                submenu[ submenuIndex ].enabled = control
         }
     }
 
@@ -316,7 +325,8 @@
 //
 
     function setViewColorModeMenuActivation ( state ) {
-        getViewMenuItems( ).submenu.items[ 0 ].checked = state
+        getViewMenuItems( ).submenu.items[ 0 ]
+                           .checked = state
     }
 
 //
@@ -325,7 +335,17 @@
 
     function setActiveTabInMenu ( ) {
         let index = ( CurrentActiveView === 'editor' )? 2 : 3
-        getViewMenuItems( ).submenu.items[ index ].checked = true
+        getViewMenuItems( ).submenu.items[ index ]
+                           .checked = true
+    }
+
+//
+// ─── MENU LOCK BUTTON ───────────────────────────────────────────────────────────
+//
+
+    function getMenuForScreenLock ( ) {
+        return OrchestraAppMenu.items[ OrchestraAppMenu.items.length - 2 ]
+                               .submenu.items[ 3 ]
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

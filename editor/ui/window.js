@@ -140,9 +140,17 @@
 
     function fireWindowMaximizeRequest ( ) {
         if ( process.platform === 'darwin' )
-            OrchestraWindow.setFullScreen( !OrchestraWindow.isFullScreen( ) )
+            fireWindowFullScreenRequest( )
         else
             fireWindowJustMaximizeMinimizeRequest( )
+    }
+
+//
+// ─── ON GO FULL SCREEN ──────────────────────────────────────────────────────────
+//
+
+    function fireWindowFullScreenRequest ( ) {
+        OrchestraWindow.setFullScreen( !OrchestraWindow.isFullScreen( ) )
     }
 
 //
@@ -150,10 +158,21 @@
 //
 
     function fireWindowJustMaximizeMinimizeRequest ( ) {
-        if ( OrchestraWindow.isMaximized( ) )
-                OrchestraWindow.unmaximize( )
-            else
-                OrchestraWindow.maximize( )
+        if ( OrchestraWindow.isMaximized( ) ) {
+            OrchestraWindow.unmaximize( )
+        } else {
+            OrchestraWindow.maximize( )
+        }
+    }
+
+//
+// ─── LOCK SCREEN POSITION ───────────────────────────────────────────────────────
+//
+
+    function onLockScreenPosition ( ) {
+        let lock = !getMenuForScreenLock( ).checked
+        OrchestraWindow.setMovable( lock )
+        OrchestraWindow.setResizable( lock )
     }
 
 //
@@ -235,6 +254,18 @@
         setMenuEnableFactor( true )
         makeWindowButtonsActive( )
         OrchestraWindow.focusOnWebView( )
+    })
+
+//
+// ─── ON FULL SCREEN EVENT ───────────────────────────────────────────────────────
+//
+
+    OrchestraWindow.on( 'enter-full-screen', ( ) => {
+        getMenuForScreenLock( ).enabled = false
+    })
+
+    OrchestraWindow.on( 'leave-full-screen', ( ) => {
+        getMenuForScreenLock( ).enabled = true
     })
 
 //
