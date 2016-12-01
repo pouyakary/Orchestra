@@ -139,10 +139,21 @@
 //
 
     function fireWindowMaximizeRequest ( ) {
-        if ( OrchestraWindow.isMaximized( ) )
-            OrchestraWindow.unmaximize( )
+        if ( process.platform === 'darwin' )
+            OrchestraWindow.setFullScreen( !OrchestraWindow.isFullScreen( ) )
         else
-            OrchestraWindow.maximize( )
+            fireWindowJustMaximizeMinimizeRequest( )
+    }
+
+//
+// ─── ON JUST MAXIMIZE AND MINIMIZE ──────────────────────────────────────────────
+//
+
+    function fireWindowJustMaximizeMinimizeRequest ( ) {
+        if ( OrchestraWindow.isMaximized( ) )
+                OrchestraWindow.unmaximize( )
+            else
+                OrchestraWindow.maximize( )
     }
 
 //

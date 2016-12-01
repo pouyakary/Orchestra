@@ -67,7 +67,7 @@
             height: window_height,  minHeight: window_height - 100,
             backgroundColor: '#F7F7F7',
             frame: false,
-            fullscreen: false,
+            // fullscreen: false,
         })
 
         editorWindow.maximize( )

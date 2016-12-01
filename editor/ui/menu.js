@@ -155,6 +155,11 @@
                         role: 'minimize'
                     },
                     {
+                        label: 'Maximize',
+                        accelerator: 'Shift+CmdOrCtrl+M',
+                        click: fireWindowJustMaximizeMinimizeRequest
+                    },
+                    {
                         role: 'togglefullscreen'
                     },
                     {
