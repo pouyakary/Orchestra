@@ -64,6 +64,7 @@
         }
 
         changePlaygroundThemeTo( mode )
+        ipcRenderer.send( 'theme-change', mode )
     }
 
 //

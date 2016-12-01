@@ -73,7 +73,7 @@
 
         editorWindow.maximize( )
         editorWindow.setMenuBarVisibility( false )
-        editorWindow.openDevTools( )
+        //editorWindow.openDevTools( )
 
 
         // settings up window options
@@ -146,11 +146,12 @@
             title: 'About Orchestra',
             width: 650, minWidth: 650, maxWidth: 650,
             height: 410, minHeight: 410, maxHeight: 410,
-            backgroundColor: '#ECECEC',
+            backgroundColor: ( windowThemeStatus === 'dark' )? 'black' : '#ECECEC',
             minimizable: false,
             maximizable: false,
-            resizable: false
-            //show: false
+            resizable: false,
+            fullscreen: false,
+            show: false
         })
 
         aboutWindow.loadURL( `file://${ __dirname }/about/index.html?${
@@ -160,9 +161,9 @@
                 quartetVersion: quartetVersion
             }))}`)
 
-        /*aboutWindow.once( 'ready-to-show', ( ) => {
+        aboutWindow.once( 'ready-to-show', ( ) => {
             aboutWindow.show( )
-        });*/
+        })
 
         aboutWindow.on( 'closed' , ( ) => {
             isAboutWindowOpen = false
@@ -230,6 +231,14 @@
 //
 
     ipcMain.on( 'open-about-page', ( event, arg ) => openAboutWindow( ) )
+
+//
+// ─── THEME CHANGE TOOL ──────────────────────────────────────────────────────────
+//
+
+    ipcMain.on( 'theme-change', ( event, mode ) => {
+        windowThemeStatus = mode
+    })
 
 //
 // ─── ON APP QUIT REQUEST ────────────────────────────────────────────────────────
