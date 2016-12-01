@@ -33,6 +33,7 @@
 // ─── STORAGE ────────────────────────────────────────────────────────────────────
 //
 
+    let windows = new Set( )
     let windowCount = 0
     let isHelpWindowOpen = false
     let isAboutWindowOpen = false
@@ -50,6 +51,15 @@
         } catch ( ex ) {
             return false
         }
+    }
+
+//
+// ─── IPC BROAD CAST ─────────────────────────────────────────────────────────────
+//
+
+    function broadcast ( messageId, data ) {
+        for ( let win of windows )
+            win.webContents.send( messageId, data )
     }
 
 //
@@ -87,6 +97,8 @@
         if ( args.mode === 'parse' )
             windowOptions.regexp = args.regexp
 
+        // adding to windows
+        windows.add( editorWindow )
 
         // loading the window
         editorWindow.loadURL( `file://${ __dirname }/index.html?${
@@ -101,6 +113,7 @@
         // editorWindow.openDevTools( );
 
         editorWindow.on( 'closed' , ( ) => {
+            windows.delete( editorWindow )
             windowCount--
         })
     }
@@ -121,7 +134,11 @@
             fullscreen: false,
         })
 
-        helpWindow.openDevTools( )
+        //helpWindow.openDevTools( )
+
+        // adding to windows
+        windows.add( helpWindow )
+
 
         if ( arg === '' )
             helpWindow.loadURL( `file://${ __dirname }/help/index.html?none` )
@@ -130,6 +147,7 @@
 
         helpWindow.on( 'closed' , ( ) => {
             isHelpWindowOpen = false
+            windows.delete( helpWindow )
             helpWindow = null
         })
     }
@@ -165,8 +183,12 @@
             aboutWindow.show( )
         })
 
+        // adding to the windows
+        windows.add( aboutWindow )
+
         aboutWindow.on( 'closed' , ( ) => {
             isAboutWindowOpen = false
+            windows.delete( aboutWindow )
             aboutWindow = null
         })
     }
@@ -238,6 +260,7 @@
 
     ipcMain.on( 'theme-change', ( event, mode ) => {
         windowThemeStatus = mode
+        broadcast( 'change-theme-to', mode )
     })
 
 //

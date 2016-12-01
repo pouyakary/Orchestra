@@ -52,7 +52,7 @@
 // ─── SET WINDOW COLOR MODE ──────────────────────────────────────────────────────
 //
 
-    function setWindowColorMode ( mode ) {
+    function setWindowColorMode ( mode, sendMessage = true ) {
         if ( mode === 'light' ) {
             WindowTheme = 'light'
             setViewColorModeMenuActivation( false )
@@ -64,7 +64,9 @@
         }
 
         changePlaygroundThemeTo( mode )
-        ipcRenderer.send( 'theme-change', mode )
+
+        if ( sendMessage )
+            ipcRenderer.send( 'theme-change', mode )
     }
 
 //
@@ -271,6 +273,14 @@
 
     OrchestraWindow.on( 'leave-full-screen', ( ) => {
         getMenuForScreenLock( ).enabled = true
+    })
+
+//
+// ─── ON CHANGE THEME REQUEST ────────────────────────────────────────────────────
+//
+
+    ipcRenderer.on( 'change-theme-to', ( event, mode ) => {
+        setWindowColorMode( mode, false )
     })
 
 //
