@@ -15,6 +15,7 @@
     const openExternal = require( 'electron' ).shell.openExternal;
     const fs = require('fs');
     const appName = require( 'electron' ).remote.app.getName( )
+    const { ipcRenderer } = require( 'electron' )
 
 //
 // ─── WINDOW DRAG FIX ────────────────────────────────────────────────────────────
@@ -62,5 +63,12 @@
         } catch ( e ) { alert( e )};
     }
 
+//
+// ─── ON THEME CHANGES ───────────────────────────────────────────────────────────
+//
+
+    ipcRenderer.on( 'change-theme-to', ( event, mode ) => {
+        document.body.className = mode
+    })
 
 // ────────────────────────────────────────────────────────────────────────────────
