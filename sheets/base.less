@@ -67,6 +67,20 @@
         overflow: hidden;
     }
 
+    #opening-logo {
+        width: 120px;
+        height: 110px;
+        background-image: url('opening-logo.png');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: auto;
+    }
+
+    .dark > #loading-view > #opening-logo {
+        background-image: url('dark-opening-logo.png');
+    }
+
     .dead-loading-view {
         opacity: 0;
         transition-duration: 0.4s;
