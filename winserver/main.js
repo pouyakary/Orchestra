@@ -26,6 +26,8 @@
 
     const uniqueWindowIdKey = 'orchestra-unique-window-id'
 
+    const settingsFilePath = path.join( __dirname, 'orchestraSettings.json' )
+
     const orchestraVersion = '1.0'
     const quartetVersion = '1.2'
 
@@ -38,7 +40,10 @@
     let isHelpWindowOpen = false
     let isAboutWindowOpen = false
     let helpWindow
-    let windowThemeStatus = 'dark'
+
+    let settings = {
+        windowThemeStatus: 'light'
+    }
 
 //
 // ─── HELPER TOOLS ───────────────────────────────────────────────────────────────
@@ -60,6 +65,23 @@
     function broadcast ( messageId, data ) {
         for ( let win of windows )
             win.webContents.send( messageId, data )
+    }
+
+//
+// ─── SAVE SETTINGS ──────────────────────────────────────────────────────────────
+//
+
+    function saveSettings ( ) {
+        fs.writeFile( settingsFilePath, JSON.stringify( settings ) )
+    }
+
+//
+// ─── UPDATE SETTINGS ────────────────────────────────────────────────────────────
+//
+
+    function updateSettings ( newSettings ) {
+        Object.assign( settings, newSettings )
+        saveSettings( )
     }
 
 //
@@ -88,7 +110,7 @@
 
         // settings up window options
         let windowOptions = {
-            theme: windowThemeStatus,
+            theme: settings.windowThemeStatus,
         }
 
         if ( args.mode === 'file' )
@@ -174,7 +196,7 @@
 
         aboutWindow.loadURL( `file://${ __dirname }/about/index.html?${
             encodeURI( JSON.stringify({
-                theme: windowThemeStatus,
+                theme: settings.windowThemeStatus,
                 orchestraVersion: orchestraVersion,
                 quartetVersion: quartetVersion
             }))}`)
@@ -204,6 +226,18 @@
     if ( mustQuit ) app.quit( )
 
 //
+// ─── LOAD SETTINGS ──────────────────────────────────────────────────────────────
+//
+
+    function loadSettings ( ) {
+        try {
+            Object.assign( settings, JSON.parse( fs.readFileSync( settingsFilePath ) ) )
+        } catch ( e ) {
+            console.log('Could not found the settings file')
+        }
+    }
+
+//
 // ─── ON READY ───────────────────────────────────────────────────────────────────
 //
 
@@ -211,6 +245,7 @@
         console.log(`Orchestra, Version ${ orchestraVersion }`)
         console.log('Copyright 2016 - Kary Foundation, Inc.')
 
+        loadSettings( )
         // runExtensionServer( )
         createWindow( parseArgs( process.argv ) )
     })
@@ -259,7 +294,9 @@
 //
 
     ipcMain.on( 'theme-change', ( event, mode ) => {
-        windowThemeStatus = mode
+        updateSettings({
+            windowThemeStatus: mode
+        })
         broadcast( 'change-theme-to', mode )
     })
 
