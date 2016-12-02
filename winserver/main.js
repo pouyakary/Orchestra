@@ -98,7 +98,7 @@
             show: false,
             width:  window_width,   minWidth: window_width - 150,
             height: window_height,  minHeight: window_height - 100,
-            backgroundColor: ( settings.windowThemeStatus === 'dark' )? '1E1E1E' : '#F7F7F7',
+            //backgroundColor: ( settings.windowThemeStatus === 'dark' )? '1E1E1E' : '#F7F7F7',
             frame: false,
             // fullscreen: false,
         })
@@ -178,19 +178,23 @@
 // ─── OPEN ABOUT PAGE ────────────────────────────────────────────────────────────
 //
 
-    function openAboutWindow ( ) {
+    function openAboutWindow ( parent ) {
         if ( isAboutWindowOpen ) return
         isAboutWindowOpen = true
+
+        console.log( parent )
 
         let aboutWindow = new BrowserWindow({
             title: 'About Orchestra',
             width: 650, minWidth: 650, maxWidth: 650,
             height: 410, minHeight: 410, maxHeight: 410,
-            backgroundColor: ( windowThemeStatus === 'dark' )? 'black' : '#ECECEC',
+            //backgroundColor: ( settings.windowThemeStatus === 'dark' )? 'black' : '#ECECEC',
             minimizable: false,
             maximizable: false,
             resizable: false,
             fullscreen: false,
+            parent: parent,
+            modal: true,
             show: false
         })
 
@@ -287,7 +291,7 @@
 // ─── OPEN ABOUT PAGE ────────────────────────────────────────────────────────────
 //
 
-    ipcMain.on( 'open-about-page', ( event, arg ) => openAboutWindow( ) )
+    ipcMain.on( 'open-about-page', ( event, arg ) => openAboutWindow( event ) )
 
 //
 // ─── THEME CHANGE TOOL ──────────────────────────────────────────────────────────
