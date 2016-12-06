@@ -24,7 +24,7 @@
         helpUrl: getHelpURLbyID( 'compose' ),
         init: function() {
             this.appendDummyInput()
-                .appendField("Quartet");
+                .appendField("Composer");
             this.appendStatementInput("blocks")
                 .setCheck("String");
             this.setInputsInline(false);

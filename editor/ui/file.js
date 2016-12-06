@@ -32,7 +32,7 @@
 
     function getFileName ( ) {
         return ( currentFile.path === defaultEmptyPath )?
-            'Untitled.quartet' : path.basename( currentFile.path )
+            'Untitled.orchestra' : path.basename( currentFile.path )
     }
 
 //

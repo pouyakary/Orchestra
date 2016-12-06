@@ -29,8 +29,8 @@
         let filePath = dialog.showOpenDialog( getWindowForDialogSheets( ), {
             properties: [ 'openFile' ],
             filters: [{
-                name: 'Quartet Language',
-                extensions: [ 'quartet' ]
+                name: 'Orchestra Language',
+                extensions: [ 'orchestra' ]
             }]
         })
 
@@ -92,8 +92,8 @@
         if ( currentFile.path === defaultEmptyPath || forceAsk ) {
             const newPath = dialog.showSaveDialog( getWindowForDialogSheets( ), {
                 filters: [{
-                    name: 'Quartet',
-                    extensions: [ 'quartet' ],
+                    name: 'Orchestra Language',
+                    extensions: [ 'orchestra' ],
                 }]})
 
             if ( newPath !== undefined ) {
