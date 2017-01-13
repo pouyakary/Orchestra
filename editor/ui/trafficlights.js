@@ -13,33 +13,43 @@
 //
 
     function appendTrafficLightEvents ( ) {
-        document.getElementById('window-button-close').onmouseover = onTrafficLightsHover
-        document.getElementById('window-button-minimize').onmouseover = onTrafficLightsHover
-        document.getElementById('window-button-maximize').onmouseover = onTrafficLightsHover
+        
+        //
+        // ─── BUTTONS ─────────────────────────────────────────────────────
+        //
 
-        document.getElementById('window-button-close').onmouseleave = onTrafficLightsLeave
-        document.getElementById('window-button-minimize').onmouseleave = onTrafficLightsLeave
-        document.getElementById('window-button-maximize').onmouseleave = onTrafficLightsLeave
-    }
+            let windowTrafficButtons = [
+                document.getElementById('window-button-close'),
+                document.getElementById('window-button-minimize'),
+                document.getElementById('window-button-maximize')
+            ]
 
-//
-// ─── ON LIGHTS HOVER ────────────────────────────────────────────────────────────
-//
+        //
+        // ─── EFFECT CHANGER ──────────────────────────────────────────────
+        //
 
-    function onTrafficLightsHover ( ) {
-        document.getElementById('window-button-close').style.backgroundSize = 'contain'
-        document.getElementById('window-button-minimize').style.backgroundSize = 'contain'
-        document.getElementById('window-button-maximize').style.backgroundSize = 'contain'
-    }
+            function applyTrafficLightsBackgroundSize ( backgroundSize ) {
+                windowTrafficButtons.forEach ( trafficButton =>
+                    trafficButton.style.backgroundSize = backgroundSize
+                )
+            }
 
-//
-// ─── ON LIGHTS LEAVE ────────────────────────────────────────────────────────────
-//
+        //
+        // ─── EVENTS ──────────────────────────────────────────────────────
+        //
 
-    function onTrafficLightsLeave ( ) {
-        document.getElementById('window-button-close').style.backgroundSize = '0 0'
-        document.getElementById('window-button-minimize').style.backgroundSize = '0 0'
-        document.getElementById('window-button-maximize').style.backgroundSize = '0 0'
+            windowTrafficButtons.forEach ( trafficButton =>
+                trafficButton.onmouseover = ( ) => 
+                    applyTrafficLightsBackgroundSize( 'contain' )
+            )
+
+            windowTrafficButtons.forEach ( trafficButton =>
+                trafficButton.onmouseleave = ( ) =>
+                    applyTrafficLightsBackgroundSize( '0 0' )
+            )
+
+        // ─────────────────────────────────────────────────────────────────
+
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
