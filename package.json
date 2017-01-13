@@ -1,6 +1,6 @@
 {
   "name": "orchestra",
-  "productName": "Orchestra Nightly",
+  "productName": "Orchestra",
   "author": "Kary Foundation",
   "main": "main.js",
   "description": "RegEx done right",
