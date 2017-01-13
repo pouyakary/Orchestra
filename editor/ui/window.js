@@ -14,11 +14,11 @@
 
     function initWindow ( ) {
         setupWorkspace( )
+        appendTrafficLightEvents( )
         onNewFile( )
         initMainMenu( )
         handleWindowArgs( )
         setMenuEnableFactor( true )
-        appendTrafficLightEvents( )
     }
 
 //
