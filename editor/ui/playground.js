@@ -107,9 +107,10 @@
 //
 
     function changePlaygroundThemeTo ( mode ) {
-        playgroundEditor.updateOptions({
-            'theme': ( mode === 'dark' )? 'vs-dark' : 'vs'
-        })
+        if ( playgroundEditor )
+            playgroundEditor.updateOptions({
+                'theme': ( mode === 'dark' )? 'vs-dark' : 'vs'
+            })
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
