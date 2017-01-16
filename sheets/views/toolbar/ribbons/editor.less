@@ -18,20 +18,20 @@
 // ─── CONSOLE VIEW ───────────────────────────────────────────────────────────────
 //
 
-    @console-color: var( --console-color );
-    @editor-ribbon-sum-of-icon-widths: 490px;
-    @console-height: 44px;
+    @console-color:                     var( --console-color );
+    @editor-ribbon-sum-of-icon-widths:  490px;
+    @console-height:                    44px;
 
     #ribbon-console-view {
-        text-align: center;
-        float: left;
-        background-color: @console-color;
-        border-radius: 3px;
-        margin: 11px 5px 0 5px;
-        padding: 3px 10px 0 10px;
-        width: calc( ~'100vw' - @editor-ribbon-sum-of-icon-widths );
-        height: @console-height;
-        overflow: hidden;
+        text-align:             center;
+        float:                  left;
+        background-color:       @console-color;
+        border-radius:          3px;
+        margin:                 11px 5px 0 5px;
+        padding:                3px 10px 0 10px;
+        width:                  calc( ~'100vw' - @editor-ribbon-sum-of-icon-widths );
+        height:                 @console-height;
+        overflow:               hidden;
     }
 
 //
@@ -39,58 +39,55 @@
 //
 
     #ribbon-console-copy-hover-button {
-        background-color: var( --console-hover-color );
-        position: relative;
-        padding-top: 13px;
-        padding-bottom: 30px;
-        text-align: center;
-        font-family: @source-code-pro-typeface;
-        text-transform: uppercase;
-        //transition-duration: 0.5s;
-        letter-spacing: 7px;
-        font-size: 14px;
-        width: calc( ~'100vw' - @editor-ribbon-sum-of-icon-widths - 20px );
-        opacity: 0;
-        top: -45px;
-        left: -10px;
-        height: 50px;
-        z-index: 1;
-        border: none;
+        background-color:       var( --console-hover-color );
+        position:               relative;
+        padding-top:            13px;
+        padding-bottom:         30px;
+        text-align:             center;
+        font-family:            @source-code-pro-typeface;
+        text-transform:         uppercase;
+        letter-spacing:         7px;
+        font-size:              14px;
+        width:                  calc( ~'100vw' - @editor-ribbon-sum-of-icon-widths - 20px );
+        opacity:                0;
+        top:                    -45px;
+        left:                   -10px;
+        height:                 50px;
+        z-index:                1;
+        border:                 none;
     }
 
     #console-copy-icon {
-        width: 20px;
-        height: 18px;
-        float: left;
-        margin-left: ~'calc( 50% - 50px )';
-        background-position: left;
-        background-size: contain;
-        background-image: url('console-copy-icon.svg');
-        background-repeat: no-repeat;
+        width:                  20px;
+        height:                 18px;
+        float:                  left;
+        margin-left:            ~'calc( 50% - 50px )';
+        background-position:    left;
+        background-size:        contain;
+        background-image:       url('console-copy-icon.svg');
+        background-repeat:      no-repeat;
     }
 
     .dark > .tab-view > #graph-and-ribbon-half > .ribbon > #ribbon-console-view > #ribbon-console-copy-hover-button > div > #console-copy-icon {
-        background-image: url('dark-console-copy-icon.svg');
+        background-image:       url('dark-console-copy-icon.svg');
     }
 
     #console-copy-text {
-        padding-left: 10px;
-        float: left;
-        color: var( --console-copy-text );
+        padding-left:           10px;
+        float:                  left;
+        color:                  var( --console-copy-text );
     }
 
     #ribbon-console-copy-hover-button:hover {
-        //transition-duration: 0.2s;
-        opacity: 1;
+        opacity:                1;
     }
 
     #ribbon-console-copy-hover-button:active {
-        //transition-duration: 0;
-        background-color: var( --color-5 );
+        background-color:       var( --color-5 );
     }
 
     .console-highlight-active-block {
-        color: var( --kary-magenta );
+        color:                  var( --kary-magenta );
     }
 
 //
@@ -99,12 +96,12 @@
 
 
     #ribbon-console-title {
-        font-family: @source-code-pro-typeface;
-        color: var( --console-title );
-        font-size: 9px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        max-height: 13px
+        font-family:            @source-code-pro-typeface;
+        color:                  var( --console-title );
+        font-size:              9px;
+        text-transform:         uppercase;
+        letter-spacing:         2px;
+        max-height:             13px
     }
 
 //
@@ -112,14 +109,14 @@
 //
 
     #ribbon-console-regexp {
-        font-family: @source-code-pro-typeface;
-        font-size: 18px;
-        letter-spacing: 2px;
-        text-align: center;
-        color: var( --console-regexp );
-        overflow: hidden;
-        max-height: 29px;
-        max-width: calc( ~'100vw' - @editor-ribbon-sum-of-icon-widths - 140px );
+        font-family:            @source-code-pro-typeface;
+        font-size:              18px;
+        letter-spacing:         2px;
+        text-align:             center;
+        color:                  var( --console-regexp );
+        overflow:               hidden;
+        max-height:             29px;
+        max-width:              calc( ~'100vw' - @editor-ribbon-sum-of-icon-widths - 140px );
     }
 
 //
@@ -127,31 +124,31 @@
 //
 
     .ribbon-editor-regexp-importer {
-        background-image: url('ribbon-editor-regexp-importer.png');
+        background-image:       url('ribbon-editor-regexp-importer.png');
     }
 
     .dark > .tab-view > #graph-and-ribbon-half > .ribbon > .ribbon-editor-regexp-importer {
-        background-image: url('dark-ribbon-editor-regexp-importer.png');
+        background-image:       url('dark-ribbon-editor-regexp-importer.png');
     }
 
 
 
     .ribbon-editor-export-svg {
-        background-image: url('ribbon-editor-export-svg.png');
+        background-image:       url('ribbon-editor-export-svg.png');
     }
 
     .dark > .tab-view > #graph-and-ribbon-half > .ribbon > .ribbon-editor-export-svg {
-        background-image: url('dark-ribbon-editor-export-svg.png');
+        background-image:       url('dark-ribbon-editor-export-svg.png');
     }
 
 
 
     .ribbon-editor-help {
-        background-image: url('ribbon-editor-help.png');
+        background-image:       url('ribbon-editor-help.png');
     }
 
     .dark > .tab-view > #graph-and-ribbon-half > .ribbon > .ribbon-editor-help {
-        background-image: url('dark-ribbon-editor-help.png');
+        background-image:       url('dark-ribbon-editor-help.png');
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

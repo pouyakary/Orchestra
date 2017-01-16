@@ -18,25 +18,23 @@
 // ─── SIZING ─────────────────────────────────────────────────────────────────────
 //
 
-    @window-button-size: 10px;
-
+    @window-button-size:            10px;
     @window-button-left-base-start: 13px;
-
-    @window-button-left-distance: 20px;
+    @window-button-left-distance:   20px;
 
 //
 // ─── BUTTON BASE ────────────────────────────────────────────────────────────────
 //
 
     .window-button-base {
-        position: fixed;
-        top: 13px;
-        width: @window-button-size;
-        height: @window-button-size;
-        border-radius: @window-button-size;
-        border: 1px solid rgba( 0, 0, 0, 0.05 );
-        background-size: 0 0;
-        overflow: hidden;
+        position:           fixed;
+        top:                13px;
+        width:              @window-button-size;
+        height:             @window-button-size;
+        border-radius:      @window-button-size;
+        border:             0.5pt solid rgba( 0, 0, 0, 0.05 );
+        background-size:    0 0;
+        overflow:           hidden;
     }
 
 //
@@ -44,9 +42,12 @@
 //
 
     .window-buttons-blur-mode {
-        background-color: #D1D1D1;
-        border-color: #B7B7B7;
+        background-color:       #DEDEDE;
+        &.dark {
+            background-color:   #1a1a1a;
+        }
     }
+
 
 //
 // ─── CLOSE BUTTON ───────────────────────────────────────────────────────────────
@@ -54,18 +55,18 @@
 
     #window-button-close {
         .window-button-base;
-        left: @window-button-left-base-start;
-        background-image: url('mac-traffic-close.png');
+        left:               @window-button-left-base-start;
+        background-image:   url('mac-traffic-close.png');
     }
 
     .window-button-close-active {
-        background-color: #FF6159;
-        border-color: #F0574F;
+        background-color:   #FF6159;
+        border-color:       #F0574F;
     }
 
     #window-button-close:active {
-        background-color: #BF4943;
-        border-color: #AD3A34;
+        background-color:   #BF4943;
+        border-color:       #AD3A34;
     }
 
 //
@@ -74,18 +75,18 @@
 
     #window-button-minimize {
         .window-button-base;
-        left: @window-button-left-base-start + @window-button-left-distance;
-        background-image: url('mac-traffic-minimize.png');
+        left:               @window-button-left-base-start + @window-button-left-distance;
+        background-image:   url('mac-traffic-minimize.png');
     }
 
     .window-button-minimize-active {
-        background-color: #FFC330;
-        border-color: #F1B428;
+        background-color:   #FFC330;
+        border-color:       #F1B428;
     }
 
     #window-button-minimize:active {
-        background-color: #BF9123;
-        border-color: #B5861F;
+        background-color:   #BF9123;
+        border-color:       #B5861F;
     }
 
 //
@@ -94,18 +95,18 @@
 
     #window-button-maximize {
         .window-button-base;
-        left: @window-button-left-base-start + 2 * @window-button-left-distance;
-        background-image: url('mac-traffic-expand.png');
+        left:               @window-button-left-base-start + 2 * @window-button-left-distance;
+        background-image:   url('mac-traffic-expand.png');
     }
 
     .window-button-maximize-active {
-        background-color: #29CD42;
-        border-color: #16BE2F;
+        background-color:   #29CD42;
+        border-color:       #16BE2F;
     }
 
     #window-button-maximize:active {
-        background-color: #1F9D33;
-        border-color: #258E30;
+        background-color:   #1F9D33;
+        border-color:       #258E30;
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

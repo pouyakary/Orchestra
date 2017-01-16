@@ -19,13 +19,13 @@
 //
 
     #header-tabs {
-        margin-left: @header-tabs-spacings;
-        float: left;
-        background-size: contain;
-        background-position: left;
-        background-repeat: no-repeat;
-        width: @toolbar-tabs-width;
-        height: @header-height;
+        margin-left:            @header-tabs-spacings;
+        float:                  left;
+        background-size:        contain;
+        background-position:    left;
+        background-repeat:      no-repeat;
+        width:                  @toolbar-tabs-width;
+        height:                 @header-height;
     }
 
 //
@@ -33,21 +33,21 @@
 //
 
     .invisible-tab {
-        height: 30px;
-        width: 102px;
-        position: fixed;
-        top: 9;
+        height:                 30px;
+        width:                  102px;
+        position:               fixed;
+        top:                    9px;
     }
 
-    @tab-x-difference: 102px;
-    @tab-x-start: 7px + @header-tabs-spacings;
+    @tab-x-difference:          102px;
+    @tab-x-start:               7px + @header-tabs-spacings;
 
     #editor-tab-invisible {
-        left: @tab-x-start;
+        left:                   @tab-x-start;
     }
 
     #playground-tab-invisible {
-        left: @tab-x-start + @tab-x-difference;
+        left:                   @tab-x-start + @tab-x-difference;
     }
 
 //
@@ -55,19 +55,19 @@
 //
 
     .editor-tab {
-        background-image: url('toolbar-tabs-editor.png');
+        background-image:       url('toolbar-tabs-editor.png');
     }
 
     .dark > .heading > .editor-tab {
-        background-image: url("dark-toolbar-tabs-editor.png");
+        background-image:       url("dark-toolbar-tabs-editor.png");
     }
 
     .playground-tab {
-        background-image: url('toolbar-tabs-playground.png');
+        background-image:       url('toolbar-tabs-playground.png');
     }
 
     .dark > .heading > .playground-tab {
-        background-image: url("dark-toolbar-tabs-playground.png");
+        background-image:       url("dark-toolbar-tabs-playground.png");
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

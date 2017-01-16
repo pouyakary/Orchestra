@@ -20,21 +20,21 @@
 
     @keyframes show-dialog {
         from {
-            opacity: 0;
-            top: 90px;
+            opacity:                0;
+            top:                    90px;
         }
         to {
-            opacity: 100%;
-            top: 110px;
+            opacity:                100%;
+            top:                    110px;
         }
     }
 
     @keyframes show-button {
         from {
-            width: 0;
+            width:                  0;
         }
         to {
-            width: 80px;
+            width:                  80px;
         }
     }
 
@@ -43,41 +43,41 @@
 //
 
     #regexp-importer {
-        left: 190px;
+        left:                       190px;
     }
 
     .regexp-importer-input-box {
-        border-radius: 100px;
-        height: 37px;
-        max-height: 37px;
-        min-height: 37px;
-        width: 370px;
-        overflow: hidden;
+        border-radius:              100px;
+        height:                     37px;
+        max-height:                 37px;
+        min-height:                 37px;
+        width:                      370px;
+        overflow:                   hidden;
     }
 
-    @transition-duration: 0.4s;
+    @transition-duration:           0.4s;
 
     .full-input {
-        width: 370px;
-        transition-duration: @transition-duration;
+        width:                      370px;
+        transition-duration:        @transition-duration;
     }
 
     .input-with-button {
-        width: 250px;
-        transition-duration: @transition-duration;
-        border-top-right-radius: 100px;
+        width:                      250px;
+        transition-duration:        @transition-duration;
+        border-top-right-radius:    100px;
         border-bottom-right-radius: 100px;
-        margin-right: 10px;
+        margin-right:               10px;
     }
 
     .disabled-button {
-        opacity: 0;
-        transition-duration: @transition-duration;
+        opacity:                    0;
+        transition-duration:        @transition-duration;
     }
 
     .enabled-button {
-        opacity: 100%;
-        transition-duration: 0.5s;
+        opacity:                    100%;
+        transition-duration:        0.5s;
     }
 
 //
@@ -85,27 +85,27 @@
 //
 
     .hide-dialog {
-        opacity: 0;
-        transition-duration: 0.3s;
+        opacity:                    0;
+        transition-duration:        0.3s;
     }
 
     .show-dialog {
-        animation: show-dialog 0.4s;
+        animation:                  show-dialog 0.4s;
     }
 
     #regexp-importer {
-        user-select: none;
-        position: fixed;
-        top: 110px;
-        width: 370px;
-        height: 152px;
-        background-image: url('dialog-back.svg');
-        padding: 20px;
-        overflow: hidden;
+        user-select:                none;
+        position:                   fixed;
+        top:                        110px;
+        width:                      370px;
+        height:                     152px;
+        background-image:           url('dialog-back.svg');
+        padding:                    20px;
+        overflow:                   hidden;
     }
 
     .dark > #EditorView > #graph-and-ribbon-half > .ribbon > #regexp-importer {
-        background-image: url('dark-dialog-back.svg');
+        background-image:           url('dark-dialog-back.svg');
     }
 
 //
@@ -113,19 +113,19 @@
 //
 
     #regexp-importer-input {
-        background-color: var( --kary-background );
-        color: var( --kary-foreground );
-        float: left;
-        border: none;
-        font-size: 1.2rem;
-        vertical-align: middle;
-        font-family: @source-code-pro-typeface;
-        border-top-left-radius: 100px;
-        border-bottom-left-radius: 100px;
-        max-width: 370px;
-        min-height: 37px;
-        padding: 0 15px 0 15px;
-        margin: 0;
+        background-color:           var( --kary-background );
+        color:                      var( --kary-foreground );
+        float:                      left;
+        border:                     none;
+        font-size:                  1.2rem;
+        vertical-align:             middle;
+        font-family:                @source-code-pro-typeface;
+        border-top-left-radius:     100px;
+        border-bottom-left-radius:  100px;
+        max-width:                  370px;
+        min-height:                 37px;
+        padding:                    0 15px 0 15px;
+        margin:                     0;
     }
 
 //
@@ -133,25 +133,25 @@
 //
 
     #regexp-importer-button {
-        width: 80px;
-        float: left;
-        border-radius: 100px;
-        border: none;
-        vertical-align: middle;
-        color: var( --kary-background );
-        font-size: 0.8rem;
-        border-top-right-radius: 100px;
+        width:                      80px;
+        float:                      left;
+        border-radius:              100px;
+        border:                     none;
+        vertical-align:             middle;
+        color:                      var( --kary-background );
+        font-size:                  0.8rem;
+        border-top-right-radius:    100px;
         border-bottom-right-radius: 100px;
-        min-height: 37px;
-        margin: 0;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-left: 10px;
+        min-height:                 37px;
+        margin:                     0;
+        text-align:                 center;
+        text-transform:             uppercase;
+        letter-spacing:             2px;
+        margin-left:                10px;
     }
 
     #regexp-importer-button:hover {
-        background-color: var( --kary-green );
+        background-color:           var( --kary-green );
     }
 
 //
@@ -159,9 +159,9 @@
 //
 
     #regexp-importer > h1 {
-        color: var( --kary-blue );
-        margin: 15px 0 6px 5px;
-        font-size: 1.6rem;
+        color:                      var( --kary-blue );
+        margin:                     15px 0 6px 5px;
+        font-size:                  1.6rem;
     }
 
 //
@@ -169,11 +169,11 @@
 //
 
     #regexp-importer > p {
-        color: var( --kary-foreground );
-        line-height: 1.4;
-        padding: 0;
-        margin: 4px 0 10px 5px;
-        font-size: 1.2rem;
+        color:                      var( --kary-foreground );
+        line-height:                1.4;
+        padding:                    0;
+        margin:                     4px 0 10px 5px;
+        font-size:                  1.2rem;
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
