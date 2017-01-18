@@ -1,7 +1,7 @@
 <!DOCTYPE Html>
 <html>
     <!--
-      -- Copyright 2016 Kary Foundation, Inc.
+      -- Copyright 2016-present Kary Foundation, Inc.
       --   Author: Pouya Kary <k@karyfoundation.org>
       --
       -- This Source Code Form is subject to the terms of the Mozilla Public
@@ -144,8 +144,14 @@
 
 				<!-- View -->
                 <div id="quartet-editor-container">
+                    <!-- The most important div of all times. Where we inject the Blockly engine -->
                     <div id="quartet-coding-view"></div>
-                    <div id="quartet-console-view"></div>
+
+                    <!-- Full Console View -->
+                    <div id="quartet-console-view">
+                        <div id="quartet-console-view-title">Console</div>
+                        <div id="quartet-console-view-content"></div>
+                    </div>
                 </div>
 			</div>
 		</div>
