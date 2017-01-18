@@ -48,6 +48,13 @@
     const TabsPlaceholder = 'header-tabs'
     const playgroundEditorID = 'playground-editor'
     const composeBlockIDforSVGCanvas = 'TheComposeBlockSVGCanvas'
+    const editorContainerId = 'quartet-editor-container'
+
+//
+// ─── CLASS NAMES ────────────────────────────────────────────────────────────────
+//
+
+    const hideShowSideConsoleClassName = 'show-console-view'
 
 //
 // ─── SPECIAL CHARS ──────────────────────────────────────────────────────────────

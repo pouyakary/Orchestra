@@ -9,6 +9,12 @@
 //
 
 //
+// ─── VARS ───────────────────────────────────────────────────────────────────────
+//
+
+    @open-close-duration: 0.4s;
+
+//
 // ─── EDITOR CONTAINER ───────────────────────────────────────────────────────────
 //
 
@@ -24,11 +30,12 @@
 //
 
     #quartet-coding-view {
-        transition-duration: 1s;
+        transition-duration: @open-close-duration;
         flex: 1;
         height: inherit !important;
         background-color: var( --kary-background );
-        max-width:  ~'calc( 100vw - 200pt )';
+        width: 100vw;
+        max-width: 100vw;
     }
 
 //
@@ -36,10 +43,10 @@
 //
 
     #quartet-console-view {
-        transition-duration: 1s;
+        transition-duration: @open-close-duration;
         flex: 1;
         height: inherit !important;
-        max-width: 200pt;
+        max-width: 0;
         background-color: #EEE;
     }
 
@@ -47,14 +54,15 @@
 // ─── HIDE CONSOLE ───────────────────────────────────────────────────────────────
 //
 
-    .hide-console-view {
+    .show-console-view {
         #quartet-console-view {
-            max-width: 0pt !important;
-            transition-duration: 1s;
+            max-width: 200pt !important;
+            transition-duration: @open-close-duration;
         }
         #quartet-coding-view {
-            max-width: 100vw !important;
-            transition-duration: 1s;
+            transition-duration: @open-close-duration;
+            width: ~'calc( 100vw - 200pt )' !important;
+            max-width: ~'calc( 100vw - 200pt )' !important;
         }
     }
 
