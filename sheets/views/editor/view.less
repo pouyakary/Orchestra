@@ -20,7 +20,7 @@
 
     #quartet-editor-container {
         height: ~'calc( 100vh - 110px )';
-        width: ~'calc( 100vw + 200pt )';
+        width: ~'calc( 100vw + 240pt )';
         overflow: hidden;
         display: flex;
     }
@@ -30,12 +30,13 @@
 //
 
     #quartet-coding-view {
-        transition-duration: @open-close-duration;
+        //transition-duration: @open-close-duration;
         flex: 1;
         height: inherit !important;
         background-color: var( --kary-background );
         width: 100vw;
         max-width: 100vw;
+        transition: width @open-close-duration, max-width @open-close-duration;
     }
 
 //
@@ -43,11 +44,15 @@
 //
 
     #quartet-console-view {
-        transition-duration: @open-close-duration;
+        //transition-duration: @open-close-duration;
         flex: 1;
         height: inherit !important;
         max-width: 0;
-        background-color: #EEE;
+        background-color: var( --side-console-background );
+        box-sizing: border-box;
+        padding: 13pt;
+        overflow: hidden;
+        transition: max-width @open-close-duration;
     }
 
 //
@@ -56,14 +61,41 @@
 
     .show-console-view {
         #quartet-console-view {
-            max-width: 200pt !important;
-            transition-duration: @open-close-duration;
+            max-width: 240pt !important;
+            transition: max-width @open-close-duration;
+            // transition-duration: @open-close-duration;
         }
         #quartet-coding-view {
-            transition-duration: @open-close-duration;
-            width: ~'calc( 100vw - 200pt )' !important;
-            max-width: ~'calc( 100vw - 200pt )' !important;
+            //transition-duration: @open-close-duration;
+            width: ~'calc( 100vw - 240pt )' !important;
+            max-width: ~'calc( 100vw - 240pt )' !important;
+            transition: width @open-close-duration, max-width @open-close-duration;
         }
+    }
+
+//
+// ─── CONSOLE VIEW ───────────────────────────────────────────────────────────────
+//
+
+    #quartet-console-view-title {
+        font-size: 1.3rem;
+        padding-bottom: 5pt;
+        border-bottom: 1pt var( --side-console-title-border ) solid;
+        color: var( --side-console-title );
+    }
+
+//
+// ─── CONSOLE CONTENT ────────────────────────────────────────────────────────────
+//
+
+    #quartet-console-view-content {
+        color: var( --console-regexp );
+        width: 174pt;
+        font-size: 14pt;
+        padding-top: 5pt;
+        font-family: @source-code-pro-typeface;
+        word-wrap: break-word;
+        line-height: 1.8;
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
