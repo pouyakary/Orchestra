@@ -20,7 +20,7 @@
         else
             sideConsole.className = ""
 
-        let resizer = setInterval( ( ) => { Blockly.svgResize( workspace ) }, 30 )
+        let resizer = setInterval( ( ) => { Blockly.svgResize( workspace ) }, 15 )
         setTimeout( ( ) => { clearInterval( resizer ) }, 400 )
     }
 
