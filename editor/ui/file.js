@@ -75,7 +75,7 @@
         fs.writeFile( currentFile.path, fileJSON, err => {
             if ( err ) {
                 alert(`Could not save your file at "${ currentFile.path }"`)
-                currentFile = defaultFileObject
+                currentFile = Object.assign({ }, defaultFileObject );
             }
 
             else setFileDirty( false )

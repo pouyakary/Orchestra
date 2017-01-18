@@ -14,7 +14,7 @@
 
     function onNewFile ( force = false ) {
         if ( !( checkForSavingChanges( ) || force ) ) return;
-        currentFile = defaultFileObject
+        currentFile = Object.assign({ }, defaultFileObject);
         updateWorkspaceWithNewXML( defaultFileXML )
     }
 
@@ -100,7 +100,7 @@
                 currentFile.path = newPath
                 return true
             } else {
-                currentFile = defaultFileObject
+                currentFile = Object.assign({ }, defaultFileObject );
                 return false
             }
         }

@@ -12,7 +12,7 @@
 // ─── FILE SYSTEM ────────────────────────────────────────────────────────────────
 //
 
-    var currentFile = defaultFileObject
+    var currentFile = Object.assign({ }, defaultFileObject );
 
 //
 // ─── WINDOW STATUS ──────────────────────────────────────────────────────────────
