@@ -13,7 +13,7 @@ It's a truly new language that gives you all sorts of possibilities and features
 
 - __Safe & Optimized Compilation__<br> Orchestra compiles to optimized and safe RegExp. Meaning you can use any character and if these characters be wildcard expressions it will take care of placing escapes for them. It let's you use any Unicode character and it will compile them to unicode escape sequences if your target RegExp engine can't understand unicode properly. 
 
-- __Higher Level Language__ `COMING IN VERSION 2`<br> Within the second release you can expect to have variables, functions, modules and libraries in Orchestra. It will truly change the face of regular expressions by giving you the tools to write really powerful pattern matching tools and with that should be expecting many new applications for regular expressions to be used in.
+- __Higher Level Language__ `Coming in Version 2`<br> Within the second release you can expect to have variables, functions, modules and libraries in Orchestra. It will truly change the face of regular expressions by giving you the tools to write really powerful pattern matching tools and with that should be expecting many new applications for regular expressions to be used in.
 
 ### Orchestra Studio
 Orchestra Studio is the IDE for Orchestra Language. As Orchestra is a visual language it's IDE and Language Core are very much together and it's very hard for Orchestra Language to exists outside of the Orchestra Studio. Because of that we tried to make Orchestra Studio the best IDE for a developing regular expressions possible. It provides
@@ -26,7 +26,7 @@ Orchestra Studio is the IDE for Orchestra Language. As Orchestra is a visual lan
 
 - __Best Documentations__<br> Orchestra comes with an offline documentation for Orchestra Language and is integrated right into the Orchestra Language. You can right click on any block at any point and it will open up its documentation.
 
-- __RegExp Visualizations__ `COMING IN VERSION 2`<br>Orchestra Studio visualizes your resulting RegExp sequence and let's you walk through the matching phases using [Regulex](https://jex.im/regulex/#!embed=false&flags=&re=%5E(a%7Cb)*%3F%24). If you use `Unsafe Wildcard` feature in your Orchestra's that is going to be the best way to see how you have changed your code.
+- __RegExp Visualizations__ `Coming in Version 2`<br>Orchestra Studio visualizes your resulting RegExp sequence and let's you walk through the matching phases using [Regulex](https://jex.im/regulex/#!embed=false&flags=&re=%5E(a%7Cb)*%3F%24). If you use `Unsafe Wildcard` feature in your Orchestra's that is going to be the best way to see how you have changed your code.
 
 - __Great IDE__<br> Orchestra is a beautiful IDE, it contains the perfection Kary Foundation software has. Beautiful UI and easy UX makes it easy to use and enjoyable to spend time in. It has night/light modes so you can work any time in the day and have fun. It also is fully cross-platform and you can have it on macOS, Linux and Window system
 
