@@ -51,9 +51,7 @@
 
 	<body>
         <div id="loading-view">
-            <div id="opening-logo">
-
-            </div>
+            <div id="opening-logo"></div>
 		</div>
 
 		<div class="heading" id="toolbar">
@@ -78,11 +76,11 @@
 
 			<!-- Invisible Buttons -->
 			<div id="editor-tab-invisible" class="invisible-tab"
-				 onclick="onChangeWindowToEditor( );">
+				 onclick="onChangeWindowToEditor( )">
 			</div>
 
 			<div id="playground-tab-invisible" class="invisible-tab"
-				 onclick="onChangeWindowToPlayground( );">
+				 onclick="onChangeWindowToPlayground( )">
 			</div>
 
 			<div style="clear: both;"></div>
@@ -106,7 +104,7 @@
                     <div id="ribbon-console-view">
                         <div id="ribbon-console-title"></div>
                         <div id="ribbon-console-regexp"></div>
-                        <button id="ribbon-console-copy-hover-button" onclick="onCopyRegExp( );">
+                        <button id="ribbon-console-copy-hover-button" onclick="onCopyRegExp( )">
                             <div>
                                 <div id="console-copy-icon"></div>
                                 <div id="console-copy-text">Copy</div>
@@ -116,13 +114,13 @@
                     </div>
 
                     <div class="ribbon-separator"></div>
-                    <div class="ribbon-icon ribbon-editor-toggle-console" id="toggle-console-icon" onclick="onToggleSideConsole( );">Console</div>
+                    <div class="ribbon-icon ribbon-editor-toggle-console" id="toggle-console-icon" onclick="onToggleSideConsole( )">Console</div>
 
                     <div class="ribbon-separator"></div>
-                    <div class="ribbon-icon ribbon-editor-export-svg" onclick="onExportWorkspaceToSVG( );">Export SVG</div>
+                    <div class="ribbon-icon ribbon-editor-export-svg" onclick="onExportWorkspaceToSVG( )">Export SVG</div>
 
                     <div class="ribbon-separator"></div>
-                    <div class="ribbon-icon ribbon-editor-help" onclick="onOpenHelpPage( );">Reference</div>
+                    <div class="ribbon-icon ribbon-editor-help" onclick="onOpenHelpPage( )">Reference</div>
 
 					<div style="clear: both;"></div>
 
@@ -150,8 +148,16 @@
 
                     <!-- Full Console View -->
                     <div id="quartet-console-view">
-                        <div id="quartet-console-view-title">Console</div>
-                        <div id="quartet-console-view-content"></div>
+                        <div id="side-bar-container">
+                            <div style="flex: 4">
+                                <div class="console-sidebar-title">compiled wildcard</div>
+                                <div id="quartet-console-view-content"></div>
+                            </div>
+                            <div style="flex: 3">
+                                <div class="console-sidebar-title">quick test cases</div>
+                                <div class="console-sidebar-title" id="console-new-test">new test</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 			</div>
@@ -213,17 +219,17 @@
 
 		<!-- Init Page -->
         <script>
-            initWindow( );
+            initWindow( )
         </script>
 
         <script src="vs/loader.js"></script>
 		<script src="ui/playground.js"></script>
 		<script>
-            initMonacoEditor( );
+            initMonacoEditor( )
             function openHelpWindowForReference ( refID ) {
-                ipcRenderer.send( 'open-help-for-ref', refID );
+                ipcRenderer.send( 'open-help-for-ref', refID )
             }
-			CancelLoadingScreenAfterCompleteLoad( );
+			CancelLoadingScreenAfterCompleteLoad( )
 		</script>
 	</body>
 </html>

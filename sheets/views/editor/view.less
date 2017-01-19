@@ -44,15 +44,28 @@
 //
 
     #quartet-console-view {
+        -webkit-user-select: none;
         //transition-duration: @open-close-duration;
         flex: 1;
         height: inherit !important;
         max-width: 0;
         background-color: var( --side-console-background );
         box-sizing: border-box;
-        padding: 13pt;
         overflow: hidden;
         transition: max-width @open-close-duration;
+        border-left: 1pt var( --side-console-border-color ) solid;
+        color: var( --side-console-title-color );
+        min-width: 220pt;
+    }
+
+//
+// ─── SIDE BAR CONTAINER ─────────────────────────────────────────────────────────
+//
+
+    #side-bar-container {
+        height: ~'calc( 100vh - 110px )';
+        display: flex;
+        flex-direction: column;
     }
 
 //
@@ -77,11 +90,13 @@
 // ─── CONSOLE VIEW ───────────────────────────────────────────────────────────────
 //
 
-    #quartet-console-view-title {
-        font-size: 1.3rem;
-        padding-bottom: 5pt;
-        border-bottom: 1pt var( --side-console-title-border ) solid;
-        color: var( --side-console-title );
+    .console-sidebar-title {
+        font-size: 0.9rem;
+        padding: 10pt;
+        padding-bottom: 7pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2pt;
     }
 
 //
@@ -89,13 +104,34 @@
 //
 
     #quartet-console-view-content {
+        padding-left: 13pt;
         color: var( --console-regexp );
-        width: 174pt;
+        width: 200pt;
         font-size: 14pt;
-        padding-top: 5pt;
         font-family: @source-code-pro-typeface;
         word-wrap: break-word;
         line-height: 1.8;
+        overflow-y: scroll;
+        margin-bottom: 13pt;
+        max-height: ~'calc( 100% - 30pt )';
+    }
+
+//
+// ─── QUICK TEST VIEW ────────────────────────────────────────────────────────────
+//
+
+    #quick-test-view {
+        min-height: 140pt;
+        overflow: scroll;
+    }
+
+//
+// ─── CONSOLE NEW TEST ───────────────────────────────────────────────────────────
+//
+
+    #console-new-test {
+        align-self: flex-end;
+        color: var( --kary-green );
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
