@@ -49,12 +49,14 @@
     const playgroundEditorID = 'playground-editor'
     const composeBlockIDforSVGCanvas = 'TheComposeBlockSVGCanvas'
     const editorContainerId = 'quartet-editor-container'
+    const ribbonToggleConsoleIconId = 'toggle-console-icon'
 
 //
 // ─── CLASS NAMES ────────────────────────────────────────────────────────────────
 //
 
     const hideShowSideConsoleClassName = 'show-console-view'
+    const activeRibbonIconClass = 'ribbon-icon-active'
 
 //
 // ─── SPECIAL CHARS ──────────────────────────────────────────────────────────────

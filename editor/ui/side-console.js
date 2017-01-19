@@ -14,11 +14,15 @@
 
     function onToggleSideConsole ( ) {
         let sideConsole = document.getElementById( editorContainerId )
+        let toggleConsoleClassIcon = document.getElementById( ribbonToggleConsoleIconId )
 
-        if ( sideConsole.className === "" )
+        if ( sideConsole.className === "" ) {
             sideConsole.className = hideShowSideConsoleClassName
-        else
+            toggleConsoleClassIcon.classList.add( activeRibbonIconClass )
+        } else {
             sideConsole.className = ""
+            toggleConsoleClassIcon.classList.remove( activeRibbonIconClass )
+        }
 
         let resizer = setInterval( ( ) => { Blockly.svgResize( workspace ) }, 15 )
         setTimeout( ( ) => { clearInterval( resizer ) }, 400 )
