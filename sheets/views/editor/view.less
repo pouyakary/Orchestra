@@ -20,7 +20,7 @@
 
     #quartet-editor-container {
         height: ~'calc( 100vh - 110px )';
-        width: ~'calc( 100vw + 240pt )';
+        width: ~'calc( 100vw + 220pt )';
         overflow: hidden;
         display: flex;
     }
@@ -61,14 +61,14 @@
 
     .show-console-view {
         #quartet-console-view {
-            max-width: 240pt !important;
+            max-width: 220pt !important;
             transition: max-width @open-close-duration;
             // transition-duration: @open-close-duration;
         }
         #quartet-coding-view {
             //transition-duration: @open-close-duration;
-            width: ~'calc( 100vw - 240pt )' !important;
-            max-width: ~'calc( 100vw - 240pt )' !important;
+            width: ~'calc( 100vw - 220pt )' !important;
+            max-width: ~'calc( 100vw - 220pt )' !important;
             transition: width @open-close-duration, max-width @open-close-duration;
         }
     }
