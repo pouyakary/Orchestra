@@ -75,7 +75,8 @@
         "onoutclick",
         "EEEEEE",
         "goog",
-        "scrollbars"
+        "scrollbars",
+        "nbps"
     ],
     // flagWords - list of words to be always considered incorrect
     // This is useful for offensive words and common spelling errors.
