@@ -9,6 +9,37 @@
 //
 
 //
+// ─── SET CONSOLE REGEX ──────────────────────────────────────────────────────────
+//
+
+    function setConsoleRegEx ( html ) {
+        const specialHTML = annotateRegExpForSideConsole( html )
+        document.querySelector( 'storage' ).innerHTML = html
+        document.getElementById( 'quartet-console-view-content' ).innerHTML = specialHTML
+        console.log( specialHTML )
+    }
+
+//
+// ─── ANNOTATE REGEXP FOR THE SIDE CONSOLE ───────────────────────────────────────
+//
+
+    function annotateRegExpForSideConsole ( regX ) {
+        const wrapInRightSpan = x => `<span style="color: var( --side-console-invisible-char );">&${ x };</span>`
+        return regX.replace( /&nbsp;|&#160;|\n|&Tab;|\t/g , match => {
+            switch ( match ) {
+                case '&nbsp;':
+                case '&#160;':
+                    return wrapInRightSpan( 'bullet' )
+                case '&Tab;':
+                case '\t':
+                    return wrapInRightSpan( 'rarr' )
+                case '\n':
+                    return wrapInRightSpan( 'crarr' )
+            }
+        })
+    }
+
+//
 // ─── TOGGLE CONSOLE ─────────────────────────────────────────────────────────────
 //
 

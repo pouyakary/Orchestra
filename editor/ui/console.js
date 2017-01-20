@@ -9,15 +9,6 @@
 //
 
 //
-// ─── SET CONSOLE REGEX ──────────────────────────────────────────────────────────
-//
-
-    function setConsoleRegEx ( html ) {
-        document.getElementById( 'ribbon-console-regexp' ).innerHTML = html
-        document.getElementById( 'quartet-console-view-content' ).innerHTML = html
-    }
-
-//
 // ─── UPDATE CONSOLE TITLE ───────────────────────────────────────────────────────
 //
 
