@@ -4,5 +4,13 @@
 	"editor.quickSuggestionsDelay": 0,
 	"editor.insertSpaces": 			true,
     "alex.enable": true,
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/.DS_Store": true,
+		"_compiled/**": true,
+		"_release/**": true
+	},
     "typescript.check.workspaceVersion": false
 }
