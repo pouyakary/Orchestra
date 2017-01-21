@@ -39,12 +39,38 @@
         //
 
             constructor ( message ) {
-                if ( currentDisplayLog )
-                    currentDisplayLog.cancel( )
-                
-                this.display( message )
+                (( ) => new Promise( resolve => { 
+                    if ( currentDisplayLog )
+                        currentDisplayLog.terminate( ).then( resolve )
+                    else 
+                        resolve( )
+                }))( ).then(( ) => {
+                    this.display( message )
+                    currentDisplayLog = this
+                })
+            }
 
-                currentDisplayLog = this
+        //
+        // ─── TERMINATE ───────────────────────────────────────────────────
+        //
+
+            terminate ( ) {
+                return new Promise ( ( resolve ) => {
+                    let index = document.getElementById( logConsoleId ).innerText.length - 1
+                    this.terminateInterval = setInterval( ( ) => {
+                        if ( index > 1 )
+                            document.getElementById( logConsoleId ).innerText =
+                                document.getElementById( logConsoleId ).innerText.substring( 0, index-- )
+                        else {
+                            document.getElementById( logConsoleId ).innerHTML = emptyLogConsoleValue
+                            clearInterval( this.terminateInterval )
+                            clearInterval( this.writerInterval )
+                            clearTimeout( this.timeout )
+                            clearTimeout( this.writeTimeout )
+                            resolve( )
+                        }
+                    }, 30 )
+                })
             }
 
         //
@@ -55,25 +81,8 @@
                 const delay = this.writeToConsole( message )
 
                 this.writeTimeout = setTimeout( ( ) => {
-                    this.timeout = setTimeout( this.terminate, message.split(' ').length * 400 + 3000 )
+                    this.timeout = setTimeout( this.terminate, message.split(' ').length * 400 + 2000 )
                 }, delay )
-            }
-
-        //
-        // ─── TERMINATE ───────────────────────────────────────────────────
-        //
-
-            terminate ( ) {
-                let index = document.getElementById( logConsoleId ).innerText.length - 1
-                this.terminateInterval = setInterval( ( ) => {
-                    if ( index > 1 )
-                        document.getElementById( logConsoleId ).innerText =
-                            document.getElementById( logConsoleId ).innerText.substring( 0, index-- )
-                    else {
-                        document.getElementById( logConsoleId ).innerHTML = emptyLogConsoleValue
-                        clearInterval( this.terminateInterval )
-                    }
-                }, 30 )
             }
 
         //
@@ -94,18 +103,6 @@
                 }, delay )
 
                 return delay * message.length
-            }
-
-        //
-        // ─── CANCELS THE CURRENT LOG ─────────────────────────────────────
-        //
-
-            cancel ( ) {
-                document.getElementById( logConsoleId ).innerHTML = ''
-                clearInterval( this.terminateInterval )
-                clearInterval( this.writerInterval )
-                clearTimeout( this.timeout )
-                clearTimeout( this.writeTimeout )
             }
 
         // ─────────────────────────────────────────────────────────────────
