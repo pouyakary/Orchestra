@@ -77,9 +77,10 @@
             if ( err ) {
                 alert(`Could not save your file at "${ currentFile.path }"`)
                 currentFile = Object.assign({ }, defaultFileObject )
+            } else {
+                setFileDirty( false )
+                new Log( "File saved successfully" )
             }
-
-            else setFileDirty( false )
         })}
 
 //
@@ -105,6 +106,8 @@
                 if ( fileJSON.playgroundText !== undefined && fileJSON.playgroundText !== '' )
                     playgroundEditor.setValue( fileJSON.playgroundText )
 
+                new Log( "File opened successfully" )
+
 
             } catch ( error ) {
                 report( `Could not load the file because of a broken file problem.${ error }` )
@@ -118,7 +121,11 @@
     function exportSVGImageTo ( filePath ) {
         const fileSVGString = renderWorkspaceIntoSVG( )
         fs.writeFile( filePath, fileSVGString, error => {
-            if ( error ) alert( 'File could not be saved. Please try again.' )
+            if ( error ) {
+                alert( 'File could not be saved. Please try again.' )
+            }
+
+            new Log( "SVG saved successfully" )
         })}
 
 // ────────────────────────────────────────────────────────────────────────────────
