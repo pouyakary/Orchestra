@@ -91,7 +91,7 @@
         let quartetXML = compileRegExToQuartetXML( regX )
         updateWorkspaceWithNewXML( quartetXML )
         setFileDirty( true )
-        new Log( "RegExp imported successfully" )
+        new Log( "RegExp imported" )
     }
 
 //

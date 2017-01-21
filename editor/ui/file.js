@@ -79,7 +79,7 @@
                 currentFile = Object.assign({ }, defaultFileObject )
             } else {
                 setFileDirty( false )
-                new Log( "File saved successfully" )
+                new Log( "Saved!" )
             }
         })}
 
@@ -106,7 +106,7 @@
                 if ( fileJSON.playgroundText !== undefined && fileJSON.playgroundText !== '' )
                     playgroundEditor.setValue( fileJSON.playgroundText )
 
-                new Log( "File opened successfully" )
+                new Log( "Opened!" )
 
 
             } catch ( error ) {
@@ -125,7 +125,7 @@
                 alert( 'File could not be saved. Please try again.' )
             }
 
-            new Log( "SVG saved successfully" )
+            new Log( "SVG got exported!" )
         })}
 
 // ────────────────────────────────────────────────────────────────────────────────
