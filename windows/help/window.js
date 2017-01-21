@@ -12,7 +12,7 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    const { ipcRenderer } = require('electron');
+    const { ipcRenderer } = require( 'electron' )
 
 //
 // ─── WINDOW DRAG FIX ────────────────────────────────────────────────────────────
@@ -26,18 +26,18 @@
 //
 
     ipcRenderer.on ( 'help-window-open-ref', ( event, arg ) => {
-        scrollToID( arg );
-    });
+        scrollToID( arg )
+    })
 
-    window.onload = onLoad;
+    window.onload = onLoad
 
 //
 // ─── ON LOAD FUNCTION ───────────────────────────────────────────────────────────
 //
 
     function onLoad ( ) {
-        createTableOfContents( );
-        moveToReferenceAtLoad( );
+        createTableOfContents( )
+        moveToReferenceAtLoad( )
     }
 
 //
@@ -45,16 +45,16 @@
 //
 
     /** @type {Element} */
-    let sidebar;
+    let sidebar
 
 //
 // ─── PARSE URL AT RUN TIME ──────────────────────────────────────────────────────
 //
 
     function moveToReferenceAtLoad ( ) {
-        let id = window.location.search.substring( 1 );
+        let id = window.location.search.substring( 1 )
         if ( id !== 'none' ) {
-            scrollToID( id, true );
+            scrollToID( id, true )
         }
     }
 
@@ -63,14 +63,14 @@
 //
 
     function scrollToID ( id , noAnimation = false ) {
-        let topMargin = ( /^ref-/.test( id ) )? 35 : 100;
+        let topMargin = ( /^ref-/.test( id ) )? 35 : 100
         if ( noAnimation ) {
-            window.scrollTo( 0, document.getElementById( id ).offsetTop - topMargin );
+            window.scrollTo( 0, document.getElementById( id ).offsetTop - topMargin )
         } else {
             jump( `#${ id }` , {
                 offset: -topMargin,
                 duration: 300,
-            });
+            })
         }
     }
 
@@ -79,16 +79,16 @@
 //
 
     function createTableOfContents ( ) {
-        let contents = document.getElementById('content');
-        sidebar = document.getElementById('sidebar');
-        let contentLength = contents.children.length;
+        let contents = document.getElementById( 'content' )
+        sidebar = document.getElementById( 'sidebar' )
+        let contentLength = contents.children.length
 
         for ( let index = 0; index < contentLength; index++ ) {
-            let section = contents.children[ index ];
-            createTableOfContentForSection( section );
+            let section = contents.children[ index ]
+            createTableOfContentForSection( section )
 
             if ( index < contentLength - 1 ) {
-                addSeparator( );
+                addSeparator( )
             }
         }
     }
@@ -100,16 +100,16 @@
     /** @param {Element} section */
     function createTableOfContentForSection ( section ) {
         // Header setup
-        let sectionSidebarElement = document.createElement('div');
-        sectionSidebarElement.className = 'sidebar-section-item';
-        addFunctionForScrollOnClick( sectionSidebarElement, section.id );
-        sectionSidebarElement.innerText = section.querySelector('h1').innerText;
-        sidebar.appendChild( sectionSidebarElement );
+        let sectionSidebarElement = document.createElement( 'div' )
+        sectionSidebarElement.className = 'sidebar-section-item'
+        addFunctionForScrollOnClick( sectionSidebarElement, section.id )
+        sectionSidebarElement.innerText = section.querySelector( 'h1' ).innerText
+        sidebar.appendChild( sectionSidebarElement )
 
         // Children setup
-        let blockRows = section.querySelectorAll('.row');
+        let blockRows = section.querySelectorAll( '.row' )
         for ( let index = 0; index < blockRows.length; index++ ) {
-            createHeaderSidebarEntry( blockRows[ index ] );
+            createHeaderSidebarEntry( blockRows[ index ] )
         }
     }
 
@@ -120,17 +120,17 @@
     /** @param {Element} header */
     function createHeaderSidebarEntry ( blockRow ) {
         try {
-            if ( blockRow.id === '' ) return;
+            if ( blockRow.id === '' ) return
 
-            let headerSidebarElement = document.createElement('div');
-            headerSidebarElement.className = 'sidebar-header-item';
+            let headerSidebarElement = document.createElement( 'div' )
+            headerSidebarElement.className = 'sidebar-header-item'
 
-            headerSidebarElement.innerHTML = '&bullet; ' + blockRow.querySelector('h2').innerText;
+            headerSidebarElement.innerHTML = '&bullet; ' + blockRow.querySelector( 'h2' ).innerText
 
-            addFunctionForScrollOnClick( headerSidebarElement, blockRow.id );
-            sidebar.appendChild( headerSidebarElement );
+            addFunctionForScrollOnClick( headerSidebarElement, blockRow.id )
+            sidebar.appendChild( headerSidebarElement )
         } catch ( error ) {
-            console.log( error );
+            console.log( error )
         }
     }
 
@@ -141,7 +141,7 @@
     function addFunctionForScrollOnClick ( element, destId ) {
         element.onclick = ( ) => {
             scrollToID( destId )
-        };
+        }
     }
 
 //
@@ -149,9 +149,9 @@
 //
 
     function addSeparator ( ) {
-        let separator = document.createElement('div');
-        separator.className = 'sidebar-separator-item';
-        sidebar.appendChild( separator );
+        let separator = document.createElement('div')
+        separator.className = 'sidebar-separator-item'
+        sidebar.appendChild( separator )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
