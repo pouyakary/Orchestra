@@ -132,7 +132,7 @@
             editorWindow.focus( )
         })
 
-        // editorWindow.openDevTools( );
+        // editorWindow.openDevTools( )
 
         editorWindow.on( 'closed' , ( ) => {
             windows.delete( editorWindow )
@@ -330,7 +330,7 @@
         // dock icon is clicked and there are no other windows open.
         if ( windowCount === 0 )
             createWindow( )
-    });
+    })
 
 //
 // ─── PARSE ARGS ─────────────────────────────────────────────────────────────────

@@ -12,8 +12,8 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    const openExternal = require( 'electron' ).shell.openExternal;
-    const fs = require('fs');
+    const openExternal = require( 'electron' ).shell.openExternal
+    const fs = require('fs')
     const appName = require( 'electron' ).remote.app.getName( )
     const { ipcRenderer } = require( 'electron' )
 
@@ -28,15 +28,15 @@
 // ─── EVENTS ─────────────────────────────────────────────────────────────────────
 //
 
-    window.onload = applyOnLoadSettings;
+    window.onload = applyOnLoadSettings
 
 //
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
 //
 
-    const orchestraVersionSpanId = 'orchestra-version';
-    const orchestraBuildSpanId = 'orchestra-build';
-    const quartetVersionSpanId = 'quartet-version';
+    const orchestraVersionSpanId = 'orchestra-version'
+    const orchestraBuildSpanId = 'orchestra-build'
+    const quartetVersionSpanId = 'quartet-version'
 
 //
 // ─── ON LOAD SCRIPT ─────────────────────────────────────────────────────────────
@@ -52,15 +52,15 @@
         document.body.className = windowOptions.theme
 
         if ( appName === 'Orchestra Nightly' ) {
-            document.getElementById( 'icon' ).style.backgroundImage = 'url("./icon-nightly.png")';
+            document.getElementById( 'icon' ).style.backgroundImage = 'url("./icon-nightly.png")'
         }
 
         try {
             fs.readFile( `${ __dirname }/commit-count.txt`, 'utf8', ( error, data ) => {
-                if ( error ) alert( error );
-                document.getElementById( orchestraBuildSpanId ).innerText = data.trim( );
-            });
-        } catch ( e ) { alert( e )};
+                if ( error ) alert( error )
+                document.getElementById( orchestraBuildSpanId ).innerText = data.trim( )
+            })
+        } catch ( e ) { alert( e )}
     }
 
 //

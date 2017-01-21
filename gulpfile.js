@@ -15,7 +15,7 @@
     var gulp        = require('gulp')
     var packageJson = require('./package.json')
     var exec        = require('child_process').exec
-    var argv        = require('yargs').argv;
+    var argv        = require('yargs').argv
     var util        = require('util')
     var path        = require('path')
     var fs          = require('fs-extra')
@@ -59,7 +59,7 @@
 
             // if right
             files.forEach( name => {
-                let dest;
+                let dest
                 if ( !( subfolder === undefined || subfolder === '' || subfolder === null ) )
                     dest = path.join( resultDirPath , subfolder , name )
                 else
@@ -78,7 +78,7 @@
     /** Copy file `A` to `B` */
     function copyFile ( A, B ) {
         if ( /\.DS_Store/.test( A ) ) {
-            return;
+            return
         }
         fs.copy( A, B, err => {
             if ( err ) {
@@ -168,9 +168,9 @@
 
     gulp.task( 'electron', ['copyResourceFiles', 'sheets'], ( ) => {
         if ( argv.pack ) {
-            console.log('packing...');
+            console.log('packing...')
             let iconFile = ( packageJson.productName !== 'Orchestra Nightly' )?
-                './designs/icon/icns/icon.icns' : './designs/icon-nightly/icns/icon.icns';
+                './designs/icon/icns/icon.icns' : './designs/icon-nightly/icns/icon.icns'
 
             shell(`electron-packager _compiled "${ packageJson.productName }" --platform=darwin --arch=x64 --overwrite=true --app-copyright="Copyright 2016 by Kary Foundation, Inc." --app-version="${ packageJson.version }" --icon=${ iconFile } --name="${ packageJson.productName }" --out=_release`)
         }
