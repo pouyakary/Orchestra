@@ -47,7 +47,7 @@
 //
 
     function getCurrentRegExpFromConsole ( ) {
-        return document.getElementById('ribbon-console-regexp')
+        return document.querySelector('storage')
             .innerText
             .replace(/\u00A0/g, ' ')
     }
