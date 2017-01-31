@@ -156,7 +156,7 @@
             fullscreen: false,
         })
 
-        //helpWindow.openDevTools( )
+        helpWindow.openDevTools( )
 
         // adding to windows
         windows.add( helpWindow )
