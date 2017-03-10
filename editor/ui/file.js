@@ -121,10 +121,8 @@
     function exportSVGImageTo ( filePath ) {
         const fileSVGString = renderWorkspaceIntoSVG( )
         fs.writeFile( filePath, fileSVGString, error => {
-            if ( error ) {
+            if ( error )
                 alert( 'File could not be saved. Please try again.' )
-            }
-
             new Log( "SVG got exported!" )
         })}
 
