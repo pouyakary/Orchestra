@@ -99,7 +99,7 @@
 
     function fireWindowCloseRequest ( ) {
         if ( onBeforeWindowClose( 'Close') )
-            OrchestraWindow.close( );
+            OrchestraWindow.close( )
     }
 
 //
