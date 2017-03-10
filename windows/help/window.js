@@ -62,7 +62,7 @@
 //
 
     function scrollToID ( id , noAnimation = false ) {
-        let topMargin = ( /^ref-/.test( id ) )? 35 : 100
+        let topMargin = (( /^ref-/.test( id ) )? 35 : 100 )
         if ( noAnimation )
             window.scrollTo( 0, document.getElementById( id ).offsetTop - topMargin )
         else
@@ -77,16 +77,12 @@
 //
 
     function createTableOfContents ( ) {
-        let contents = document.getElementById( 'content' )
-        sidebar = document.getElementById( 'sidebar' )
-        let contentLength = contents.children.length
+        let contents        = document.getElementById( 'content' )
+            sidebar         = document.getElementById( 'sidebar' )
 
-        for ( let index = 0; index < contentLength; index++ ) {
-            let section = contents.children[ index ]
+        for ( let section of contents.children ) {
             createTableOfContentForSection( section )
-
-            if ( index < contentLength - 1 )
-                addSeparator( )
+            addSeparator( )
         }
     }
 
@@ -116,7 +112,8 @@
     /** @param {Element} header */
     function createHeaderSidebarEntry ( blockRow ) {
         try {
-            if ( blockRow.id === '' ) return
+            if ( blockRow.id === '' )
+                 return
 
             let headerSidebarElement = document.createElement( 'div' )
             headerSidebarElement.className = 'sidebar-header-item'
@@ -127,7 +124,7 @@
             sidebar.appendChild( headerSidebarElement )
 
         } catch ( error ) {
-            console.log( error )
+            console.error( error )
         }
     }
 
@@ -136,9 +133,7 @@
 //
 
     function addFunctionForScrollOnClick ( element, destId ) {
-        element.onclick = ( ) => {
-            scrollToID( destId )
-        }
+        element.onclick = ( ) => scrollToID( destId )
     }
 
 //
