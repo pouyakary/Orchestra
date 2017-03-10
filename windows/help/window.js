@@ -45,7 +45,7 @@
 //
 
     /** @type {Element} */
-    let sidebar
+    var sidebar
 
 //
 // ─── PARSE URL AT RUN TIME ──────────────────────────────────────────────────────
@@ -53,9 +53,8 @@
 
     function moveToReferenceAtLoad ( ) {
         let id = window.location.search.substring( 1 )
-        if ( id !== 'none' ) {
+        if ( id !== 'none' )
             scrollToID( id, true )
-        }
     }
 
 //
@@ -64,14 +63,13 @@
 
     function scrollToID ( id , noAnimation = false ) {
         let topMargin = ( /^ref-/.test( id ) )? 35 : 100
-        if ( noAnimation ) {
+        if ( noAnimation )
             window.scrollTo( 0, document.getElementById( id ).offsetTop - topMargin )
-        } else {
+        else
             jump( `#${ id }` , {
                 offset: -topMargin,
                 duration: 300,
             })
-        }
     }
 
 //
@@ -87,9 +85,8 @@
             let section = contents.children[ index ]
             createTableOfContentForSection( section )
 
-            if ( index < contentLength - 1 ) {
+            if ( index < contentLength - 1 )
                 addSeparator( )
-            }
         }
     }
 
@@ -108,9 +105,8 @@
 
         // Children setup
         let blockRows = section.querySelectorAll( '.row' )
-        for ( let index = 0; index < blockRows.length; index++ ) {
+        for ( let index = 0; index < blockRows.length; index++ )
             createHeaderSidebarEntry( blockRows[ index ] )
-        }
     }
 
 //
@@ -129,6 +125,7 @@
 
             addFunctionForScrollOnClick( headerSidebarElement, blockRow.id )
             sidebar.appendChild( headerSidebarElement )
+
         } catch ( error ) {
             console.log( error )
         }
