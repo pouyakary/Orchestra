@@ -1,9 +1,7 @@
 {
 	"editor.tabSize": 				4,
-	"editor.wrappingColumn": 		0,
 	"editor.quickSuggestionsDelay": 0,
 	"editor.insertSpaces": 			true,
-    "alex.enable": true,
 	"files.exclude": {
 		"**/.git": true,
 		"**/.svn": true,
@@ -11,6 +9,5 @@
 		"**/.DS_Store": true,
 		"_compiled/**": true,
 		"_release/**": true
-	},
-    "typescript.check.workspaceVersion": false
+	}
 }
