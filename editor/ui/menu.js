@@ -101,7 +101,7 @@
                     },
                     {
                         label: 'Copy Compiled RegExp as Escaped String',
-                        accelerator: 'Alt+CmdOrCtrl+C',
+                        accelerator: 'Alt+C',
                         click: onGetEscapedStringRegExp
                     },
                     {
