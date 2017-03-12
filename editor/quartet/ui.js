@@ -60,4 +60,17 @@
         clipboard.writeText( getCurrentRegExpFromConsole( ) )
     }
 
+//
+// ─── ON COPY ESCAPED STRING REGEXP ──────────────────────────────────────────────
+//
+
+    function onGetEscapedStringRegExp ( ) {
+        let source = getCurrentRegExpFromConsole( )
+        const regX = new RegExp( source.substring( 1, source.length - 1 ) )
+                        .source
+                        .replace( /\\/g, '\\\\' )
+
+        clipboard.writeText(`"${ regX }"`)
+    }
+
 // ────────────────────────────────────────────────────────────────────────────────

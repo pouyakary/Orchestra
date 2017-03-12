@@ -100,6 +100,11 @@
                         click: onCopyRegExp
                     },
                     {
+                        label: 'Copy Compiled RegExp as Escaped String',
+                        accelerator: 'Alt+CmdOrCtrl+C',
+                        click: onGetEscapedStringRegExp
+                    },
+                    {
                         label: 'Paste',
                         accelerator: 'CmdOrCtrl+V',
                         role: 'paste'
