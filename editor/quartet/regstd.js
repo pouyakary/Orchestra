@@ -59,8 +59,9 @@
 //
 
     function quartetSequence ( code ) {
-        if ( sequenceRegEx.test( code ) ) return code
-        return ( quartetGetStringLength( code ) <= 1 )? code : '(?:' + code + ')'
+        return '(?:' + code + ')'
+        // if ( sequenceRegEx.test( code ) ) return code
+        // return ( quartetGetStringLength( code ) <= 1 )? code : '(?:' + code + ')'
     }
 
 //
