@@ -1,7 +1,9 @@
 # Orchestra
 Orchestra is a visual language that compiles into RegExp (as for ECMAScript.) that tries to replace the existing syntax of Regular Expressions and tries to build upon that a better language so that developers can do more powerful stuff while having less pain.
 
-![Kary Orchestra Editor View](https://cloud.githubusercontent.com/assets/2157285/18604069/2f72743e-7c8d-11e6-90a0-7aebc5555faf.png)
+![Kary Orchestra Editor View](https://cloud.githubusercontent.com/assets/2157285/24599749/ea6aae1c-1866-11e7-869f-5dfd7869cd26.png)
+
+
 
 
 ### Orchestra Language
