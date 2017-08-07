@@ -12,16 +12,16 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    var gulp        = require('gulp')
-    var packageJson = require('./package.json')
-    var exec        = require('child_process').exec
-    var argv        = require('yargs').argv
-    var util        = require('util')
-    var path        = require('path')
-    var fs          = require('fs-extra')
-    var ugly        = require('gulp-uglify')
-    var less        = require('less')
-    var mv          = require('mv')
+    const gulp        = require('gulp')
+    const packageJson = require('./package.json')
+    const exec        = require('child_process').exec
+    const argv        = require('yargs').argv
+    const util        = require('util')
+    const path        = require('path')
+    const fs          = require('fs-extra')
+    const ugly        = require('gulp-uglify')
+    const less        = require('less')
+    const mv          = require('mv')
 
 //
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
