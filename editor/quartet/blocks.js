@@ -721,11 +721,11 @@
     };
 
     QuartetGenerator['repeat_in_range'] = function ( block ) {
-        var text_start = block.getFieldValue('start');
-        var text_end = block.getFieldValue('end');
-        var statements_code = QuartetGenerator.statementToCode(block, 'code').trim( );
-
-        return quartetSequence( statements_code ) + '{' + text_start + ',' + text_end + '}';
+        var text_start = block.getFieldValue( 'start' );
+        var text_end = block.getFieldValue( 'end' );
+        var statements_code = QuartetGenerator.statementToCode( block, 'blocks' ).trim( );
+        let result = quartetSequence( statements_code ) + '{' + text_start + ',' + text_end + '}';
+        return result;
     }
 
 //
