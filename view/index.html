@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="ribbon-separator"></div>
-                    <div class="ribbon-icon ribbon-editor-toggle-console" id="toggle-console-icon" onclick="onToggleSideConsole( )">Console</div>
+                    <div class="ribbon-icon ribbon-editor-toggle-console" id="toggle-console-icon" onclick="onToggleSideConsole( )">Inspector</div>
 
                     <div class="ribbon-separator"></div>
                     <div class="ribbon-icon ribbon-editor-export-svg" onclick="onExportWorkspaceToSVG( )">Export SVG</div>
@@ -174,8 +174,10 @@
                 <div class="ribbon-icon ribbon-general-open-file"
                      onclick="onOpenFileOnPlayground( )">Load Text</div>
                 <div class="ribbon-separator"></div>
-                <div class="ribbon-icon ribbon-playground-smaller-text">Smaller Text</div>
-                <div class="ribbon-icon ribbon-playground-bigger-text">Bigger Text</div>
+                <div class="ribbon-icon ribbon-playground-smaller-text"
+                     onclick="playgroundMakeFontSizeSmaller( )">Smaller Text</div>
+                <div class="ribbon-icon ribbon-playground-bigger-text"
+                     onclick="playgroundMakeFontSizeBigger( )">Bigger Text</div>
             </div>
             <div id="playground-editor"></div>
         </div>

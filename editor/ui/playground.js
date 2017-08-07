@@ -13,6 +13,9 @@
 //
 
     function initMonacoEditor ( ) {
+        // constants
+        playgroundFontSize = 14
+
         let lastValue = ''
         if ( playgroundEditor !== null && playgroundEditor !== undefined ) {
             lastValue = playgroundEditor.getValue( )
@@ -49,10 +52,10 @@
                 try {
                     // so if the regX be horrible it would get out of the try
                     tokenizer = { root: [[
-                        new RegExp( CompiledRegEx, 'm') , "match" ]]}
+                        new RegExp( CompiledRegEx, 'mg') , "match" ]]}
 
                 } catch ( error ) {
-
+                    console.log( 'Monaco Tokenizer Error:', error )
                 }
 
             monaco.languages.setMonarchTokensProvider( MatchLanguageName, {
@@ -64,8 +67,8 @@
                     value: lastValue,
                     language: MatchLanguageName,
                     fontFamily: 'GraphSourceCodePro',
-                    fontSize: 14,
-                    lineHeight: 24,
+                    fontSize: playgroundFontSize,
+                    lineHeight: getPlaygroundLineHeight( ),
                     renderWhitespace: true,
                     insertSpaces: false,
                     theme: ( WindowTheme === 'dark' )? 'vs-dark' : 'vs'
@@ -111,6 +114,36 @@
             playgroundEditor.updateOptions({
                 'theme': ( mode === 'dark' )? 'vs-dark' : 'vs'
             })
+    }
+
+//
+// ─── MAKE FONT SIZE BIGGER ──────────────────────────────────────────────────────
+//
+
+    function playgroundMakeFontSizeBigger ( ) {
+        playgroundFontSize++
+        updatePlaygroundFontSize( )
+    }
+
+    function playgroundMakeFontSizeSmaller ( ) {
+        playgroundFontSize--
+        updatePlaygroundFontSize( )
+    }
+
+    function updatePlaygroundFontSize ( ) {
+        if ( playgroundEditor )
+            playgroundEditor.updateOptions({
+                fontSize: playgroundFontSize,
+                lineHeight: getPlaygroundLineHeight( )
+            })
+    }
+
+//
+// ─── GET LINE HEIGHT BASED ON FONT SIZE ─────────────────────────────────────────
+//
+
+    function getPlaygroundLineHeight ( ) {
+        return Math.floor( playgroundFontSize * 1.5 )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
