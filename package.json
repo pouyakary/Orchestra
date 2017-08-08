@@ -19,6 +19,7 @@
   "dependencies": {
     "concerto-compiler": "1.0.5",
     "messenger": "0.0.9",
+    "monaco-editor": "^0.9.0",
     "regulex": "0.0.2"
   },
   "devDependencies": {

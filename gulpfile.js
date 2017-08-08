@@ -119,6 +119,7 @@
         copyNodeModules('messenger')
         copyNodeModules('regulex')
         copyNodeModules('amdefine')
+        copyNodeModules('monaco-editor/min/vs')
 
         copyFile(
             getLocalPath( 'package.json' ),
