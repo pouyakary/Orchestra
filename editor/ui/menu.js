@@ -183,7 +183,7 @@
                     {
                         label: "Open Developer Tools",
                         accelerator: "Shift+CmdOrCtrl+D",
-                        click: OrchestraWindow.openDevTools
+                        click: ( ) => OrchestraWindow.openDevTools({ detach: true })
                     }
                 ]
             },
