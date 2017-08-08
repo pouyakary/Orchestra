@@ -2,7 +2,7 @@
     "version": "0.1.0",
     "command": "npm",
     "isShellCommand": false,
-    "args": [ "run", "debug" ],
+    "args": [ "run", "build" ],
     "showOutput": "never",
     "echoCommand": false
 }
