@@ -16,7 +16,7 @@
         const specialHTML = annotateRegExpForSideConsole( html )
         document.querySelector( 'storage' ).innerHTML = html
         document.getElementById( 'quartet-console-view-content' ).innerHTML = specialHTML
-        console.log( specialHTML )
+        // console.log( specialHTML )
     }
 
 //
