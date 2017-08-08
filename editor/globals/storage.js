@@ -54,5 +54,7 @@
 
     var playgroundEditor
     var playgroundFontSize
+    var playgroundCompiledRegX
+    var playgroundCompiledRegExpObject 
 
 // ────────────────────────────────────────────────────────────────────────────────
