@@ -55,6 +55,9 @@
     var playgroundEditor
     var playgroundFontSize
     var playgroundCompiledRegX
-    var playgroundCompiledRegExpObject 
+    var playgroundLatestMatches
+    var PlaygroundRegExpMatchProvider
+    var playgroundOldDecorations
+    var playgroundDecorationDelayerTimeout
 
 // ────────────────────────────────────────────────────────────────────────────────

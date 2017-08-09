@@ -9,12 +9,111 @@
 //
 
 //
+// ─── FETCH MATCHES ──────────────────────────────────────────────────────────────
+//
+
+    function playgroundFetchLatestMatches ( ) {
+        let matches = [ ]
+        let counter = 1
+        const regX = new RegExp( playgroundCompiledRegX, 'mg' )
+        while ( true ) {
+            const match = regX.exec( playgroundEditor.getValue( ) )
+            
+            if ( match === null )
+                return matches
+
+            matches.push({
+                text:       match[ 0 ],
+                startIndex: match.index,
+                endIndex:   match[ 0 ].length + match.index,
+                no:         counter++,
+                groups:     match.slice( 1 )
+            })
+        }
+    }
+
+//
+// ─── MATCH PROVIDER ─────────────────────────────────────────────────────────────
+//
+
+    function pushDecorationsToTheModel ( ) {
+        if ( !playgroundEditor )
+            return
+        if ( playgroundCompiledRegX === '' || playgroundCompiledRegX === undefined )          return
+
+        playgroundLatestMatches = playgroundFetchLatestMatches( )
+
+        const decorations = playgroundLatestMatches.map( match => {
+            const startPosition =
+                playgroundEditor.model.getPositionAt( match.startIndex )
+            const endPosition   =
+                playgroundEditor.model.getPositionAt( match.endIndex )
+
+            return {
+                range: new monaco.Range(
+                    startPosition.lineNumber,
+                    startPosition.column,
+                      endPosition.lineNumber,
+                      endPosition.column
+                ),
+                options: {
+                    className:      "match-token",
+                    hoverMessage:   createHoverMessage( match ),
+                }
+            }
+        })
+
+        playgroundOldDecorations =
+            playgroundEditor.deltaDecorations( playgroundOldDecorations , decorations )
+    }
+
+//
+// ─── REMOVE DECORATIONS ─────────────────────────────────────────────────────────
+//
+
+    function removeDecorationsFromPlayground ( ) {
+        playgroundOldDecorations =
+            playgroundEditor.deltaDecorations( playgroundOldDecorations, [{
+                range: new monaco.Range( 1, 1, 1, 1 ),
+                options : { }
+            }])
+    }
+
+//
+// ─── CREATING HOVER MESSAGE ─────────────────────────────────────────────────────
+//
+
+    function createHoverMessage ( match ) {
+        let groupCounter = 1
+        const groups = match.groups.map( group => {
+            let groupValue
+            if ( group === undefined )
+                groupValue = '_Empty_' 
+            else
+                groupValue = "`" + group + "`"
+
+            return `Group #${ groupCounter++ }: ${ groupValue }`
+        })
+
+        return(
+            `__Match No. ${ match.no }__\n\n` +
+            `Range: ${ match.startIndex } &mdash; ${ match.endIndex - 1 }\n\n` +
+            `*****\n\n` +
+            `\`\`\`\n${ match.text }\n\`\`\`\n\n` +
+            (( groupCounter === 1 )? '' : '\n\n*****\n\n' ) +
+            groups.join('\n\n')
+        )
+    }
+
+//
 // ─── INIT MONACO EDITOR ─────────────────────────────────────────────────────────
 //
 
     function initMonacoEditor ( ) {
         // constants
+        playgroundCompiledRegX = fetchLatestCompiledRegExp( )
         playgroundFontSize = 14
+        playgroundOldDecorations = [ ]
 
         let lastValue = ''
         if ( playgroundEditor !== null && playgroundEditor !== undefined ) {
@@ -31,7 +130,8 @@
         }
 
         require.config({
-            baseUrl: uriFromPath( __dirname )
+            baseUrl: uriFromPath(
+                path.join( __dirname, 'node_modules', 'monaco-editor', 'min' ))
         })
 
         // workaround monaco-css not understanding the environment
@@ -45,23 +145,6 @@
             const MatchLanguageName = 'CurrentMatchLanguage'
             monaco.languages.register({ id: MatchLanguageName })
 
-            let tokenizer = { }
-            let CompiledRegEx = fetchLatestCompiledRegExp( )
-
-            if ( CompiledRegEx !== '' )
-                try {
-                    // so if the regX be horrible it would get out of the try
-                    tokenizer = { root: [[
-                        new RegExp( CompiledRegEx, 'mg') , "match" ]]}
-
-                } catch ( error ) {
-                    console.log( 'Monaco Tokenizer Error:', error )
-                }
-
-            monaco.languages.setMonarchTokensProvider( MatchLanguageName, {
-                tokenizer: tokenizer
-            })
-
             playgroundEditor = monaco.editor.create(
                 document.getElementById( playgroundEditorID ), {
                     value: lastValue,
@@ -69,11 +152,40 @@
                     fontFamily: 'GraphSourceCodePro',
                     fontSize: playgroundFontSize,
                     lineHeight: getPlaygroundLineHeight( ),
+                    suggestOnTriggerCharacters: false,
                     renderWhitespace: true,
                     insertSpaces: false,
+                    mouseWheelZoom: false,
+                    quickSuggestions: false,
+                    minimap: true,
                     theme: ( WindowTheme === 'dark' )? 'vs-dark' : 'vs'
                 }
             )
+
+            // decoration handlers
+            setupPlaygroundChangeContentEvent( )
+            pushDecorationsToTheModel( )
+        })
+    }
+
+//
+// ─── ON CHANGE EVENTS ───────────────────────────────────────────────────────────
+//
+
+    function setupPlaygroundChangeContentEvent ( ) {
+        const delay = null;
+        clearTimeout( playgroundDecorationDelayerTimeout )
+
+        function onChangeContent ( ) {
+            removeDecorationsFromPlayground( )
+            pushDecorationsToTheModel( )
+        }
+
+        playgroundEditor.getModel( ).onDidChangeContent( e => {
+            clearTimeout( playgroundDecorationDelayerTimeout )
+            removeDecorationsFromPlayground( )
+            playgroundDecorationDelayerTimeout =
+                setTimeout( onChangeContent, delay )
         })
     }
 
@@ -143,7 +255,7 @@
 //
 
     function getPlaygroundLineHeight ( ) {
-        return Math.floor( playgroundFontSize * 1.5 )
+        return Math.floor( playgroundFontSize * 1.8 )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
