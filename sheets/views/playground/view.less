@@ -33,33 +33,37 @@
     .viwe-lines,
     .view-line,
     .token {
-        color:              var( --kary-foreground );
+        color: var( --kary-foreground );
     }
 
-    .monaco-editor .token.match {
-        background-color:   var( --playground-match-back );
-        color:              var( --playground-match-text );
+    .monaco-editor .margin {
+        background-color: var( --playground-background ) !important;
     }
 
     .monaco-editor, .monaco-editor-background {
-        background-color:   var( --kary-background );
+        background: var( --playground-background ) !important;
     }
 
+    .monaco-editor .line-numbers {
+        color: var( --playground-line-nums ) !important;
+        background-color: var( --playground-background );
+    }
+
+    /* Cursor */
     .monaco-editor .cursor {
-        background:         var( --playground-caret ) !important;
+        background: var( --playground-caret ) !important;
     }
 
     .monaco-editor .current-line {
-        background:         var( --color-5 );
-        border:             none;
+        border: none !important;
     }
 
-    .monaco-editor.vs .line-numbers {
-        color:              var( --playground-line-nums ) !important;
+    .monaco-editor .view-overlays.focused .selected-text {
+        background: var( --playground-selection-back ) !important;
     }
 
-    .monaco-editor .lines-decorations {
-        background-color:   transparent;
+    .monaco-editor .view-overlays .selected-text {
+        background: var( --playground-selection-back ) !important;
     }
 
 //
@@ -67,7 +71,12 @@
 //
 
     .playground-match {
-        background-color:   var( --color-5 );
+        background-color:   var( --playground-match-back );
+    }
+
+    .match-token {
+        background-color:   var( --playground-match-back ) !important;
+        color:              var( --playground-match-text ) !important;
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
