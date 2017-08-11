@@ -145,6 +145,8 @@
             const MatchLanguageName = 'CurrentMatchLanguage'
             monaco.languages.register({ id: MatchLanguageName })
 
+            setupPlaygroundMonacoThemes( monaco )
+
             playgroundEditor = monaco.editor.create(
                 document.getElementById( playgroundEditorID ), {
                     value: lastValue,
@@ -157,8 +159,8 @@
                     insertSpaces: false,
                     mouseWheelZoom: false,
                     quickSuggestions: false,
-                    minimap: true,
-                    theme: ( WindowTheme === 'dark' )? 'vs-dark' : 'vs'
+                    minimap: false,
+                    theme: WindowTheme
                 }
             )
 
@@ -173,19 +175,14 @@
 //
 
     function setupPlaygroundChangeContentEvent ( ) {
-        const delay = null;
+        const delay = 100;
         clearTimeout( playgroundDecorationDelayerTimeout )
-
-        function onChangeContent ( ) {
-            removeDecorationsFromPlayground( )
-            pushDecorationsToTheModel( )
-        }
 
         playgroundEditor.getModel( ).onDidChangeContent( e => {
             clearTimeout( playgroundDecorationDelayerTimeout )
             removeDecorationsFromPlayground( )
             playgroundDecorationDelayerTimeout =
-                setTimeout( onChangeContent, delay )
+                setTimeout( pushDecorationsToTheModel, delay )
         })
     }
 
@@ -222,10 +219,12 @@
 //
 
     function changePlaygroundThemeTo ( mode ) {
-        if ( playgroundEditor )
+        if ( playgroundEditor ) {
+            monaco.editor.setTheme( WindowTheme )
             playgroundEditor.updateOptions({
-                'theme': ( mode === 'dark' )? 'vs-dark' : 'vs'
+                theme: WindowTheme
             })
+        }
     }
 
 //
@@ -256,6 +255,44 @@
 
     function getPlaygroundLineHeight ( ) {
         return Math.floor( playgroundFontSize * 1.8 )
+    }
+
+//
+// ─── DARK THEME ─────────────────────────────────────────────────────────────────
+//
+
+    function setupPlaygroundMonacoThemes ( monaco ) {
+        // light
+        monaco.editor.defineTheme( 'light', {
+            base: 'vs',
+            inherit: true,
+            rules: [{ background: 'F7F7F7' }],
+            colors: {
+                'editor.foreground':                    '#141414',
+                'editor.background':                    '#F7F7F7',
+                'editorCursor.foreground':              '#00BBEC',
+                'editor.lineHighlightBackground':       '#F7F7F7',
+                'editorLineNumber.foreground':          '#2A75C0',
+                'editor.selectionBackground':           '#C2E8F4',
+                'editor.inactiveSelectionBackground':   '#88000015'
+            }
+        })
+
+        // dark
+        monaco.editor.defineTheme( 'dark', {
+            base: 'vs-dark',
+            inherit: true,
+            rules: [{ background: '1E1E1E' }],
+            colors: {
+                'editor.foreground':                    '#C1C1C1',
+                'editor.background':                    '#1E1E1E',
+                'editorCursor.foreground':              '#7DA76F',
+                'editor.lineHighlightBackground':       '#1E1E1E',
+                'editorLineNumber.foreground':          '#668BB7',
+                'editor.selectionBackground':           '#E0DEFF',
+                'editor.inactiveSelectionBackground':   '#88000015'
+            }
+        })
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

@@ -20,8 +20,6 @@
         initMainMenu( )
         handleWindowArgs( )
         setMenuEnableFactor( true )
-
-        OrchestraWindow.openDevTools({ detach: true })
     }
 
 //

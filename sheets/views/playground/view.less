@@ -19,51 +19,76 @@
 //
 
     #playground-editor {
-        width:              100vw;
+        width:              100vw; 
         height:             calc( ~'100vh - 39px ' - @ribbon-height );
-        color:              var( --playground-text );
     }
 
 //
 // ─── MONACO STYLES ──────────────────────────────────────────────────────────────
 //
 
-    .monaco-editor.vs,
-    .lines-content,
-    .viwe-lines,
-    .view-line,
-    .token {
-        color: var( --kary-foreground );
+    // .monaco-editor, .monaco-editor .inputarea.ime-input {
+    //     color: var( --playground-text ) !important;
+    // }
+
+    // .monaco-editor .margin {
+    //     background-color: var( --playground-background ) !important;
+    // }
+
+    // .monaco-editor, .monaco-editor-background {
+    //     background: var( --playground-background ) !important;
+    // }
+
+    // .monaco-editor .line-numbers {
+    //     color: var( --playground-line-nums ) !important;
+    //     background-color: var( --playground-background ) !important;
+    // }
+
+    // /* Cursor */
+    // .monaco-editor .cursor {
+    //     background: var( --playground-caret ) !important;
+    // }
+
+    // .monaco-editor .current-line {
+    //     border: none !important;
+    // }
+
+    // .monaco-editor .view-overlays.focused .selected-text {
+    //     background: var( --playground-selection-back ) !important;
+    // }
+
+    // .monaco-editor .view-overlays .selected-text {
+    //     background: var( --playground-selection-back ) !important;
+    // }
+
+    // for documentation:
+    // https://github.com/Microsoft/vscode/blob/master/src/vs/editor/contrib/hover/browser/hover.css
+
+    .monaco-editor .monaco-editor-hover {
+        @margin-size:       0;
+        border-radius:      5pt                                     !important;
+        margin-top:         @margin-size                            !important;
+        margin-bottom:      @margin-size                            !important;
+        padding:            5pt 10pt 4pt 10pt                       !important;
+        user-select:        none                                    !important;
+        border:             var( --playground-hover-border )        !important;
+        background-color:   var( --playground-hover-back )          !important;
+        box-shadow:         var( --playground-hover-shadow )        !important;
     }
 
-    .monaco-editor .margin {
-        background-color: var( --playground-background ) !important;
+    .monaco-editor-hover hr {
+        background-color:   var( --playground-hover-hr-back )       !important;
+        height:             1pt                                     !important;
+        border:             none                                    !important;
     }
 
-    .monaco-editor, .monaco-editor-background {
-        background: var( --playground-background ) !important;
+    .monaco-editor-hover code {
+        background-color:   var( --playground-hover-code-back )     !important;
+        color:              var( --playground-hover-code-text )     !important;
     }
 
-    .monaco-editor .line-numbers {
-        color: var( --playground-line-nums ) !important;
-        background-color: var( --playground-background );
-    }
-
-    /* Cursor */
-    .monaco-editor .cursor {
-        background: var( --playground-caret ) !important;
-    }
-
-    .monaco-editor .current-line {
-        border: none !important;
-    }
-
-    .monaco-editor .view-overlays.focused .selected-text {
-        background: var( --playground-selection-back ) !important;
-    }
-
-    .monaco-editor .view-overlays .selected-text {
-        background: var( --playground-selection-back ) !important;
+    .monaco-editor-hover strong {
+        color:              var( --playground-hover-strong-color )  !important;
     }
 
 //
@@ -71,12 +96,12 @@
 //
 
     .playground-match {
-        background-color:   var( --playground-match-back );
+        background-color:   var( --playground-match-back )      !important;
     }
 
     .match-token {
-        background-color:   var( --playground-match-back ) !important;
-        color:              var( --playground-match-text ) !important;
+        background-color:   var( --playground-match-back )      !important;
+        color:              var( --playground-match-text )      !important;
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
