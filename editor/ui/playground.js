@@ -92,7 +92,7 @@
             else
                 groupValue = "`" + group + "`"
 
-            return `Group #${ groupCounter++ }: ${ groupValue }`
+            return `Group ${ groupCounter++ }: ${ groupValue }`
         })
 
         return(
