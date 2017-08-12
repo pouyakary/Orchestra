@@ -65,7 +65,7 @@
 
     const __SPACE_UNICODE_STRING__      = "\\u0020"
     const emptyLogConsoleValue          = '&smashp;'
-    
+
     // the most stupid code someone has ever forced to write in JS. To make a
     // clean timeout object (!) as you can't really make an empty one yourself :|
     const emptyTimeoutObject            = (( ) => {
@@ -73,5 +73,12 @@
                                             clearTimeout( x )
                                             return x
                                         })( )
+
+//
+// ─── DEVELOPER TOOLS ────────────────────────────────────────────────────────────
+//
+
+    const originalDevToolsClearFunction = console.clear
+    const originalDevToolsLogFunction   = console.log
 
 // ────────────────────────────────────────────────────────────────────────────────
