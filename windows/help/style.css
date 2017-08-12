@@ -11,6 +11,7 @@
 
 html {
     font-family: 'Helvetica Neue', Helvetica, Arial;
+    user-select: none;
 }
 
 body {
@@ -21,8 +22,6 @@ body {
 }
 
 sidebar {
-    -webkit-user-select: none;
-    user-select: none;
     position: fixed;
     top: 0;
     width: 180px;
