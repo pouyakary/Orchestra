@@ -9,36 +9,6 @@
 //
 
 //
-// ─── INIT WINDOW ────────────────────────────────────────────────────────────────
-//
-
-    function initWindow ( ) {
-        printWelcomeMessage( )
-        setupWorkspace( )
-        appendTrafficLightEvents( )
-        onNewFile( )
-        initMainMenu( )
-        handleWindowArgs( )
-        setMenuEnableFactor( true )
-    }
-
-//
-// ─── CONSOLE WELCOME MESSAGE ────────────────────────────────────────────────────
-//
-
-    function printWelcomeMessage ( ) {
-        const firstStyle =
-            "font-weight: bold;" +
-            "font-size: 14px;" +
-            "font-family: Helvetica, Arial;"
-        const secondStyle =
-            "font-size: 14px;" +
-            "font-family: Helvetica, Arial;"
-
-        console.log( '\n%cOrchestra Studio %c\u2022 Copyright 2016-present, Kary Foundation, Inc.\n\n', firstStyle, secondStyle )
-    }
-
-//
 // ─── HANDLE WINDOW ARGS ─────────────────────────────────────────────────────────
 //
 
