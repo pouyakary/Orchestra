@@ -62,14 +62,11 @@
 //
 
     function scrollToID ( id , noAnimation = false ) {
-        let topMargin = (( /^ref-/.test( id ) )? 35 : 100 )
-        if ( noAnimation )
-            window.scrollTo( 0, document.getElementById( id ).offsetTop - topMargin )
-        else
-            jump( `#${ id }` , {
-                offset: -topMargin,
-                duration: 300,
-            })
+        const topMargin =
+            (( /^ref-/.test( id ) )? 35 : 100 )
+
+        document.getElementById( 'content' ).scrollTop =
+            document.getElementById( id ).offsetTop - topMargin
     }
 
 //
