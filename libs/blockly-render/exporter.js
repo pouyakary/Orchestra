@@ -97,10 +97,6 @@ function renderWorkspaceIntoSVG ( ) {
           .blocklyEditableText>text {\
             fill: #000;\
           }\
-          .blocklyEditableText:hover>rect {\
-            stroke: #fff;\
-            stroke-width: 2;\
-          }\
           .blocklyBubbleText {\
             fill: #000;\
           }\
@@ -136,13 +132,6 @@ function renderWorkspaceIntoSVG ( ) {
             fill: #00c;\
             stroke: #ccc;\
             stroke-width: 1px;\
-          }\
-          .blocklyIconGroup:hover>.blocklyIconShield {\
-            fill: #00f;\
-            stroke: #fff;\
-          }\
-          .blocklyIconGroup:hover>.blocklyIconMark {\
-            fill: #fff;\
           }\
           .blocklyIconMark {\
             cursor: default !important;\
@@ -191,10 +180,6 @@ function renderWorkspaceIntoSVG ( ) {
           }\
           .blocklyScrollbarKnob {\
             fill: #ccc;\
-          }\
-          .blocklyScrollbarBackground:hover+.blocklyScrollbarKnob,\
-          .blocklyScrollbarKnob:hover {\
-            fill: #bbb;\
           }\
           .blocklyInvalidInput {\
             background: #faa;\
@@ -250,9 +235,6 @@ function renderWorkspaceIntoSVG ( ) {
           .blocklyToolboxDiv[dir="RTL"] .blocklyTreeRow {\
             padding-right: 0;\
             padding-left: 1em !important;\
-          }\
-          .blocklyTreeRow:hover {\
-            background-color: #e4e4e4;\
           }\
           .blocklyTreeSeparator {\
             border-bottom: solid #e5e5e5 1px;\
@@ -323,9 +305,6 @@ function renderWorkspaceIntoSVG ( ) {
             height: 13px;\
             width: 15px;\
             border: 1px solid #666;\
-          }\
-          .blocklyWidgetDiv .goog-palette-cell-hover .goog-palette-colorswatch {\
-            border: 1px solid #FFF;\
           }\
           .blocklyWidgetDiv .goog-palette-cell-selected .goog-palette-colorswatch {\
             border: 1px solid #000;\
