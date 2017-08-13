@@ -627,11 +627,73 @@
                     <img src="blocks/advanced-whitespace-set.svg">
                 </div>
             </div>
+        </div>
 
 
+
+
+
+        <!-- Special Set Blocks Group -->
+        <div class="block-group" id="special-set-blocks">
+            <!-- Heading -->
+            <h1>Special Sets</h1>
+
+
+            <!-- World Block -->
+            <div class="row" id="ref-word">
+                <div class="column text">
+                    <h2>Word</h2>
+                    <p>
+                        <b>Word</b> is a special set that includes ranges from <code>a-z</code>, <code>A-Z</code>, <code>0-9</code> and underscore character.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    <b>Word</b> in wildcard is <code>\w</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/word.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    <p>
+                        A <b>Word</b> block is basically an <b>Alphabet</b> block with all of it's ranges set and a underscore in special characters which compiles to <code>/[0-9a-zA-Z_]/</code> wildcard.
+                    </p>
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-word.svg">
+                </div>
+            </div>
+
+
+
+            <!-- Anything But World Block -->
+            <div class="separator"></div>
+            <div class="row" id="ref-anything_but_word">
+                <div class="column text">
+                    <h2>Anything but Word</h2>
+                    <p>
+                        <b>Anything but Word</b> is the exclude set of <b>Word</b> block which means anything not in ranges of <code>a-z</code>, <code>A-Z</code>, <code>0-9</code> and underscore character.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    <b>Anything but Word</b> in wildcard is <code>\W</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/anything-but-word.svg">
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Boundary Blacks -->
+        <div class="block-group" id="special-set-blocks">
+            <!-- Heading -->
+            <h1>Boundaries</h1>
 
             <!-- Start of Line Character -->
-            <div class="separator"></div>
             <div class="row" id="ref-line_start">
                 <div class="column text">
                     <h2>Start of the Line</h2>
@@ -694,60 +756,6 @@
                 </div>
                 <div class="column block">
                     <img src="blocks/end-of-line.svg">
-                </div>
-            </div>
-        </div>
-
-        <div class="block-group" id="special-set-blocks">
-            <!-- Heading -->
-            <h1>Special Sets</h1>
-
-
-
-            <!-- World Block -->
-            <div class="separator"></div>
-            <div class="row" id="ref-word">
-                <div class="column text">
-                    <h2>Word</h2>
-                    <p>
-                        <b>Word</b> is a special set that includes ranges from <code>a-z</code>, <code>A-Z</code>, <code>0-9</code> and underscore character.
-                    </p>
-
-                    <h3>RegEx Specs</h3>
-                    <b>Word</b> in wildcard is <code>\w</code>
-                </div>
-                <div class="column block">
-                    <img src="blocks/word.svg">
-                </div>
-            </div>
-            <div class="row">
-                <div class="column text">
-                    <h3>Example</h3>
-                    <p>
-                        A <b>Word</b> block is basically an <b>Alphabet</b> block with all of it's ranges set and a underscore in special characters which compiles to <code>/[0-9a-zA-Z_]/</code> wildcard.
-                    </p>
-                </div>
-                <div class="column block">
-                    <img src="blocks/ex-word.svg">
-                </div>
-            </div>
-
-
-
-            <!-- Anything But World Block -->
-            <div class="separator"></div>
-            <div class="row" id="ref-anything_but_word">
-                <div class="column text">
-                    <h2>Anything but Word</h2>
-                    <p>
-                        <b>Anything but Word</b> is the exclude set of <b>Word</b> block which means anything not in ranges of <code>a-z</code>, <code>A-Z</code>, <code>0-9</code> and underscore character.
-                    </p>
-
-                    <h3>RegEx Specs</h3>
-                    <b>Anything but Word</b> in wildcard is <code>\W</code>
-                </div>
-                <div class="column block">
-                    <img src="blocks/anything-but-word.svg">
                 </div>
             </div>
         </div>
