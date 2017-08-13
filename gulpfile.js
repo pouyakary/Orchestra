@@ -158,12 +158,14 @@
                 })
             }
 
-            getCommitCountFromMasterBranchOfGithub( ).then( GitHubCommitCount => {
-                fs.writeFileSync( commitCountFilePath, GitHubCommitCount )
-                callback( )
-            }).catch( e => {
-                throw e
-            })
+            getCommitCountFromMasterBranchOfGithub( )
+                .then( GitHubCommitCount => {
+                    fs.writeFileSync( commitCountFilePath, GitHubCommitCount )
+                    callback( )
+                })
+                .catch( e => {
+                    throw e
+                })
 
         } catch ( error ) {
             try {
