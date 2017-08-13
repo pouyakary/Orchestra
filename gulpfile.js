@@ -136,11 +136,14 @@
 
     gulp.task( 'get-commit-counts', callback => {
         const commitCountFilePath = `./${resultDirPath}/about/commit-count.txt`
+        const githubOrchestraRepositoryAPI = 
+            'https://api.github.com/repos/karyfoundation/orchestra/stats/contributors'
+
         try {
             async function getCommitCountFromMasterBranchOfGithub ( ) {
                 return new Promise ( ( resolve, reject ) => {
                     const options = {
-                        url: 'https://api.github.com/repos/karyfoundation/orchestra/stats/contributors',
+                        url: githubOrchestraRepositoryAPI,
                         method: 'GET',
                         headers: {
                             'User-Agent':   'Super Agent/0.0.1',
@@ -169,7 +172,7 @@
 
         } catch ( error ) {
             try {
-                shell('git rev-list --all --count > ' + commitCountFilePath )
+                shell( 'git rev-list --all --count > ' + commitCountFilePath )
                 callback( )
 
             } catch ( error2 ) {
