@@ -911,36 +911,24 @@
     }
 
 //
-// ─── ENUMERATED UNICODE PROPERTY ────────────────────────────────────────────────
+// ─── ALL SPACES ─────────────────────────────────────────────────────────────────
 //
 
-    Blockly.Blocks['unicode_enum_property'] = {
+    Blockly.Blocks['all_whitespace_chars'] = {
         init: function() {
             this.appendDummyInput()
-                .appendField("Enumerated Unicode Property");
-            this.appendDummyInput()
-                .appendField("Proprety:")
-                .appendField(
-                    new Blockly.FieldDropdown([
-                        [ "option", "OPTIONNAME" ]
-                    ]), "property")
-            this.appendDummyInput()
-                .appendField("     Value:")
-                .appendField(new Blockly.FieldDropdown([["Select a property first","none"]]), "value")
+                .appendField("All Whitespace Characters")
             this.setPreviousStatement(true, "String")
             this.setNextStatement(true, "String")
-            this.setColour(90)
-            this.setTooltip("")
-            this.setHelpUrl("")
+            this.setColour(20)
+            this.setTooltip('')
+            this.setHelpUrl('http://www.example.com/')
         }
-    };
+    }
 
-    QuartetGenerator['unicode_enum_property'] = function ( block ) {
-        const property = block.getFieldValue('property')
-        const value = block.getFieldValue('value')
-        
-        return code;
-    };
+    QuartetGenerator[ 'all_whitespace_chars' ] = function ( block ) {
+        return '\\s'
+    }
 
 // ────────────────────────────────────────────────────────────────────────────────
 
