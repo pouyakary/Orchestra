@@ -127,7 +127,7 @@
         )
 
         // adding commit count
-        shell(`git rev-list --all --count > ${resultDirPath}/about/commit-count.txt`)
+        shell(`git rev-list --all --count > ./${resultDirPath}/about/commit-count.txt`)
 
         callback()
     })
