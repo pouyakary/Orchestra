@@ -368,9 +368,7 @@
         var checkbox_tab = block.getFieldValue('tab') == 'TRUE'
         var checkbox_linefeed = block.getFieldValue('linefeed') == 'TRUE'
 
-        if ( checkbox_space && checkbox_tab && checkbox_linefeed ) {
-            return '\\s'
-        } else if ( checkbox_space || checkbox_linefeed || checkbox_tab ) {
+        if ( checkbox_space || checkbox_linefeed || checkbox_tab ) {
             var chars = [ ]
             if ( checkbox_space ) { chars.push( '&#160' ) }
             if ( checkbox_tab ) { chars.push( '\\t' ) }
