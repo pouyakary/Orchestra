@@ -430,7 +430,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    Imagine you wanna find the Top level domain name and the website's address using a URL of form <code>www.websitename.domain</code>. This Quartet compiles to <code>/www\.([0-9a-z\-])\.([0-9a-z\-])/</code> and in a JavaScript environment you can use <code>$1</code> and <code>$2</code> to find website name and domain name.
+                    Imagine you wanna find the Top level domain name and the website's address using a URL of form <code>www.websitename.domain</code>. This Quartet compiles to <code>/www\.((?:[^\.])+)\.((?:[^\.])+)/</code> and in a JavaScript environment you can use <code>$1</code> and <code>$2</code> to find website name and domain name.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-match.svg">
