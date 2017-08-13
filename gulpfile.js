@@ -12,16 +12,17 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    const gulp        = require('gulp')
-    const packageJson = require('./package.json')
-    const exec        = require('child_process').exec
-    const argv        = require('yargs').argv
-    const util        = require('util')
-    const path        = require('path')
-    const fs          = require('fs-extra')
-    const ugly        = require('gulp-uglify')
-    const less        = require('less')
-    const mv          = require('mv')
+    const gulp          = require('gulp')
+    const packageJson   = require('./package.json')
+    const exec          = require('child_process').exec
+    const argv          = require('yargs').argv
+    const util          = require('util')
+    const path          = require('path')
+    const fs            = require('fs-extra')
+    const ugly          = require('gulp-uglify')
+    const less          = require('less')
+    const mv            = require('mv')
+    const request       = require('request')
 
 //
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
@@ -126,10 +127,53 @@
             getLocalPath( path.join( resultDirPath , 'package.json' ) )
         )
 
-        // adding commit count
-        shell(`git rev-list --all --count > ./${resultDirPath}/about/commit-count.txt`)
-
         callback()
+    })
+
+//
+// ─── GETTING COMMIT COUNT ───────────────────────────────────────────────────────
+//
+
+    gulp.task( 'get-commit-counts', callback => {
+        const commitCountFilePath = `./${resultDirPath}/about/commit-count.txt`
+        try {
+            async function getCommitCountFromMasterBranchOfGithub ( ) {
+                return new Promise ( ( resolve, reject ) => {
+                    const options = {
+                        url: 'https://api.github.com/repos/karyfoundation/orchestra/stats/contributors',
+                        method: 'GET',
+                        headers: {
+                            'User-Agent':   'Super Agent/0.0.1',
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                    }
+                    request( options, ( error, response, body ) => {
+                        if ( !error && response.statusCode == 200 ) {
+                            const data = JSON.parse( body )[ 0 ].total.toString( )
+                            resolve( data )
+                        } else {
+                            reject('Could not connect to GitHub')
+                        }
+                    })
+                })
+            }
+
+            getCommitCountFromMasterBranchOfGithub( ).then( GitHubCommitCount => {
+                fs.writeFileSync( commitCountFilePath, GitHubCommitCount )
+                callback( )
+            }).catch( e => {
+                throw e
+            })
+
+        } catch ( error ) {
+            try {
+                shell('git rev-list --all --count > ' + commitCountFilePath )
+                callback( )
+
+            } catch ( error2 ) {
+                callback('Could not save latest commits count')
+            }
+        }
     })
 
 //
@@ -167,7 +211,7 @@
 // ─── ELECTRON PACKER ────────────────────────────────────────────────────────────
 //
 
-    gulp.task( 'electron', ['copyResourceFiles', 'sheets'], ( ) => {
+    gulp.task( 'electron', ['copyResourceFiles', 'get-commit-counts', 'sheets'], ( ) => {
         if ( argv.pack ) {
             console.log('packing...')
             let iconFile = ( packageJson.productName !== 'Orchestra Nightly' )?
