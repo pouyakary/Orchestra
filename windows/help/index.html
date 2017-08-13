@@ -632,7 +632,6 @@
 
             <!-- Start of Line Character -->
             <div class="separator"></div>
-            <div id="ref-sigma_range"></div>
             <div class="row" id="ref-line_start">
                 <div class="column text">
                     <h2>Start of the Line</h2>
@@ -650,11 +649,15 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    A very common use of <b>Start of the Line</b> and <b>End of the Line</b> is when you want to exactly match a RegExp within your test sample. For example imagine if your test sample is <code>"aaabbbbaaa"</code> and your RegExp is the one you see in the right; What you want is to see if your string is only made of <code>a</code>.<br><br>
-
-                    In JavaScript you would do <code>/a+/.test("aaabbbbaaa")</code> to test your string against the RegExp that we just made, result is however not what you expect, it is <code>true</code>.<br><br>
-
-                    That simply is due to the fact that RegExp test functions <b>"Match Partially"</b> within your code so in this string there are two sequences containing a row of <code>a</code> characters and therefore RegExp engines returns <code>true</code>.
+                    <p>
+                        A very common use of <b>Start of the Line</b> and <b>End of the Line</b> is when you want to exactly match a RegExp within your test sample. For example imagine if your test sample is <code>"aaabbbbaaa"</code> and your RegExp is the one you see in the right; What you want is to see if your string is only made of <code>a</code>.
+                    </p>
+                    <p>
+                        In JavaScript you would do <code>/a+/.test("aaabbbbaaa")</code> to test your string against the RegExp that we just made, result is however not what you expect, it is <code>true</code>.
+                    </p>
+                    <p>
+                        That simply is due to the fact that RegExp test functions <b>"Match Partially"</b> within your code so in this string there are two sequences containing a row of <code>a</code> characters and therefore RegExp engines returns <code>true</code>.
+                    </p>
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-start-end-of-line-1.svg">
@@ -662,9 +665,12 @@
             </div>
             <div class="row">
                 <div class="column text">
-                    To overcome this problem you may use <b>Start of the Line</b> and <b>End of the Line</b> to indicate that you want <i>the whole string</i> to be match with your RegExp and not only a partial part of it.<br><br>
-
-                    This Orchestra that compiles to <code>/^a+$/</code> ensures that your Orchestra is testing the full string and so it's result when testing <code>aaabbbbaaa</code> is <code>false</code>.
+                    <p>
+                        To overcome this problem you may use <b>Start of the Line</b> and <b>End of the Line</b> to indicate that you want <i>the whole string</i> to be match with your RegExp and not only a partial part of it.
+                    </p>
+                    <p>
+                        This Orchestra that compiles to <code>/^a+$/</code> ensures that your Orchestra is testing the full string and so it's result when testing <code>aaabbbbaaa</code> is <code>false</code>.
+                    </p>
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-start-end-of-line-2.svg">
@@ -676,11 +682,11 @@
 
             <!-- End of Line Character -->
             <div class="separator"></div>
-            <div class="row">
+            <div class="row" id="ref-line_end">
                 <div class="column text">
                     <h2>End of the Line</h2>
                     <p>
-                        <b>End of the Line</b> Matches the very end of the a line.
+                        <b>End of the Line</b> matches the very end of the a line.
                     </p>
 
                     <h3>RegEx Specs</h3>
@@ -688,6 +694,41 @@
                 </div>
                 <div class="column block">
                     <img src="blocks/end-of-line.svg">
+                </div>
+            </div>
+        </div>
+
+        <div class="block-group" id="special-set-blocks">
+            <!-- Heading -->
+            <h1>Special Sets</h1>
+
+
+
+            <!-- World Block -->
+            <div class="separator"></div>
+            <div class="row" id="ref-word">
+                <div class="column text">
+                    <h2>Word</h2>
+                    <p>
+                        <b>Word</b> is a special set that includes ranges from <code>a-z</code>, <code>A-Z</code>, <code>0-9</code> and underscore character.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    <b>Word</b> in wildcard is <code>$</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/word.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    <p>
+                        A <b>Word</b> block is basically an <b>Alphabet</b> block with all of it's ranges set and a underscore in special characters which compiles to <code>/[0-9a-zA-Z_]/</code> wildcard.
+                    </p>
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-word.svg">
                 </div>
             </div>
         </div>
