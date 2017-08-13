@@ -22,6 +22,16 @@
     const selectedBlockHTMl = /\<span class\="console\-highlight\-active\-block"\>(.*)\<\/span\>/g
 
 //
+// ─── HTML TEXT LENGTH COUNTER ───────────────────────────────────────────────────
+//
+
+    function countHTMLEmbeddedTextLength ( text ) {
+        const element = document.createElement('div')
+        element.innerHTML = text
+        return element.innerText.length
+    }
+
+//
 // ─── TO UNICODE ─────────────────────────────────────────────────────────────────
 //
 
@@ -59,9 +69,11 @@
 //
 
     function quartetSequence ( code ) {
-        return '(?:' + code + ')'
-        // if ( sequenceRegEx.test( code ) ) return code
-        // return ( quartetGetStringLength( code ) <= 1 )? code : '(?:' + code + ')'
+        const length = countHTMLEmbeddedTextLength( code )
+        if ( length <= 1 )
+            return code
+        else
+            return '(?:' + code + ')'
     }
 
 //
@@ -123,14 +135,6 @@
     }
 
 //
-// ─── GET STRING LENGTH ──────────────────────────────────────────────────────────
-//
-
-    function quartetGetStringLength ( code ) {
-        return code.replace( htmlSpecialEntities, ' ' ).length
-    }
-
-//
 // ─── SPACE DECODE ───────────────────────────────────────────────────────────────
 //
 
@@ -143,10 +147,14 @@
 //
 
     function quartetAlphabet ( sigma ) {
-        if ( sigma.length === 0 ) return ''
+        if ( sigma.length === 0 )
+            return ''
+
         return quartetEncodeHTML(
-            ( sigma.length === 1 )? sigma[ 0 ] : '[' + sigma.join('') + ']'
-        )
+                ( sigma.length === 1 )
+                    ? sigma[ 0 ]
+                    : '[' + sigma.join('') + ']'
+            )
     }
 
 //
