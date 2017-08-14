@@ -33,18 +33,34 @@
     }
 
 //
+// ─── TEST COMPILED REGEXP ───────────────────────────────────────────────────────
+//
+
+    function testCompiledRegExp ( ) {
+        try {
+            // test if compiled regexp is empty
+            if ( playgroundCompiledRegX === '' || playgroundCompiledRegX === undefined )          return false
+
+            // see if regexp is only about boundaries
+            if ( detectAllBoundaryRegExp.text( playgroundCompiledRegX ) )
+                return false
+
+            // test if RegExp is working good
+            new RegExp( playgroundCompiledRegX, 'mg' )
+
+            // we are okay
+            return true
+        } catch ( e ) {
+            return false
+        }
+    }
+
+//
 // ─── MATCH PROVIDER ─────────────────────────────────────────────────────────────
 //
 
     function pushDecorationsToTheModel ( ) {
-        if ( !playgroundEditor )
-            return
-        if ( playgroundCompiledRegX === '' || playgroundCompiledRegX === undefined )          return
-        try {
-            new RegExp( playgroundCompiledRegX, 'mg' )
-        } catch ( e ) {
-            return
-        }
+        if ( ! testCompiledRegExp( ) ) return;
 
         playgroundLatestMatches = playgroundFetchLatestMatches( )
 
