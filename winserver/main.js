@@ -149,7 +149,7 @@
         isHelpWindowOpen = true
 
         helpWindow = new BrowserWindow({
-            title: "Quartet's Block Reference",
+            title: "Orchestra Blocks Reference",
             width:  1050, minWidth: 1050,
             height: 600, minHeight: 200,
             backgroundColor: 'white',
@@ -247,7 +247,7 @@
 
     app.on( 'ready' , ( ) => {
         console.log(`Orchestra, Version ${ orchestraVersion }`)
-        console.log('Copyright 2016 - Kary Foundation, Inc.')
+        console.log('Copyright 2016-present - Kary Foundation, Inc. All Rights Reserved.')
 
         loadSettings( )
         // runExtensionServer( )
@@ -338,7 +338,7 @@
 
     function parseArgs ( args ) {
         if ( args.length === 2 )
-            if ( args[ 1 ].endsWith( '.quartet' ) )
+            if ( args[ 1 ].endsWith( '.orchestra' ) )
                 return {
                     mode: 'file',
                     file: args[ 1 ]
