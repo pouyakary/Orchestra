@@ -208,7 +208,7 @@
                         click: ( ) => openExternal('http://www.ecma-international.org/ecma-262/6.0/#sec-regexp-regular-expression-objects')
                     },
                     {
-                        label: "RegExp on Mozilla Developer Network",
+                        label: "RegExp on MDN Web Docs",
                         click: ( ) => openExternal('https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/RegExp')
                     },
                     {
