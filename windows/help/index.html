@@ -795,6 +795,39 @@
                     <img src="blocks/word-boundary.svg">
                 </div>
             </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example 1</h3>
+                    <p>
+                        When this Orchestra matches the <code>"hello world"</code> string it remembers 3 groups: <code>h</code>, <i>the space between hello and world</i>  and <code>w</code> 
+                    </p>
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-boundary-1.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example 2</h3>
+                    <p>
+                        This Orchestra does not match the string: <code>"foobar"</code> because foo is followed by <code>b</code> which is a counted as a <b>word</b> character.
+                    </p>
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-boundary-2.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example 3</h3>
+                    <p>
+                        This Orchestra will never match anything because it's impossible for a word boundary to exist between two words
+                    </p>
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-boundary-3.svg">
+                </div>
+            </div>
         </div>
 
 
