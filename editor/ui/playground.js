@@ -40,6 +40,11 @@
         if ( !playgroundEditor )
             return
         if ( playgroundCompiledRegX === '' || playgroundCompiledRegX === undefined )          return
+        try {
+            new RegExp( playgroundCompiledRegX, 'mg' )
+        } catch ( e ) {
+            return
+        }
 
         playgroundLatestMatches = playgroundFetchLatestMatches( )
 
