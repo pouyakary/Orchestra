@@ -76,9 +76,9 @@ sidebar {
     /*max-width: 750px;
     margin-left: 240px;*/
     width: calc( 100vw - 210px );
-    height: calc( 100vh - 150px );
+    height: calc( 100vh - 50pt );
     overflow-y: scroll;
-    padding-bottom: 150px;
+    padding-bottom: 50pt;
 }
 
 .block-group {
@@ -164,4 +164,24 @@ code {
 
 .separator {
     padding-top: 50px;
+}
+
+footer {
+    margin-top: 100pt;
+    background-color: #f7f7f7;
+    padding: 20pt;
+    border-radius: 5pt;
+    display: flex;
+}
+
+.footer-logo {
+    max-width: 219px;
+    flex: auto;
+    margin-right: 20pt;
+    margin-top: 2pt;
+}
+
+.footer-text {
+    flex: auto;
+    font-size: 12pt;
 }
