@@ -197,7 +197,7 @@
                 role: 'help',
                 submenu: [
                     {
-                        label: "Quartet Language's Reference (Offline)",
+                        label: "Orchestra Blocks Reference (Offline)",
                         click: onOpenHelpPage
                     },
                     {
