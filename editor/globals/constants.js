@@ -81,4 +81,10 @@
     const originalDevToolsClearFunction = console.clear
     const originalDevToolsLogFunction   = console.log
 
+//
+// ─── PLAYGROUND ─────────────────────────────────────────────────────────────────
+//
+
+    const detectAllBoundaryRegExp = /(?:\\b|\\B|\^|\$)+/g
+
 // ────────────────────────────────────────────────────────────────────────────────
