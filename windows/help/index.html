@@ -35,7 +35,7 @@
             <div class="row" id="ref-comment">
                 <div class="column text">
                     <h2>Comment</h2>
-                    Just as in a textual programming language where you can put text that has no effect on the behavior of the program, <b>Comment</b> Block in Quartet provides the same functionality.
+                    Just as in a textual programming language where you can put text that has no effect on the behavior of the program, <b>Comment</b> Block in Orchestra provides the same functionality.
                 </div>
                 <div class="column block">
                     <img src="blocks/comment.svg">
@@ -76,7 +76,7 @@
             <div class="row" id="ref-free_form_regex">
                 <div class="column text">
                     <h2>Unsafe Wildcard</h2>
-                    <b>Unsafe Wildcard</b> <span class="unsafe">Unsafe</span> is used to inject wildcard grammar into the final Quartet. Quartet targets JavaScript's RegEx implementation which is a very standard implementation by the way, However other languages have some extra RegEx goodies. In order for you to have those goodies inside of the Quartet, you may use this unsafe block and add whatever text you want to the Quartet at any position.
+                    <b>Unsafe Wildcard</b> <span class="unsafe">Unsafe</span> is used to inject wildcard grammar into the final Orchestra. Orchestra targets JavaScript's RegEx implementation which is a very standard implementation by the way, However other languages have some extra RegEx goodies. In order for you to have those goodies inside of the Orchestra, you may use this unsafe block and add whatever text you want to the Orchestra at any position.
                 </div>
                 <div class="column block">
                     <img src="blocks/unsafe-wildcard.svg">
@@ -85,7 +85,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    ECMAScript (as even in the latest drafts) has no support for Look-behind thus as our strategy Quartet does not provide a block for look-behind too. However if targeting special RegEx engines that support lookbehind you can inject a wildcard like this that compiles to <code>/(?&lt;=ABC)/</code>.
+                    ECMAScript (as even in the latest drafts) has no support for Look-behind thus as our strategy Orchestra does not provide a block for look-behind too. However if targeting special RegEx engines that support lookbehind you can inject a wildcard like this that compiles to <code>/(?&lt;=ABC)/</code>.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-unsafe-wildcard.svg">
@@ -108,7 +108,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    The following Quartet compiles to <code>/\uD83D/</code>.
+                    The following Orchestra compiles to <code>/\uD83D/</code>.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-unicode-input.png" width="175">
@@ -150,7 +150,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example 1</h3>
-                    Imagine you wanna find the sentence ending marks: [ <code>?</code>, <code>!</code>, <code>.</code>, <code>;</code> ]. This Quartet can be useful. It compiles to <code>/[\.\!,;]/</code> in wildcard format.
+                    Imagine you wanna find the sentence ending marks: [ <code>?</code>, <code>!</code>, <code>.</code>, <code>;</code> ]. This Orchestra can be useful. It compiles to <code>/[\.\!,;]/</code> in wildcard format.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-alphabet.svg">
@@ -159,7 +159,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example 2</h3>
-                    The following option based Quartet works exactly the same as the Example 1. However using Alphabets you write less code and RegEx engines get to optimize your Quartets so much better.
+                    The following option based Orchestra works exactly the same as the Example 1. However using Alphabets you write less code and RegEx engines get to optimize your Orchestras so much better.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-alphabet-2.svg">
@@ -187,7 +187,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    Imagine you wanna find all numbers from 4 to 8. This Quartet can find them. Wildcard compiled version of this Quartet is: <code>/[4-8]/</code>.
+                    Imagine you wanna find all numbers from 4 to 8. This Orchestra can find them. Wildcard compiled version of this Orchestra is: <code>/[4-8]/</code>.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-range.svg">
@@ -215,7 +215,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    This Quartet finds the sequences with no <code>Q</code> / <code>q</code> characters in them. This Quartet compiles to wildcard: <code>/^qQ/</code>.
+                    This Orchestra finds the sequences with no <code>Q</code> / <code>q</code> characters in them. This Orchestra compiles to wildcard: <code>/^qQ/</code>.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-anythingbut.svg">
@@ -257,7 +257,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    Imagine we want to find an integer number with all digits but <code>5</code> and <code>6</code>. This Quartet compiles to <code>/[1-47-9]+/</code> and finds exactly that
+                    Imagine we want to find an integer number with all digits but <code>5</code> and <code>6</code>. This Orchestra compiles to <code>/[1-47-9]+/</code> and finds exactly that
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-sigma.svg">
@@ -307,7 +307,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    The following Quartet compiles to wildcard <code>/a+/</code> and matches one or more of the letter <code>'a'</code> followed by each other. So <code>"a"</code>, <code>"aa"</code>, <code>"aaaaaa"</code> are all matched. In the string <code>"abaa"</code> however, It will match two substrings as <code>"a"</code> and <code>"aa"</code>.
+                    The following Orchestra compiles to wildcard <code>/a+/</code> and matches one or more of the letter <code>'a'</code> followed by each other. So <code>"a"</code>, <code>"aa"</code>, <code>"aaaaaa"</code> are all matched. In the string <code>"abaa"</code> however, It will match two substrings as <code>"a"</code> and <code>"aa"</code>.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-one-or-more.svg">
@@ -335,7 +335,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    The following Quartet compiles to wildcard <code>/ab*a/</code> and matches at least <code>"aa"</code> but also <code>"aba"</code>, <code>"abbbbba"</code>.
+                    The following Orchestra compiles to wildcard <code>/ab*a/</code> and matches at least <code>"aa"</code> but also <code>"aba"</code>, <code>"abbbbba"</code>.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-any-number-of.svg">
@@ -363,7 +363,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example 1</h3>
-                    The following Quartet compiles to wildcard <code>/ab?c/</code> and matches either <code>"abc"</code> or <code>"ac"</code>.
+                    The following Orchestra compiles to wildcard <code>/ab?c/</code> and matches either <code>"abc"</code> or <code>"ac"</code>.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-maybe-1.svg">
@@ -372,7 +372,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example 2</h3>
-                    These two Quartets are equivalent to each other.
+                    These two Orchestras are equivalent to each other.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-maybe-2.svg"><br/><br/>
@@ -389,7 +389,7 @@
                 <div class="column text">
                     <h2>Options</h2>
                     <p>
-                        The combination of <b>One of Options</b> and <b>Option</b> blocks makes it possible for you to define multiple possibilities in your code. Each time the Quartet reaches the <b>One of options</b> block one of it's options must happen. Remember that the <b>Option</b> block can only be used inside of the <b>One of Options</b> block and <b>One of Options</b> block can not contain anything but <b>Option</b> blocks. (This approach lets you create more sophisticated options with clear borders.)
+                        The combination of <b>One of Options</b> and <b>Option</b> blocks makes it possible for you to define multiple possibilities in your code. Each time the Orchestra reaches the <b>One of options</b> block one of it's options must happen. Remember that the <b>Option</b> block can only be used inside of the <b>One of Options</b> block and <b>One of Options</b> block can not contain anything but <b>Option</b> blocks. (This approach lets you create more sophisticated options with clear borders.)
                     </p>
 
                     <h3>RegEx Specs</h3>
@@ -402,7 +402,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    This Quartet finds different ways to say <code>"Hello World"</code> like <code>"Howdy World"</code> and so on...
+                    This Orchestra finds different ways to say <code>"Hello World"</code> like <code>"Howdy World"</code> and so on...
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-one-of-options-and-option.svg">
@@ -417,7 +417,7 @@
                 <div class="column text">
                     <h2>Remember Match</h2>
                     <p>
-                        <b>Remember Match</b> is used to capture a portion of your Quartet formula and save it to a give memory.
+                        <b>Remember Match</b> is used to capture a portion of your Orchestra formula and save it to a give memory.
                     </p>
 
                     <h3>RegEx Specs</h3>
@@ -430,7 +430,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    Imagine you wanna find the Top level domain name and the website's address using a URL of form <code>www.websitename.domain</code>. This Quartet compiles to <code>/www\.((?:[^\.])+)\.((?:[^\.])+)/</code> and in a JavaScript environment you can use <code>$1</code> and <code>$2</code> to find website name and domain name.
+                    Imagine you wanna find the Top level domain name and the website's address using a URL of form <code>www.websitename.domain</code>. This Orchestra compiles to <code>/www\.((?:[^\.])+)\.((?:[^\.])+)/</code> and in a JavaScript environment you can use <code>$1</code> and <code>$2</code> to find website name and domain name.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-match.svg">
@@ -458,7 +458,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    In this lookahead we want to find all the <code>"Regular"</code> strings that are being in the <code>"Regular Expression"</code> strings. You can use match but you can also use this Quartet. This Quartet compiles to this wildcard: <code>/(?:Regular)(?=(?:[ \t])+ Expressions)/</code>
+                    In this lookahead we want to find all the <code>"Regular"</code> strings that are being in the <code>"Regular Expression"</code> strings. You can use match but you can also use this Orchestra. This Orchestra compiles to this wildcard: <code>/(?:Regular)(?=(?:[ \t])+ Expressions)/</code>
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-lookahead.svg">
@@ -486,7 +486,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    This Quartet compiles to <code>/w{3}/</code> and matches the string <code>"www"</code>.
+                    This Orchestra compiles to <code>/w{3}/</code> and matches the string <code>"www"</code>.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-repeat.svg">
@@ -514,7 +514,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    This Quartet matches any <b>LOL</b> text with at least <code>3</code> repeats of O. So both of <code>"LOOOL"</code> and <code>"LOOOOOL"</code> are accepted, but <code>"LOOL"</code> is rejected. This Quartet Compiles to <code>/LO{3,}L/</code>
+                    This Orchestra matches any <b>LOL</b> text with at least <code>3</code> repeats of O. So both of <code>"LOOOL"</code> and <code>"LOOOOOL"</code> are accepted, but <code>"LOOL"</code> is rejected. This Orchestra Compiles to <code>/LO{3,}L/</code>
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-repeat-at-least.svg">
@@ -542,7 +542,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    To find <b>WOOOW</b> words that contain at least <b>3</b> and at most <b>6</b> <code>'O'</code> characters in their middle this Quartet can work. Also it compiles to: <code>/WO{3,6}W/</code>
+                    To find <b>WOOOW</b> words that contain at least <b>3</b> and at most <b>6</b> <code>'O'</code> characters in their middle this Orchestra can work. Also it compiles to: <code>/WO{3,6}W/</code>
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-repeat-in-range.svg">
@@ -577,7 +577,7 @@
             <div class="row">
                 <div class="column text">
                     <h3>Example</h3>
-                    This Quartet compiles to <code>/.+/</code> and matches the content of a line.
+                    This Orchestra compiles to <code>/.+/</code> and matches the content of a line.
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-any-char.svg">
@@ -596,7 +596,7 @@
                     </p>
 
                     <h3>RegEx Specs</h3>
-                    If one of the chars be selected only it will be exported, so a compilation like <code>\n</code>, for a combination of two, Quartet compiler generates an alphabet of chars <code>[\t\n]</code> and in case all the 3 chars are selected the compilation would be the RegEx special escape sequence for non-breaking space + tab + new line feed that is the character: <code>\s</code>
+                    If one of the chars be selected only it will be exported, so a compilation like <code>\n</code>, for a combination of two, Orchestra compiler generates an alphabet of chars <code>[\t\n]</code> and in case all the 3 chars are selected the compilation would be the RegEx special escape sequence for non-breaking space + tab + new line feed that is the character: <code>\s</code>
                 </div>
                 <div class="column block">
                     <img src="blocks/basic-whitespace-set.svg">
