@@ -9,6 +9,12 @@
 //
 
 //
+// ─── IMPORTS ────────────────────────────────────────────────────────────────────
+//
+
+    @import '../../globals';
+
+//
 // ─── VARS ───────────────────────────────────────────────────────────────────────
 //
 
@@ -44,7 +50,7 @@
 //
 
     #quartet-console-view {
-        -webkit-user-select: none;
+        user-select: none;
         //transition-duration: @open-close-duration;
         flex: 1;
         height: inherit !important;
@@ -64,6 +70,22 @@
 
     #side-bar-container {
         height: ~'calc( 100vh - 110px )';
+        display: flex;
+        flex-direction: column;
+
+        .console-sidebar-spacer {
+            max-height: fit-content;
+            border-bottom: 1pt var( --side-console-border-color ) solid;
+            padding-top: 10pt;
+            margin-bottom: 2pt;
+        }
+    }
+
+    .flex-fixed {
+        flex:       auto;
+        height:     fit-content;
+        max-height: fit-content;
+        min-height: fit-content;
     }
 
 //
@@ -101,7 +123,7 @@
 // ─── CONSOLE CONTENT ────────────────────────────────────────────────────────────
 //
 
-    #quartet-console-view-content {
+    #orchestra-console-view-content {
         padding-left: 13pt;
         color: var( --console-regexp );
         width: 200pt;
@@ -113,6 +135,32 @@
         margin-bottom: 13pt;
         max-height: ~'calc( 100% - 30pt )';
         letter-spacing: 2pt;
+    }
+
+    #orchestra-console-view-flags {
+        display:            flex;
+        justify-content:    flex-start;
+
+        .sidebar-flags {
+            @sidebar-flag-size:     30pt;
+            background-color:       var( --side-console-flag-inactive-back );
+            color:                  var( --side-console-flag-inactive-color );
+            border-radius:          3pt;
+            font-family:            @source-code-pro-typeface;
+            width:                  @sidebar-flag-size;
+            height:                 @sidebar-flag-size;
+            max-width:              @sidebar-flag-size;
+            margin-left:            10pt;
+            text-align:             center;
+            vertical-align:         center;
+            font-size:              18pt;
+            flex:                   1;
+
+            &.active {
+                background-color:   var( --side-console-flag-active-back );
+                color:              var( --side-console-flag-active-color );
+            }
+        }
     }
 
 //
