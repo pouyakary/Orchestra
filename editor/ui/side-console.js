@@ -15,7 +15,7 @@
     function setConsoleRegEx ( html ) {
         const specialHTML = annotateRegExpForSideConsole( html )
         document.querySelector( 'storage' ).innerHTML = html
-        document.getElementById( 'quartet-console-view-content' ).innerHTML = specialHTML
+        document.getElementById( 'orchestra-console-view-content' ).innerHTML = specialHTML
         // console.log( specialHTML )
     }
 
@@ -44,8 +44,10 @@
 //
 
     function onToggleSideConsole ( ) {
-        let sideConsole = document.getElementById( editorContainerId )
-        let toggleConsoleClassIcon = document.getElementById( ribbonToggleConsoleIconId )
+        const sideConsole =
+            document.getElementById( editorContainerId )
+        const toggleConsoleClassIcon =
+            document.getElementById( ribbonToggleConsoleIconId )
 
         if ( sideConsole.className === "" ) {
             sideConsole.className = hideShowSideConsoleClassName
@@ -55,8 +57,13 @@
             toggleConsoleClassIcon.classList.remove( activeRibbonIconClass )
         }
 
-        let resizer = setInterval( ( ) => { Blockly.svgResize( workspace ) }, 15 )
-        setTimeout( ( ) => { clearInterval( resizer ) }, 400 )
+        let resizer = setInterval( ( ) => {
+            Blockly.svgResize( workspace )
+        }, 15 )
+
+        setTimeout( ( ) => {
+            clearInterval( resizer )
+        }, 400 )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
