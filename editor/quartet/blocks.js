@@ -201,7 +201,7 @@
     Blockly.Blocks[ 'any' ] = {
         init: function( ) {
             this.appendDummyInput()
-                .appendField("Any character but new line")
+                .appendField("Any character except of New Line")
             this.setInputsInline(true)
             this.setPreviousStatement(true, "String")
             this.setNextStatement(true, "String")
@@ -937,7 +937,7 @@
     Blockly.Blocks['dot_all'] = {
         init: function() {
             this.appendDummyInput()
-                .appendField("Any Character (dotall)")
+                .appendField("Any Character")
             this.setPreviousStatement(true, "String")
             this.setNextStatement(true, "String")
             this.setColour(20)
