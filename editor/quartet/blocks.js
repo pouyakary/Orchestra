@@ -306,7 +306,7 @@
     Blockly.Blocks['line_start'] = {
         init: function() {
             this.appendDummyInput()
-                .appendField("Start of the Line")
+                .appendField("Start of the Input")
             this.setPreviousStatement(true, "String")
             this.setNextStatement(true, "String")
             this.setColour(20)
@@ -326,7 +326,7 @@
     Blockly.Blocks[ 'line_end' ] = {
         init: function() {
             this.appendDummyInput()
-                .appendField("End of the Line")
+                .appendField("End of the Input")
             this.setPreviousStatement(true, "String")
             this.setNextStatement(true, "String")
             this.setColour(20)
