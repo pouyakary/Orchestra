@@ -930,6 +930,26 @@
         return '\\s'
     }
 
+//
+// ─── EVERY CHARACTER ────────────────────────────────────────────────────────────
+//
+
+    Blockly.Blocks['dot_all'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("Any Character (dotall)")
+            this.setPreviousStatement(true, "String")
+            this.setNextStatement(true, "String")
+            this.setColour(20)
+            this.setTooltip('')
+            this.setHelpUrl('http://www.example.com/')
+        }
+    }
+
+    QuartetGenerator[ 'dot_all' ] = function ( block ) {
+        return '[^]'
+    }
+
 // ────────────────────────────────────────────────────────────────────────────────
 
 
