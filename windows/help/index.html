@@ -784,7 +784,7 @@
                     <h2>Word Boundary</h2>
                     <p>
                         <b>Word Boundary</b>
-                        
+
                         Matches a word boundary. This is the position where a word character is not followed or preceded by another word-character, such as between a letter and a space. Note that a matched word boundary is not included in the match. In other words, the length of a matched word boundary is zero.
                     </p>
 
@@ -799,7 +799,7 @@
                 <div class="column text">
                     <h3>Example 1</h3>
                     <p>
-                        When this Orchestra matches the <code>"hello world"</code> string it remembers 3 groups: <code>h</code>, <i>the space between hello and world</i>  and <code>w</code> 
+                        When this Orchestra matches the <code>"hello world"</code> string it remembers 3 groups: <code>h</code>, <i>the space between hello and world</i> and <code>w</code>.
                     </p>
                 </div>
                 <div class="column block">
@@ -821,16 +821,52 @@
                 <div class="column text">
                     <h3>Example 3</h3>
                     <p>
-                        This Orchestra will never match anything because it's impossible for a word boundary to exist between two words
+                        This Orchestra will never match anything because it's impossible for a word boundary to exist between two words.
                     </p>
                 </div>
                 <div class="column block">
                     <img src="blocks/ex-boundary-3.svg">
                 </div>
             </div>
+
+
+
+
+            <!-- Word Boundary -->
+            <div class="separator"></div>
+            <div class="row" id="ref-anything_but_boundary">
+                <div class="column text">
+                    <h2>Anything but Word Boundary</h2>
+                    <p>
+                        <b>Anything but Word Boundary</b> matches a non-word boundary. This is a position where the previous and next character are of the same type: Either both must be words, or both must be non-words. Such as between two letters or between two spaces. The beginning and end of a string are considered non-words. Same as the matched word boundary, the matched non-word boundary is also not included in the match.
+                    </p>
+
+                    <h3>RegEx Specs</h3>
+                    <b>Anything but Word Boundary</b> in wildcard is <code>\B</code>
+                </div>
+                <div class="column block">
+                    <img src="blocks/anything-but-boundary.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column text">
+                    <h3>Example</h3>
+                    <p>
+                        
+                    </p>
+                </div>
+                <div class="column block">
+                    <img src="blocks/ex-boundary-3.svg">
+                </div>
+            </div>
+
         </div>
 
 
+
+
+
+        <!-- Footer -->
         <div class="block-group">
             <footer>
                 <div class="footer-logo">
