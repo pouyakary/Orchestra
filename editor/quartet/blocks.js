@@ -984,33 +984,9 @@
         }
     }
 
-<<<<<<< HEAD
     QuartetGenerator[ 'eol' ] = block =>
         // ../../orchestras/eol.orchestra
         '(?:\\r\\n|[\\n\\r\\v\\f\\u0085\\u2028\\u2029])'
-=======
-//
-// ─── EVERY CHARACTER ────────────────────────────────────────────────────────────
-//
-
-    Blockly.Blocks['eol'] = {
-        init: function() {
-            this.appendDummyInput()
-                .appendField("End Of Line")
-            this.setPreviousStatement(true, "String")
-            this.setNextStatement(true, "String")
-            this.setColour(20)
-            this.setTooltip('')
-            this.setHelpUrl('http://www.example.com/')
-        }
-    }
-
-    QuartetGenerator[ 'eol' ] = function ( block ) {
-        return '[\\n\\r\\v\\ff\\u0085\\u2028\\u2029]'
-    }
-
-// ────────────────────────────────────────────────────────────────────────────────
->>>>>>> 7ad35302490013b7dcb88ed4eb1d2a287971f864
 
 // ────────────────────────────────────────────────────────────────────────────────
 
