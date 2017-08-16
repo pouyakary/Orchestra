@@ -53,8 +53,8 @@
 // ─── COMPILER ───────────────────────────────────────────────────────────────────
 //
 
-    var activatedFlags =
-        Object.assign({ }, defaultActivatedFlagsValue )
+    var activatedFlags = Object.assign({ }, defaultActivatedFlagsValue )
+    var compiledFlags
 
 //
 // ─── PLAYGROUND ─────────────────────────────────────────────────────────────────
@@ -63,6 +63,7 @@
     var playgroundEditor
     var playgroundFontSize
     var playgroundCompiledRegX
+    var playgroundActivatedFlags
     var playgroundLatestMatches
     var PlaygroundRegExpMatchProvider
     var playgroundOldDecorations

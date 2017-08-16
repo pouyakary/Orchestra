@@ -15,19 +15,22 @@
     function playgroundFetchLatestMatches ( ) {
         let matches = [ ]
         let counter = 1
-        const regX = new RegExp( playgroundCompiledRegX, 'mg' )
+        updatePlaygroundFlags( )
+        const regX = new RegExp( playgroundCompiledRegX, playgroundActivatedFlags )
+        const text = playgroundEditor.getValue( )
+
         while ( true ) {
-            const match = regX.exec( playgroundEditor.getValue( ) )
+            const match = regX.exec( text )
 
             if ( match === null )
                 return matches
 
             matches.push({
-                text:       match[ 0 ],
-                startIndex: match.index,
-                endIndex:   match[ 0 ].length + match.index,
-                no:         counter++,
-                groups:     match.slice( 1 )
+                endIndex:       match[ 0 ].length + match.index,
+                groups:         match.slice( 1 ),
+                no:             counter++,
+                startIndex:     match.index,
+                text:           match[ 0 ],
             })
         }
     }
@@ -47,7 +50,7 @@
                 return false
 
             // test if RegExp is working good
-            new RegExp( playgroundCompiledRegX, 'mg' )
+            new RegExp( playgroundCompiledRegX, playgroundActivatedFlags )
 
             // we are okay
             return true
@@ -134,6 +137,7 @@
     function initMonacoEditor ( ) {
         // constants
         playgroundCompiledRegX = fetchLatestCompiledRegExp( )
+        updatePlaygroundFlags( )
         playgroundFontSize = 14
         playgroundOldDecorations = [ ]
 
@@ -315,6 +319,14 @@
                 'editor.inactiveSelectionBackground':   '#88000015'
             }
         })
+    }
+
+//
+// ─── UPDATE PLAYGROUND FLAGS ────────────────────────────────────────────────────
+//
+
+    function updatePlaygroundFlags ( ) {
+        playgroundActivatedFlags = setCompiledFlags({ g: true })
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

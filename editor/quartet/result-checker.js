@@ -13,6 +13,15 @@
 //
 
     function updateFlagsForLatestBuild ( ) {
+        detectActiveFlags( )
+        setCompiledFlags( )
+    }
+
+//
+// ─── DETECT FLAGS ───────────────────────────────────────────────────────────────
+//
+
+    function detectActiveFlags ( ) {
         const latestCompiledRegex = fetchLatestCompiledRegExp( )
 
         // resetting flags
