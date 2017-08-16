@@ -16,7 +16,7 @@
         let matches = [ ]
         let counter = 1
         updatePlaygroundFlags( )
-        const regX = new RegExp( playgroundCompiledRegX, playgroundActivatedFlags )
+        const regX = compileRegExpForPlayground( )
         const text = playgroundEditor.getValue( )
 
         while ( true ) {
@@ -50,7 +50,7 @@
                 return false
 
             // test if RegExp is working good
-            new RegExp( playgroundCompiledRegX, playgroundActivatedFlags )
+            compileRegExpForPlayground( )
 
             // we are okay
             return true
@@ -327,6 +327,17 @@
 
     function updatePlaygroundFlags ( ) {
         playgroundActivatedFlags = setCompiledFlags({ g: true })
+    }
+
+//
+// ─── COMPILE REGEXP FOR PLAYGROUND USE ──────────────────────────────────────────
+//
+
+    function compileRegExpForPlayground ( ) {
+        const regExpCode =
+            `/${ playgroundCompiledRegX.replace(/\//g, '\\/') }/${ playgroundActivatedFlags }`
+        const es5Version = regexpu.transpileCode( regExpCode )
+        return eval( es5Version )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

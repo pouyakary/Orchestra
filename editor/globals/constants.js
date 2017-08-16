@@ -30,8 +30,14 @@
     const { dialog }                    = require( 'electron' ).remote
     const OrchestraWindow               = require( 'electron' ).remote.getCurrentWindow( )
     const openExternal                  = require( 'electron' ).shell.openExternal
+
+//
+// ─── NODE MODULES ───────────────────────────────────────────────────────────────
+//
+
     const regulex                       = require('regulex')
     const concerto                      = require('concerto-compiler')
+    const regexpu                       = require('regexpu')
 
 //
 // ─── NODE LOADS ─────────────────────────────────────────────────────────────────

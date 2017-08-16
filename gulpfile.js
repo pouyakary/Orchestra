@@ -121,6 +121,21 @@
         copyNodeModules('regulex')
         copyNodeModules('amdefine')
         copyNodeModules('monaco-editor/min/vs')
+        copyNodeModules('regexpu-core')
+        copyNodeModules('regexpu')
+        copyNodeModules('regjsgen')
+        copyNodeModules('regjsparser')
+        copyNodeModules('regenerate')
+        copyNodeModules('unicode-match-property-ecmascript')
+        copyNodeModules('unicode-canonical-property-names-ecmascript')
+        copyNodeModules('unicode-property-aliases-ecmascript')
+        copyNodeModules('jsesc')
+        copyNodeModules('recast')
+        copyNodeModules('unicode-match-property-value-ecmascript')
+        copyNodeModules('ast-types')
+        copyNodeModules('source-map')
+        copyNodeModules('esprima')
+        copyNodeModules('private')
 
         copyFile(
             getLocalPath( 'package.json' ),
@@ -136,7 +151,7 @@
 
     gulp.task( 'get-commit-counts', callback => {
         const commitCountFilePath = `./${resultDirPath}/about/commit-count.txt`
-        const githubOrchestraRepositoryAPI = 
+        const githubOrchestraRepositoryAPI =
             'https://api.github.com/repos/karyfoundation/orchestra/stats/contributors'
 
         try {
