@@ -13,7 +13,6 @@
 //
 
     function quartetOnUIChange ( event ) {
-
         switch ( event.type ) {
             case Blockly.Events.MOVE:
                 return
@@ -27,9 +26,12 @@
         if ( event.type === Blockly.Events.UI && event.element === 'selected' )
             quartetActiveBlockId = event.newValue || event.blockId
 
-        let compiledRegex = QuartetGenerator.blockToCode( ComposeBlock )
+        const compiledRegex = QuartetGenerator.blockToCode( ComposeBlock )
 
         setConsoleRegEx( `/${ compiledRegex }/` )
+
+        updateFlagsForLatestBuild( )
+        refreshActivatedFlagConsoleView( )
     }
 
 //
@@ -37,7 +39,7 @@
 //
 
     function fetchLatestCompiledRegExp ( ) {
-        let latestCompiledRegEx = getCurrentRegExpFromConsole( )
+        const latestCompiledRegEx = getCurrentRegExpFromConsole( )
         if ( latestCompiledRegEx.length < 3 ) return ''
         return latestCompiledRegEx.substring( 1, latestCompiledRegEx.length - 1 )
     }
@@ -65,7 +67,7 @@
 //
 
     function onGetEscapedStringRegExp ( ) {
-        let source = getCurrentRegExpFromConsole( )
+        const source = getCurrentRegExpFromConsole( )
         const regX = new RegExp( source.substring( 1, source.length - 1 ) )
                         .source
                         .replace( /\\/g, '\\\\' )

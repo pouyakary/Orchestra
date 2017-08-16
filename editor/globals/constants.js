@@ -32,6 +32,7 @@
     const openExternal                  = require( 'electron' ).shell.openExternal
     const regulex                       = require('regulex')
     const concerto                      = require('concerto-compiler')
+
 //
 // ─── NODE LOADS ─────────────────────────────────────────────────────────────────
 //
@@ -75,6 +76,14 @@
                                         })( )
 
 //
+// ─── COMPILER ───────────────────────────────────────────────────────────────────
+//
+
+    const defaultActivatedFlagsValue = {
+        m: false, g: false, i: false, u: false, y: false
+    }
+
+//
 // ─── DEVELOPER TOOLS ────────────────────────────────────────────────────────────
 //
 
@@ -86,5 +95,17 @@
 //
 
     const detectAllBoundaryRegExp = /^(?:(?:\\b|\\B|\^|\$))+$/g
+
+//
+// ─── FLAGS CHECKER ──────────────────────────────────────────────────────────────
+//
+
+    const detectOrchestraWithEOL =
+        // ../../orchestras/detect-orchestra-with-eol.orchestra
+        /(?:^|[^\\])(\\n|\\r|\\f|\\v|\\u0085|\\u2028|\\u2029|(?:\[(?:[^A-Z\[\]\^])*(?:\\s(?:[^A-Z\[\]])*\\S|\\w(?:[^A-Z\[\]])*\\W|\\W(?:[^A-Z\[\]])*\\w|\\S(?:[^A-Z\[\]])*\\s)(?:[^A-Z\[\]])*\]|\[\^(?:[^A-Z\[\]\^])*\]))/g
+
+    const checkIfEmptyExcludeSet =
+        // ../../orchestras/check-if-empty-exclude-set.orchestra
+        /^\[\^(?:[^A-Z\[\]\^])*\]$/
 
 // ────────────────────────────────────────────────────────────────────────────────

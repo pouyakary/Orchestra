@@ -66,4 +66,19 @@
         }, 400 )
     }
 
+//
+// ─── REFRESH ACTIVATED FLAGS VIEW ───────────────────────────────────────────────
+//
+
+    function refreshActivatedFlagConsoleView ( ) {
+        const flagsViewHTML =
+            Object.keys( activatedFlags )
+                .map( key => `<div class="sidebar-flags${ ( activatedFlags[ key ]? ' active' : '' ) }">${ key }</div>` )
+
+        document.getElementById('orchestra-console-view-flags').innerHTML =
+            flagsViewHTML.join('')
+    }
+
+
+
 // ────────────────────────────────────────────────────────────────────────────────

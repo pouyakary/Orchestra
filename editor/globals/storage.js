@@ -12,7 +12,8 @@
 // ─── FILE SYSTEM ────────────────────────────────────────────────────────────────
 //
 
-    var currentFile = Object.assign({ }, defaultFileObject )
+    var currentFile =
+        Object.assign({ }, defaultFileObject )
 
 //
 // ─── WINDOW STATUS ──────────────────────────────────────────────────────────────
@@ -47,6 +48,13 @@
     var quartetActiveBlockId = ''
     var workspace
     var ComposeBlock
+
+//
+// ─── COMPILER ───────────────────────────────────────────────────────────────────
+//
+
+    var activatedFlags =
+        Object.assign({ }, defaultActivatedFlagsValue )
 
 //
 // ─── PLAYGROUND ─────────────────────────────────────────────────────────────────
