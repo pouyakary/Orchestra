@@ -50,17 +50,18 @@
 //
 
     #quartet-console-view {
-        background-color:   var( --side-console-background );
-        border-left:        1pt var( --side-console-border-color ) solid;
-        box-sizing:         border-box;
-        color:              var( --side-console-title-color );
-        flex:               1;
-        height:             inherit !important;
-        max-width:          0;
-        min-width:          220pt;
-        overflow:           hidden;
-        transition:         max-width @open-close-duration;
-        user-select:        none;
+        -webkit-user-select:    none;
+        background-color:       var( --side-console-background );
+        border-left:            1pt var( --side-console-border-color ) solid;
+        box-sizing:             border-box;
+        color:                  var( --side-console-title-color );
+        flex:                   1;
+        height:                 inherit !important;
+        max-width:              0;
+        min-width:              220pt;
+        overflow:               hidden;
+        transition:             max-width @open-close-duration;
+        user-select:            none;
     }
 
 //
@@ -68,24 +69,25 @@
 //
 
     #side-bar-container {
-        display:            flex;
-        flex-direction:     column;
-        height:             ~'calc( 100vh - 110px )';
-        user-select:        none;
+        -webkit-user-select:    none;
+        display:                flex;
+        flex-direction:         column;
+        height:                 ~'calc( 100vh - 110px )';
+        user-select:            none;
 
         .console-sidebar-spacer {
-            border-bottom:  1pt var( --side-console-border-color ) solid;
-            margin-bottom:  2pt;
-            max-height:     fit-content;
-            padding-top:    10pt;
+            border-bottom:      1pt var( --side-console-border-color ) solid;
+            margin-bottom:      2pt;
+            max-height:         fit-content;
+            padding-top:        10pt;
         }
     }
 
     .flex-fixed {
-        flex:       auto;
-        height:     fit-content;
-        max-height: fit-content;
-        min-height: fit-content;
+        flex:           auto;
+        height:         fit-content;
+        max-height:     fit-content;
+        min-height:     fit-content;
     }
 
 //
@@ -94,17 +96,19 @@
 
     .show-console-view {
         #quartet-console-view {
-            max-width:      220pt !important;
-            transition:     max-width @open-close-duration;
-            user-select:    none;
-            // transition-duration: @open-close-duration;
+            -webkit-user-select:    none;
+            max-width:              220pt !important;
+            transition:             max-width @open-close-duration;
+            user-select:            none;
         }
+
         #quartet-coding-view {
             //transition-duration: @open-close-duration;
-            max-width:      ~'calc( 100vw - 220pt )' !important;
-            transition:     width @open-close-duration, max-width @open-close-duration;
-            user-select:    none;
-            width:          ~'calc( 100vw - 220pt )' !important;
+            -webkit-user-select:    none;
+            max-width:              ~'calc( 100vw - 220pt )' !important;
+            transition:             width @open-close-duration, max-width @open-close-duration;
+            user-select:            none;
+            width:                  ~'calc( 100vw - 220pt )' !important;
         }
     }
 
@@ -113,13 +117,14 @@
 //
 
     .console-sidebar-title {
-        font-size:          0.9rem;
-        font-weight:        700;
-        letter-spacing:     2pt;
-        padding-bottom:     7pt;
-        padding:            10pt;
-        text-transform:     uppercase;
-        user-select:        none;
+        font-size:              0.9rem;
+        font-weight:            700;
+        letter-spacing:         2pt;
+        padding-bottom:         7pt;
+        padding:                10pt;
+        text-transform:         uppercase;
+        user-select:            none;
+        -webkit-user-select:    none;
     }
 
 //
@@ -127,27 +132,30 @@
 //
 
     #orchestra-console-view-content {
-        color:              var( --console-regexp );
-        font-family:        @source-code-pro-typeface;
-        font-size:          12pt;
-        letter-spacing:     2pt;
-        line-height:        1.8;
-        margin-bottom:      13pt;
-        max-height:         ~'calc( 100% - 30pt )';
-        overflow-y:         scroll;
-        padding-left:       13pt;
-        user-select:        none;
-        width:              200pt;
-        word-wrap:          break-word;
+        -webkit-user-select:    none;
+        color:                  var( --console-regexp );
+        font-family:            @source-code-pro-typeface;
+        font-size:              12pt;
+        letter-spacing:         2pt;
+        line-height:            1.8;
+        margin-bottom:          13pt;
+        max-height:             ~'calc( 100% - 30pt )';
+        overflow-y:             scroll;
+        padding-left:           13pt;
+        user-select:            none;
+        width:                  200pt;
+        word-wrap:              break-word;
     }
 
     #orchestra-console-view-flags {
-        display:            flex;
-        justify-content:    flex-start;
-        user-select:        none;
+        -webkit-user-select:    none;
+        display:                flex;
+        justify-content:        flex-start;
+        user-select:            none;
 
         .sidebar-flags {
             @sidebar-flag-size:     30pt;
+            -webkit-user-select:    none;
             background-color:       var( --side-console-flag-inactive-back );
             border-radius:          3pt;
             color:                  var( --side-console-flag-inactive-color );
