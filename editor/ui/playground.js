@@ -18,7 +18,7 @@
         const regX = new RegExp( playgroundCompiledRegX, 'mg' )
         while ( true ) {
             const match = regX.exec( playgroundEditor.getValue( ) )
-            
+
             if ( match === null )
                 return matches
 
@@ -39,10 +39,11 @@
     function testCompiledRegExp ( ) {
         try {
             // test if compiled regexp is empty
-            if ( playgroundCompiledRegX === '' || playgroundCompiledRegX === undefined )          return false
+            if ( playgroundCompiledRegX === '' || playgroundCompiledRegX === undefined )
+                return false
 
             // see if regexp is only about boundaries
-            if ( detectAllBoundaryRegExp.text( playgroundCompiledRegX ) )
+            if ( detectAllBoundaryRegExp.test( playgroundCompiledRegX ) )
                 return false
 
             // test if RegExp is working good
@@ -60,7 +61,7 @@
 //
 
     function pushDecorationsToTheModel ( ) {
-        if ( ! testCompiledRegExp( ) ) return;
+        if ( !testCompiledRegExp( ) ) { return }
 
         playgroundLatestMatches = playgroundFetchLatestMatches( )
 
@@ -109,7 +110,7 @@
         const groups = match.groups.map( group => {
             let groupValue
             if ( group === undefined )
-                groupValue = '_Empty_' 
+                groupValue = '_Empty_'
             else
                 groupValue = "`" + group + "`"
 
