@@ -12,14 +12,17 @@
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
 //
 
-    // ../../quartets/regex-sequence.quartet
-    const sequenceRegEx = /^(?:\(.*\)|\[.*\])$/
+    const sequenceRegEx =
+        // ../../orchestras/regex-sequence.orchestra
+        /^(?:\(.*\)|\[.*\])$/
 
-    // ../../quartets/quartet-html-entities.quartet
-    const htmlSpecialEntities = /&(?:nbsp|#160|gt|lt);/g
+    const htmlSpecialEntities =
+        // ../../orchestras/quartet-html-entities.orchestra
+        /&(?:nbsp|#160|gt|lt);/g
 
-    // ../../quartets/html-entities.quartet
-    const selectedBlockHTMl = /\<span class\="console\-highlight\-active\-block"\>(.*)\<\/span\>/g
+    const selectedBlockHTMl =
+        // ../../orchestras/html-entities.orchestra
+        /\<span class\="console\-highlight\-active\-block"\>(.*)\<\/span\>/g
 
 //
 // ─── HTML TEXT LENGTH COUNTER ───────────────────────────────────────────────────
