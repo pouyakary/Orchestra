@@ -25,10 +25,10 @@
 //
 
     #quartet-editor-container {
-        height: ~'calc( 100vh - 110px )';
-        width: ~'calc( 100vw + 220pt )';
-        overflow: hidden;
-        display: flex;
+        display:    flex;
+        height:     ~'calc( 100vh - 110px )';
+        overflow:   hidden;
+        width:      ~'calc( 100vw + 220pt )';
     }
 
 //
@@ -37,12 +37,12 @@
 
     #quartet-coding-view {
         //transition-duration: @open-close-duration;
-        flex: 1;
-        height: inherit !important;
-        background-color: var( --kary-background );
-        width: 100vw;
-        max-width: 100vw;
-        transition: width @open-close-duration, max-width @open-close-duration;
+        background-color:   var( --kary-background );
+        flex:               1;
+        height:             inherit !important;
+        max-width:          100vw;
+        transition:         width @open-close-duration, max-width @open-close-duration;
+        width:              100vw;
     }
 
 //
@@ -50,18 +50,17 @@
 //
 
     #quartet-console-view {
-        user-select: none;
-        //transition-duration: @open-close-duration;
-        flex: 1;
-        height: inherit !important;
-        max-width: 0;
-        background-color: var( --side-console-background );
-        box-sizing: border-box;
-        overflow: hidden;
-        transition: max-width @open-close-duration;
-        border-left: 1pt var( --side-console-border-color ) solid;
-        color: var( --side-console-title-color );
-        min-width: 220pt;
+        background-color:   var( --side-console-background );
+        border-left:        1pt var( --side-console-border-color ) solid;
+        box-sizing:         border-box;
+        color:              var( --side-console-title-color );
+        flex:               1;
+        height:             inherit !important;
+        max-width:          0;
+        min-width:          220pt;
+        overflow:           hidden;
+        transition:         max-width @open-close-duration;
+        user-select:        none;
     }
 
 //
@@ -69,15 +68,16 @@
 //
 
     #side-bar-container {
-        height: ~'calc( 100vh - 110px )';
-        display: flex;
-        flex-direction: column;
+        display:            flex;
+        flex-direction:     column;
+        height:             ~'calc( 100vh - 110px )';
+        user-select:        none;
 
         .console-sidebar-spacer {
-            max-height: fit-content;
-            border-bottom: 1pt var( --side-console-border-color ) solid;
-            padding-top: 10pt;
-            margin-bottom: 2pt;
+            border-bottom:  1pt var( --side-console-border-color ) solid;
+            margin-bottom:  2pt;
+            max-height:     fit-content;
+            padding-top:    10pt;
         }
     }
 
@@ -94,15 +94,17 @@
 
     .show-console-view {
         #quartet-console-view {
-            max-width: 220pt !important;
-            transition: max-width @open-close-duration;
+            max-width:      220pt !important;
+            transition:     max-width @open-close-duration;
+            user-select:    none;
             // transition-duration: @open-close-duration;
         }
         #quartet-coding-view {
             //transition-duration: @open-close-duration;
-            width: ~'calc( 100vw - 220pt )' !important;
-            max-width: ~'calc( 100vw - 220pt )' !important;
-            transition: width @open-close-duration, max-width @open-close-duration;
+            max-width:      ~'calc( 100vw - 220pt )' !important;
+            transition:     width @open-close-duration, max-width @open-close-duration;
+            user-select:    none;
+            width:          ~'calc( 100vw - 220pt )' !important;
         }
     }
 
@@ -111,12 +113,13 @@
 //
 
     .console-sidebar-title {
-        font-size: 0.9rem;
-        padding: 10pt;
-        padding-bottom: 7pt;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 2pt;
+        font-size:          0.9rem;
+        font-weight:        700;
+        letter-spacing:     2pt;
+        padding-bottom:     7pt;
+        padding:            10pt;
+        text-transform:     uppercase;
+        user-select:        none;
     }
 
 //
@@ -124,61 +127,46 @@
 //
 
     #orchestra-console-view-content {
-        padding-left: 13pt;
-        color: var( --console-regexp );
-        width: 200pt;
-        font-size: 12pt;
-        font-family: @source-code-pro-typeface;
-        word-wrap: break-word;
-        line-height: 1.8;
-        overflow-y: scroll;
-        margin-bottom: 13pt;
-        max-height: ~'calc( 100% - 30pt )';
-        letter-spacing: 2pt;
+        color:              var( --console-regexp );
+        font-family:        @source-code-pro-typeface;
+        font-size:          12pt;
+        letter-spacing:     2pt;
+        line-height:        1.8;
+        margin-bottom:      13pt;
+        max-height:         ~'calc( 100% - 30pt )';
+        overflow-y:         scroll;
+        padding-left:       13pt;
+        user-select:        none;
+        width:              200pt;
+        word-wrap:          break-word;
     }
 
     #orchestra-console-view-flags {
         display:            flex;
         justify-content:    flex-start;
+        user-select:        none;
 
         .sidebar-flags {
             @sidebar-flag-size:     30pt;
             background-color:       var( --side-console-flag-inactive-back );
-            color:                  var( --side-console-flag-inactive-color );
             border-radius:          3pt;
-            font-family:            @source-code-pro-typeface;
-            width:                  @sidebar-flag-size;
-            height:                 @sidebar-flag-size;
-            max-width:              @sidebar-flag-size;
-            margin-left:            10pt;
-            text-align:             center;
-            vertical-align:         center;
-            font-size:              18pt;
+            color:                  var( --side-console-flag-inactive-color );
             flex:                   1;
+            font-family:            @source-code-pro-typeface;
+            font-size:              18pt;
+            height:                 @sidebar-flag-size;
+            margin-left:            10pt;
+            max-width:              @sidebar-flag-size;
+            text-align:             center;
+            user-select:            none;
+            vertical-align:         center;
+            width:                  @sidebar-flag-size;
 
             &.active {
                 background-color:   var( --side-console-flag-active-back );
                 color:              var( --side-console-flag-active-color );
             }
         }
-    }
-
-//
-// ─── QUICK TEST VIEW ────────────────────────────────────────────────────────────
-//
-
-    #quick-test-view {
-        min-height: 140pt;
-        overflow: scroll;
-    }
-
-//
-// ─── CONSOLE NEW TEST ───────────────────────────────────────────────────────────
-//
-
-    #console-new-test {
-        align-self: flex-end;
-        color: var( --kary-green );
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
