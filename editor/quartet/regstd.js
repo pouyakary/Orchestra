@@ -114,16 +114,7 @@
                     result.push( '&nbsp;')
                     break
                 default:
-                    let charCode = character.charCodeAt( 0 )
-
-                    // we add basic alphabet as basic alphabet they are safe ASCII
-                    // and extended ASCII.
-                    if ( 32 < charCode && charCode < 255 )
-                        result.push( character )
-
-                    // for codes that don't have a safe ASCII representation we
-                    // would encode them to safe unicode escape sequences.
-                    else result.push( getUnicodeCharacter( character ) )
+                    result.push( character )
             }
         }
         return quartetEncodeHTML( result.join('') )

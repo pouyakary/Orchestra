@@ -18,9 +18,12 @@
         // resetting flags
         activatedFlags = Object.assign({ }, defaultActivatedFlagsValue )
 
-        // checking for multiline flag (m)
-        if ( checkIfRegExpIsMultiLine( latestCompiledRegex ) )
-            activatedFlags.m = true
+        // checks
+        activatedFlags.m =
+            checkIfRegExpIsMultiLine( latestCompiledRegex )
+
+        activatedFlags.u =
+            checkIfRegExpDependsOnUnicodeFlag( latestCompiledRegex )
     }
 
 //
@@ -43,6 +46,20 @@
                 return true
             }
         }
+    }
+
+//
+// ─── CHECK IF REGEXP IS UNICODE BASED ───────────────────────────────────────────
+//
+
+    function checkIfRegExpDependsOnUnicodeFlag ( regX ) {
+        for ( const char of [ ...regX ] ) {
+            if ( char.codePointAt( 1 ) !== undefined )
+                return true
+            if ( char.codePointAt( 0 ) === 65039 )
+                return true
+        }
+        return false
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
