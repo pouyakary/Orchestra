@@ -1,7 +1,7 @@
 # Orchestra
 Orchestra is a visual language that compiles into RegExp (as for ECMAScript.). It's replacement for the existing syntax of Regular Expressions and tries to build upon that a better language so  developers can do more powerful stuff while having less pain.
 
-![Kary Orchestra Editor View](https://cloud.githubusercontent.com/assets/2157285/24599749/ea6aae1c-1866-11e7-869f-5dfd7869cd26.png)
+![Kary Orchestra Editor View](https://user-images.githubusercontent.com/2157285/29429035-743f7674-83a4-11e7-890e-ca54519a792d.png)
 
 ### Orchestra Language
 It's a truly new language that gives you all sorts of possibilities and features you want from a powerful regular expression system.
@@ -10,7 +10,7 @@ It's a truly new language that gives you all sorts of possibilities and features
 
 - __Scalability__<br> Orchestra is capable of writing very large regular expressions. With that you can write scalable and maintainable regular expressions suited for doing large task. You can now use RegExps for task like data mining, parser writing and so on...
 
-- __Safe & Optimized Compilation__<br> Orchestra compiles to optimized and safe RegExp. It takes care of escapes and Unicode text encodings. You can have things like Emojies in your phrases and it'll work!
+- __Safe & Optimized Compilation__<br> Orchestra compiles to optimized and safe RegExp. It takes care of escapes and Unicode text encodings. You can have things like Emojies in your phrases and it'll work! Orchestra's Compiler also embraces [RegExpU](https://github.com/mathiasbynens/regexpu) (the RegExp to ES5 transformer used inside of Babel) so you can be sure that what you compile will work everywhere.
 
 - __Higher Level Language__ `Coming in Version 2`<br> Within the second release you can expect to have variables, functions, modules and libraries in Orchestra. It will truly change the face of regular expressions by giving you the tools to write really powerful RegExes. With that, you should be expecting many new applications for regular expressions to be used in.
 
@@ -21,7 +21,9 @@ Orchestra Studio is the IDE for Orchestra Language. As Orchestra is a visual lan
 
 - __Importing RegExps__<br>By using Kary Foundation's [Concerto Compiler](https://github.com/karyfoundation/concerto), Orchestra Studio is capable of importing any RegExp code and convert it to an optimized and greatly formatted Orchestra code. So you can import and edit any of your existing RegExps.
 
-- __Great Debugging with Playgrounds__<br>Orchestra Studio let's you define a sample "testing text" and many quick tests in your Orchestra project and each time you change your Orchestra code you can instantly view how it executed on your samples and what it did find there.
+- __Great Debugging with Playgrounds__<br>Orchestra Studio let's you define a sample "testing text" and many quick tests in your Orchestra project and each time you change your Orchestra code you can instantly view how it executed on your samples and what it did find there. We designed playground with all the benefits you might had in [RegExr](http://regexr.com) (match highlights, hover on match to get information) and what's even better is that your playground texts also get saved within the Orchestra file therefore each time you open your file your tests get loaded and you can check your work as you make changes.
+
+- __Test Cases__ `Coming in Version 2`<br> With this feature you'll be able to define tests to say if a certain text must be matched or must be rejected and also what the match groups must contain and hence each time you make changes you'll see if your changes has broken any tests... (by each single change...)
 
 - __Best Documentations__<br> Orchestra comes with an offline documentation for Orchestra Language and is integrated right into the Orchestra Language. You can right click on any block and select 'help' to view the block's full documentation.
 
