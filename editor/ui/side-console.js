@@ -67,6 +67,15 @@
     }
 
 //
+// ─── RENDER COMPILER OPTIONS VIEW ───────────────────────────────────────────────
+//
+
+    function renderCompilerOptionsView ( ) {
+        activateTargetButton( )
+        activateFormatButton( )
+    }
+
+//
 // ─── REFRESH ACTIVATED FLAGS VIEW ───────────────────────────────────────────────
 //
 

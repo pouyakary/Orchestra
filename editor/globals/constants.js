@@ -25,6 +25,19 @@
     }
 
 //
+// ─── BASIC FILE FORMAT FOR LOADING OLDER FILES ──────────────────────────────────
+//
+
+    const compileOptionsBaseOptions = {
+        target: 'es6',
+        format: 'regexp',
+    }
+
+    const emptyBaseFileJSON = {
+        compilerOptions: Object.assign({ }, compileOptionsBaseOptions )
+    }
+
+//
 // ─── ELECTRON LOADS ─────────────────────────────────────────────────────────────
 //
 

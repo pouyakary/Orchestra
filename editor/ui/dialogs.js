@@ -14,7 +14,13 @@
 
     function onNewFile ( force = false ) {
         if ( !( checkForSavingChanges( ) || force ) ) return;
-        currentFile = Object.assign({ }, defaultFileObject)
+
+        currentFile =
+            Object.assign({ }, defaultFileObject)
+        currentFile.compilerOptions =
+            Object.assign({ }, compileOptionsBaseOptions )
+        renderCompilerOptionsView( )
+
         updateWorkspaceWithNewXML( defaultFileXML )
     }
 

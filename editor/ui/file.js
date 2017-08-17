@@ -36,17 +36,6 @@
     }
 
 //
-// ─── LOAD NEW FILE ──────────────────────────────────────────────────────────────
-//
-
-    function loadFile ( fileJSONString ) {
-        const fileJSON = JSON.parse( fileJSONString )
-
-        // setupWorkspaceWithNewFile( fileJSON.workspaceXML );
-        playgroundEditor.setValue( fileJSON.playgroundText )
-    }
-
-//
 // ─── SERIALIZE FILE ─────────────────────────────────────────────────────────────
 //
 
@@ -54,6 +43,10 @@
         return JSON.stringify({
             workspaceXML: serializeWorkspaceIntoXML( ),
             playgroundText: playgroundEditor.getValue( ),
+            compilerOptions: {
+                target: currentFile.compilerECMAScriptTarget,
+                format: currentFile.compilerOutputFormat,
+            }
         })}
 
 //
@@ -81,7 +74,8 @@
                 setFileDirty( false )
                 new Log( "Saved!" )
             }
-        })}
+        })
+    }
 
 //
 // ─── OPEN FILE ──────────────────────────────────────────────────────────────────
@@ -95,24 +89,40 @@
                 return
             }
 
-            try {
-                let fileJSON = JSON.parse( fileJSONString )
-                if ( fileJSON.workspaceXML !== undefined && fileJSON.workspaceXML !== null ) {
-                    updateWorkspaceWithNewXML( fileJSON.workspaceXML )
-                    currentFile.path = filePath
-                    setFileDirty( true )
-                }
-
-                if ( fileJSON.playgroundText !== undefined && fileJSON.playgroundText !== '' )
-                    playgroundEditor.setValue( fileJSON.playgroundText )
-
-                new Log( "Opened!" )
-
-
-            } catch ( error ) {
-                report( `Could not load the file because of a broken file problem.${ error }` )
-            }
+            loadFileIntoWindow( fileJSONString, filePath )
         })}
+
+//
+// ─── LOAD FILE INTO WINDOW ──────────────────────────────────────────────────────
+//
+
+    function loadFileIntoWindow ( fileJSONString, filePath ) {
+        try {
+            const fileJSON =
+                Object.assign( emptyBaseFileJSON, JSON.parse( fileJSONString ) )
+
+            // workspace
+            if ( fileJSON.workspaceXML !== undefined && fileJSON.workspaceXML !== null ) {
+                updateWorkspaceWithNewXML( fileJSON.workspaceXML )
+                currentFile.path = filePath
+                setFileDirty( true )
+            }
+
+            // playground
+            if ( fileJSON.playgroundText !== undefined && fileJSON.playgroundText !== '' )
+                playgroundEditor.setValue( fileJSON.playgroundText )
+
+            // compiler configs
+            currentFile.compilerECMAScriptTarget = fileJSON.compilerOptions.target
+            currentFile.compilerOutputFormat = fileJSON.compilerOptions.format
+            renderCompilerOptionsView( )
+
+            new Log( "Opened!" )
+
+        } catch ( error ) {
+            report( `Could not load the file because of a broken file problem.${ error }` )
+        }
+    }
 
 //
 // ─── EXPORT SVG IMAGE ───────────────────────────────────────────────────────────
