@@ -20,6 +20,8 @@
         path: defaultEmptyPath,
         dirty: true,
         emptyNewFile: true,
+        compilerECMAScriptTarget: 'es6',
+        compilerOutputFormat: 'regexp',
     }
 
 //

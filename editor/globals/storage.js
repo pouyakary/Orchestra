@@ -57,6 +57,13 @@
     var compiledFlags
 
 //
+// ─── COMPILER OPTIONS ───────────────────────────────────────────────────────────
+//
+
+    //var compilerECMAScriptTarget = 'es6'
+    //var compilerOutputFormat = 'regexp'
+
+//
 // ─── PLAYGROUND ─────────────────────────────────────────────────────────────────
 //
 

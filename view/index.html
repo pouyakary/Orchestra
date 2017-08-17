@@ -162,8 +162,12 @@
                                         <div class="console-options-title">Target</div>
                                         <div class="console-options-value">
                                             <div class="console-options-select-box">
-                                                <div class="console-options-select-option">ES5</div>
-                                                <div class="console-options-select-option active">ES6</div>
+                                                <div class="console-options-select-option"
+                                                   onclick="onSetTargetECMAScript('es5')"
+                                                        id="console-target-option-es5">ES5</div>
+                                                <div class="console-options-select-option active"
+                                                   onclick="onSetTargetECMAScript('es6')"
+                                                        id="console-target-option-es6">ES6</div>
                                             </div>
                                         </div>
                                     </div>
@@ -173,8 +177,12 @@
                                         <div class="console-options-title">Format</div>
                                         <div class="console-options-value">
                                             <div class="console-options-select-box">
-                                                <div class="console-options-select-option">"..."</div>
-                                                <div class="console-options-select-option active">/.../</div>
+                                                <div class="console-options-select-option"
+                                                   onclick="onSetCopyOutputFormat('string')"
+                                                        id="console-output-format-string">"..."</div>
+                                                <div class="console-options-select-option active"
+                                                   onclick="onSetCopyOutputFormat('regexp')"
+                                                        id="console-output-format-regexp">/.../</div>
                                             </div>
                                         </div>
                                     </div>

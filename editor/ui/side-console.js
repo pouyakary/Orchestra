@@ -73,12 +73,60 @@
     function refreshActivatedFlagConsoleView ( ) {
         const flagsViewHTML =
             Object.keys( activatedFlags )
-                .map( key => `<div class="sidebar-flags${ ( activatedFlags[ key ]? ' active' : '' ) }">${ key }</div>` )
+                .map( key =>
+                    `<div class="sidebar-flags${ activatedFlags[ key ]? ' active' : '' }">${ key }</div>` )
 
         document.getElementById('orchestra-console-view-flags').innerHTML =
             flagsViewHTML.join('')
     }
 
+//
+// ─── SET ECMASCRIPT TARGET ──────────────────────────────────────────────────────
+//
 
+    function onSetTargetECMAScript ( target ) {
+        currentFile.compilerECMAScriptTarget = target
+        activateTargetButton( )
+    }
+
+    function activateTargetButton ( ) {
+        if ( currentFile.compilerECMAScriptTarget === 'es6' ) {
+            setConsoleOptionActivation( 'console-target-option-es6', true )
+            setConsoleOptionActivation( 'console-target-option-es5', false )
+        } else {
+            setConsoleOptionActivation( 'console-target-option-es6', false )
+            setConsoleOptionActivation( 'console-target-option-es5', true )
+        }
+    }
+
+//
+// ─── SET COMPILER FORMAT ────────────────────────────────────────────────────────
+//
+
+    function onSetCopyOutputFormat ( format ) {
+        currentFile.compilerOutputFormat = format
+        activateFormatButton( )
+    }
+
+    function activateFormatButton ( ) {
+        if ( currentFile.compilerOutputFormat === 'regexp' ) {
+            setConsoleOptionActivation( 'console-output-format-regexp', true )
+            setConsoleOptionActivation( 'console-output-format-string', false )
+        } else {
+            setConsoleOptionActivation( 'console-output-format-regexp', false )
+            setConsoleOptionActivation( 'console-output-format-string', true )
+        }
+    }
+
+//
+// ─── GENERAL CONSOLE OPTION ─────────────────────────────────────────────────────
+//
+
+    function setConsoleOptionActivation ( id, activation ) {
+        if ( activation )
+            document.getElementById( id ).classList.add('active')
+        else
+            document.getElementById( id ).classList.remove('active')
+    }
 
 // ────────────────────────────────────────────────────────────────────────────────
