@@ -85,21 +85,68 @@
 //
 
     function onCopyRegExp ( ) {
-        clipboard.writeText( getCurrentRegExpFromConsole( ) )
+        clipboard.writeText( compileRegExpForCopy( ) )
+    }
+
+//
+// ─── COMPILE REGEXP FOR COPY ────────────────────────────────────────────────────
+//
+
+    function compileRegExpForCopy ( ) {
+        let regX = getCurrentRegExpFromConsole( )
+            regX = transformRegExpBasedOnTargetECMAScript( regX )
+            regX = transformRegExpBasedOnFormat( regX )
+        return regX
+    }
+
+//
+// ─── COMPILE REGEXP BASED ON TARGET ─────────────────────────────────────────────
+//
+
+    function transformRegExpBasedOnTargetECMAScript ( regX ) {
+        const regExpFlags =
+                setCompiledFlags( )
+        const regExpBodyCode =
+                "/" + regX.substring( 1, regX.length - 1 ).replace( /\//g, '\\/' ) + "/"
+        const regExpCode =
+                regExpBodyCode + regExpFlags
+
+        if ( currentFile.compilerECMAScriptTarget === 'es5' )
+            try {
+                return regexpu.transpileCode( regExpCode )
+            } catch ( e ) {
+                new Log('Error: This Orchestra is not ES5-Compatible')
+            }
+        else
+            return regExpCode
+    }
+
+//
+// ─── TRANSFORM REGEXP BASED ON FORMAT ───────────────────────────────────────────
+//
+
+    function transformRegExpBasedOnFormat ( regX ) {
+        if ( currentFile.compilerOutputFormat === 'string' ) {
+            return onGetEscapedStringRegExp( regX )
+        } else {
+            return regX
+        }
     }
 
 //
 // ─── ON COPY ESCAPED STRING REGEXP ──────────────────────────────────────────────
 //
 
-    function onGetEscapedStringRegExp ( ) {
-        const source = getCurrentRegExpFromConsole( )
+    function onGetEscapedStringRegExp ( source ) {
+        const regExyBody =
+            source.substring( 1 ).replace(/\/[mgiuys]*$/, '')
         const regX =
-            new RegExp( source.substring( 1, source.length - 1 ) )
-                .source
-                .replace( /\\|"/g, match => match === "\\" ? '\\\\' : '\\"')
+            new RegExp( regExyBody )
+                    .source
+                    .replace( /\\|"/g, match =>
+                        match === "\\" ? '\\\\' : '\\"')
 
-        clipboard.writeText(`"${ regX }"`)
+        return '"' + regX + '"'
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

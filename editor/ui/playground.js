@@ -329,14 +329,15 @@
         playgroundActivatedFlags = setCompiledFlags({ g: true })
     }
 
-//
+//[]
 // ─── COMPILE REGEXP FOR PLAYGROUND USE ──────────────────────────────────────────
 //
 
     function compileRegExpForPlayground ( ) {
         const regExpCode =
             `/${ playgroundCompiledRegX.replace(/\//g, '\\/') }/${ playgroundActivatedFlags }`
-        const es5Version = regexpu.transpileCode( regExpCode )
+        const es5Version =
+            regexpu.transpileCode( regExpCode )
         return eval( es5Version )
     }
 
