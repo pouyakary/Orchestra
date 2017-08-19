@@ -12,7 +12,7 @@
       "CFBundleTypeExtensions": [
         "orchestra"
       ],
-      "CFBundleTypeIconFile": "code_file.icns"
+      "CFBundleTypeIconFile": "app/file-icon.icns"
     }
   ],
   "CFBundleURLTypes": [

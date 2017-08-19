@@ -21,6 +21,7 @@
     const mv                    = require('mv')
     const packageJson           = require('./package.json')
     const path                  = require('path')
+    const plist                 = require('plist')
     const request               = require('request')
     const ugly                  = require('gulp-uglify')
     const util                  = require('util')
@@ -289,7 +290,28 @@
     }
 
     function updateDarwinInfoPlistFile ( ) {
+        // data
+        const plistFilePath = (( packageJson.productName !== 'Orchestra Nightly' )
+            ? '_release/Orchestra-darwin-x64/Orchestra.app/Contents/Info.plist'
+            : '_release/Orchestra Nightly-darwin-x64/Orchestra.app/Contents/Info.plist'
+        )
 
+        // loading the info file
+        const plistFileString =
+            fs.readFileSync( plistFilePath, 'utf8' )
+        const infoJSON =
+            plist.parse( plistFileString )
+
+        // adding stuff to the plist data
+        const newInfoJSON =
+            Object.assign( infoJSON, darwinInfoPlistBase )
+
+        // making new plist info
+        const newPlistFileString =
+            plist.build( newInfoJSON )
+
+        // done, now saving it back
+        fs.writeFileSync( plistFilePath, newPlistFileString )
     }
 
 //
