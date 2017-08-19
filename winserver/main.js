@@ -24,22 +24,22 @@
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
 //
 
-    const uniqueWindowIdKey = 'orchestra-unique-window-id'
-
-    const settingsFilePath = path.join( __dirname, 'orchestraSettings.json' )
-
-    const orchestraVersion = '1.0'
-    const quartetVersion = '1.2'
+    const uniqueWindowIdKey     = 'orchestra-unique-window-id'
+    const settingsFilePath      = path.join( __dirname, 'orchestraSettings.json' )
+    const orchestraVersion      = '1.0'
+    const quartetVersion        = '1.2'
 
 //
 // ─── STORAGE ────────────────────────────────────────────────────────────────────
 //
 
-    let windows = new Set( )
-    let windowCount = 0
-    let isHelpWindowOpen = false
-    let isAboutWindowOpen = false
+    let windows             = new Set( )
+    let windowCount         = 0
+    let isHelpWindowOpen    = false
+    let isAboutWindowOpen   = false
+    let isWinServerLoaded   = false
     let helpWindow
+    let firstLoadFilePath   = null
 
     let settings = {
         windowThemeStatus: 'light'
@@ -242,26 +242,52 @@
     }
 
 //
-// ─── ON READY ───────────────────────────────────────────────────────────────────
-//
-
-    app.on( 'ready' , ( ) => {
-        console.log(`Orchestra, Version ${ orchestraVersion }`)
-        console.log('Copyright 2016-present - Kary Foundation, Inc. All Rights Reserved.')
-
-        loadSettings( )
-        // runExtensionServer( )
-        createWindow( parseArgs( process.argv ) )
-    })
-
-//
 // ─── ON OPEN FILE EVENT ─────────────────────────────────────────────────────────
 //
 
     app.on( 'open-file', ( event, filePath ) => {
         event.preventDefault( )
-        createWindow({ mode: 'file', file: filePath })
+
+        if ( isWinServerLoaded ) {
+            createWindow({
+                mode: 'file',
+                file: filePath
+            })
+        } else {
+            firstLoadFilePath = filePath
+        }
     })
+
+//
+// ─── ON READY ───────────────────────────────────────────────────────────────────
+//
+
+    app.on( 'ready' , loadWinServer )
+
+    function loadWinServer ( ) {
+        if ( isWinServerLoaded ) { return }
+
+        console.log(`Orchestra, Version ${ orchestraVersion }`)
+        console.log('Copyright 2016-present - Kary Foundation, Inc. All Rights Reserved.')
+        isWinServerLoaded = true
+
+
+        let windowCreationArgs
+        if ( firstLoadFilePath ) {
+            windowCreationArgs = {
+                mode: 'file',
+                file: firstLoadFilePath,
+            }
+            firstLoadFilePath = null
+        } else {
+            windowCreationArgs =
+                parseArgs( process.argv )
+        }
+
+
+        loadSettings( )
+        createWindow( windowCreationArgs )
+    }
 
 //
 // ─── ON OPEN HELP WINDOW ────────────────────────────────────────────────────────
