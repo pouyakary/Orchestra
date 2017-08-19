@@ -12,17 +12,18 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    const gulp          = require('gulp')
-    const packageJson   = require('./package.json')
-    const exec          = require('child_process').exec
-    const argv          = require('yargs').argv
-    const util          = require('util')
-    const path          = require('path')
-    const fs            = require('fs-extra')
-    const ugly          = require('gulp-uglify')
-    const less          = require('less')
-    const mv            = require('mv')
-    const request       = require('request')
+    const argv                  = require('yargs').argv
+    const darwinInfoPlistBase   = require('./build/darwin-info-base.json')
+    const exec                  = require('child_process').exec
+    const fs                    = require('fs-extra')
+    const gulp                  = require('gulp')
+    const less                  = require('less')
+    const mv                    = require('mv')
+    const packageJson           = require('./package.json')
+    const path                  = require('path')
+    const request               = require('request')
+    const ugly                  = require('gulp-uglify')
+    const util                  = require('util')
 
 //
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
@@ -41,9 +42,14 @@
 //
 
     /** Run shell commands easy! */
-    function shell ( command , callback ) {
-        exec( command, err => {
-            if ( err ) console.log( err )
+    async function shell ( command , callback ) {
+        return new Promise(( resolve, reject ) => {
+            exec( command, err => {
+                if ( err )
+                    reject( err )
+                else
+                    resolve( )
+            })
         })
     }
 
@@ -109,13 +115,18 @@
             copyToBinaryFromDir( address, address )
         }
 
-        copyToBinaryFromDir( 'resources' )
+        // codes
         copyToBinaryFromDir( 'view' )
         copyToBinaryFromDir( 'editor' )
         copyToBinaryFromDir( 'libs' )
         copyToBinaryFromDir( 'windows' )
         copyToBinaryFromDir( 'winserver' )
 
+        // design files
+        copyToBinaryFromDir( 'resources' )
+        copyToBinaryFromDir( 'designs/icon/file-icon-darwin/icns' )
+
+        // node modules
         copyNodeModules('concerto-compiler')
         copyNodeModules('messenger')
         copyNodeModules('regulex')
@@ -137,6 +148,7 @@
         copyNodeModules('esprima')
         copyNodeModules('private')
 
+        // package
         copyFile(
             getLocalPath( 'package.json' ),
             getLocalPath( path.join( resultDirPath , 'package.json' ) )
@@ -155,35 +167,39 @@
             'https://api.github.com/repos/karyfoundation/orchestra/stats/contributors'
 
         try {
-            async function getCommitCountFromMasterBranchOfGithub ( ) {
-                return new Promise ( ( resolve, reject ) => {
-                    const options = {
-                        url: githubOrchestraRepositoryAPI,
-                        method: 'GET',
-                        headers: {
-                            'User-Agent':   'Super Agent/0.0.1',
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                    }
-                    request( options, ( error, response, body ) => {
-                        if ( !error && response.statusCode == 200 ) {
+            new Promise (( resolve, reject ) => {
+                const rejectHandler = ( ) =>
+                    reject('Could not connect to GitHub')
+
+                const options = {
+                    url: githubOrchestraRepositoryAPI,
+                    method: 'GET',
+                    headers: {
+                        'User-Agent':   'Super Agent/0.0.1',
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                }
+
+                request( options, ( error, response, body ) => {
+                    if ( !error && response.statusCode == 200 ) {
+                        try {
                             const data = JSON.parse( body )[ 0 ].total.toString( )
                             resolve( data )
-                        } else {
-                            reject('Could not connect to GitHub')
+                        } catch ( parseError ) {
+                            rejectHandler( )
                         }
-                    })
+                    } else {
+                        rejectHandler( )
+                    }
                 })
-            }
-
-            getCommitCountFromMasterBranchOfGithub( )
-                .then( GitHubCommitCount => {
-                    fs.writeFileSync( commitCountFilePath, GitHubCommitCount )
-                    callback( )
-                })
-                .catch( e => {
-                    throw e
-                })
+            })
+            .then( GitHubCommitCount => {
+                fs.writeFileSync( commitCountFilePath, GitHubCommitCount )
+                callback( )
+            })
+            .catch( e => {
+                throw e
+            })
 
         } catch ( error ) {
             try {
@@ -231,16 +247,63 @@
 // ─── ELECTRON PACKER ────────────────────────────────────────────────────────────
 //
 
-    gulp.task( 'electron', ['copyResourceFiles', 'get-commit-counts', 'sheets'], ( ) => {
-        if ( argv.pack ) {
-            console.log('packing...')
-            let iconFile = ( packageJson.productName !== 'Orchestra Nightly' )?
-                './designs/icon/icns/icon.icns' : './designs/icon-nightly/icns/icon.icns'
+    async function packOrchestraForMac ( ) {
+        return new Promise(( resolve, reject ) => {
+            try {
+                // assets
+                const iconFile = (( packageJson.productName !== 'Orchestra Nightly' )
+                    ? './designs/icon/icns/icon.icns'
+                    : './designs/icon-nightly/icns/icon.icns'
+                )
 
-            shell(`electron-packager _compiled "${ packageJson.productName }" --platform=darwin --arch=x64 --overwrite=true --app-copyright="Copyright 2016 by Kary Foundation, Inc." --app-version="${ packageJson.version }" --icon=${ iconFile } --name="${ packageJson.productName }" --out=_release`)
+                // build script
+                const packBashScript = (
+                    'electron-packager' +
+                        ' _compiled "' + packageJson.productName + '"' +
+                        ' --platform=darwin --arch=x64' +
+                        ' --overwrite=true' +
+                        ' --app-copyright="Copyright 2016-present, Kary Foundation, Inc. All rights reserved."' +
+                        ' --app-version="' + packageJson.version + '"' +
+                        ' --icon=' + iconFile +
+                        ' --name="' + packageJson.productName + '"'+
+                        ' --out=_release'
+                )
+
+                // building
+                const execPromise = shell( packBashScript )
+
+                // after mac build
+                execPromise.then(( ) => {
+                    updateDarwinInfoPlistFile( )
+                    resolve( )
+                })
+
+
+                execPromise.catch( error => {
+                    reject( error )
+                })
+            } catch ( buildError ) {
+                reject( buildError )
+            }
+        })
+    }
+
+    function updateDarwinInfoPlistFile ( ) {
+
+    }
+
+//
+// ─── PACK ───────────────────────────────────────────────────────────────────────
+//
+
+    gulp.task( 'pack-orchestra',
+        [ 'copyResourceFiles', 'get-commit-counts', 'sheets' ], callback => {
+
+        if ( argv.pack ) {
+            packOrchestraForMac( )
         }
 
-        if ( argv.debug ) {
+        else if ( argv.debug ) {
             shell('npm run electron')
         }
     })
@@ -249,7 +312,7 @@
 // ─── AFTER PACK ─────────────────────────────────────────────────────────────────
 //
 
-    gulp.task( 'after-pack', [ 'electron' ], ( ) => {
+    gulp.task( 'build-orchestra', [ 'pack-orchestra' ], ( ) => {
 
     })
 
@@ -258,6 +321,6 @@
 //
 
     /** Where everything starts */
-    gulp.task( 'default', [ 'after-pack' ])
+    gulp.task( 'default', [ 'build-orchestra' ])
 
 // ────────────────────────────────────────────────────────────────────────────────
