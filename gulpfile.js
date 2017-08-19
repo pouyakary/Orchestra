@@ -31,12 +31,8 @@
 //
 
     const version = "v1.0"
-
-//
-// ─── CONSTS ─────────────────────────────────────────────────────────────────────
-//
-
     const resultDirPath = '_compiled'
+    const nightlyName = 'Orchestra Nightly'
 
 //
 // ─── TOOLS ──────────────────────────────────────────────────────────────────────
@@ -252,7 +248,7 @@
         return new Promise(( resolve, reject ) => {
             try {
                 // assets
-                const iconFile = (( packageJson.productName !== 'Orchestra Nightly' )
+                const iconFile = (( packageJson.productName !== nightlyName )
                     ? './designs/icon/icns/icon.icns'
                     : './designs/icon-nightly/icns/icon.icns'
                 )
@@ -291,7 +287,7 @@
 
     function updateDarwinInfoPlistFile ( ) {
         // data
-        const plistFilePath = (( packageJson.productName !== 'Orchestra Nightly' )
+        const plistFilePath = (( packageJson.productName !== nightlyName )
             ? '_release/Orchestra-darwin-x64/Orchestra.app/Contents/Info.plist'
             : '_release/Orchestra Nightly-darwin-x64/Orchestra.app/Contents/Info.plist'
         )
