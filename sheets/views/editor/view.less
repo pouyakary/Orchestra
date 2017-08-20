@@ -139,11 +139,9 @@
         letter-spacing:         2pt;
         line-height:            1.8;
         margin-bottom:          13pt;
-        max-height:             ~'calc( 100% - 30pt )';
         overflow-y:             scroll;
         padding-left:           13pt;
         user-select:            none;
-        width:                  200pt;
         word-wrap:              break-word;
     }
 
@@ -227,6 +225,15 @@
             color:              var( --side-console-option-active-color );
             box-shadow:         var( --side-console-option-active-shadow );
         }
+    }
+
+//
+// ─── CODE VIEW CONSOLE ──────────────────────────────────────────────────────────
+//
+
+    .console-sidebar-code-view {
+        display:        flex;
+        flex-direction: column
     }
 
 // ────────────────────────────────────────────────────────────────────────────────
