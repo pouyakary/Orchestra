@@ -13,13 +13,14 @@
 //
 
     function CancelLoadingScreenAfterCompleteLoad ( ) {
-        setTimeout( ( ) => {
-            setTimeout( ( ) => {
-                let loadingView = document.getElementById('loading-view')
+        setTimeout(( ) => {
+            setTimeout(( ) => {
+                const loadingView = document.getElementById('loading-view')
                 loadingView.className = 'dead-loading-view'
-                setTimeout( ( ) => {
-                    loadingView.remove( );
-                    // console.clear( );
-                }, 1000 )})})}
+
+                setTimeout(( ) => loadingView.remove( ), 1000 )
+            })
+        })
+    }
 
 // ────────────────────────────────────────────────────────────────────────────────
