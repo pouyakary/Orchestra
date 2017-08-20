@@ -55,12 +55,12 @@
             document.getElementById( 'icon' ).style.backgroundImage = 'url("./icon-nightly.png")'
         }
 
-        try {
+        /*try {
             fs.readFile( `${ __dirname }/commit-count.txt`, 'utf8', ( error, data ) => {
                 if ( error ) alert( error )
                 document.getElementById( orchestraBuildSpanId ).innerText = data.trim( )
             })
-        } catch ( e ) { alert( e )}
+        } catch ( e ) { alert( e )}*/
     }
 
 //

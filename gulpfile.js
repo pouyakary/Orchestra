@@ -315,7 +315,7 @@
 //
 
     gulp.task( 'pack-orchestra',
-        [ 'copyResourceFiles', 'get-commit-counts', 'sheets' ], callback => {
+        [ 'copyResourceFiles', /* 'get-commit-counts' */, 'sheets' ], callback => {
 
         if ( argv.pack ) {
             packOrchestraForMac( )
