@@ -244,46 +244,31 @@
 // ─── ELECTRON PACKER ────────────────────────────────────────────────────────────
 //
 
-    async function packOrchestraForMac ( ) {
-        return new Promise(( resolve, reject ) => {
-            try {
-                // assets
-                const iconFile = (( packageJson.productName !== nightlyName )
-                    ? './designs/icon/icns/icon.icns'
-                    : './designs/icon-nightly/icns/icon.icns'
+    async function packOrchestraForDarwin ( ) {
+        const iconFile =
+            (( packageJson.productName !== nightlyName )
+                ? './designs/icon/icns/icon.icns'
+                : './designs/icon-nightly/icns/icon.icns'
                 )
 
-                // build script
-                const packBashScript = (
-                    'electron-packager' +
-                        ' _compiled "' + packageJson.productName + '"' +
-                        ' --platform=darwin --arch=x64' +
-                        ' --overwrite=true' +
-                        ' --app-copyright="Copyright 2016-present, Kary Foundation, Inc. All rights reserved."' +
-                        ' --app-version="' + packageJson.version + '"' +
-                        ' --icon=' + iconFile +
-                        ' --name="' + packageJson.productName + '"'+
-                        ' --out=_release'
-                )
+        // build script
+        const packBashScript =
+            ( 'electron-packager'
+            + ' _compiled "' + packageJson.productName + '"'
+            + ' --platform=darwin --arch=x64'
+            + ' --overwrite=true'
+            + ' --app-copyright="Copyright 2016-present, Kary Foundation, Inc. All rights reserved."'
+            + ' --app-version="' + packageJson.version + '"'
+            + ' --icon=' + iconFile
+            + ' --name="' + packageJson.productName + '"'
+            + ' --out=_release'
+            )
 
-                // building
-                const execPromise = shell( packBashScript )
-
-                // after mac build
-                execPromise.then(( ) => {
-                    updateDarwinInfoPlistFile( )
-                    resolve( )
-                })
-
-
-                execPromise.catch( error => {
-                    reject( error )
-                })
-            } catch ( buildError ) {
-                reject( buildError )
-            }
-        })
+        // building
+        await shell( packBashScript )
+        updateDarwinInfoPlistFile( )
     }
+
 
     function updateDarwinInfoPlistFile ( ) {
         // data
@@ -311,20 +296,52 @@
     }
 
 //
+// ─── PACK FOR LINUX ─────────────────────────────────────────────────────────────
+//
+
+    async function packOrchestraForLinux ( ) {
+        // to be continued...
+    }
+
+//
+// ─── PACK FOR WINDOWS ───────────────────────────────────────────────────────────
+//
+
+    async function packOrchestraForWindows ( ) {
+        // to be continued...
+    }
+
+
+//
 // ─── PACK ───────────────────────────────────────────────────────────────────────
 //
 
-    gulp.task( 'pack-orchestra',
-        [ 'copyResourceFiles', /* 'get-commit-counts' ,*/ 'sheets' ], callback => {
-
-        if ( argv.pack ) {
-            packOrchestraForMac( )
-        }
-
-        else if ( argv.debug ) {
-            shell('npm run electron')
-        }
+    gulp.task( 'pack-orchestra', [ 'copyResourceFiles', 'sheets' ], callback => {
+        if ( argv.pack )
+            buildAllPlatforms( callback )
+        else if ( argv.debug )
+            runElectron( callback )
     })
+
+
+    function runElectron ( callback ) {
+        shell('npm run electron')
+            .then(( ) => callback )
+            .catch( error => callback( error ) )
+    }
+
+
+    function buildAllPlatforms ( callback ) {
+        const buildPromises = [
+            packOrchestraForDarwin,
+            packOrchestraForLinux,
+            packOrchestraForWindows
+        ]
+
+        Promise.all( buildPromises )
+            .then(( ) => callback )
+            .catch( error => callback( error ) )
+    }
 
 //
 // ─── AFTER PACK ─────────────────────────────────────────────────────────────────
