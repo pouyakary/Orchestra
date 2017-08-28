@@ -39,7 +39,7 @@
 //
 
     /** Run shell commands easy! */
-    async function shell ( command , callback ) {
+    function shell ( command , callback ) {
         return new Promise(( resolve, reject ) => {
             exec( command, err => {
                 if ( err )
@@ -79,15 +79,17 @@
 // ─── COPY SINGLE FILE ───────────────────────────────────────────────────────────
 //
 
-    /** Copy file `A` to `B` */
-    function copyFile ( A, B ) {
-        if ( /\.DS_Store/.test( A ) ) {
-            return
-        }
-        fs.copy( A, B, err => {
-            if ( err ) {
-                console.log(`Could not copy file ${ A }`)
-            }
+    /** Copies a file from `origin` to `destination` */
+    async function copyFile ( origin, destination ) {
+        if ( /\.DS_Store/.test( origin ) ) { return }
+
+        await new Promise(( resolve, reject ) => {
+            fs.copy( origin, destination, err => {
+                if ( err )
+                    reject(`Could not copy file ${ origin }`)
+                else
+                    resolve( )
+            })
         })
     }
 
@@ -257,12 +259,15 @@
             + ' _compiled "' + packageJson.productName + '"'
             + ' --platform=darwin --arch=x64'
             + ' --overwrite=true'
+            + ' --app-bundle-id="org.karyfoundation.orchestra"'
             + ' --app-copyright="Copyright 2016-present, Kary Foundation, Inc. All rights reserved."'
             + ' --app-version="' + packageJson.version + '"'
             + ' --icon=' + iconFile
             + ' --name="' + packageJson.productName + '"'
             + ' --out=_release'
-            )
+            + ' --protocol="orchestra"'
+            + ' --protocol-name="Orchestra"'
+        )
 
         // building
         await shell( packBashScript )
@@ -295,6 +300,20 @@
         fs.writeFileSync( plistFilePath, newPlistFileString )
     }
 
+
+    async function createMacDMGImage ( ) {
+        const orchestraMacAppAddress =
+            " _release/Orchestra-darwin-x64/Orchestra.app"
+
+        fs.mkdirpSync('./_installers/macOS')
+
+        await shell ( 'electron-installer-dmg'
+                    + orchestraMacAppAddress
+                    + ' Orchestra'
+                    + ' --out="./_installers/macOS"'
+                    + ' --overwrite'
+                    )}
+
 //
 // ─── PACK FOR LINUX ─────────────────────────────────────────────────────────────
 //
@@ -317,30 +336,50 @@
 //
 
     gulp.task( 'pack-orchestra', [ 'copyResourceFiles', 'sheets' ], callback => {
-        if ( argv.pack )
-            buildAllPlatforms( callback )
-        else if ( argv.debug )
-            runElectron( callback )
+        async function packFunctionBody ( ) {
+            if ( argv.debug )
+                return await shell( 'npm run electron' )
+
+            if ( argv.pack )
+                await buildAllPlatforms( )
+
+            if ( argv.installers )
+                await createInstallersForAllPlatforms( )
+        }
+
+        packFunctionBody( )
+            .then( callback )
+            .catch( callback )
     })
 
+//
+// ─── BUILD FOR ALL PLATFORMS ────────────────────────────────────────────────────
+//
 
-    function runElectron ( callback ) {
-        shell('npm run electron')
-            .then(( ) => callback )
-            .catch( error => callback( error ) )
-    }
-
-
-    function buildAllPlatforms ( callback ) {
-        const buildPromises = [
+    async function buildAllPlatforms ( ) {
+        await runAsyncFunctions([
             packOrchestraForDarwin,
             packOrchestraForLinux,
             packOrchestraForWindows
-        ]
+        ])
+    }
 
-        Promise.all( buildPromises )
-            .then(( ) => callback )
-            .catch( error => callback( error ) )
+//
+// ─── CREATE INSTALLERS FOR ALL PLATFORMS ────────────────────────────────────────
+//
+
+    async function createInstallersForAllPlatforms ( ) {
+        await runAsyncFunctions([
+            createMacDMGImage
+        ])
+    }
+
+//
+// ─── RUN MANY ASYNC FUNCTIONS ───────────────────────────────────────────────────
+//
+
+    async function runAsyncFunctions ( functions ) {
+        await Promise.all( functions.map( func => func( ) ) )
     }
 
 //
