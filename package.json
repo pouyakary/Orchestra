@@ -8,7 +8,8 @@
   "license": "Apache-2.0",
   "version": "0.1.0",
   "scripts": {
-    "build": "gulp --pack",
+    "pack": "gulp --pack",
+    "build": "gulp --pack --installers",
     "debug": "gulp --debug",
     "electron": "electron ./_compiled/main.js --enable-logging",
     "configure": "npm install -g gulp gulp-cli electron-installer-dmg"
