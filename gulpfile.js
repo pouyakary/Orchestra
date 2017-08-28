@@ -41,14 +41,12 @@
     /** Run shell commands easy! */
     function shell ( command , callback ) {
         return new Promise(( resolve, reject ) => {
-            exec( command, err => {
+            exec( command.join(' '), err => {
                 if ( err )
                     reject( err )
                 else
                     resolve( )
-            })
-        })
-    }
+            })})}
 
 //
 // ─── COPY DIR FILES ─────────────────────────────────────────────────────────────
@@ -202,7 +200,8 @@
 
         } catch ( error ) {
             try {
-                shell( 'git rev-list --all --count > ' + commitCountFilePath )
+                shell([ 'git', 'rev-list', '--all', '--count',
+                        '>', commitCountFilePath ])
                 callback( )
 
             } catch ( error2 ) {
@@ -232,7 +231,7 @@
                         if ( error ) {
                             console.log('could not store the less file')
                         } else {
-                            callback()
+                            callback( )
                         }
                     }
                 )
@@ -254,20 +253,22 @@
                 )
 
         // build script
-        const packBashScript =
-            ( 'electron-packager'
-            + ' _compiled "' + packageJson.productName + '"'
-            + ' --platform=darwin --arch=x64'
-            + ' --overwrite=true'
-            + ' --app-bundle-id="org.karyfoundation.orchestra"'
-            + ' --app-copyright="Copyright 2016-present, Kary Foundation, Inc. All rights reserved."'
-            + ' --app-version="' + packageJson.version + '"'
-            + ' --icon=' + iconFile
-            + ' --name="' + packageJson.productName + '"'
-            + ' --out=_release'
-            + ' --protocol="orchestra"'
-            + ' --protocol-name="Orchestra"'
-        )
+        const packBashScript = [
+            'electron-packager',
+            ' _compiled',
+            '"' + packageJson.productName + '"',
+            '--platform=darwin',
+            '--arch=x64',
+            '--overwrite=true',
+            '--app-bundle-id="org.karyfoundation.orchestra"',
+            '--app-copyright="Copyright 2016-present, Kary Foundation, Inc. All rights reserved."',
+            '--app-version="' + packageJson.version + '"',
+            '--icon=' + iconFile,
+            '--name="' + packageJson.productName + '"',
+            '--out=_release',
+            '--protocol="orchestra"',
+            '--protocol-name="Orchestra"',
+        ]
 
         // building
         await shell( packBashScript )
@@ -303,16 +304,21 @@
 
     async function createMacDMGImage ( ) {
         const orchestraMacAppAddress =
-            " _release/Orchestra-darwin-x64/Orchestra.app"
+            "_release/Orchestra-darwin-x64/Orchestra.app"
 
         fs.mkdirpSync('./_installers/macOS')
 
-        await shell ( 'electron-installer-dmg'
-                    + orchestraMacAppAddress
-                    + ' Orchestra'
-                    + ' --out="./_installers/macOS"'
-                    + ' --overwrite'
-                    )}
+        await shell([
+            'electron-installer-dmg',
+            orchestraMacAppAddress,
+            'Orchestra',
+            '--out="./_installers/macOS"',
+            '--icon-size=152',
+            '--icon="./designs/icon/icns/icon.icns"',
+            '--background="./build/dmg-back.png"',
+            '--overwrite'
+        ])
+    }
 
 //
 // ─── PACK FOR LINUX ─────────────────────────────────────────────────────────────
@@ -338,7 +344,7 @@
     gulp.task( 'pack-orchestra', [ 'copyResourceFiles', 'sheets' ], callback => {
         async function packFunctionBody ( ) {
             if ( argv.debug )
-                return await shell( 'npm run electron' )
+                return await shell([ 'npm', 'run', 'electron' ])
 
             if ( argv.pack )
                 await buildAllPlatforms( )
