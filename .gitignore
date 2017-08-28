@@ -1,6 +1,7 @@
 _compiled/*
 _release/**
 _documentation/*
+_installers/**
 node_modules/*
 npm-debug.log
 www/*
