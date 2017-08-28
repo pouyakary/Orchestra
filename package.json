@@ -10,7 +10,8 @@
   "scripts": {
     "build": "gulp --pack",
     "debug": "gulp --debug",
-    "electron": "electron ./_compiled/main.js --enable-logging"
+    "electron": "electron ./_compiled/main.js --enable-logging",
+    "configure": "npm install -g gulp gulp-cli electron-installer-dmg"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "dependencies": {
     "concerto-compiler": "1.0.5",
+    "macos-alias": "^0.2.11",
     "messenger": "0.0.9",
     "monaco-editor": "^0.9.0",
     "regexpu": "^4.1.1",
@@ -26,11 +28,12 @@
   "devDependencies": {
     "electron": "^1.4.4",
     "electron-builder": "^5.30.0",
+    "electron-installer-dmg": "^0.2.1",
     "electron-packager": "^7.7.0",
-    "fs-extra": "0.30.0",
-    "gulp": "3.9.1",
     "gulp-cli": "1.2.1",
+    "gulp": "3.9.1",
     "gulp-uglify": "1.5.3",
+    "fs-extra": "0.30.0",
     "less": "2.7.1",
     "mv": "^2.1.1",
     "plist": "^2.1.0",
