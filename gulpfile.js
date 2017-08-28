@@ -363,11 +363,16 @@
 //
 
     async function buildAllPlatforms ( ) {
-        await runAsyncFunctions([
-            packOrchestraForDarwin,
-            packOrchestraForLinux,
-            packOrchestraForWindows
-        ])
+        const platformFunctions = [ ]
+
+        if ( argv.mac )
+            platformFunctions.push( packOrchestraForDarwin )
+        if ( argv.win )
+            platformFunctions.push( packOrchestraForWindows )
+        if ( argv.linux )
+            platformFunctions.push( packOrchestraForLinux )
+
+        await runAsyncFunctions( platformFunctions )
     }
 
 //
@@ -375,9 +380,12 @@
 //
 
     async function createInstallersForAllPlatforms ( ) {
-        await runAsyncFunctions([
-            createMacDMGImage
-        ])
+        const platformFunctions = [ ]
+
+        if ( argv.mac )
+            platformFunctions.push( createMacDMGImage )
+
+        await runAsyncFunctions(platformFunctions)
     }
 
 //
