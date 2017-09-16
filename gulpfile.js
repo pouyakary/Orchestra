@@ -34,6 +34,29 @@
     const resultDirPath = '_compiled'
     const nightlyName = 'Orchestra Nightly'
 
+    const OrchestraNodeModules = [
+            'concerto-compiler',
+            'messenger',
+            'regulex',
+            'amdefine',
+            'monaco-editor/min/vs',
+            'regexpu-core',
+            'regexpu',
+            'regjsgen',
+            'regjsparser',
+            'regenerate',
+            'unicode-match-property-ecmascript',
+            'unicode-canonical-property-names-ecmascript',
+            'unicode-property-aliases-ecmascript',
+            'jsesc',
+            'recast',
+            'unicode-match-property-value-ecmascript',
+            'ast-types',
+            'source-map',
+            'esprima',
+            'private',
+        ]
+
 //
 // ─── TOOLS ──────────────────────────────────────────────────────────────────────
 //
@@ -124,26 +147,7 @@
         copyToBinaryFromDir( 'designs/icon/file-icon-darwin/icns' )
 
         // node modules
-        copyNodeModules( 'concerto-compiler' )
-        copyNodeModules( 'messenger' )
-        copyNodeModules( 'regulex' )
-        copyNodeModules( 'amdefine' )
-        copyNodeModules( 'monaco-editor/min/vs' )
-        copyNodeModules( 'regexpu-core' )
-        copyNodeModules( 'regexpu' )
-        copyNodeModules( 'regjsgen' )
-        copyNodeModules( 'regjsparser' )
-        copyNodeModules( 'regenerate' )
-        copyNodeModules( 'unicode-match-property-ecmascript' )
-        copyNodeModules( 'unicode-canonical-property-names-ecmascript' )
-        copyNodeModules( 'unicode-property-aliases-ecmascript' )
-        copyNodeModules( 'jsesc' )
-        copyNodeModules( 'recast' )
-        copyNodeModules( 'unicode-match-property-value-ecmascript' )
-        copyNodeModules( 'ast-types' )
-        copyNodeModules( 'source-map' )
-        copyNodeModules( 'esprima' )
-        copyNodeModules( 'private' )
+        OrchestraNodeModules.forEach( x => copyNodeModules( x ) )
 
         // package
         copyFile(
