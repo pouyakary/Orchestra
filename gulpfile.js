@@ -63,13 +63,8 @@
 
     /** Run shell commands easy! */
     function shell ( command , callback ) {
-        return new Promise(( resolve, reject ) => {
-            exec( command.join(' '), err => {
-                if ( err )
-                    reject( err )
-                else
-                    resolve( )
-            })})}
+        return new Promise(( resolve, reject ) =>
+            exec( command.join(' '), err => err? reject( err ) : resolve( ) ))}
 
 //
 // ─── COPY DIR FILES ─────────────────────────────────────────────────────────────
@@ -225,18 +220,17 @@
                 path.join( __dirname, 'sheets', 'ui.less' ), 'utf8' )
 
             less.render( lessSourceCode, ( err, output ) => {
-                if ( err ) {
+                if ( err )
                     console.log(`Less failure: ${ err }`); return
-                }
+
                 fs.writeFile(
                     path.join( __dirname, '_compiled/style.css' ),
                     output.css,
                     error => {
-                        if ( error ) {
+                        if ( error )
                             console.log('could not store the less file')
-                        } else {
+                        else
                             callback( )
-                        }
                     }
                 )
             })
@@ -371,8 +365,10 @@
 
         if ( argv.mac )
             platformFunctions.push( packOrchestraForDarwin )
+
         if ( argv.win )
             platformFunctions.push( packOrchestraForWindows )
+
         if ( argv.linux )
             platformFunctions.push( packOrchestraForLinux )
 
