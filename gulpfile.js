@@ -19,7 +19,7 @@
     const gulp                  = require('gulp')
     const less                  = require('less')
     const mv                    = require('mv')
-    const packageJson           = require('./package.json')
+    const packageJsonFirstLoad  = require('./package.json')
     const path                  = require('path')
     const plist                 = require('plist')
     const request               = require('request')
@@ -30,9 +30,13 @@
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
 //
 
-    const version       = "v1.0"
-    const resultDirPath = '_compiled'
-    const nightlyName   = 'Orchestra Nightly'
+    const orchestraVersion   = "v1.0"
+    const pathToResultDir    = '_compiled'
+    const nightlyReleaseName = 'Orchestra Nightly'
+    const stableReleaseName  = 'Orchestra'
+
+    const isProductionBuild  =
+        ( argv.productionBuild? true : false )
 
     const OrchestraNodeModules = [
         'concerto-compiler', 'messenger', 'regulex', 'monaco-editor/min/vs',
@@ -44,13 +48,23 @@
     ]
 
 //
+// ─── UPDATING PACKAGE JSON ──────────────────────────────────────────────────────
+//
+
+    const packageJson = Object.assign( packageJsonFirstLoad, {
+        productName: ( isProductionBuild? stableReleaseName : nightlyReleaseName ),
+    })
+
+//
 // ─── TOOLS ──────────────────────────────────────────────────────────────────────
 //
 
     /** Run shell commands easy! */
     function shell ( command , callback ) {
         return new Promise(( resolve, reject ) =>
-            exec( command.join(' '), err => err ? reject( err ) : resolve( ) ) )}
+            exec( command.join(' '), err => err ? reject( err ) : resolve( ) )
+        )
+    }
 
 //
 // ─── COPY DIR FILES ─────────────────────────────────────────────────────────────
@@ -65,11 +79,10 @@
 
             // if right
             files.forEach( name => {
-                let dest
-                if ( !( subfolder === undefined || subfolder === '' || subfolder === null ) )
-                    dest = path.join( resultDirPath , subfolder , name )
-                else
-                    dest = path.join( resultDirPath , name )
+                const dest =
+                    ( !( subfolder === undefined || subfolder === '' || subfolder === null )
+                        ? path.join( pathToResultDir , subfolder , name )
+                        : path.join( pathToResultDir , name ))
 
                 if ( !( name.endsWith('.map') || name.endsWith('.d.ts') ) )
                     copyFile(
@@ -128,7 +141,7 @@
         // package
         copyFile(
             getLocalPath( 'package.json' ),
-            getLocalPath( path.join( resultDirPath , 'package.json' ) )
+            getLocalPath( path.join( pathToResultDir , 'package.json' ) )
         )
 
         callback()
@@ -139,7 +152,8 @@
 //
 
     gulp.task( 'get-commit-counts', callback => {
-        const commitCountFilePath = `./${resultDirPath}/about/commit-count.txt`
+        const commitCountFilePath =
+            `./${pathToResultDir}/about/commit-count.txt`
         const githubOrchestraRepositoryAPI =
             'https://api.github.com/repos/karyfoundation/orchestra/stats/contributors'
 
@@ -225,9 +239,9 @@
 
     async function packOrchestraForDarwin ( ) {
         const iconFile =
-            (( packageJson.productName !== nightlyName )
-                ? './designs/icon/icns/icon.icns'
-                : './designs/icon-nightly/icns/icon.icns'
+            ( isProductionBuild
+                ? './designs/icon-nightly/icns/icon.icns'
+                : './designs/icon/icns/icon.icns'
                 )
 
         // build script
@@ -256,10 +270,11 @@
 
     function updateDarwinInfoPlistFile ( ) {
         // data
-        const plistFilePath = (( packageJson.productName !== nightlyName )
-            ? '_release/Orchestra-darwin-x64/Orchestra.app/Contents/Info.plist'
-            : '_release/Orchestra Nightly-darwin-x64/Orchestra.app/Contents/Info.plist'
-        )
+        const plistFilePath =
+            ( isProductionBuild
+                ? '_release/Orchestra-darwin-x64/Orchestra.app/Contents/Info.plist'
+                : '_release/Orchestra Nightly-darwin-x64/Orchestra.app/Contents/Info.plist'
+                )
 
         // loading the info file
         const plistFileString =
@@ -313,7 +328,6 @@
     async function packOrchestraForWindows ( ) {
         // to be continued...
     }
-
 
 //
 // ─── PACK ───────────────────────────────────────────────────────────────────────
