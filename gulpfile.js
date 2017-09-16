@@ -30,32 +30,18 @@
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
 //
 
-    const version = "v1.0"
+    const version       = "v1.0"
     const resultDirPath = '_compiled'
-    const nightlyName = 'Orchestra Nightly'
+    const nightlyName   = 'Orchestra Nightly'
 
     const OrchestraNodeModules = [
-            'concerto-compiler',
-            'messenger',
-            'regulex',
-            'amdefine',
-            'monaco-editor/min/vs',
-            'regexpu-core',
-            'regexpu',
-            'regjsgen',
-            'regjsparser',
-            'regenerate',
-            'unicode-match-property-ecmascript',
-            'unicode-canonical-property-names-ecmascript',
-            'unicode-property-aliases-ecmascript',
-            'jsesc',
-            'recast',
-            'unicode-match-property-value-ecmascript',
-            'ast-types',
-            'source-map',
-            'esprima',
-            'private',
-        ]
+        'concerto-compiler', 'messenger', 'regulex', 'monaco-editor/min/vs',
+        'amdefine', 'regexpu-core', 'regexpu', 'regjsgen', 'regjsparser',
+        'regenerate', 'unicode-match-property-ecmascript', 'jsesc', 'recast',
+        'unicode-canonical-property-names-ecmascript', 'ast-types', 'esprima',
+        'unicode-property-aliases-ecmascript', 'source-map', 'private',
+        'unicode-match-property-value-ecmascript',
+    ]
 
 //
 // ─── TOOLS ──────────────────────────────────────────────────────────────────────
@@ -120,9 +106,8 @@
 
     /** Copies static resource files into the result directory */
     gulp.task( 'copyResourceFiles', callback => {
-
         function copyNodeModules ( handle ) {
-            let address = path.join( 'node_modules', handle )
+            const address = path.join( 'node_modules', handle )
             copyToBinaryFromDir( address, address )
         }
 
@@ -173,16 +158,15 @@
                 }
 
                 request( options, ( error, response, body ) => {
-                    if ( !error && response.statusCode == 200 ) {
+                    if ( !error && response.statusCode == 200 )
                         try {
                             const data = JSON.parse( body )[ 0 ].total.toString( )
                             resolve( data )
                         } catch ( parseError ) {
                             rejectHandler( )
                         }
-                    } else {
+                    else
                         rejectHandler( )
-                    }
                 })
             })
             .then( GitHubCommitCount => {
