@@ -13,7 +13,7 @@
 //
 
     function onNewFile ( force = false ) {
-        if ( !( checkForSavingChanges( ) || force ) ) return;
+        if ( !( checkForSavingChanges( ) || force ) ) { return }
 
         currentFile =
             Object.assign({ }, defaultFileObject)
@@ -29,7 +29,7 @@
 //
 
     function onOpenFile ( ) {
-        if ( !checkForSavingChanges( ) ) return;
+        if ( !checkForSavingChanges( ) ) { return }
 
         // get file path
         let filePath = dialog.showOpenDialog( getWindowForDialogSheets( ), {
@@ -40,7 +40,7 @@
             }]
         })
 
-        if ( filePath === undefined ) return;
+        if ( filePath === undefined ) { return }
 
         // done let's load.
         openFileWithPath( filePath[ 0 ] )

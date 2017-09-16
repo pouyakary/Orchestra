@@ -28,7 +28,7 @@
 
     QuartetGenerator.finish = code => {
         return code.trim( )
-    };
+    }
 
 //
 // ─── SCRUB NAKED VALUE ──────────────────────────────────────────────────────────
@@ -36,7 +36,7 @@
 
     QuartetGenerator.scrubNakedValue = line => {
         return line.trim( )
-    };
+    }
 
 //
 // ─── QUOTE ──────────────────────────────────────────────────────────────────────
@@ -44,7 +44,7 @@
 
     QuartetGenerator.quote_ = text => {
         return text.trim( )
-    };
+    }
 
 //
 // ─── SCRUB ──────────────────────────────────────────────────────────────────────

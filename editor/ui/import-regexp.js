@@ -14,13 +14,12 @@
 
     function checkToSeeIfRegExpImporterNeedsToBeDisabledOnOutClick ( event ) {
         function isChildOf( child, parent ) {
-            if ( child.parentNode === parent ) {
-                return true;
-            } else if ( child.parentNode === null ) {
-                return false;
-            } else {
-                return isChildOf( child.parentNode, parent );
-            }
+            if ( child.parentNode === parent )
+                return true
+            else if ( child.parentNode === null )
+                return false
+            else
+                return isChildOf( child.parentNode, parent )
         }
 
         let dialog = document.getElementById('regexp-importer')
