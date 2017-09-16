@@ -64,7 +64,7 @@
     /** Run shell commands easy! */
     function shell ( command , callback ) {
         return new Promise(( resolve, reject ) =>
-            exec( command.join(' '), err => err? reject( err ) : resolve( ) ))}
+            exec( command.join(' '), err => err ? reject( err ) : resolve( ) ) )}
 
 //
 // ─── COPY DIR FILES ─────────────────────────────────────────────────────────────
@@ -99,14 +99,10 @@
     async function copyFile ( origin, destination ) {
         if ( /\.DS_Store/.test( origin ) ) { return }
 
-        await new Promise(( resolve, reject ) => {
-            fs.copy( origin, destination, err => {
-                if ( err )
-                    reject(`Could not copy file ${ origin }`)
-                else
-                    resolve( )
-            })
-        })
+        await new Promise( ( resolve, reject ) => {
+            fs.copy( origin, destination, err =>
+                err ? reject(`Could not copy file ${ origin }`)
+                    : resolve( ) ) })
     }
 
 //
