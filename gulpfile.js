@@ -12,19 +12,19 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    const argv                  = require('yargs').argv
-    const darwinInfoPlistBase   = require('./build/darwin-info-base.json')
-    const exec                  = require('child_process').exec
-    const fs                    = require('fs-extra')
-    const gulp                  = require('gulp')
-    const less                  = require('less')
-    const mv                    = require('mv')
-    const packageJsonFirstLoad  = require('./package.json')
-    const path                  = require('path')
-    const plist                 = require('plist')
-    const request               = require('request')
-    const ugly                  = require('gulp-uglify')
-    const util                  = require('util')
+    const argv                      = require('yargs').argv
+    const darwinInfoPlistBase       = require('./build/darwin-info-base.json')
+    const exec                      = require('child_process').exec
+    const fs                        = require('fs-extra')
+    const gulp                      = require('gulp')
+    const less                      = require('less')
+    const mv                        = require('mv')
+    const packageJsonFirstLoad      = require('./package.json')
+    const path                      = require('path')
+    const plist                     = require('plist')
+    const request                   = require('request')
+    const ugly                      = require('gulp-uglify')
+    const util                      = require('util')
 
 //
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
@@ -74,6 +74,7 @@
     function copyToBinaryFromDir ( dir, subfolder ) {
         fs.readdir( dir , ( err , files ) => {
             // if error
+
             if ( err )
                 console.log(`Could not get files from directory ${ dir }`)
 
@@ -239,10 +240,9 @@
 
     async function packOrchestraForDarwin ( ) {
         const iconFile =
-            ( isProductionBuild
-                ? './designs/icon-nightly/icns/icon.icns'
-                : './designs/icon/icns/icon.icns'
-                )
+            ( isProductionBuild ? './designs/icon-nightly/icns/icon.icns'
+                                : './designs/icon/icns/icon.icns'
+                                )
 
         // build script
         const packBashScript = [
@@ -271,10 +271,9 @@
     function updateDarwinInfoPlistFile ( ) {
         // data
         const plistFilePath =
-            ( isProductionBuild
-                ? '_release/Orchestra-darwin-x64/Orchestra.app/Contents/Info.plist'
-                : '_release/Orchestra Nightly-darwin-x64/Orchestra.app/Contents/Info.plist'
-                )
+            ( isProductionBuild ? '_release/Orchestra-darwin-x64/Orchestra.app/Contents/Info.plist'
+                                : '_release/Orchestra Nightly-darwin-x64/Orchestra.app/Contents/Info.plist'
+                                )
 
         // loading the info file
         const plistFileString =
