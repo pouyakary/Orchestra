@@ -1,0 +1,13 @@
+
+os: osx
+language: node_js
+
+node_js:
+  - "iojs"
+  - "7"
+
+before_install:
+  - npm run configure
+
+
+
