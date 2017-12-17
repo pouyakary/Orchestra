@@ -56,15 +56,22 @@
     })
 
 //
+// ─── ASYNCIFY ───────────────────────────────────────────────────────────────────
+//
+
+    const asyncify = ( func, ...args ) =>
+        new Promise( ( resolve, reject ) =>
+            func( ...args, ( err, output ) =>
+                err ? reject( err )
+                    : resolve( output? output : undefined ) ) )
+
+//
 // ─── TOOLS ──────────────────────────────────────────────────────────────────────
 //
 
     /** Run shell commands easy! */
-    function shell ( command , callback ) {
-        return new Promise(( resolve, reject ) =>
-            exec( command.join(' '), err => err ? reject( err ) : resolve( ) )
-        )
-    }
+    const shell = ( ...commands ) => asyncify( exec, commands.join(' ') )
+
 
 //
 // ─── COPY DIR FILES ─────────────────────────────────────────────────────────────
@@ -99,10 +106,14 @@
     async function copyFile ( origin, destination ) {
         if ( /\.DS_Store/.test( origin ) ) { return }
 
-        await new Promise( ( resolve, reject ) => {
-            fs.copy( origin, destination, err =>
-                err ? reject(`Could not copy file ${ origin }`)
-                    : resolve( ) ) })
+        // await new Promise( ( resolve, reject ) => {
+        //     fs.copy( origin, destination, err =>
+        //         err ? reject(`Could not copy file ${ origin }`)
+        //             : resolve( ) ) })
+
+        //         // ==
+
+        await asyncify( fs.copy, origin, destination )
     }
 
 //
@@ -131,6 +142,8 @@
         copyToBinaryFromDir( 'libs' )
         copyToBinaryFromDir( 'windows' )
         copyToBinaryFromDir( 'winserver' )
+
+
 
         // design files
         copyToBinaryFromDir( 'resources' )
@@ -194,8 +207,8 @@
 
         } catch ( error ) {
             try {
-                shell([ 'git', 'rev-list', '--all', '--count',
-                        '>', commitCountFilePath ])
+                shell( 'git', 'rev-list', '--all', '--count',
+                        '>', commitCountFilePath )
                 callback( )
 
             } catch ( error2 ) {
@@ -209,26 +222,39 @@
 //
 
     /** Compiles the Less style sheets */
-    gulp.task( 'sheets', callback => {
+    gulp.task( 'sheets', async callback => {
         try {
             let lessSourceCode = fs.readFileSync(
                 path.join( __dirname, 'sheets', 'ui.less' ), 'utf8' )
 
-            less.render( lessSourceCode, ( err, output ) => {
-                if ( err )
-                    console.log(`Less failure: ${ err }`); return
+            const renderedLess =
+                await asyncify( less.render, lessSourceCode )
 
-                fs.writeFile(
-                    path.join( __dirname, '_compiled/style.css' ),
-                    output.css,
-                    error => {
-                        if ( error )
-                            console.log('could not store the less file')
-                        else
-                            callback( )
-                    }
-                )
-            })
+            asyncify( fs.writeFile,
+                path.join( __dirname, '_compiled/style.css' ),
+                output.css
+            )
+
+            // less.render( lessSourceCode, ( err, output ) => {
+            //     if ( err )
+            //         console.log(`Less failure: ${ err }`); return
+
+            //     asyncify( fs.writeFile,
+            //         path.join( __dirname, '_compiled/style.css' ),
+            //         output.css
+            //     )
+
+            //     // fs.writeFile(
+            //     //     path.join( __dirname, '_compiled/style.css' ),
+            //     //     output.css,
+            //     //     error => {
+            //     //         if ( error )
+            //     //             console.log('could not store the less file')
+            //     //         else
+            //     //             callback( )
+            //     //     }
+            //     // )
+            // })
         } catch ( err ) {
             console.log('Compiling less failed ' + err )
         }
@@ -263,7 +289,7 @@
         ]
 
         // building
-        await shell( packBashScript )
+        await shell( ...packBashScript )
         updateDarwinInfoPlistFile( )
     }
 
@@ -300,7 +326,7 @@
 
         fs.mkdirpSync('./_installers/macOS')
 
-        await shell([
+        await shell(
             'electron-installer-dmg',
             orchestraMacAppAddress,
             'Orchestra',
@@ -309,7 +335,7 @@
             '--icon="./designs/icon/icns/icon.icns"',
             '--background="./build/dmg-back.png"',
             '--overwrite'
-        ])
+        )
     }
 
 //
@@ -335,7 +361,7 @@
     gulp.task( 'pack-orchestra', [ 'copyResourceFiles', 'sheets' ], callback => {
         async function packFunctionBody ( ) {
             if ( argv.debug )
-                return await shell([ 'npm', 'run', 'electron' ])
+                return await shell( 'npm', 'run', 'electron' )
 
             if ( argv.pack )
                 await buildAllPlatforms( )
