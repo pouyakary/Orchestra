@@ -30,6 +30,8 @@
         "Standalone",
         "Toolbar",
         "amdefine",
+        "asyncify",
+        "callbackify",
         "carrige",
         "countdots",
         "deletable",
