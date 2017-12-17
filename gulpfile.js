@@ -72,7 +72,6 @@
     /** Run shell commands easy! */
     const shell = ( ...commands ) => asyncify( exec, commands.join(' ') )
 
-
 //
 // ─── COPY DIR FILES ─────────────────────────────────────────────────────────────
 //
@@ -169,7 +168,7 @@
         const commitCountFilePath =
             `./${pathToResultDir}/about/commit-count.txt`
         const githubOrchestraRepositoryAPI =
-            'https://api.github.com/repos/karyfoundation/orchestra/stats/contributors'
+            'https://api.github.com/repos/pmkary/orchestra/stats/contributors'
 
         try {
             new Promise (( resolve, reject ) => {
@@ -266,8 +265,8 @@
 
     async function packOrchestraForDarwin ( ) {
         const iconFile =
-            ( isProductionBuild ? './designs/icon-nightly/icns/icon.icns'
-                                : './designs/icon/icns/icon.icns'
+            ( isProductionBuild ? './designs/icon/icns/icon.icns'
+                                : './designs/icon-nightly/icns/icon.icns'
                                 )
 
         // build script
@@ -278,8 +277,8 @@
             '--platform=darwin',
             '--arch=x64',
             '--overwrite=true',
-            '--app-bundle-id="org.karyfoundation.orchestra"',
-            '--app-copyright="Copyright 2016-present, Kary Foundation, Inc. All rights reserved."',
+            '--app-bundle-id="us.kary.orchestra"',
+            '--app-copyright="Copyright 2016-present, Pouya KAry. All rights reserved."',
             '--app-version="' + packageJson.version + '"',
             '--icon=' + iconFile,
             '--name="' + packageJson.productName + '"',
