@@ -1,22 +1,24 @@
 {
   "name": "orchestra",
   "productName": "Orchestra",
-  "author": "Kary Foundation",
+  "author": "Pouya Kary",
   "main": "main.js",
   "description": "RegEx done right",
-  "homepage": "https://github.com/karyfoundation/orchestra",
+  "homepage": "http://orchestra.kary.us",
   "license": "Apache-2.0",
   "version": "0.1.0",
   "scripts": {
+    "test": "echo 'can not do right now' > /dev/null",
     "pack": "gulp --pack",
-    "build": "gulp --pack --installers",
+    "build": "gulp --pack --installers --mac --production-build",
     "debug": "gulp --debug",
+    "dist-mac": "gulp --pack --installers --mac",
     "electron": "electron ./_compiled/main.js --enable-logging",
     "configure": "npm install -g gulp gulp-cli electron-installer-dmg"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/karyfoundation/orchestra"
+    "url": "https://github.com/pmkary/orchestra"
   },
   "dependencies": {
     "concerto-compiler": "1.0.5",
