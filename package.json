@@ -10,11 +10,12 @@
   "scripts": {
     "test": "echo 'can not do right now' > /dev/null",
     "pack": "gulp --pack",
-    "build": "gulp --pack --installers --mac --production-build",
+    "build-mac": "gulp --pack --installers --mac --production-build",
+    "build-linux": "gulp --pack --installers --linux --production-build",
     "debug": "gulp --debug",
     "dist-mac": "gulp --pack --installers --mac",
     "electron": "electron ./_compiled/main.js --enable-logging",
-    "configure": "npm install -g gulp gulp-cli electron-installer-dmg"
+    "configure": "npm install -g gulp gulp-cli electron-installer-dmg electron-installer-debian"
   },
   "repository": {
     "type": "git",

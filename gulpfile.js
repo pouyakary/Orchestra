@@ -47,6 +47,9 @@
         'unicode-match-property-value-ecmascript',
     ]
 
+    const CopyrightNotice =
+        'Copyright 2016-present, Pouya KAry. All rights reserved.'
+
 //
 // ─── UPDATING PACKAGE JSON ──────────────────────────────────────────────────────
 //
@@ -278,7 +281,7 @@
             '--arch=x64',
             '--overwrite=true',
             '--app-bundle-id="us.kary.orchestra"',
-            '--app-copyright="Copyright 2016-present, Pouya KAry. All rights reserved."',
+            '--app-copyright="' + CopyrightNotice + '"',
             '--app-version="' + packageJson.version + '"',
             '--icon=' + iconFile,
             '--name="' + packageJson.productName + '"',
@@ -342,7 +345,31 @@
 //
 
     async function packOrchestraForLinux ( ) {
-        // to be continued...
+        const iconFile =
+            ( isProductionBuild ? './designs/icon/icon.png'
+                                : './designs/icon-nightly/icns/icon.icns'
+                                )
+
+        // build script
+        const packBashScript = [
+            'electron-packager',
+            ' _compiled',
+            '"' + packageJson.productName + '"',
+            '--platform=linux',
+            '--arch=x64',
+            '--overwrite=true',
+            '--app-bundle-id="us.kary.orchestra"',
+            '--app-copyright="' + CopyrightNotice + '"',
+            '--app-version="' + packageJson.version + '"',
+            '--icon=' + iconFile,
+            '--name="' + packageJson.productName + '"',
+            '--out=_release',
+            '--protocol="orchestra"',
+            '--protocol-name="Orchestra"',
+        ]
+
+        // building
+        await shell( ...packBashScript )
     }
 
 //
