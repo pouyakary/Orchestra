@@ -372,6 +372,16 @@
         await shell( ...packBashScript )
     }
 
+
+    async function createDebianDEBInstaller ( ) {
+        await shell(
+            'electron-installer-debian',
+            '--src _release/Orchestra-linux-x64',
+            '--arch amd64',
+            '--config build/debian-config.json',
+        )
+    }
+
 //
 // ─── PACK FOR WINDOWS ───────────────────────────────────────────────────────────
 //
@@ -429,6 +439,9 @@
 
         if ( argv.mac )
             platformFunctions.push( createMacDMGImage )
+
+        if ( argv.linux )
+            platformFunctions.push( createDebianDEBInstaller )
 
         await runAsyncFunctions(platformFunctions)
     }

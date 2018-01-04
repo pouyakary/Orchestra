@@ -1,0 +1,10 @@
+{
+    "dest": "_installers/debian",
+    "icon": "designs/icon/icon.png",
+    "categories": [
+        "Development"
+    ],
+    "lintianOverrides": [
+        "changelog-file-missing-in-native-package"
+    ]
+}
