@@ -17,7 +17,6 @@
     const exec                      = require('child_process').exec
     const fs                        = require('fs-extra')
     const gulp                      = require('gulp')
-    const less                      = require('less')
     const mv                        = require('mv')
     const packageJsonFirstLoad      = require('./package.json')
     const path                      = require('path')
@@ -225,41 +224,14 @@
 
     /** Compiles the Less style sheets */
     gulp.task( 'sheets', async callback => {
-        try {
-            let lessSourceCode = fs.readFileSync(
-                path.join( __dirname, 'sheets', 'ui.less' ), 'utf8' )
+        const thisDir = (...x) => path.join( __dirname, ...x )
 
-            const renderedLess =
-                await asyncify( less.render, lessSourceCode )
-
-            asyncify( fs.writeFile,
-                path.join( __dirname, '_compiled/style.css' ),
-                output.css
-            )
-
-            // less.render( lessSourceCode, ( err, output ) => {
-            //     if ( err )
-            //         console.log(`Less failure: ${ err }`); return
-
-            //     asyncify( fs.writeFile,
-            //         path.join( __dirname, '_compiled/style.css' ),
-            //         output.css
-            //     )
-
-            //     // fs.writeFile(
-            //     //     path.join( __dirname, '_compiled/style.css' ),
-            //     //     output.css,
-            //     //     error => {
-            //     //         if ( error )
-            //     //             console.log('could not store the less file')
-            //     //         else
-            //     //             callback( )
-            //     //     }
-            //     // )
-            // })
-        } catch ( err ) {
-            console.log('Compiling less failed ' + err )
-        }
+        shell('less',
+            thisDir( 'sheets', 'ui.less' ),
+            thisDir( '_compiled', 'style.css' )
+        ).catch(() => {
+            callback( err )
+        })
     })
 
 //

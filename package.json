@@ -15,7 +15,7 @@
     "debug": "gulp --debug",
     "dist-mac": "gulp --pack --installers --mac",
     "electron": "electron ./_compiled/main.js --enable-logging",
-    "configure": "npm install -g gulp gulp-cli electron-installer-dmg electron-installer-debian"
+    "configure": "npm install -g gulp gulp-cli electron-installer-dmg electron-installer-debian less"
   },
   "repository": {
     "type": "git",
@@ -39,7 +39,6 @@
     "gulp": "3.9.1",
     "gulp-uglify": "1.5.3",
     "fs-extra": "0.30.0",
-    "less": "2.7.1",
     "mv": "^2.1.1",
     "plist": "^2.1.0",
     "sloc": "0.1.10",
