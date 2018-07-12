@@ -13,10 +13,9 @@
 //
 
     const openExternal = require( 'electron' ).shell.openExternal
-    const fs = require('fs')
     const appName = require( 'electron' ).remote.app.getName( )
 
-    const { ipcRenderer, webFrame } = require( 'electron' )
+    const { webFrame } = require( 'electron' )
 
 //
 // ─── DISABLE ZOOM ───────────────────────────────────────────────────────────────
@@ -55,27 +54,6 @@
         document.getElementById( 'app-name' ).innerText = appName
         document.getElementById( orchestraVersionSpanId ).innerText = windowOptions.orchestraVersion
         document.getElementById( quartetVersionSpanId ).innerText = windowOptions.quartetVersion
-
-        document.body.className = windowOptions.theme
-
-        if ( appName === 'Orchestra Nightly' ) {
-            document.getElementById( 'icon' ).style.backgroundImage = 'url("./icon-nightly.png")'
-        }
-
-        /*try {
-            fs.readFile( `${ __dirname }/commit-count.txt`, 'utf8', ( error, data ) => {
-                if ( error ) alert( error )
-                document.getElementById( orchestraBuildSpanId ).innerText = data.trim( )
-            })
-        } catch ( e ) { alert( e )}*/
     }
-
-//
-// ─── ON THEME CHANGES ───────────────────────────────────────────────────────────
-//
-
-    ipcRenderer.on( 'change-theme-to', ( event, mode ) => {
-        document.body.className = mode
-    })
 
 // ────────────────────────────────────────────────────────────────────────────────

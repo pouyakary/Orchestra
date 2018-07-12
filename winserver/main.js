@@ -185,9 +185,10 @@
         console.log( parent )
 
         let aboutWindow = new BrowserWindow({
-            title: 'About Orchestra',
+            title: 'Orchestra Hall',
+            titleBarStyle: 'hiddenInset',
             width: 650, minWidth: 650, maxWidth: 650,
-            height: 410, minHeight: 410, maxHeight: 410,
+            height: 390, minHeight: 390, maxHeight: 390,
             //backgroundColor: ( settings.windowThemeStatus === 'dark' )? 'black' : '#ECECEC',
             minimizable: false,
             maximizable: false,

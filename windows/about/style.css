@@ -10,82 +10,54 @@
  */
 
 html {
-    font-size: 12px;
+    font-size:      12px;
 }
 
 body {
-    background-color: black;
-    margin: 0;
-    padding: 0;
-    font-family: Helvetica, sans-serif;
-    overflow: hidden;
+    cursor:                 default;
+    background-color:       #424242;
+    margin:                 0;
+    padding:                0;
+    font-family:            Helvetica, sans-serif;
+    overflow:               hidden;
 }
 
-p {
-    line-height: 1.5;
-}
-
-h1, h2, h3, h4 {
-    padding: 0;
-    margin: 0;
-}
-
-h2 {
-    margin-top: 20px;
-}
-
-ul {
-    padding: 0;
-}
-
-li {
-    margin-bottom: 3px;
+a {
+    cursor:     pointer;
+    color:      white;
 }
 
 #main-background {
-    background-color: #ECECEC;
-    padding: 50px;
-    width: 550px;
-    height: 290px;
+    -webkit-app-region:     drag;
+    color:                  white;
+    background-image:       url( "background.png" );
+    background-position:    top center;
+    background-size:        contain;
+    background-color:       #ECECEC;
+    padding:                50px;
+    width:                  550px;
+    height:                 290px;
 }
 
 #main-text {
-    position: fixed;
-    left: 160px;
-    top: 30px;
-    width: 450px;
-    overflow: hidden;
+    position:       fixed;
+    left:           50px;
+    top:            257px;
+    width:          550px;
+    overflow:       hidden;
+    display:        flex;
 }
 
-#icon {
-    background-image: url('./icon.png');
-    width: 120px;
-    height: 120px;
-    background-size: contain;
-    background-position: center;
-    position: fixed;
-    top: 30px;
-    left: 25px;
+#app-name {
+    flex:           auto;
+    font-size:      3rem;
+    font-weight:    bold;
+    max-width:      fit-content;
 }
 
-/** dark theme */
-
-.dark > #main-background {
-    background-color: black;
-}
-
-.dark > #main-background > #main-text > h1 {
-    color: #7DA76F;
-}
-
-.dark > #main-background > #main-text > h2 {
-    color: #A47097;
-}
-
-.dark > #main-background > #main-text {
-    color: #ccc;
-}
-
-.dark > #main-background > #main-text > p > a {
-    color: #668BB7;
+#app-text {
+    padding:        0.4rem 0 0 2rem;
+    flex:           1;
+    color:          #eee;
+    line-height:    1.5;
 }
