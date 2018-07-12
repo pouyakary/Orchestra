@@ -19,6 +19,7 @@
         onNewFile( )
         initMainMenu( )
         handleWindowArgs( )
+        disableZoomOnINIT( )
         setMenuEnableFactor( true )
     }
 

@@ -15,7 +15,14 @@
     const openExternal = require( 'electron' ).shell.openExternal
     const fs = require('fs')
     const appName = require( 'electron' ).remote.app.getName( )
-    const { ipcRenderer } = require( 'electron' )
+
+    const { ipcRenderer, webFrame } = require( 'electron' )
+
+//
+// ─── DISABLE ZOOM ───────────────────────────────────────────────────────────────
+//
+
+    webFrame.setZoomLevelLimits( 1, 1 )
 
 //
 // ─── WINDOW DRAG FIX ────────────────────────────────────────────────────────────

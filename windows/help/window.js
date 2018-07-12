@@ -12,7 +12,13 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    const { ipcRenderer } = require( 'electron' )
+    const { ipcRenderer, webFrame } = require( 'electron' )
+
+//
+// ─── DISABLING ZOOM ─────────────────────────────────────────────────────────────
+//
+
+    webFrame.setZoomLevelLimits( 1, 1 )
 
 //
 // ─── WINDOW DRAG FIX ────────────────────────────────────────────────────────────
