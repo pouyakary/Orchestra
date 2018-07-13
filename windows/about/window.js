@@ -12,10 +12,11 @@
 // ─── IMPORTS ────────────────────────────────────────────────────────────────────
 //
 
-    const openExternal = require( 'electron' ).shell.openExternal
-    const appName = require( 'electron' ).remote.app.getName( )
-
-    const { webFrame } = require( 'electron' )
+    const openExternal  = require( 'electron' ).shell.openExternal
+    const appName       = require( 'electron' ).remote.app.getName( )
+    const AboutWindow   = require( 'electron' ).remote.getCurrentWindow( )
+    const { webFrame }  = require( 'electron' )
+    const os            = require( 'os' )
 
 //
 // ─── DISABLE ZOOM ───────────────────────────────────────────────────────────────
@@ -54,6 +55,22 @@
         document.getElementById( 'app-name' ).innerText = appName
         document.getElementById( orchestraVersionSpanId ).innerText = windowOptions.orchestraVersion
         document.getElementById( quartetVersionSpanId ).innerText = windowOptions.quartetVersion
+    }
+
+//
+// ─── EXIT BUTTON ────────────────────────────────────────────────────────────────
+//
+
+    if ( os.platform( ) !== "darwin" ) {
+        document.getElementById( "close-button" ).hidden = false
+    }
+
+//
+// ─── ON EXIT ────────────────────────────────────────────────────────────────────
+//
+
+    function onExit ( ) {
+        AboutWindow.close( )
     }
 
 // ────────────────────────────────────────────────────────────────────────────────

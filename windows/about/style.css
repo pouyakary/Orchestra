@@ -36,13 +36,13 @@ a {
     background-color:       #ECECEC;
     padding:                50px;
     width:                  550px;
-    height:                 290px;
+    height:                 320px;
 }
 
 #main-text {
     position:       fixed;
     left:           50px;
-    top:            257px;
+    top:            295px;
     width:          550px;
     overflow:       hidden;
     display:        flex;
@@ -56,8 +56,28 @@ a {
 }
 
 #app-text {
-    padding:        0.4rem 0 0 2rem;
+    padding:        0.2rem 0 0 2rem;
     flex:           1;
     color:          #eee;
     line-height:    1.5;
+}
+
+#close-button {
+    --button-side-padding:
+        10px;
+
+    position:           fixed;
+    top:                20px;
+    left:               20px;
+    border:             1pt solid rgba(255, 255, 255, 0.7);
+    padding:            4px calc( var( --button-side-padding ) - 0.2em ) 2px var( --button-side-padding );
+    letter-spacing:     0.2em;
+    font-size:          9px;
+    border-radius:      50px;
+    max-width:          fit-content;
+}
+
+#close-button:focus, #close-button:hover {
+    background-color:       white;
+    color:                  black;
 }

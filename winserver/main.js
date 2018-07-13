@@ -184,11 +184,20 @@
 
         console.log( parent )
 
+        const aboutWindowHeight =
+            415
+        const aboutWindowWidth =
+            650
+
         let aboutWindow = new BrowserWindow({
             title: 'Orchestra Hall',
             titleBarStyle: 'hiddenInset',
-            width: 650, minWidth: 650, maxWidth: 650,
-            height: 390, minHeight: 390, maxHeight: 390,
+            width: aboutWindowWidth,
+            minWidth: aboutWindowWidth,
+            maxWidth: aboutWindowWidth,
+            height: aboutWindowHeight,
+            minHeight: aboutWindowHeight,
+            maxHeight: aboutWindowHeight,
             //backgroundColor: ( settings.windowThemeStatus === 'dark' )? 'black' : '#ECECEC',
             minimizable: false,
             maximizable: false,
