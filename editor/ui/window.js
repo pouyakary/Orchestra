@@ -85,7 +85,7 @@
 //
 
     function fireWindowCloseRequest ( ) {
-        if ( onBeforeWindowClose( 'Close') )
+        if ( onBeforeWindowClose('Close') )
             OrchestraWindow.close( )
     }
 
