@@ -53,6 +53,7 @@
         min-height:                 37px;
         width:                      370px;
         overflow:                   hidden;
+        cursor:                     text;
     }
 
     @transition-duration:           0.4s;
@@ -68,16 +69,19 @@
         border-top-right-radius:    100px;
         border-bottom-right-radius: 100px;
         margin-right:               10px;
+        cursor: pointer;
     }
 
     .disabled-button {
         opacity:                    0;
         transition-duration:        @transition-duration;
+        cursor:                     not-allowed;
     }
 
     .enabled-button {
         opacity:                    100%;
         transition-duration:        0.5s;
+        cursor: pointer;
     }
 
 //
