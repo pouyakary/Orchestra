@@ -40,7 +40,7 @@
             "font-family: Helvetica, Arial;"
 
         originalDevToolsLogFunction(
-            '\n%cOrchestra Studio %c\u2022 Copyright 2016-present by Kary Foundation, Inc. All rights reserved.\n\n',
+            '\n%cOrchestra Hall %c\u2022 Copyright 2016-present by Pouya Kary. All rights reserved.\n\n',
             firstStyle, secondStyle )
     }
 
