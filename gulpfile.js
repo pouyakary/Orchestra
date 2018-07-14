@@ -226,10 +226,10 @@
     gulp.task( 'sheets', async callback => {
         const thisDir = (...x) => path.join( __dirname, ...x )
 
-        shell('less',
+        shell('lessc',
             thisDir( 'sheets', 'ui.less' ),
             thisDir( '_compiled', 'style.css' )
-        ).catch(() => {
+        ).catch(( ) => {
             callback( err )
         })
     })
