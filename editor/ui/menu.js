@@ -210,16 +210,16 @@
                         type: 'separator'
                     },
                     {
-                        label: "Kary Foundation's Website",
-                        click: ( ) => openExternal('https://www.karyfoundation.org/')
+                        label: "Pouya Kary's Website",
+                        click: ( ) => openExternal('https://kary.us/')
                     },
                     {
                         label: "Report an issue...",
-                        click: ( ) => openExternal('https://github.com/karyfoundation/orchestra/issues')
+                        click: ( ) => openExternal('https://github.com/pmkary/orchestra/issues')
                     },
                     {
-                        label: "Orchestra and Quartet on GitHub",
-                        click: ( ) => openExternal('https://github.com/karyfoundation/orchestra')
+                        label: "Orchestra on GitHub",
+                        click: ( ) => openExternal('https://github.com/pmkary/orchestra')
                     },
                 ]
             },

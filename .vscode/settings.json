@@ -9,5 +9,8 @@
 		"**/.DS_Store": true,
 		"_compiled/**": true,
 		"_release/**": true
-	}
+	},
+	"cSpell.words": [
+		"Kary's"
+	]
 }
