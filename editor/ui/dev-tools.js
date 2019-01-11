@@ -1,6 +1,6 @@
 
 //
-// Copyright © 2017-presentPouya Kary. All rights reserved.
+// Copyright © 2017-present Pouya Kary. All rights reserved.
 //   Author: Pouya Kary <k@karyfoundation.org>
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
@@ -40,7 +40,7 @@
             "font-family: Helvetica, Arial;"
 
         originalDevToolsLogFunction(
-            '\n%cOrchestra Hall %c\u2022 Copyright 2016-present by Pouya Kary. All rights reserved.\n\n',
+            '\n%cOrchestra Hall %c\u2022 Copyright 2016-present by  Pouya Kary. All rights reserved.\n\n',
             firstStyle, secondStyle )
     }
 

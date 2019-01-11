@@ -1,6 +1,6 @@
 
 /*
- * Copyright 2016Pouya Kary.
+ * Copyright 2016 Pouya Kary.
  *   Author: Pouya Kary <k@karyfoundation.org>
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -76,7 +76,7 @@ sidebar {
     float:              right;
 
     /* max-width: 750px;
-                    margin-left: 240px; */
+                        margin-left: 240px; */
     width:              calc( 100vw - 210px );
     height:             calc( 100vh - 50pt );
     overflow-y:         scroll;
