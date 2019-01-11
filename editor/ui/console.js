@@ -1,6 +1,6 @@
 
 //
-// Copyright © 2016-present Kary Foundation, Inc. All Rights Reserved
+// Copyright © 2016-presentPouya Kary. All Rights Reserved
 //   Author: Pouya Kary <k@karyfoundation.org>
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
@@ -39,10 +39,10 @@
         //
 
             constructor ( message ) {
-                (( ) => new Promise( resolve => { 
+                (( ) => new Promise( resolve => {
                     if ( currentDisplayLog )
                         currentDisplayLog.terminate( ).then( resolve )
-                    else 
+                    else
                         resolve( )
                 }))( ).then(( ) => {
                     this.display( message )
@@ -93,7 +93,7 @@
                 document.getElementById( logConsoleId ).innerHTML = ''
 
                 let index = 0
-                const delay = 30 
+                const delay = 30
 
                 this.writerInterval = setInterval( ( ) => {
                     if ( index < message.length )

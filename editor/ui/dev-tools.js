@@ -1,6 +1,6 @@
 
 //
-// Copyright © 2017-present Kary Foundation, Inc. All rights reserved.
+// Copyright © 2017-presentPouya Kary. All rights reserved.
 //   Author: Pouya Kary <k@karyfoundation.org>
 //
 // This Source Code Form is subject to the terms of the Mozilla Public
