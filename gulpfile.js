@@ -17,14 +17,10 @@
     const exec                      = require('child_process').exec
     const fs                        = require('fs-extra')
     const gulp                      = require('gulp')
-    const mv                        = require('mv')
     const packageJsonFirstLoad      = require('./package.json')
     const path                      = require('path')
     const plist                     = require('plist')
     const request                   = require('request')
-    const ugly                      = require('gulp-uglify')
-    const util                      = require('util')
-
 //
 // ─── CONSTANTS ──────────────────────────────────────────────────────────────────
 //
@@ -366,7 +362,7 @@
 // ─── PACK ───────────────────────────────────────────────────────────────────────
 //
 
-    gulp.task( 'pack-orchestra', [ 'copyResourceFiles', 'sheets' ], callback => {
+    gulp.task( 'pack-orchestra', gulp.series('copyResourceFiles', 'sheets', async callback => {
         async function packFunctionBody ( ) {
             if ( argv.debug )
                 return await shell( 'npm', 'run', 'electron' )
@@ -381,7 +377,7 @@
         packFunctionBody( )
             .then( callback )
             .catch( callback )
-    })
+    }))
 
 //
 // ─── BUILD FOR ALL PLATFORMS ────────────────────────────────────────────────────
@@ -430,15 +426,13 @@
 // ─── AFTER PACK ─────────────────────────────────────────────────────────────────
 //
 
-    gulp.task( 'build-orchestra', [ 'pack-orchestra' ], ( ) => {
-
-    })
+    gulp.task( 'build-orchestra', gulp.series('pack-orchestra', ( ) => { }))
 
 //
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
 //
 
     /** Where everything starts */
-    gulp.task( 'default', [ 'build-orchestra' ])
+    gulp.task( 'default', gulp.series('build-orchestra', ( ) => { }))
 
 // ────────────────────────────────────────────────────────────────────────────────

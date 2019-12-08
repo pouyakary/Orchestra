@@ -233,11 +233,7 @@
 // ─── SINGE INSTANCE APP ─────────────────────────────────────────────────────────
 //
 
-    const mustQuit = app.makeSingleInstance(( argv, workingDir ) => {
-        createWindow( parseArgs( argv ) )
-    })
-
-    if ( mustQuit ) app.quit( )
+    app.requestSingleInstanceLock()
 
 //
 // ─── LOAD SETTINGS ──────────────────────────────────────────────────────────────
