@@ -199,7 +199,7 @@
                 callback( )
             })
             .catch( e => {
-                throw e
+                callback( e )
             })
 
         } catch ( error ) {
@@ -225,7 +225,9 @@
         shell('lessc',
             thisDir( 'sheets', 'ui.less' ),
             thisDir( '_compiled', 'style.css' )
-        ).catch(( ) => {
+        ).then(( ) => {
+            callback( )
+        }).catch(( err ) => {
             callback( err )
         })
     })
@@ -426,7 +428,9 @@
 // ─── AFTER PACK ─────────────────────────────────────────────────────────────────
 //
 
-    gulp.task( 'build-orchestra', gulp.series('pack-orchestra', ( ) => { }))
+    gulp.task( 'build-orchestra', gulp.series('pack-orchestra', ( callback ) => {
+        callback( )
+    }))
 
 //
 // ─── MAIN ───────────────────────────────────────────────────────────────────────
