@@ -1,8 +1,0 @@
-{
-    "version": "0.1.0",
-    "command": "npm",
-    "isShellCommand": false,
-    "args": [ "run", "build-mac" ],
-    "showOutput": "never",
-    "echoCommand": false
-}
