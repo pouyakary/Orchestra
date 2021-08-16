@@ -40,11 +40,11 @@
 //
 // ─── ELECTRON LOADS ─────────────────────────────────────────────────────────────
 //
+    const electron = require( 'electron' )
 
-    const { ipcRenderer, clipboard, webFrame }  = require( 'electron' )
-    const { dialog }                            = require( 'electron' ).remote
-    const OrchestraWindow                       = require( 'electron' ).remote.getCurrentWindow( )
-    const openExternal                          = require( 'electron' ).shell.openExternal
+    const { ipcRenderer, clipboard, webFrame }  = electron
+    const OrchestraWindow                       = electron.remote.getCurrentWindow( )
+    const openExternal                          = electron.shell.openExternal
 
 //
 // ─── NODE MODULES ───────────────────────────────────────────────────────────────

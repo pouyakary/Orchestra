@@ -9,3 +9,4 @@ Orchestra-darwin-x64/**
 .vscode/.browse.VC.db
 .vscode/.browse.VC.db-shm
 .vscode/.browse.VC.db-wal
+.DS_Store

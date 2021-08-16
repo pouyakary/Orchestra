@@ -15,7 +15,8 @@
 //
 
     const electron                          = require( 'electron' )
-    const { ipcMain, BrowserWindow, app }   = require( 'electron' )
+    const { ipcMain, BrowserWindow, app }   = electron
+    const { contextBridge, dialog }         = electron
     const messenger                         = require( 'messenger' )
     const fs                                = require( 'fs' )
     const path                              = require( 'path' )
@@ -28,6 +29,13 @@
     const settingsFilePath      = path.join( __dirname, 'orchestraSettings.json' )
     const orchestraVersion      = '1.0'
     const quartetVersion        = '1.2'
+
+    const webPreferences = {
+        nodeIntegration:        true,
+        contextIsolation:       false,
+        enableRemoteModule:     true,
+        preload:                path.join( __dirname, "preload.js" )
+    }
 
 //
 // ─── STORAGE ────────────────────────────────────────────────────────────────────
@@ -72,7 +80,7 @@
 //
 
     function saveSettings ( ) {
-        fs.writeFile( settingsFilePath, JSON.stringify( settings ) )
+        fs.writeFileSync( settingsFilePath, JSON.stringify( settings ) )
     }
 
 //
@@ -101,6 +109,7 @@
             //backgroundColor: ( settings.windowThemeStatus === 'dark' )? '1E1E1E' : '#F7F7F7',
             frame: false,
             // fullscreen: false,
+            webPreferences
         })
 
         editorWindow.maximize( )
@@ -154,6 +163,7 @@
             height: 600, minHeight: 200,
             backgroundColor: 'white',
             fullscreen: false,
+            webPreferences
         })
 
         // helpWindow.openDevTools( )
@@ -205,7 +215,8 @@
             fullscreen: false,
             parent: parent,
             modal: true,
-            show: false
+            show: false,
+            webPreferences
         })
 
         aboutWindow.loadURL( `file://${ __dirname }/about/index.html?${

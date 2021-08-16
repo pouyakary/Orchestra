@@ -1,8 +1,23 @@
 {
-    "version": "0.1.0",
+    "version": "2.0.0",
     "command": "npm",
     "isShellCommand": false,
-    "args": [ "run", "build-mac" ],
-    "showOutput": "never",
-    "echoCommand": false
+    "args": [
+        "run",
+        "build-mac"
+    ],
+    "echoCommand": false,
+    "tasks": [
+        {
+            "label": "npm",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run",
+                "build-mac"
+            ],
+            "problemMatcher": [],
+            "group": "build"
+        }
+    ]
 }

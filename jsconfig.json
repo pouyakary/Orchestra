@@ -12,6 +12,6 @@
         "_compiled",
         "_release",
         "node_modules",
-        "gulpfile.js"
+        "build.js"
     ]
 }

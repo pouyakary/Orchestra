@@ -16,10 +16,10 @@
         <script src="blockly-core/en.js"></script>
 
         <!-- Blockly Render -->
-        <script src="blockly-render/exporter.js" async></script>
+        <script src="blockly-render/exporter.js"></script>
 
         <!-- Quartet Core -->
-        <script src="quartet/regstd.js" async></script>
+        <script src="quartet/regstd.js"></script>
         <script src="quartet/generator.js"></script>
         <script src="quartet/blocks.js"></script>
         <script src="quartet/blockly-styles.js"></script>
@@ -30,16 +30,16 @@
 
         <!-- UI -->
         <script src="ui/loading-screen.js"></script>
-        <script src="ui/screen-controller.js" async></script>
-        <script src="ui/file.js" async></script>
-        <script src="ui/dialogs.js" async></script>
+        <script src="ui/screen-controller.js"></script>
+        <script src="ui/file.js"></script>
+        <script src="ui/dialogs.js"></script>
         <script src="ui/window.js"></script>
         <script src="ui/dev-tools.js"></script>
-        <script src="ui/trafficlights.js" async></script>
-        <script src="ui/console.js" async></script>
-        <script src="ui/side-console.js" async></script>
-        <script src="ui/menu.js" async></script>
-        <script src="ui/import-regexp.js" async></script>
+        <script src="ui/trafficlights.js"></script>
+        <script src="ui/console.js"></script>
+        <script src="ui/side-console.js"></script>
+        <script src="ui/menu.js"></script>
+        <script src="ui/import-regexp.js"></script>
         <script src="ui/playground.js"></script>
         <script src="ui/init.js"></script>
 	</head>
@@ -262,17 +262,21 @@
 
 		<!-- Init Page -->
         <script>
-            initWindow( )
+            window.onload = function ( ) {
+                initWindow( )
+            }
         </script>
 
         <script src="node_modules/monaco-editor/min/vs/loader.js"></script>
 		<script src="ui/playground.js"></script>
 		<script>
-            initMonacoEditor( )
-            function openHelpWindowForReference ( refID ) {
-                ipcRenderer.send( 'open-help-for-ref', refID )
-            }
-			CancelLoadingScreenAfterCompleteLoad( )
+            setTimeout( function () {
+                initMonacoEditor( )
+                function openHelpWindowForReference ( refID ) {
+                    ipcRenderer.send( 'open-help-for-ref', refID )
+                }
+                CancelLoadingScreenAfterCompleteLoad( )
+            })
 		</script>
 	</body>
 </html>

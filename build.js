@@ -16,7 +16,6 @@
     const darwinInfoPlistBase       = require('./build/darwin-info-base.json')
     const exec                      = require('child_process').exec
     const fs                        = require('fs-extra')
-    const gulp                      = require('gulp')
     const packageJsonFirstLoad      = require('./package.json')
     const path                      = require('path')
     const plist                     = require('plist')
@@ -127,7 +126,8 @@
 //
 
     /** Copies static resource files into the result directory */
-    gulp.task( 'copyResourceFiles', callback => {
+    async function copyResourceFiles ( ) {
+        console.log("--> Coping resource files")
         function copyNodeModules ( handle ) {
             const address = path.join( 'node_modules', handle )
             copyToBinaryFromDir( address, address )
@@ -140,8 +140,6 @@
         copyToBinaryFromDir( 'windows' )
         copyToBinaryFromDir( 'winserver' )
 
-
-
         // design files
         copyToBinaryFromDir( 'resources' )
         copyToBinaryFromDir( 'designs/icon/file-icon-darwin/icns' )
@@ -150,93 +148,91 @@
         OrchestraNodeModules.forEach( x => copyNodeModules( x ) )
 
         // package
-        copyFile(
+        await copyFile(
             getLocalPath( 'package.json' ),
             getLocalPath( path.join( pathToResultDir , 'package.json' ) )
         )
-
-        callback()
-    })
+    }
 
 //
 // ─── GETTING COMMIT COUNT ───────────────────────────────────────────────────────
 //
 
-    gulp.task( 'get-commit-counts', callback => {
-        const commitCountFilePath =
-            `./${pathToResultDir}/about/commit-count.txt`
-        const githubOrchestraRepositoryAPI =
-            'https://api.github.com/repos/pmkary/orchestra/stats/contributors'
+    async function getCommitCounts ( ) {
+        return new Promise ( callback => {
+            const commitCountFilePath =
+                `./${pathToResultDir}/about/commit-count.txt`
+            const githubOrchestraRepositoryAPI =
+                'https://api.github.com/repos/pmkary/orchestra/stats/contributors'
 
-        try {
-            new Promise (( resolve, reject ) => {
-                const rejectHandler = ( ) =>
-                    reject('Could not connect to GitHub')
-
-                const options = {
-                    url: githubOrchestraRepositoryAPI,
-                    method: 'GET',
-                    headers: {
-                        'User-Agent':   'Super Agent/0.0.1',
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                }
-
-                request( options, ( error, response, body ) => {
-                    if ( !error && response.statusCode == 200 )
-                        try {
-                            const data = JSON.parse( body )[ 0 ].total.toString( )
-                            resolve( data )
-                        } catch ( parseError ) {
-                            rejectHandler( )
-                        }
-                    else
-                        rejectHandler( )
-                })
-            })
-            .then( GitHubCommitCount => {
-                fs.writeFileSync( commitCountFilePath, GitHubCommitCount )
-                callback( )
-            })
-            .catch( e => {
-                callback( e )
-            })
-
-        } catch ( error ) {
             try {
-                shell( 'git', 'rev-list', '--all', '--count',
-                        '>', commitCountFilePath )
-                callback( )
+                new Promise (( resolve, reject ) => {
+                    const rejectHandler = ( ) =>
+                        reject('Could not connect to GitHub')
 
-            } catch ( error2 ) {
-                callback('Could not save latest commits count')
+                    const options = {
+                        url: githubOrchestraRepositoryAPI,
+                        method: 'GET',
+                        headers: {
+                            'User-Agent':   'Super Agent/0.0.1',
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                    }
+
+                    request( options, ( error, response, body ) => {
+                        if ( !error && response.statusCode == 200 )
+                            try {
+                                const data = JSON.parse( body )[ 0 ].total.toString( )
+                                resolve( data )
+                            } catch ( parseError ) {
+                                rejectHandler( )
+                            }
+                        else
+                            rejectHandler( )
+                    })
+                })
+                .then( GitHubCommitCount => {
+                    fs.writeFileSync( commitCountFilePath, GitHubCommitCount )
+                    callback( )
+                })
+                .catch( e => {
+                    callback( e )
+                })
+
+            } catch ( error ) {
+                try {
+                    shell( 'git', 'rev-list', '--all', '--count',
+                            '>', commitCountFilePath )
+                    callback( )
+
+                } catch ( error2 ) {
+                    callback('Could not save latest commits count')
+                }
             }
-        }
-    })
+        })
+    }
 
 //
 // ─── SHEETS ─────────────────────────────────────────────────────────────────────
 //
 
     /** Compiles the Less style sheets */
-    gulp.task( 'sheets', async callback => {
+    async function sheets ( ) {
+        console.log("--> Making sheets")
         const thisDir = (...x) => path.join( __dirname, ...x )
 
-        shell('lessc',
+        await shell('lessc',
             thisDir( 'sheets', 'ui.less' ),
             thisDir( '_compiled', 'style.css' )
-        ).then(( ) => {
-            callback( )
-        }).catch(( err ) => {
-            callback( err )
-        })
-    })
+        )
+    }
 
 //
 // ─── ELECTRON PACKER ────────────────────────────────────────────────────────────
 //
 
     async function packOrchestraForDarwin ( ) {
+        console.log( "--> Packing for Darwin" )
         const iconFile =
             ( isProductionBuild ? './designs/icon/icns/icon.icns'
                                 : './designs/icon-nightly/icns/icon.icns'
@@ -248,7 +244,7 @@
             ' _compiled',
             '"' + packageJson.productName + '"',
             '--platform=darwin',
-            '--arch=x64',
+            '--arch=arm64',
             '--overwrite=true',
             '--app-bundle-id="us.kary.orchestra"',
             '--app-copyright="' + CopyrightNotice + '"',
@@ -267,6 +263,7 @@
 
 
     function updateDarwinInfoPlistFile ( ) {
+        console.log( "--> Updating Darwin Info Plist" )
         // data
         const plistFilePath =
             ( isProductionBuild ? '_release/Orchestra-darwin-x64/Orchestra.app/Contents/Info.plist'
@@ -293,6 +290,7 @@
 
 
     async function createMacDMGImage ( ) {
+        console.log( "--> Creating Mac DMG Image" )
         const orchestraMacAppAddress =
             "_release/Orchestra-darwin-x64/Orchestra.app"
 
@@ -315,6 +313,7 @@
 //
 
     async function packOrchestraForLinux ( ) {
+        console.log( "--> Packing for Linux" )
         const iconFile =
             ( isProductionBuild ? './designs/icon/icon.png'
                                 : './designs/icon-nightly/icns/icon.icns'
@@ -344,6 +343,7 @@
 
 
     async function createDebianDEBInstaller ( ) {
+        console.log( "--> Create DEB File..." )
         await shell(
             'electron-installer-debian',
             '--src _release/Orchestra-linux-x64',
@@ -361,13 +361,29 @@
     }
 
 //
+// ─── COMPILE ────────────────────────────────────────────────────────────────────
+//
+
+    async function compile ( ) {
+        console.log( "--> Compiling" )
+        await copyResourceFiles( )
+        await sheets( )
+    }
+
+//
 // ─── PACK ───────────────────────────────────────────────────────────────────────
 //
 
-    gulp.task( 'pack-orchestra', gulp.series('copyResourceFiles', 'sheets', async callback => {
+    async function packOrchestra ( ) {
+        console.log ( "--> Packing Orchestra" )
+        await compile( )
+
         async function packFunctionBody ( ) {
-            if ( argv.debug )
-                return await shell( 'npm', 'run', 'electron' )
+            if ( argv.debug ) {
+                console.log( "--> Running electron")
+                await shell( 'npm', 'run', 'electron' )
+                return
+            }
 
             if ( argv.pack )
                 await buildAllPlatforms( )
@@ -376,28 +392,25 @@
                 await createInstallersForAllPlatforms( )
         }
 
-        packFunctionBody( )
-            .then( callback )
-            .catch( callback )
-    }))
+        await packFunctionBody( )
+    }
 
 //
 // ─── BUILD FOR ALL PLATFORMS ────────────────────────────────────────────────────
 //
 
     async function buildAllPlatforms ( ) {
+        console.log( "--> Building all platforms" )
         const platformFunctions = [ ]
 
         if ( argv.mac )
-            platformFunctions.push( packOrchestraForDarwin )
+            await packOrchestraForDarwin( )
 
         if ( argv.win )
-            platformFunctions.push( packOrchestraForWindows )
+            await packOrchestraForWindows( )
 
         if ( argv.linux )
-            platformFunctions.push( packOrchestraForLinux )
-
-        await runAsyncFunctions( platformFunctions )
+            await packOrchestraForLinux( )
     }
 
 //
@@ -405,38 +418,25 @@
 //
 
     async function createInstallersForAllPlatforms ( ) {
-        const platformFunctions = [ ]
+        console.log( "--> Making Installer" )
 
         if ( argv.mac )
-            platformFunctions.push( createMacDMGImage )
+            await createMacDMGImage( )
 
         if ( argv.linux )
-            platformFunctions.push( createDebianDEBInstaller )
-
-        await runAsyncFunctions(platformFunctions)
+            await createDebianDEBInstaller( )
     }
 
 //
 // ─── RUN MANY ASYNC FUNCTIONS ───────────────────────────────────────────────────
 //
 
-    async function runAsyncFunctions ( functions ) {
-        await Promise.all( functions.map( func => func( ) ) )
+    main ( ); async function main ( ) {
+        try {
+            await packOrchestra( )
+        } catch ( error ) {
+            console.error( error )
+        }
     }
-
-//
-// ─── AFTER PACK ─────────────────────────────────────────────────────────────────
-//
-
-    gulp.task( 'build-orchestra', gulp.series('pack-orchestra', ( callback ) => {
-        callback( )
-    }))
-
-//
-// ─── MAIN ───────────────────────────────────────────────────────────────────────
-//
-
-    /** Where everything starts */
-    gulp.task( 'default', gulp.series('build-orchestra', ( ) => { }))
 
 // ────────────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,1 @@
+npm install -g less gulp appdmg electron-packager
