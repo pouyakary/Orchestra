@@ -29,7 +29,7 @@
             border: false,
             scrollbars: true,
             // trashcan: true,
-            media: './blockly-core/media/',
+            media: '../libs/blockly-core/media/',
         })
 
         Blockly.Xml.domToWorkspace( Blockly.Xml.textToDom( defaultFileXML ), workspace )

@@ -1,12 +1,6 @@
-_compiled/*
-_release/**
-_documentation/*
-_installers/**
-node_modules/*
+_compiled/
+_release/
+_installers/
+node_modules/
 npm-debug.log
-www/*
-Orchestra-darwin-x64/**
-.vscode/.browse.VC.db
-.vscode/.browse.VC.db-shm
-.vscode/.browse.VC.db-wal
 .DS_Store

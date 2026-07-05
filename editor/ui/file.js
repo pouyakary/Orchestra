@@ -1,139 +1,91 @@
+// ─── Set dirty ───────────────────────────────────────────────────────────────
 
-//
-// Copyright © 2016-present Pouya Kary. All Rights Reserved
-//   Author: Pouya Kary <k@karyfoundation.org>
-//
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
-//
+function setFileDirty(dirt) {
+    currentFile.dirty = dirt
+    window.electronAPI.setDocumentEdited(dirt)
+    updateConsoleTitle()
+}
 
-//
-// ─── SET DIRTY ──────────────────────────────────────────────────────────────────
-//
+function getFileDirtStatus() {
+    return currentFile.emptyNewFile ? false : currentFile.dirty
+}
 
-    function setFileDirty ( dirt ) {
-        currentFile.dirty = dirt
-        OrchestraWindow.setDocumentEdited( dirt )
-        updateConsoleTitle( )
-    }
+function getFileName() {
+    return currentFile.path === defaultEmptyPath
+        ? 'Untitled.orchestra'
+        : pathLib.basename(currentFile.path)
+}
 
-//
-// ─── GET FILE DIRT STATUS ───────────────────────────────────────────────────────
-//
+// ─── Serialize ───────────────────────────────────────────────────────────────
 
-    function getFileDirtStatus ( ) {
-        return ( currentFile.emptyNewFile )? false : currentFile.dirty
-    }
+function serializeFile() {
+    return JSON.stringify({
+        workspaceXML: serializeWorkspaceIntoXML(),
+        playgroundText: playgroundEditor.getValue(),
+        compilerOptions: {
+            target: currentFile.compilerECMAScriptTarget,
+            format: currentFile.compilerOutputFormat,
+        },
+    })
+}
 
-//
-// ─── GET FILE NAME ──────────────────────────────────────────────────────────────
-//
+function serializeWorkspaceIntoXML() {
+    return Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace))
+}
 
-    function getFileName ( ) {
-        return ( currentFile.path === defaultEmptyPath )?
-            'Untitled.orchestra' : path.basename( currentFile.path )
-    }
+// ─── Save ────────────────────────────────────────────────────────────────────
 
-//
-// ─── SERIALIZE FILE ─────────────────────────────────────────────────────────────
-//
+function saveFileWithInfo() {
+    const fileJSON = serializeFile()
+    window.electronAPI.writeFile(currentFile.path, fileJSON).then(() => {
+        setFileDirty(false)
+        new Log('Saved!')
+    }).catch(() => {
+        alert(`Could not save your file at "${currentFile.path}"`)
+        currentFile = Object.assign({}, defaultFileObject)
+    })
+}
 
-    function serializeFile ( ) {
-        return JSON.stringify({
-            workspaceXML: serializeWorkspaceIntoXML( ),
-            playgroundText: playgroundEditor.getValue( ),
-            compilerOptions: {
-                target: currentFile.compilerECMAScriptTarget,
-                format: currentFile.compilerOutputFormat,
-            }
-        })}
+// ─── Open ────────────────────────────────────────────────────────────────────
 
-//
-// ─── WORKSPACE TO XML ───────────────────────────────────────────────────────────
-//
+function openFileWithPath(filePath) {
+    window.electronAPI.readFile(filePath).then((fileJSONString) => {
+        loadFileIntoWindow(fileJSONString, filePath)
+    }).catch(() => {
+        report('Error: Could not open the file.')
+    })
+}
 
-    function serializeWorkspaceIntoXML ( ) {
-        return Blockly.Xml.domToText( Blockly.Xml.workspaceToDom( workspace ) )
-    }
+function loadFileIntoWindow(fileJSONString, filePath) {
+    try {
+        const fileJSON = Object.assign(emptyBaseFileJSON, JSON.parse(fileJSONString))
 
-//
-// ─── SAVE FILE ──────────────────────────────────────────────────────────────────
-//
-
-    function saveFileWithInfo ( ) {
-        // Going with the file path
-        const fileJSON = serializeFile( )
-
-        // save the file
-        fs.writeFile( currentFile.path, fileJSON, err => {
-            if ( err ) {
-                alert(`Could not save your file at "${ currentFile.path }"`)
-                currentFile = Object.assign({ }, defaultFileObject )
-            } else {
-                setFileDirty( false )
-                new Log( "Saved!" )
-            }
-        })
-    }
-
-//
-// ─── OPEN FILE ──────────────────────────────────────────────────────────────────
-//
-
-    function openFileWithPath ( filePath ) {
-        // open the file
-        fs.readFile( filePath, ( err, fileJSONString ) => {
-            if ( err ) {
-                report('Error: Could not open the file.')
-                return
-            }
-
-            loadFileIntoWindow( fileJSONString, filePath )
-        })}
-
-//
-// ─── LOAD FILE INTO WINDOW ──────────────────────────────────────────────────────
-//
-
-    function loadFileIntoWindow ( fileJSONString, filePath ) {
-        try {
-            const fileJSON =
-                Object.assign( emptyBaseFileJSON, JSON.parse( fileJSONString ) )
-
-            // workspace
-            if ( fileJSON.workspaceXML !== undefined && fileJSON.workspaceXML !== null ) {
-                updateWorkspaceWithNewXML( fileJSON.workspaceXML )
-                currentFile.path = filePath
-                setFileDirty( true )
-            }
-
-            // playground
-            if ( fileJSON.playgroundText !== undefined && fileJSON.playgroundText !== '' )
-                playgroundEditor.setValue( fileJSON.playgroundText )
-
-            // compiler configs
-            currentFile.compilerECMAScriptTarget = fileJSON.compilerOptions.target
-            currentFile.compilerOutputFormat = fileJSON.compilerOptions.format
-            renderCompilerOptionsView( )
-
-            new Log( "Opened!" )
-
-        } catch ( error ) {
-            report( `Could not load the file because of a broken file problem.${ error }` )
+        if (fileJSON.workspaceXML !== undefined && fileJSON.workspaceXML !== null) {
+            updateWorkspaceWithNewXML(fileJSON.workspaceXML)
+            currentFile.path = filePath
+            setFileDirty(true)
         }
+
+        if (fileJSON.playgroundText !== undefined && fileJSON.playgroundText !== '')
+            playgroundEditor.setValue(fileJSON.playgroundText)
+
+        currentFile.compilerECMAScriptTarget = fileJSON.compilerOptions.target
+        currentFile.compilerOutputFormat = fileJSON.compilerOptions.format
+        renderCompilerOptionsView()
+
+        new Log('Opened!')
+    } catch (error) {
+        report(`Could not load the file because of a broken file problem.${error}`)
     }
+}
 
-//
-// ─── EXPORT SVG IMAGE ───────────────────────────────────────────────────────────
-//
+// ─── Export SVG ──────────────────────────────────────────────────────────────
 
-    function exportSVGImageTo ( filePath ) {
-        const fileSVGString = renderWorkspaceIntoSVG( )
-        fs.writeFile( filePath, fileSVGString, error => {
-            if ( error )
-                alert( 'File could not be saved. Please try again.' )
-            new Log( "SVG got exported!" )
-        })}
-
-// ────────────────────────────────────────────────────────────────────────────────
+function exportSVGImageTo(filePath) {
+    const fileSVGString = renderWorkspaceIntoSVG()
+    window.electronAPI.writeFile(filePath, fileSVGString).then(() => {
+        new Log('SVG got exported!')
+    }).catch(() => {
+        alert('File could not be saved. Please try again.')
+    })
+}

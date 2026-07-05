@@ -85,7 +85,7 @@
             code += 'A-Z'
         code += quartetEncodeText( text_other )
 
-        return '[ ' + code + ' ]'
+        return `[${code}]`
     }
 
 //

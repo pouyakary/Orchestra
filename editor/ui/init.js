@@ -13,6 +13,11 @@
 //
 
     function initWindow ( ) {
+        // Add platform class to body for CSS targeting
+        if (window.electronAPI.getPlatform() === 'darwin') {
+            document.body.classList.add('darwin')
+        }
+
         initDeveloperToolsInfrastructure( )
         setupWorkspace( )
         appendTrafficLightEvents( )

@@ -1,138 +1,91 @@
+// ─── New file ────────────────────────────────────────────────────────────────
 
-//
-// Copyright © 2016-present Pouya Kary. All Rights Reserved
-//   Author: Pouya Kary <k@karyfoundation.org>
-//
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
-//
+async function onNewFile(force = false) {
+    if (!(await checkForSavingChanges()) && !force) return
 
-//
-// ─── ON NEW FILE ────────────────────────────────────────────────────────────────
-//
+    currentFile = Object.assign({}, defaultFileObject)
+    currentFile.compilerOptions = Object.assign({}, compileOptionsBaseOptions)
+    renderCompilerOptionsView()
+    updateWorkspaceWithNewXML(defaultFileXML)
+}
 
-    function onNewFile ( force = false ) {
-        if ( !( checkForSavingChanges( ) || force ) ) { return }
+// ─── Open file ───────────────────────────────────────────────────────────────
 
-        currentFile =
-            Object.assign({ }, defaultFileObject)
-        currentFile.compilerOptions =
-            Object.assign({ }, compileOptionsBaseOptions )
-        renderCompilerOptionsView( )
+async function onOpenFile() {
+    if (!(await checkForSavingChanges())) return
 
-        updateWorkspaceWithNewXML( defaultFileXML )
+    const { canceled, filePaths } = await window.electronAPI.showOpenDialog({
+        properties: ['openFile'],
+        filters: [{
+            name: 'Orchestra Language',
+            extensions: ['orchestra'],
+        }],
+    })
+
+    if (canceled || !filePaths || filePaths.length === 0) return
+    openFileWithPath(filePaths[0])
+}
+
+// ─── Save ────────────────────────────────────────────────────────────────────
+
+async function onSaveFile(force = false) {
+    const hasPath = await checkPathAndAskForPathIfNeeded(force)
+    if (hasPath) saveFileWithInfo()
+}
+
+function onSaveFileAs() {
+    onSaveFile(true)
+}
+
+// ─── Export SVG ──────────────────────────────────────────────────────────────
+
+async function onExportWorkspaceToSVG() {
+    if (workspace.getTopBlocks().length === 1) {
+        const { canceled, filePath } = await window.electronAPI.showSaveDialog({
+            filters: [{ name: 'SVG', extensions: ['svg'] }],
+        })
+        if (!canceled && filePath) exportSVGImageTo(filePath)
+    } else {
+        alert('Your workspace contains blocks in top level other than Quartet Compose Block. Please clean up your workspace and try again.')
+    }
+}
+
+// ─── Check and ask for file path ─────────────────────────────────────────────
+
+async function checkPathAndAskForPathIfNeeded(forceAsk = false) {
+    if (currentFile.path !== defaultEmptyPath && !forceAsk) {
+        return true
     }
 
-//
-// ─── ON OPEN FILE ───────────────────────────────────────────────────────────────
-//
+    const { canceled, filePath } = await window.electronAPI.showSaveDialog({
+        filters: [{ name: 'Orchestra Language', extensions: ['orchestra'] }],
+    })
 
-    function onOpenFile ( ) {
-        if ( !checkForSavingChanges( ) ) { return }
+    if (!canceled && filePath) {
+        currentFile.path = filePath
+        return true
+    }
 
-        // get file path
-        let filePath = dialog.showOpenDialog( getWindowForDialogSheets( ), {
-            properties: [ 'openFile' ],
-            filters: [{
-                name: 'Orchestra Language',
-                extensions: [ 'orchestra' ]
-            }]
+    currentFile = Object.assign({}, defaultFileObject)
+    return false
+}
+
+// ─── Check for saving changes ────────────────────────────────────────────────
+
+async function checkForSavingChanges() {
+    if (getFileDirtStatus()) {
+        const { response } = await window.electronAPI.showMessageBox({
+            buttons: ['Save Them', "Cancel", "Don't Save"],
+            title: 'Orchestra',
+            message: "Don't let your saves be lost",
+            detail: "If you don't save then everything since your last save will be lost. You're a developer you know that.",
         })
 
-        if ( filePath === undefined ) { return }
-
-        // done let's load.
-        openFileWithPath( filePath[ 0 ] )
-    }
-
-//
-// ─── ON SAVE FILE ───────────────────────────────────────────────────────────────
-//
-
-    function onSaveFile ( force = false ) {
-        if ( checkPathAndAskForPathIfNeeded( force ) )
-            saveFileWithInfo( )
-    }
-
-//
-// ─── ON SAVE FILE AS ────────────────────────────────────────────────────────────
-//
-
-    function onSaveFileAs ( ) {
-        onSaveFile( true )
-    }
-
-//
-// ─── ON EXPORT SVG FILE ─────────────────────────────────────────────────────────
-//
-
-    function onExportWorkspaceToSVG ( ) {
-        if ( workspace.getTopBlocks( ).length === 1 ) {
-            let filePath = dialog.showSaveDialog( getWindowForDialogSheets( ), {
-                filters: [{
-                    name: 'SVG',
-                    extensions: [ 'svg' ],
-                }]})
-
-            if ( filePath !== undefined )
-                exportSVGImageTo( filePath )
+        if (response === 0) {
+            await onSaveFile()
+            return true
         }
-
-        else alert("Your workspace contains blocks in top level other than Quartet Compose Block. Please clean up your workspace and try again.")
+        if (response === 1) return false
     }
-
-//
-// ─── GET WINDOW FOR DIALOG SHEETS ───────────────────────────────────────────────
-//
-
-    function getWindowForDialogSheets ( ) {
-        return ( OrchestraWindow.isMaximized( ) )? OrchestraWindow : null
-    }
-
-//
-// ─── CHECK AND ASK FOR FILE PATH ────────────────────────────────────────────────
-//
-
-    function checkPathAndAskForPathIfNeeded ( forceAsk = false ) {
-        if ( currentFile.path === defaultEmptyPath || forceAsk ) {
-            const newPath = dialog.showSaveDialog( getWindowForDialogSheets( ), {
-                filters: [{
-                    name: 'Orchestra Language',
-                    extensions: [ 'orchestra' ],
-                }]})
-
-            if ( newPath !== undefined ) {
-                currentFile.path = newPath
-                return true
-            } else {
-                currentFile = Object.assign({ }, defaultFileObject )
-                return false
-            }
-        }
-        return true
-    }
-
-//
-// ─── SAVE BEFORE FILE CHANGE ────────────────────────────────────────────────────
-//
-
-    function checkForSavingChanges ( ) {
-        if ( getFileDirtStatus( ) ) {
-            const ans = dialog.showMessageBox( getWindowForDialogSheets( ), {
-                buttons: [ "Save Them", "Cancel", "Don't Save" ],
-                title: "Orchestra",
-                message: "Don't let your saves be lost",
-                detail: "If you don't save then everything since your last save will be lost. You're a developer you know that."
-            })
-
-            if ( ans === 0 )
-                onSaveFile( )
-            else if ( ans === 1 )
-                return false
-        }
-
-        return true
-    }
-
-// ────────────────────────────────────────────────────────────────────────────────
+    return true
+}

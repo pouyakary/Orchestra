@@ -3,18 +3,78 @@
     "description": "RegEx done right",
     "homepage": "http://orchestra.kary.us",
     "license": "Apache-2.0",
-    "main": "main.js",
+    "main": "winserver/main.js",
     "name": "orchestra",
     "productName": "Orchestra",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "scripts": {
-        "build-linux": "node build.js --pack --installers --linux --production-build",
-        "build-mac": "node build.js  --pack --installers --mac --production-build",
-        "configure": "npm install -g gulp gulp-cli electron-installer-dmg electron-installer-debian less",
-        "debug": "node build.js  --debug",
-        "dist-mac": "node build.js  --pack --installers --mac",
-        "electron": "electron ./_compiled/main.js --enable-logging",
-        "pack": "node build.js  --pack"
+        "start": "electron .",
+        "build": "electron-builder --mac",
+        "build:linux": "electron-builder --linux",
+        "build:win": "electron-builder --win",
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder"
+    },
+    "build": {
+        "appId": "us.kary.orchestra",
+        "productName": "Orchestra",
+        "directories": {
+            "output": "_release"
+        },
+        "files": [
+            "winserver/**/*",
+            "editor/**/*",
+            "view/**/*",
+            "libs/**/*",
+            "windows/**/*",
+            "resources/**/*",
+            "sheets/**/*",
+            "!node_modules/**/{test,__tests__,tests,powered-test,example,examples}",
+            "!node_modules/**/*.{md,ts,map}"
+        ],
+        "extraResources": [],
+        "mac": {
+            "category": "public.app-category.developer-tools",
+            "icon": "designs/icon/icns/icon.icns",
+            "target": [
+                "dmg",
+                "zip"
+            ],
+            "hardenedRuntime": true,
+            "extendInfo": {
+                "CFBundleDocumentTypes": [
+                    {
+                        "CFBundleTypeName": "Orchestra Source File",
+                        "CFBundleTypeRole": "Editor",
+                        "CFBundleTypeExtensions": ["orchestra"]
+                    }
+                ],
+                "CFBundleURLTypes": [
+                    {
+                        "CFBundleTypeRole": "Viewer",
+                        "CFBundleURLName": "Orchestra",
+                        "CFBundleURLSchemes": ["orchestra"]
+                    }
+                ]
+            }
+        },
+        "dmg": {
+            "background": "build/dmg-back.png",
+            "iconSize": 152
+        },
+        "linux": {
+            "target": [
+                "AppImage",
+                "deb"
+            ],
+            "category": "Development"
+        },
+        "win": {
+            "target": [
+                "nsis"
+            ],
+            "icon": "designs/icon/icon.ico"
+        }
     },
     "repository": {
         "type": "git",
@@ -25,26 +85,15 @@
         "core-js": "^3.4.7",
         "jsonfile": "^2.4.0",
         "lodash.template": "^4.5.0",
-        "messenger": "0.0.9",
-        "monaco-editor": "^0.9.0",
-        "natives": "^1.1.6",
+        "monaco-editor": "^0.52.0",
         "regenerate-unicode-properties": "^8.1.0",
         "regexpu": "^4.1.1",
-        "regulex": "0.0.2",
-        "request": "^2.88.2"
+        "regulex": "0.0.2"
     },
     "devDependencies": {
-        "electron": "^13.1.9",
-        "electron-builder": "^22.11.7",
-        "electron-installer-dmg": "^0.2.1",
-        "electron-packager": "^15.3.0",
-        "fs-extra": "^0.30.0",
-        "gulp": "^3.9.1",
-        "gulp-cli": "^2.3.0",
-        "gulp-uglify": "1.5.3",
-        "mv": "^2.1.1",
-        "plist": "^0.3.1",
-        "sloc": "0.1.10",
+        "electron": "^33.0.0",
+        "electron-builder": "^25.0.0",
+        "less": "^4.2.0",
         "yargs": "^17.1.1"
     }
 }

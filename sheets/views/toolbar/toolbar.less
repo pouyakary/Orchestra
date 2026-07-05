@@ -26,16 +26,31 @@
         background-repeat:      no-repeat;
         padding-top:            6px;
         padding-bottom:         6px;
-        //padding-left: 20px;
+        padding-left:           20px;
         padding-right:          20px;
         font-size:              1.8rem;
         color:                  var( --kary-foreground );
         height:                 @header-height - 6px;
         background-color:       var( --color-2 );
         width:                  100vw;
-        //background-color: #D9D9D9;
         overflow:               hidden;
         border-bottom:          @ribbon-border-size solid var( --acent-color );
+    }
+
+    // On macOS, match native title bar for traffic lights
+    .darwin .heading {
+        padding-left:           78px;
+        height:                 28px;
+    }
+
+    .heading #window-buttons,
+    .heading .ribbon-icon,
+    .heading .ribbon-separator,
+    .heading .invisible-tab,
+    .heading #ribbon-console-view,
+    .heading button,
+    .heading input {
+        -webkit-app-region:     no-drag;
     }
 
 //
@@ -80,19 +95,19 @@
 
     #icon-move {
         margin-left:            30px;
-        background-image:       url('cursor.png');
+        background-image:       url('../resources/cursor.png');
     }
 
     #icon-edit {
-        background-image:       url('edit.png');
+        background-image:       url('../resources/edit.png');
     }
 
     #icon-remove {
-        background-image:       url('remove.png');
+        background-image:       url('../resources/remove.png');
     }
 
     #icon-select {
-        background-image:       url('select.png');
+        background-image:       url('../resources/select.png');
     }
 
 //

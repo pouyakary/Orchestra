@@ -1,40 +1,27 @@
+// ─── Change to editor ────────────────────────────────────────────────────────
 
-//
-// Copyright © 2016-present Pouya Kary. All Rights Reserved
-//   Author: Pouya Kary <k@karyfoundation.org>
-//
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
-//
+function onChangeWindowToEditor() {
+    CurrentActiveView = 'editor'
+    setActiveTabInMenu()
+    document.getElementById(EditorWindowScreenElement).hidden = false
+    document.getElementById(PlaygroundWindowScreenElement).hidden = true
+    document.getElementById(TabsPlaceholder).className = 'editor-tab'
 
-//
-// ─── CHANGE TO EDITOR ───────────────────────────────────────────────────────────
-//
+    Blockly.fireUiEvent(window, 'resize')
+}
 
-    function onChangeWindowToEditor ( ) {
-        CurrentActiveView = 'editor'
-        setActiveTabInMenu( )
-        document.getElementById( EditorWindowScreenElement ).hidden = false
-        document.getElementById( PlaygroundWindowScreenElement ).hidden = true
-        document.getElementById( TabsPlaceholder ).className = 'editor-tab'
+// ─── Change to playground ────────────────────────────────────────────────────
 
-        Blockly.fireUiEvent( window, 'resize' )
-    }
+function onChangeWindowToPlayground() {
+    CurrentActiveView = 'playground'
+    setActiveTabInMenu()
+    document.getElementById(EditorWindowScreenElement).hidden = true
+    document.getElementById(PlaygroundWindowScreenElement).hidden = false
+    document.getElementById(TabsPlaceholder).className = 'playground-tab'
 
-//
-// ─── CHANGE TO PLAYGROUND ───────────────────────────────────────────────────────
-//
-
-    function onChangeWindowToPlayground ( ) {
-        CurrentActiveView = 'playground'
-        setActiveTabInMenu( )
-        document.getElementById( EditorWindowScreenElement ).hidden = true
-        document.getElementById( PlaygroundWindowScreenElement ).hidden = false
-        document.getElementById( TabsPlaceholder ).className = 'playground-tab'
-
-        initMonacoEditor( )
-        playgroundEditor.layout( )
-    }
-
-// ────────────────────────────────────────────────────────────────────────────────
+    initMonacoEditor(() => {
+        if (playgroundEditor) {
+            playgroundEditor.layout()
+        }
+    })
+}

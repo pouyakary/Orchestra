@@ -1,428 +1,484 @@
+const { app, BrowserWindow, ipcMain, dialog, shell, Menu, clipboard } = require('electron')
+const fs = require('fs')
+const path = require('path')
 
-//
-// Copyright © 2016-present Pouya Kary. All Rights Reserved
-//   Author: Pouya Kary <k@karyfoundation.org>
-//
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
-//
+const orchestraVersion = '1.0'
+const quartetVersion = '1.2'
+const settingsFilePath = path.join(app.getPath('userData'), 'orchestraSettings.json')
 
-'use strict'
+let windows = new Set()
+let windowCount = 0
+let isHelpWindowOpen = false
+let isAboutWindowOpen = false
+let isWinServerLoaded = false
+let helpWindow = null
+let firstLoadFilePath = null
+let settings = { windowThemeStatus: 'light' }
 
-//
-// ─── DEFS ───────────────────────────────────────────────────────────────────────
-//
+// ─── Settings ────────────────────────────────────────────────────────────────
 
-    const electron                          = require( 'electron' )
-    const { ipcMain, BrowserWindow, app }   = electron
-    const { contextBridge, dialog }         = electron
-    const messenger                         = require( 'messenger' )
-    const fs                                = require( 'fs' )
-    const path                              = require( 'path' )
-
-//
-// ─── CONSTANTS ──────────────────────────────────────────────────────────────────
-//
-
-    const uniqueWindowIdKey     = 'orchestra-unique-window-id'
-    const settingsFilePath      = path.join( __dirname, 'orchestraSettings.json' )
-    const orchestraVersion      = '1.0'
-    const quartetVersion        = '1.2'
-
-    const webPreferences = {
-        nodeIntegration:        true,
-        contextIsolation:       false,
-        enableRemoteModule:     true,
-        preload:                path.join( __dirname, "preload.js" )
+function loadSettings() {
+    try {
+        Object.assign(settings, JSON.parse(fs.readFileSync(settingsFilePath, 'utf8')))
+    } catch {
+        // No settings file yet
     }
+}
 
-//
-// ─── STORAGE ────────────────────────────────────────────────────────────────────
-//
+function saveSettings() {
+    fs.writeFileSync(settingsFilePath, JSON.stringify(settings))
+}
 
-    let windows             = new Set( )
-    let windowCount         = 0
-    let isHelpWindowOpen    = false
-    let isAboutWindowOpen   = false
-    let isWinServerLoaded   = false
-    let helpWindow
-    let firstLoadFilePath   = null
+function updateSettings(newSettings) {
+    Object.assign(settings, newSettings)
+    saveSettings()
+}
 
-    let settings = {
-        windowThemeStatus: 'light'
-    }
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
-//
-// ─── HELPER TOOLS ───────────────────────────────────────────────────────────────
-//
-
-    function existsSync ( filename ) {
-        try {
-            fs.accessSync( filename )
-            return true
-        } catch ( ex ) {
-            return false
+function broadcast(messageId, data) {
+    for (const win of windows) {
+        if (!win.isDestroyed()) {
+            win.webContents.send(messageId, data)
         }
     }
+}
 
-//
-// ─── IPC BROAD CAST ─────────────────────────────────────────────────────────────
-//
+// ─── Preload paths ───────────────────────────────────────────────────────────
 
-    function broadcast ( messageId, data ) {
-        for ( let win of windows )
-            win.webContents.send( messageId, data )
+function getPreloadPath() {
+    return path.join(__dirname, 'preload.js')
+}
+
+// ─── Window creation ─────────────────────────────────────────────────────────
+
+function createWindow(args = { mode: 'start' }) {
+    windowCount++
+
+    const windowWidth = 1100
+    const windowHeight = 640
+
+    const isMac = process.platform === 'darwin'
+
+    const editorWindow = new BrowserWindow({
+        show: false,
+        width: windowWidth,
+        minWidth: windowWidth - 150,
+        height: windowHeight,
+        minHeight: windowHeight - 100,
+        frame: !isMac,
+        titleBarStyle: isMac ? 'hiddenInset' : undefined,
+        webPreferences: {
+            nodeIntegration: false,
+            contextIsolation: true,
+            sandbox: false,
+            preload: getPreloadPath(),
+        },
+    })
+
+    editorWindow.maximize()
+    editorWindow.setMenuBarVisibility(false)
+
+    const windowOptions = {
+        theme: settings.windowThemeStatus,
     }
 
-//
-// ─── SAVE SETTINGS ──────────────────────────────────────────────────────────────
-//
+    if (args.mode === 'file') windowOptions.file = args.file
+    if (args.mode === 'parse') windowOptions.regexp = args.regexp
 
-    function saveSettings ( ) {
-        fs.writeFileSync( settingsFilePath, JSON.stringify( settings ) )
-    }
+    windows.add(editorWindow)
 
-//
-// ─── UPDATE SETTINGS ────────────────────────────────────────────────────────────
-//
+    const indexPath = path.join(__dirname, '..', 'view', 'index.html')
+    const query = encodeURI(JSON.stringify(windowOptions))
+    editorWindow.loadURL(`file://${indexPath}?${query}`)
 
-    function updateSettings ( newSettings ) {
-        Object.assign( settings, newSettings )
-        saveSettings( )
-    }
+    editorWindow.once('ready-to-show', () => {
+        editorWindow.show()
+        editorWindow.focus()
+    })
 
-//
-// ─── GENERATE MAIN WINDOW ───────────────────────────────────────────────────────
-//
+    editorWindow.on('closed', () => {
+        windows.delete(editorWindow)
+        windowCount--
+    })
 
-    function createWindow ( args = { mode: 'start' } ) {
-        let editorWindow
-        windowCount++
+    return editorWindow
+}
 
-        const window_width = 1100
-        const window_height = 640
-        editorWindow = new BrowserWindow({
-            show: false,
-            width:  window_width,   minWidth: window_width - 150,
-            height: window_height,  minHeight: window_height - 100,
-            //backgroundColor: ( settings.windowThemeStatus === 'dark' )? '1E1E1E' : '#F7F7F7',
-            frame: false,
-            // fullscreen: false,
-            webPreferences
+// ─── Help window ─────────────────────────────────────────────────────────────
+
+function openHelpWindow(arg = '') {
+    if (isHelpWindowOpen) return
+    isHelpWindowOpen = true
+
+    helpWindow = new BrowserWindow({
+        title: 'Orchestra Blocks Reference',
+        width: 1050,
+        minWidth: 1050,
+        height: 600,
+        minHeight: 200,
+        backgroundColor: 'white',
+        webPreferences: {
+            nodeIntegration: false,
+            contextIsolation: true,
+            sandbox: false,
+            preload: getPreloadPath(),
+        },
+    })
+
+    windows.add(helpWindow)
+
+    const helpPath = path.join(__dirname, '..', 'windows', 'help', 'index.html')
+    const query = arg === '' ? 'none' : `ref-${arg}`
+    helpWindow.loadURL(`file://${helpPath}?${query}`)
+
+    helpWindow.on('closed', () => {
+        isHelpWindowOpen = false
+        windows.delete(helpWindow)
+        helpWindow = null
+    })
+}
+
+// ─── About window ────────────────────────────────────────────────────────────
+
+function openAboutWindow(parent) {
+    if (isAboutWindowOpen) return
+    isAboutWindowOpen = true
+
+    const aboutWindowHeight = 415
+    const aboutWindowWidth = 650
+
+    const aboutWindow = new BrowserWindow({
+        title: 'Orchestra Hall',
+        titleBarStyle: 'hiddenInset',
+        width: aboutWindowWidth,
+        minWidth: aboutWindowWidth,
+        maxWidth: aboutWindowWidth,
+        height: aboutWindowHeight,
+        minHeight: aboutWindowHeight,
+        maxHeight: aboutWindowHeight,
+        minimizable: false,
+        maximizable: false,
+        resizable: false,
+        fullscreen: false,
+        parent: parent,
+        modal: true,
+        show: false,
+        webPreferences: {
+            nodeIntegration: false,
+            contextIsolation: true,
+            sandbox: false,
+            preload: getPreloadPath(),
+        },
+    })
+
+    const aboutPath = path.join(__dirname, '..', 'windows', 'about', 'index.html')
+    const query = encodeURI(JSON.stringify({
+        theme: settings.windowThemeStatus,
+        orchestraVersion,
+        quartetVersion,
+    }))
+    aboutWindow.loadURL(`file://${aboutPath}?${query}`)
+
+    aboutWindow.once('ready-to-show', () => {
+        aboutWindow.show()
+    })
+
+    windows.add(aboutWindow)
+
+    aboutWindow.on('closed', () => {
+        isAboutWindowOpen = false
+        windows.delete(aboutWindow)
+    })
+}
+
+// ─── App menu ────────────────────────────────────────────────────────────────
+
+function buildAppMenu() {
+    const template = [
+        {
+            label: 'File',
+            submenu: [
+                { label: 'New File', accelerator: 'CmdOrCtrl+N', click: () => broadcast('menu-action', 'new-file') },
+                { label: 'New Window', accelerator: 'Shift+CmdOrCtrl+N', click: () => createWindow() },
+                { type: 'separator' },
+                { label: 'Open...', accelerator: 'CmdOrCtrl+O', click: () => broadcast('menu-action', 'open-file') },
+                { type: 'separator' },
+                { label: 'Save', accelerator: 'CmdOrCtrl+S', click: () => broadcast('menu-action', 'save-file') },
+                { label: 'Save As', accelerator: 'Shift+CmdOrCtrl+S', click: () => broadcast('menu-action', 'save-file-as') },
+                { type: 'separator' },
+                { label: 'Export to SVG', accelerator: 'CmdOrCtrl+E', click: () => broadcast('menu-action', 'export-svg') },
+            ],
+        },
+        {
+            label: 'Edit',
+            submenu: [
+                { label: 'Undo', accelerator: 'CmdOrCtrl+Z', role: 'undo' },
+                { type: 'separator' },
+                { label: 'Cut', accelerator: 'CmdOrCtrl+X', role: 'cut' },
+                { label: 'Copy', accelerator: 'CmdOrCtrl+C', role: 'copy' },
+                { label: 'Copy Compiled RegExp', accelerator: 'Shift+CmdOrCtrl+C', click: () => broadcast('menu-action', 'copy-regexp') },
+                { label: 'Paste', accelerator: 'CmdOrCtrl+V', role: 'paste' },
+                { label: 'Select All', accelerator: 'CmdOrCtrl+A', role: 'selectAll' },
+            ],
+        },
+        {
+            label: 'View',
+            submenu: [
+                { label: 'Night Mode', accelerator: 'Shift+CmdOrCtrl+N', type: 'checkbox', click: () => broadcast('menu-action', 'toggle-theme') },
+                { type: 'separator' },
+                { label: 'Editor', accelerator: 'CmdOrCtrl+E', type: 'radio', click: () => broadcast('menu-action', 'switch-editor') },
+                { label: 'Playground', accelerator: 'CmdOrCtrl+P', type: 'radio', click: () => broadcast('menu-action', 'switch-playground') },
+            ],
+        },
+        {
+            label: 'Window',
+            role: 'window',
+            submenu: [
+                { role: 'minimize' },
+                { label: 'Maximize', accelerator: 'Shift+CmdOrCtrl+M', click: () => broadcast('menu-action', 'maximize') },
+                { role: 'togglefullscreen' },
+                { label: 'Lock Position and Size', accelerator: 'Shift+CmdOrCtrl+L', type: 'checkbox', click: () => broadcast('menu-action', 'toggle-lock') },
+                { role: 'close' },
+                { type: 'separator' },
+                { label: 'Open Developer Tools', accelerator: 'Shift+CmdOrCtrl+D', click: (_, win) => { if (win) win.webContents.openDevTools({ mode: 'detach' }) } },
+            ],
+        },
+        {
+            label: 'Help',
+            role: 'help',
+            submenu: [
+                { label: 'Orchestra Blocks Reference (Offline)', click: () => openHelpWindow() },
+                { type: 'separator' },
+                { label: 'RegExp on ECMA-262 Edition 6.0', click: () => shell.openExternal('http://www.ecma-international.org/ecma-262/6.0/#sec-regexp-regular-expression-objects') },
+                { label: 'RegExp on MDN Web Docs', click: () => shell.openExternal('https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/RegExp') },
+                { type: 'separator' },
+                { label: "Pouya Kary's Website", click: () => shell.openExternal('https://kary.us/') },
+                { label: 'Report an issue...', click: () => shell.openExternal('https://github.com/pmkary/orchestra/issues') },
+                { label: 'Orchestra on GitHub', click: () => shell.openExternal('https://github.com/pmkary/orchestra') },
+            ],
+        },
+    ]
+
+    // macOS app menu
+    if (process.platform === 'darwin') {
+        template.unshift({
+            label: app.getName(),
+            submenu: [
+                { label: 'About Orchestra', click: (_, win) => openAboutWindow(win) },
+                { type: 'separator' },
+                { label: 'Services', role: 'services', submenu: [] },
+                { type: 'separator' },
+                { label: `Hide ${app.getName()}`, accelerator: 'Command+H', role: 'hide' },
+                { label: 'Hide Others', accelerator: 'Command+Alt+H', role: 'hideOthers' },
+                { label: 'Show All', role: 'unhide' },
+                { type: 'separator' },
+                { label: 'Quit', accelerator: 'Command+Q', click: () => app.quit() },
+            ],
         })
+    } else {
+        // Windows/Linux: add About to Help menu
+        template[template.length - 1].submenu.push(
+            { type: 'separator' },
+            { label: 'About Orchestra', click: (_, win) => openAboutWindow(win) }
+        )
+    }
 
-        editorWindow.maximize( )
-        editorWindow.setMenuBarVisibility( false )
-        //editorWindow.openDevTools( )
+    const menu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(menu)
+}
 
+// ─── IPC handlers ────────────────────────────────────────────────────────────
 
-        // settings up window options
-        let windowOptions = {
-            theme: settings.windowThemeStatus,
+function setupIPC() {
+    // File operations
+    ipcMain.handle('file:read', async (_, filePath) => {
+        return fs.promises.readFile(filePath, 'utf8')
+    })
+
+    ipcMain.handle('file:write', async (_, filePath, data) => {
+        await fs.promises.writeFile(filePath, data, 'utf8')
+    })
+
+    // Dialogs
+    ipcMain.handle('dialog:open', async (event, options) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        const result = await dialog.showOpenDialog(win, options)
+        return result
+    })
+
+    ipcMain.handle('dialog:save', async (event, options) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        const result = await dialog.showSaveDialog(win, options)
+        return result
+    })
+
+    ipcMain.handle('dialog:message', async (event, options) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        const result = await dialog.showMessageBox(win, options)
+        return result
+    })
+
+    // Shell
+    ipcMain.handle('shell:open-external', async (_, url) => {
+        await shell.openExternal(url)
+    })
+
+    // Clipboard
+    ipcMain.handle('clipboard:write-text', async (_, text) => {
+        clipboard.writeText(text)
+    })
+
+    // App info
+    ipcMain.handle('app:get-name', () => app.getName())
+
+    // Window controls
+    ipcMain.on('window:minimize', (event) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        if (win) win.minimize()
+    })
+
+    ipcMain.on('window:maximize', (event) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        if (win) {
+            if (win.isMaximized()) win.unmaximize()
+            else win.maximize()
         }
+    })
 
-        if ( args.mode === 'file' )
-            windowOptions.file = args.file
+    ipcMain.on('window:close', (event) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        if (win) win.close()
+    })
 
-        if ( args.mode === 'parse' )
-            windowOptions.regexp = args.regexp
+    ipcMain.on('window:toggle-fullscreen', (event) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        if (win) win.setFullScreen(!win.isFullScreen())
+    })
 
-        // adding to windows
-        windows.add( editorWindow )
+    ipcMain.on('window:set-edited', (event, edited) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        if (win) win.setDocumentEdited(edited)
+    })
 
-        // loading the window
-        editorWindow.loadURL( `file://${ __dirname }/index.html?${
-            encodeURI( JSON.stringify( windowOptions ) )
-        }`)
+    ipcMain.on('window:set-represented-filename', (event, filename) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        if (win) win.setRepresentedFilename(filename)
+    })
 
-        editorWindow.once( 'ready-to-show', ( ) => {
-            editorWindow.show( )
-            editorWindow.focus( )
-        })
+    ipcMain.on('window:set-movable', (event, movable) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        if (win) win.setMovable(movable)
+    })
 
-        // editorWindow.openDevTools( )
+    ipcMain.on('window:set-resizable', (event, resizable) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        if (win) win.setResizable(resizable)
+    })
 
-        editorWindow.on( 'closed' , ( ) => {
-            windows.delete( editorWindow )
-            windowCount--
-        })
-    }
+    ipcMain.on('window:open-devtools', (event) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        if (win) win.webContents.openDevTools({ mode: 'detach' })
+    })
 
-//
-// ─── OPEN HELP WINDOW ───────────────────────────────────────────────────────────
-//
+    // Window state queries
+    ipcMain.handle('window:is-maximized', (event) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        return win ? win.isMaximized() : false
+    })
 
-    function openHelpWindow ( arg = '' ) {
-        if ( isHelpWindowOpen ) return
-        isHelpWindowOpen = true
+    ipcMain.handle('window:is-fullscreen', (event) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        return win ? win.isFullScreen() : false
+    })
 
-        helpWindow = new BrowserWindow({
-            title: "Orchestra Blocks Reference",
-            width:  1050, minWidth: 1050,
-            height: 600, minHeight: 200,
-            backgroundColor: 'white',
-            fullscreen: false,
-            webPreferences
-        })
+    // Theme
+    ipcMain.on('theme-change', (_, mode) => {
+        updateSettings({ windowThemeStatus: mode })
+        broadcast('change-theme-to', mode)
+    })
 
-        // helpWindow.openDevTools( )
+    // Help window
+    ipcMain.on('open-help-page', () => openHelpWindow())
 
-        // adding to windows
-        windows.add( helpWindow )
-
-
-        if ( arg === '' )
-            helpWindow.loadURL( `file://${ __dirname }/help/index.html?none` )
-        else
-            helpWindow.loadURL( `file://${ __dirname }/help/index.html?ref-${ arg }` )
-
-        helpWindow.on( 'closed' , ( ) => {
-            isHelpWindowOpen = false
-            windows.delete( helpWindow )
-            helpWindow = null
-        })
-    }
-
-//
-// ─── OPEN ABOUT PAGE ────────────────────────────────────────────────────────────
-//
-
-    function openAboutWindow ( parent ) {
-        if ( isAboutWindowOpen ) return
-        isAboutWindowOpen = true
-
-        console.log( parent )
-
-        const aboutWindowHeight =
-            415
-        const aboutWindowWidth =
-            650
-
-        let aboutWindow = new BrowserWindow({
-            title: 'Orchestra Hall',
-            titleBarStyle: 'hiddenInset',
-            width: aboutWindowWidth,
-            minWidth: aboutWindowWidth,
-            maxWidth: aboutWindowWidth,
-            height: aboutWindowHeight,
-            minHeight: aboutWindowHeight,
-            maxHeight: aboutWindowHeight,
-            //backgroundColor: ( settings.windowThemeStatus === 'dark' )? 'black' : '#ECECEC',
-            minimizable: false,
-            maximizable: false,
-            resizable: false,
-            fullscreen: false,
-            parent: parent,
-            modal: true,
-            show: false,
-            webPreferences
-        })
-
-        aboutWindow.loadURL( `file://${ __dirname }/about/index.html?${
-            encodeURI( JSON.stringify({
-                theme: settings.windowThemeStatus,
-                orchestraVersion: orchestraVersion,
-                quartetVersion: quartetVersion
-            }))}`)
-
-        aboutWindow.once( 'ready-to-show', ( ) => {
-            aboutWindow.show( )
-        })
-
-        // adding to the windows
-        windows.add( aboutWindow )
-
-        aboutWindow.on( 'closed' , ( ) => {
-            isAboutWindowOpen = false
-            windows.delete( aboutWindow )
-            aboutWindow = null
-        })
-    }
-
-//
-// ─── SINGE INSTANCE APP ─────────────────────────────────────────────────────────
-//
-
-    app.requestSingleInstanceLock()
-
-//
-// ─── LOAD SETTINGS ──────────────────────────────────────────────────────────────
-//
-
-    function loadSettings ( ) {
-        try {
-            Object.assign( settings, JSON.parse( fs.readFileSync( settingsFilePath ) ) )
-        } catch ( e ) {
-            console.log('Could not found the settings file')
-        }
-    }
-
-//
-// ─── ON OPEN FILE EVENT ─────────────────────────────────────────────────────────
-//
-
-    app.on( 'open-file', ( event, filePath ) => {
-        event.preventDefault( )
-
-        if ( isWinServerLoaded ) {
-            createWindow({
-                mode: 'file',
-                file: filePath
-            })
+    ipcMain.on('open-help-for-ref', (_, arg) => {
+        if (isHelpWindowOpen && helpWindow) {
+            helpWindow.focus()
+            helpWindow.webContents.send('help-window-open-ref', `ref-${arg}`)
         } else {
-            firstLoadFilePath = filePath
+            openHelpWindow(arg)
         }
     })
 
-//
-// ─── ON READY ───────────────────────────────────────────────────────────────────
-//
+    ipcMain.on('open-new-window', () => createWindow())
 
-    app.on( 'ready' , loadWinServer )
-
-    function loadWinServer ( ) {
-        if ( isWinServerLoaded ) { return }
-
-        console.log(`Orchestra, Version ${ orchestraVersion }`)
-        console.log('Copyright 2016-present - Pouya Kary. All Rights Reserved.')
-        isWinServerLoaded = true
-
-
-        let windowCreationArgs
-        if ( firstLoadFilePath ) {
-            windowCreationArgs = {
-                mode: 'file',
-                file: firstLoadFilePath,
-            }
-            firstLoadFilePath = null
-        } else {
-            windowCreationArgs =
-                parseArgs( process.argv )
-        }
-
-
-        loadSettings( )
-        createWindow( windowCreationArgs )
-    }
-
-//
-// ─── ON OPEN HELP WINDOW ────────────────────────────────────────────────────────
-//
-
-    ipcMain.on ( 'open-help-page', ( event, arg ) => openHelpWindow ( ))
-
-//
-// ─── OPEN HELP FOR REFERENCE ────────────────────────────────────────────────────
-//
-
-    ipcMain.on ( 'open-help-for-ref', ( event, arg ) => {
-        if ( isHelpWindowOpen ) {
-            helpWindow.focus( )
-            helpWindow.webContents.send( 'help-window-open-ref', `ref-${ arg }` )
-        } else
-            openHelpWindow( arg )
+    ipcMain.on('open-about-page', (event) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        openAboutWindow(win)
     })
 
-//
-// ─── ON WINDOW ASKS ─────────────────────────────────────────────────────────────
-//
+    ipcMain.on('app-quit', () => app.quit())
 
-    ipcMain.on( 'open-new-window', ( event, arg ) => createWindow( ) )
-
-//
-// ─── OPEN ABOUT PAGE ────────────────────────────────────────────────────────────
-//
-
-    ipcMain.on( 'open-about-page', ( event, arg ) => openAboutWindow( event ) )
-
-//
-// ─── THEME CHANGE TOOL ──────────────────────────────────────────────────────────
-//
-
-    ipcMain.on( 'theme-change', ( event, mode ) => {
-        updateSettings({
-            windowThemeStatus: mode
-        })
-        broadcast( 'change-theme-to', mode )
-    })
-
-//
-// ─── ON APP QUIT REQUEST ────────────────────────────────────────────────────────
-//
-
-    ipcMain.on( 'app-quit', ( event, arg ) => app.quit( ) )
-
-//
-// ─── QUIT APP ON WINDOWS CLOSE ──────────────────────────────────────────────────
-//
-
-    app.on( 'window-all-closed', ( e, win ) => {
-        // On macOS it is common for applications and their menu bar
-        // to stay active until the user quits explicitly with Cmd + Q
-        if ( process.platform !== 'darwin' )
-            app.quit( )
-    })
-
-//
-// ─── ON ACTIVE ──────────────────────────────────────────────────────────────────
-//
-
-    app.on( 'activate', ( ) => {
-        // On macOS it's common to re-create a window in the app when the
-        // dock icon is clicked and there are no other windows open.
-        if ( windowCount === 0 )
-            createWindow( )
-    })
-
-//
-// ─── PARSE ARGS ─────────────────────────────────────────────────────────────────
-//
-
-    function parseArgs ( args ) {
-        if ( args.length === 2 )
-            if ( args[ 1 ].endsWith( '.orchestra' ) )
-                return {
-                    mode: 'file',
-                    file: args[ 1 ]
-                }
-        if ( args.length === 3 )
-            if ( args[ 1 ] === 'parse' )
-                return {
-                    mode: 'parse',
-                    regexp: args[ 2 ]
-                }
-        return { mode: 'start' }
-    }
-
-//
-// ─── EXTENSION SERVER ───────────────────────────────────────────────────────────
-//
-
-    function runExtensionServer ( ) {
-
-        //
-        // ─── CREATE SERVER ───────────────────────────────────────────────
-        //
-
-            const extensionServer = messenger.createListener( 5994 )
-
-        //
-        // ─── ON OPEN ORCHESTRA FOR A REGEX ───────────────────────────────
-        //
-
-            extensionServer.on( 'open', ( message, regX ) => {
-                if ( regX !== null || regX !== undefined )
-                    if ( existsSync( regX ) )
-                        createWindow({ mode: 'parse', regexp: regX })
-                    else
-                        message.reply( '404' )
-                else
-                    createWindow( )
+    // Window focus/blur state for renderer
+    ipcMain.on('window:request-state', (event) => {
+        const win = BrowserWindow.fromWebContents(event.sender)
+        if (win) {
+            event.sender.send('window-state', {
+                isMaximized: win.isMaximized(),
+                isFullScreen: win.isFullScreen(),
             })
+        }
+    })
+}
 
-        // ─────────────────────────────────────────────────────────────────
+// ─── Parse args ──────────────────────────────────────────────────────────────
 
+function parseArgs(args) {
+    if (args.length === 2 && args[1].endsWith('.orchestra')) {
+        return { mode: 'file', file: args[1] }
     }
+    if (args.length === 3 && args[1] === 'parse') {
+        return { mode: 'parse', regexp: args[2] }
+    }
+    return { mode: 'start' }
+}
 
-// ────────────────────────────────────────────────────────────────────────────────
+// ─── App lifecycle ───────────────────────────────────────────────────────────
+
+app.requestSingleInstanceLock()
+
+app.on('open-file', (event, filePath) => {
+    event.preventDefault()
+    if (isWinServerLoaded) {
+        createWindow({ mode: 'file', file: filePath })
+    } else {
+        firstLoadFilePath = filePath
+    }
+})
+
+app.on('ready', () => {
+    if (isWinServerLoaded) return
+
+    console.log(`Orchestra, Version ${orchestraVersion}`)
+    console.log('Copyright 2016-present - Pouya Kary. All Rights Reserved.')
+    isWinServerLoaded = true
+
+    loadSettings()
+    setupIPC()
+    buildAppMenu()
+
+    const args = firstLoadFilePath
+        ? { mode: 'file', file: firstLoadFilePath }
+        : parseArgs(process.argv)
+
+    firstLoadFilePath = null
+    createWindow(args)
+})
+
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') app.quit()
+})
+
+app.on('activate', () => {
+    if (windowCount === 0) createWindow()
+})
