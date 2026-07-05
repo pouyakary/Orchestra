@@ -30,5 +30,5 @@ async function applyOnLoadSettings() {
 // ─── Exit button ─────────────────────────────────────────────────────────────
 
 function onExit() {
-    window.close()
+    window.electronAPI.closeWindow()
 }

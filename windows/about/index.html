@@ -1,25 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <title>About Orchestra</title>
     <script src="window.js"></script>
 </head>
+
 <body>
     <div id="main-background">
-        <div id="close-button" onclick="onExit()" hidden="true">EXIT</div>
+        <svg width="40" height="40" viewBox="0 0 100 100"
+            class="about-close-button" onclick="onExit()"
+            xmlns="http://www.w3.org/2000/svg" stroke="white"
+            stroke-width="8" stroke-linecap="round">
+            <circle cx="50" cy="50" fill="black" r="45"></circle>
+            <line x1="32" y1="32" x2="67" y2="67"></line>
+            <line x1="67" y1="32" x2="32" y2="67"></line>
+        </svg>
+
         <div id="main-text">
             <div id="app-name">Orchestra</div>
             <div id="app-text">
-                Orchestra Hall <span id='orchestra-version'>1.0</span> &bullet;
-                Orchestra Language <span id='quartet-version'>1.0</span><br>
+                Orchestra Hall <span id='orchestra-version'>1.0</span>
+                &bullet;
+                Orchestra Language <span
+                    id='quartet-version'>1.0</span><br>
 
-                Copyright 2016-present by <a href="#" onclick="window.electronAPI.openExternal('https://kary.us/')">Pouya Kary</a> All rights reserved.<br><br>
+                Copyright 2016-present by <a href="#"
+                    onclick="window.electronAPI.openExternal('https://pouyakary.org/')">Pouya
+                    Kary</a> All rights reserved.<br><br>
 
-                This software package is released under <a href="#" onclick="window.electronAPI.openExternal('https://www.mozilla.org/en-US/MPL/2.0/')">Mozilla Public License, Version 2</a> as published by Mozilla Foundation
+                This software package is released under <a href="#"
+                    onclick="window.electronAPI.openExternal('https://www.mozilla.org/en-US/MPL/2.0/')">Mozilla
+                    Public License, Version 2</a> as published by
+                Mozilla Foundation
             </div>
         </div>
     </div>
 </body>
+
 </html>
