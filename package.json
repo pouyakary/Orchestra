@@ -91,7 +91,7 @@
         "regulex": "0.0.2"
     },
     "devDependencies": {
-        "electron": "^39.8.5",
+        "electron": "^41.10.6",
         "electron-builder": "^25.0.0",
         "less": "^4.2.0",
         "yargs": "^17.1.1"
